@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+/* Hide default cursor globally */
+* {
+	cursor: none !important;
+}
+
 @theme {
 	/* Responsive Breakpoints */
 	--breakpoint-tablet: 960px; /* Small PC: 960px - 1440px */
