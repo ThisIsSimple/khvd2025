@@ -63,18 +63,26 @@
 	<!-- Days -->
 	<div class="flex flex-col items-center">
 		<div class="flex gap-3">
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(days, prevDays, 0)}>
-					<div class="flip-card-front">{padZero(days)[0]}</div>
-					<div class="flip-card-back">{padZero(prevDays)[0]}</div>
+			{#each [0, 1] as position}
+				<div class="flip-card">
+					<!-- Upper half - current number -->
+					<div class="flip-card-top">
+						<span class="flip-card-number">{padZero(days)[position]}</span>
+					</div>
+
+					<!-- Lower half - current number -->
+					<div class="flip-card-bottom">
+						<span class="flip-card-number">{padZero(days)[position]}</span>
+					</div>
+
+					<!-- Flipping piece - previous number -->
+					{#if hasChanged(days, prevDays, position)}
+						<div class="flip-card-top-flip" key={`${days}-${position}`}>
+							<span class="flip-card-number">{padZero(prevDays)[position]}</span>
+						</div>
+					{/if}
 				</div>
-			</div>
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(days, prevDays, 1)}>
-					<div class="flip-card-front">{padZero(days)[1]}</div>
-					<div class="flip-card-back">{padZero(prevDays)[1]}</div>
-				</div>
-			</div>
+			{/each}
 		</div>
 		<span class="text-sm mt-2 text-white/70">DAYS</span>
 	</div>
@@ -84,18 +92,21 @@
 	<!-- Hours -->
 	<div class="flex flex-col items-center">
 		<div class="flex gap-3">
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(hours, prevHours, 0)}>
-					<div class="flip-card-front">{padZero(hours)[0]}</div>
-					<div class="flip-card-back">{padZero(prevHours)[0]}</div>
+			{#each [0, 1] as position}
+				<div class="flip-card">
+					<div class="flip-card-top">
+						<span class="flip-card-number">{padZero(hours)[position]}</span>
+					</div>
+					<div class="flip-card-bottom">
+						<span class="flip-card-number">{padZero(hours)[position]}</span>
+					</div>
+					{#if hasChanged(hours, prevHours, position)}
+						<div class="flip-card-top-flip" key={`${hours}-${position}`}>
+							<span class="flip-card-number">{padZero(prevHours)[position]}</span>
+						</div>
+					{/if}
 				</div>
-			</div>
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(hours, prevHours, 1)}>
-					<div class="flip-card-front">{padZero(hours)[1]}</div>
-					<div class="flip-card-back">{padZero(prevHours)[1]}</div>
-				</div>
-			</div>
+			{/each}
 		</div>
 		<span class="text-sm mt-2 text-white/70">HOURS</span>
 	</div>
@@ -105,18 +116,21 @@
 	<!-- Minutes -->
 	<div class="flex flex-col items-center">
 		<div class="flex gap-3">
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(minutes, prevMinutes, 0)}>
-					<div class="flip-card-front">{padZero(minutes)[0]}</div>
-					<div class="flip-card-back">{padZero(prevMinutes)[0]}</div>
+			{#each [0, 1] as position}
+				<div class="flip-card">
+					<div class="flip-card-top">
+						<span class="flip-card-number">{padZero(minutes)[position]}</span>
+					</div>
+					<div class="flip-card-bottom">
+						<span class="flip-card-number">{padZero(minutes)[position]}</span>
+					</div>
+					{#if hasChanged(minutes, prevMinutes, position)}
+						<div class="flip-card-top-flip" key={`${minutes}-${position}`}>
+							<span class="flip-card-number">{padZero(prevMinutes)[position]}</span>
+						</div>
+					{/if}
 				</div>
-			</div>
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(minutes, prevMinutes, 1)}>
-					<div class="flip-card-front">{padZero(minutes)[1]}</div>
-					<div class="flip-card-back">{padZero(prevMinutes)[1]}</div>
-				</div>
-			</div>
+			{/each}
 		</div>
 		<span class="text-sm mt-2 text-white/70">MINS</span>
 	</div>
@@ -126,18 +140,21 @@
 
 	<div class="hidden tablet:flex flex-col items-center">
 		<div class="flex gap-3">
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(seconds, prevSeconds, 0)}>
-					<div class="flip-card-front">{padZero(seconds)[0]}</div>
-					<div class="flip-card-back">{padZero(prevSeconds)[0]}</div>
+			{#each [0, 1] as position}
+				<div class="flip-card">
+					<div class="flip-card-top">
+						<span class="flip-card-number">{padZero(seconds)[position]}</span>
+					</div>
+					<div class="flip-card-bottom">
+						<span class="flip-card-number">{padZero(seconds)[position]}</span>
+					</div>
+					{#if hasChanged(seconds, prevSeconds, position)}
+						<div class="flip-card-top-flip" key={`${seconds}-${position}`}>
+							<span class="flip-card-number">{padZero(prevSeconds)[position]}</span>
+						</div>
+					{/if}
 				</div>
-			</div>
-			<div class="flip-card">
-				<div class="flip-card-inner" class:flipping={hasChanged(seconds, prevSeconds, 1)}>
-					<div class="flip-card-front">{padZero(seconds)[1]}</div>
-					<div class="flip-card-back">{padZero(prevSeconds)[1]}</div>
-				</div>
-			</div>
+			{/each}
 		</div>
 		<span class="text-sm mt-2 text-white/70">SECS</span>
 	</div>
@@ -149,60 +166,81 @@
 		width: 60px;
 		height: 80px;
 		background: #000;
-		border-radius: 8px;
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-		overflow: hidden;
-		perspective: 500px;
+		perspective: 300px;
 	}
 
-	.flip-card-inner {
-		width: 100%;
-		height: 100%;
-		position: relative;
-		transform-style: preserve-3d;
-		transform-origin: center center;
-	}
-
-	.flip-card-front,
-	.flip-card-back {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-		color: white;
-		font-size: 2.5rem;
-		font-weight: bold;
-		font-family: 'Bebas Neue', Impact, sans-serif;
+	/* Upper half - static, shows current number's top */
+	.flip-card-top {
 		position: absolute;
 		top: 0;
 		left: 0;
+		right: 0;
+		height: 50%;
+		overflow: hidden;
+		background: #000;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding-bottom: 1px;
+	}
+
+	/* Lower half - static, shows current number's bottom */
+	.flip-card-bottom {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 50%;
+		overflow: hidden;
+		background: #000;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		padding-top: 1px;
+	}
+
+	/* Flipping piece - animates down from top */
+	.flip-card-top-flip {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 50%;
+		overflow: hidden;
+		background: #000;
+		transform-origin: bottom;
+		transform-style: preserve-3d;
 		backface-visibility: hidden;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding-bottom: 1px;
+		animation: flipDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		z-index: 5;
 	}
 
-	.flip-card-back {
-		transform: rotateX(180deg);
-	}
-
-	/* Flip animation */
-	.flip-card-inner.flipping {
-		animation: flip 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-	}
-
-	@keyframes flip {
+	@keyframes flipDown {
 		0% {
 			transform: rotateX(0deg);
-		}
-		50% {
-			transform: rotateX(-90deg);
 		}
 		100% {
 			transform: rotateX(-180deg);
 		}
 	}
 
+	/* Number styling */
+	.flip-card-number {
+		color: white;
+		font-size: 2.5rem;
+		font-weight: bold;
+		font-family: 'Bebas Neue', Impact, sans-serif;
+		line-height: 1;
+		user-select: none;
+	}
+
 	/* Horizontal divider line */
-	.flip-card::before {
+	.flip-card::after {
 		content: '';
 		position: absolute;
 		top: 50%;
@@ -212,6 +250,7 @@
 		background: rgba(255, 255, 255, 0.1);
 		z-index: 10;
 		transform: translateY(-50%);
+		pointer-events: none;
 	}
 
 	/* Tablet and above */
@@ -221,8 +260,7 @@
 			height: 90px;
 		}
 
-		.flip-card-front,
-		.flip-card-back {
+		.flip-card-number {
 			font-size: 3rem;
 		}
 	}
