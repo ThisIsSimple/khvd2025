@@ -13,6 +13,12 @@
 	let prevMinutes = $state(0);
 	let prevSeconds = $state(0);
 
+	// Delayed values for bottom half (1 second delay)
+	let delayedDays = $state(0);
+	let delayedHours = $state(0);
+	let delayedMinutes = $state(0);
+	let delayedSeconds = $state(0);
+
 	let interval: number | undefined;
 
 	function updateCountdown() {
@@ -37,6 +43,14 @@
 		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+		// Update bottom half with 1 second delay
+		setTimeout(() => {
+			delayedDays = days;
+			delayedHours = hours;
+			delayedMinutes = minutes;
+			delayedSeconds = seconds;
+		}, 1000);
 	}
 
 	onMount(() => {
@@ -70,16 +84,12 @@
 						<span class="flip-card-number">{padZero(days)[position]}</span>
 					</div>
 
-					<!-- Lower half - shows previous during flip, then current -->
+					<!-- Lower half - delayed by 1 second -->
 					<div class="flip-card-bottom">
-						<span class="flip-card-number"
-							>{hasChanged(days, prevDays, position)
-								? padZero(prevDays)[position]
-								: padZero(days)[position]}</span
-						>
+						<span class="flip-card-number">{padZero(delayedDays)[position]}</span>
 					</div>
 
-					<!-- Flipping piece - previous number -->
+					<!-- Flipping piece - previous number covers the top -->
 					{#key `${days}-${prevDays}-${position}`}
 						{#if hasChanged(days, prevDays, position)}
 							<div class="flip-card-top-flip">
@@ -90,7 +100,6 @@
 				</div>
 			{/each}
 		</div>
-		<span class="text-sm mt-2 text-white/70">DAYS</span>
 	</div>
 
 	<span class="text-4xl text-white font-bold -mt-6">:</span>
@@ -104,11 +113,7 @@
 						<span class="flip-card-number">{padZero(hours)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number"
-							>{hasChanged(hours, prevHours, position)
-								? padZero(prevHours)[position]
-								: padZero(hours)[position]}</span
-						>
+						<span class="flip-card-number">{padZero(delayedHours)[position]}</span>
 					</div>
 					{#key `${hours}-${prevHours}-${position}`}
 						{#if hasChanged(hours, prevHours, position)}
@@ -120,7 +125,6 @@
 				</div>
 			{/each}
 		</div>
-		<span class="text-sm mt-2 text-white/70">HOURS</span>
 	</div>
 
 	<span class="text-4xl text-white font-bold -mt-6">:</span>
@@ -134,11 +138,7 @@
 						<span class="flip-card-number">{padZero(minutes)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number"
-							>{hasChanged(minutes, prevMinutes, position)
-								? padZero(prevMinutes)[position]
-								: padZero(minutes)[position]}</span
-						>
+						<span class="flip-card-number">{padZero(minutes)[position]}</span>
 					</div>
 					{#key `${minutes}-${prevMinutes}-${position}`}
 						{#if hasChanged(minutes, prevMinutes, position)}
@@ -150,7 +150,6 @@
 				</div>
 			{/each}
 		</div>
-		<span class="text-sm mt-2 text-white/70">MINS</span>
 	</div>
 
 	<!-- Seconds (hidden on mobile) -->
@@ -164,11 +163,7 @@
 						<span class="flip-card-number">{padZero(seconds)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number"
-							>{hasChanged(seconds, prevSeconds, position)
-								? padZero(prevSeconds)[position]
-								: padZero(seconds)[position]}</span
-						>
+						<span class="flip-card-number">{padZero(seconds)[position]}</span>
 					</div>
 					{#key `${seconds}-${prevSeconds}-${position}`}
 						{#if hasChanged(seconds, prevSeconds, position)}
@@ -180,7 +175,6 @@
 				</div>
 			{/each}
 		</div>
-		<span class="text-sm mt-2 text-white/70">SECS</span>
 	</div>
 </div>
 
