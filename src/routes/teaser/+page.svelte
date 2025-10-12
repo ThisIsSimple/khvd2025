@@ -14,10 +14,10 @@
 	<div class="relative inset-0 w-full h-screen">
 		<img src="/teaser.png" alt="KHVD 2025 Teaser Background" class="w-full h-full object-cover" />
 
-		<div class="absolute inset-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-			<div>
+		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+			<div class="w-full">
 				<div class="relative z-10 text-center text-black px-4">
-					<h1 class="text-h2 tablet:text-8xl font-display mb-6">EXHIBITION D-DAY</h1>
+					<h1 class="text-h3 tablet:text-h2 font-display mb-6">EXHIBITION D-DAY</h1>
 				</div>
 
 				<div class="relative z-10 flex justify-center">

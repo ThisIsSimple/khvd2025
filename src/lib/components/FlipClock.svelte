@@ -3,21 +3,25 @@
 
 	let { targetDate }: { targetDate: Date } = $props();
 
-	let days = $state(0);
-	let hours = $state(0);
-	let minutes = $state(0);
-	let seconds = $state(0);
+	// Top half values (updated immediately when animation starts)
+	let topDays = $state(0);
+	let topHours = $state(0);
+	let topMinutes = $state(0);
+	let topSeconds = $state(0);
 
-	let prevDays = $state(0);
-	let prevHours = $state(0);
-	let prevMinutes = $state(0);
-	let prevSeconds = $state(0);
+	// Bottom half values (updated after animation ends)
+	let bottomDays = $state(0);
+	let bottomHours = $state(0);
+	let bottomMinutes = $state(0);
+	let bottomSeconds = $state(0);
 
-	// Delayed values for bottom half (1 second delay)
-	let delayedDays = $state(0);
-	let delayedHours = $state(0);
-	let delayedMinutes = $state(0);
-	let delayedSeconds = $state(0);
+	// New values calculated but not yet displayed
+	let newDays = $state(0);
+	let newHours = $state(0);
+	let newMinutes = $state(0);
+	let newSeconds = $state(0);
+
+	let isHidden = $state(false);
 
 	let interval: number | undefined;
 
@@ -27,34 +31,37 @@
 		const distance = target - now;
 
 		if (distance < 0) {
-			days = 0;
-			hours = 0;
-			minutes = 0;
-			seconds = 0;
+			newDays = 0;
+			newHours = 0;
+			newMinutes = 0;
+			newSeconds = 0;
 			return;
 		}
 
-		prevDays = days;
-		prevHours = hours;
-		prevMinutes = minutes;
-		prevSeconds = seconds;
+		// Calculate new values
+		newDays = Math.floor(distance / (1000 * 60 * 60 * 24));
+		newHours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		newMinutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		newSeconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-		days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		// Update top half immediately when new values are calculated
+		topDays = newDays;
+		topHours = newHours;
+		topMinutes = newMinutes;
+		topSeconds = newSeconds;
+	}
 
-		// Update bottom half with 1 second delay
-		setTimeout(() => {
-			delayedDays = days;
-			delayedHours = hours;
-			delayedMinutes = minutes;
-			delayedSeconds = seconds;
-		}, 1000);
+	function applyBottomValues() {
+		// Apply new values to bottom half after animation ends
+		bottomDays = newDays;
+		bottomHours = newHours;
+		bottomMinutes = newMinutes;
+		bottomSeconds = newSeconds;
 	}
 
 	onMount(() => {
 		updateCountdown();
+		applyBottomValues();
 		interval = setInterval(updateCountdown, 1000) as unknown as number;
 	});
 
@@ -79,21 +86,25 @@
 		<div class="flex gap-3">
 			{#each [0, 1] as position}
 				<div class="flip-card">
-					<!-- Upper half - current number -->
+					<!-- Upper half - updates immediately -->
 					<div class="flip-card-top">
-						<span class="flip-card-number">{padZero(days)[position]}</span>
+						<span class="flip-card-number">{padZero(topDays)[position]}</span>
 					</div>
 
-					<!-- Lower half - delayed by 1 second -->
+					<!-- Lower half - updates after animation ends -->
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(delayedDays)[position]}</span>
+						<span class="flip-card-number">{padZero(bottomDays)[position]}</span>
 					</div>
 
-					<!-- Flipping piece - previous number covers the top -->
-					{#key `${days}-${prevDays}-${position}`}
-						{#if hasChanged(days, prevDays, position)}
-							<div class="flip-card-top-flip">
-								<span class="flip-card-number">{padZero(prevDays)[position]}</span>
+					<!-- Flipping piece - shows old bottom value during animation -->
+					{#key `${topDays}-${bottomDays}-${position}`}
+						{#if hasChanged(topDays, bottomDays, position)}
+							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
+								<!-- Front side: old value -->
+								<span class="flip-card-number flip-card-front">{padZero(bottomDays)[position]}</span
+								>
+								<!-- Back side: new value (flipped) -->
+								<span class="flip-card-number flip-card-back">{padZero(topDays)[position]}</span>
 							</div>
 						{/if}
 					{/key}
@@ -110,15 +121,20 @@
 			{#each [0, 1] as position}
 				<div class="flip-card">
 					<div class="flip-card-top">
-						<span class="flip-card-number">{padZero(hours)[position]}</span>
+						<span class="flip-card-number">{padZero(topHours)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(delayedHours)[position]}</span>
+						<span class="flip-card-number">{padZero(bottomHours)[position]}</span>
 					</div>
-					{#key `${hours}-${prevHours}-${position}`}
-						{#if hasChanged(hours, prevHours, position)}
-							<div class="flip-card-top-flip">
-								<span class="flip-card-number">{padZero(prevHours)[position]}</span>
+					{#key `${topHours}-${bottomHours}-${position}`}
+						{#if hasChanged(topHours, bottomHours, position)}
+							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
+								<div class="flip-card-front">
+									<span class="flip-card-number">{padZero(bottomHours)[position]}</span>
+								</div>
+								<div class="flip-card-back">
+									<span class="flip-card-number">{padZero(topHours)[position]}</span>
+								</div>
 							</div>
 						{/if}
 					{/key}
@@ -135,15 +151,18 @@
 			{#each [0, 1] as position}
 				<div class="flip-card">
 					<div class="flip-card-top">
-						<span class="flip-card-number">{padZero(minutes)[position]}</span>
+						<span class="flip-card-number">{padZero(topMinutes)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(minutes)[position]}</span>
+						<span class="flip-card-number">{padZero(bottomMinutes)[position]}</span>
 					</div>
-					{#key `${minutes}-${prevMinutes}-${position}`}
-						{#if hasChanged(minutes, prevMinutes, position)}
-							<div class="flip-card-top-flip">
-								<span class="flip-card-number">{padZero(prevMinutes)[position]}</span>
+					{#key `${topMinutes}-${bottomMinutes}-${position}`}
+						{#if hasChanged(topMinutes, bottomMinutes, position)}
+							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
+								<span class="flip-card-number flip-card-front"
+									>{padZero(bottomMinutes)[position]}</span
+								>
+								<span class="flip-card-number flip-card-back">{padZero(topMinutes)[position]}</span>
 							</div>
 						{/if}
 					{/key}
@@ -160,15 +179,20 @@
 			{#each [0, 1] as position}
 				<div class="flip-card">
 					<div class="flip-card-top">
-						<span class="flip-card-number">{padZero(seconds)[position]}</span>
+						<span class="flip-card-number">{padZero(topSeconds)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(seconds)[position]}</span>
+						<span class="flip-card-number">{padZero(bottomSeconds)[position]}</span>
 					</div>
-					{#key `${seconds}-${prevSeconds}-${position}`}
-						{#if hasChanged(seconds, prevSeconds, position)}
-							<div class="flip-card-top-flip">
-								<span class="flip-card-number">{padZero(prevSeconds)[position]}</span>
+					{#key `${topSeconds}-${bottomSeconds}-${position}`}
+						{#if hasChanged(topSeconds, bottomSeconds, position)}
+							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
+								<div class="flip-card-front">
+									<span class="flip-card-number">{padZero(bottomSeconds)[position]}</span>
+								</div>
+								<div class="flip-card-back">
+									<span class="flip-card-number">{padZero(topSeconds)[position]}</span>
+								</div>
 							</div>
 						{/if}
 					{/key}
@@ -181,10 +205,10 @@
 <style>
 	.flip-card {
 		position: relative;
-		width: 60px;
-		height: 80px;
-		background: #000;
+		width: 100px;
+		height: 140px;
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+		background: transparent;
 		perspective: 300px;
 	}
 
@@ -194,13 +218,12 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 50%;
+		height: 48.5%;
 		overflow: hidden;
 		background: #000;
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
-		padding-bottom: 0px;
 	}
 
 	/* Lower half - static, shows current number's bottom */
@@ -209,13 +232,12 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		height: 50%;
+		height: 48.5%;
 		overflow: hidden;
 		background: #000;
 		display: flex;
 		align-items: flex-start;
 		justify-content: center;
-		padding-top: 1px;
 	}
 
 	/* Flipping piece - animates down from top */
@@ -224,18 +246,13 @@
 		top: 0;
 		left: 0;
 		right: 0;
+		bottom: 0;
 		height: 50%;
 		overflow: hidden;
-		background: #000;
 		transform-origin: bottom;
 		transform-style: preserve-3d;
-		backface-visibility: hidden;
-		display: flex;
-		align-items: flex-end;
-		justify-content: center;
-		padding-bottom: 1px;
-		animation: flipDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-		z-index: 5;
+		background: transparent;
+		animation: flipDown 0.95s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 	}
 
 	@keyframes flipDown {
@@ -250,7 +267,7 @@
 	/* Number styling */
 	.flip-card-number {
 		color: white;
-		font-size: 2.5rem;
+		font-size: 6rem;
 		font-weight: bold;
 		font-family: 'Bebas Neue', Impact, sans-serif;
 		line-height: 1;
@@ -258,12 +275,43 @@
 	}
 
 	.flip-card-top .flip-card-number,
-	.flip-card-top-flip .flip-card-number {
-		transform: translateY(50%);
+	.flip-card-front .flip-card-number {
+		transform: translateY(51.5%);
 	}
 
 	.flip-card-bottom .flip-card-number {
-		transform: translateY(-50%);
+		transform: translateY(-51.5%);
+	}
+
+	.flip-card-back .flip-card-number {
+		transform: translateY(-51.5%) rotateX(0deg);
+	}
+
+	/* Front side of flipping card - shows old value */
+	.flip-card-front {
+		position: absolute;
+		width: 100%;
+		height: 97%;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		background: #000;
+		-webkit-backface-visibility: hidden; /* Safari */
+		backface-visibility: hidden;
+	}
+
+	/* Back side of flipping card - shows new value (initially rotated) */
+	.flip-card-back {
+		position: absolute;
+		width: 100%;
+		height: 97%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		background: #000;
+		transform: rotateX(180deg);
+		-webkit-backface-visibility: hidden; /* Safari */
+		backface-visibility: hidden;
 	}
 
 	/* Horizontal divider line */
@@ -281,14 +329,18 @@
 	}
 
 	/* Tablet and above */
-	@media (min-width: 960px) {
+	@media (max-width: 960px) {
 		.flip-card {
-			width: 70px;
-			height: 90px;
+			width: 40px;
+			height: 55px;
 		}
 
 		.flip-card-number {
-			font-size: 3rem;
+			font-size: 2.5rem;
+		}
+
+		.flip-card-top-flip {
+			height: calc(55px / 2);
 		}
 	}
 </style>
