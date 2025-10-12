@@ -9,8 +9,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const user = verifySession(sessionToken);
 	event.locals.user = user;
 
-	// Protect admin routes
-	if (event.url.pathname.startsWith('/admin')) {
+	// Protect admin routes (except login page)
+	if (event.url.pathname.startsWith('/admin') && event.url.pathname !== '/admin/login') {
 		if (!user) {
 			return new Response('Redirect', {
 				status: 303,
