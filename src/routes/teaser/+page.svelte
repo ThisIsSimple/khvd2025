@@ -27,6 +27,6 @@
 		</div>
 	</div>
 	<div class="min-h-screen bg-white">
-		<div class="text-b1">응원의 말을 적어주세요</div>
+		<div class="text-h8 font-bold!">전시를 기다리며 응원의 말을 적어주세요</div>
 	</div>
 </div>

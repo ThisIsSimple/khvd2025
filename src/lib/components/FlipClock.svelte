@@ -129,12 +129,10 @@
 					{#key `${topHours}-${bottomHours}-${position}`}
 						{#if hasChanged(topHours, bottomHours, position)}
 							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
-								<div class="flip-card-front">
-									<span class="flip-card-number">{padZero(bottomHours)[position]}</span>
-								</div>
-								<div class="flip-card-back">
-									<span class="flip-card-number">{padZero(topHours)[position]}</span>
-								</div>
+								<!-- Front side: old value -->
+								<span class="flip-card-number flip-card-front">{padZero(bottomHours)[position]}</span>
+								<!-- Back side: new value (flipped) -->
+								<span class="flip-card-number flip-card-back">{padZero(topHours)[position]}</span>
 							</div>
 						{/if}
 					{/key}
@@ -159,9 +157,9 @@
 					{#key `${topMinutes}-${bottomMinutes}-${position}`}
 						{#if hasChanged(topMinutes, bottomMinutes, position)}
 							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
-								<span class="flip-card-number flip-card-front"
-									>{padZero(bottomMinutes)[position]}</span
-								>
+								<!-- Front side: old value -->
+								<span class="flip-card-number flip-card-front">{padZero(bottomMinutes)[position]}</span>
+								<!-- Back side: new value (flipped) -->
 								<span class="flip-card-number flip-card-back">{padZero(topMinutes)[position]}</span>
 							</div>
 						{/if}
@@ -248,11 +246,11 @@
 		right: 0;
 		bottom: 0;
 		height: 50%;
-		overflow: hidden;
 		transform-origin: bottom;
 		transform-style: preserve-3d;
 		background: transparent;
 		animation: flipDown 0.95s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		z-index: 5;
 	}
 
 	@keyframes flipDown {
@@ -292,10 +290,12 @@
 		position: absolute;
 		width: 100%;
 		height: 97%;
+		overflow: hidden;
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
 		background: #000;
+		transform: rotateX(0deg);
 		-webkit-backface-visibility: hidden; /* Safari */
 		backface-visibility: hidden;
 	}
@@ -305,6 +305,7 @@
 		position: absolute;
 		width: 100%;
 		height: 97%;
+		overflow: hidden;
 		display: flex;
 		align-items: flex-start;
 		justify-content: center;
