@@ -70,17 +70,23 @@
 						<span class="flip-card-number">{padZero(days)[position]}</span>
 					</div>
 
-					<!-- Lower half - current number -->
+					<!-- Lower half - shows previous during flip, then current -->
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(days)[position]}</span>
+						<span class="flip-card-number"
+							>{hasChanged(days, prevDays, position)
+								? padZero(prevDays)[position]
+								: padZero(days)[position]}</span
+						>
 					</div>
 
 					<!-- Flipping piece - previous number -->
-					{#if hasChanged(days, prevDays, position)}
-						<div class="flip-card-top-flip" key={`${days}-${position}`}>
-							<span class="flip-card-number">{padZero(prevDays)[position]}</span>
-						</div>
-					{/if}
+					{#key `${days}-${prevDays}-${position}`}
+						{#if hasChanged(days, prevDays, position)}
+							<div class="flip-card-top-flip">
+								<span class="flip-card-number">{padZero(prevDays)[position]}</span>
+							</div>
+						{/if}
+					{/key}
 				</div>
 			{/each}
 		</div>
@@ -98,13 +104,19 @@
 						<span class="flip-card-number">{padZero(hours)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(hours)[position]}</span>
+						<span class="flip-card-number"
+							>{hasChanged(hours, prevHours, position)
+								? padZero(prevHours)[position]
+								: padZero(hours)[position]}</span
+						>
 					</div>
-					{#if hasChanged(hours, prevHours, position)}
-						<div class="flip-card-top-flip" key={`${hours}-${position}`}>
-							<span class="flip-card-number">{padZero(prevHours)[position]}</span>
-						</div>
-					{/if}
+					{#key `${hours}-${prevHours}-${position}`}
+						{#if hasChanged(hours, prevHours, position)}
+							<div class="flip-card-top-flip">
+								<span class="flip-card-number">{padZero(prevHours)[position]}</span>
+							</div>
+						{/if}
+					{/key}
 				</div>
 			{/each}
 		</div>
@@ -122,13 +134,19 @@
 						<span class="flip-card-number">{padZero(minutes)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(minutes)[position]}</span>
+						<span class="flip-card-number"
+							>{hasChanged(minutes, prevMinutes, position)
+								? padZero(prevMinutes)[position]
+								: padZero(minutes)[position]}</span
+						>
 					</div>
-					{#if hasChanged(minutes, prevMinutes, position)}
-						<div class="flip-card-top-flip" key={`${minutes}-${position}`}>
-							<span class="flip-card-number">{padZero(prevMinutes)[position]}</span>
-						</div>
-					{/if}
+					{#key `${minutes}-${prevMinutes}-${position}`}
+						{#if hasChanged(minutes, prevMinutes, position)}
+							<div class="flip-card-top-flip">
+								<span class="flip-card-number">{padZero(prevMinutes)[position]}</span>
+							</div>
+						{/if}
+					{/key}
 				</div>
 			{/each}
 		</div>
@@ -146,13 +164,19 @@
 						<span class="flip-card-number">{padZero(seconds)[position]}</span>
 					</div>
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(seconds)[position]}</span>
+						<span class="flip-card-number"
+							>{hasChanged(seconds, prevSeconds, position)
+								? padZero(prevSeconds)[position]
+								: padZero(seconds)[position]}</span
+						>
 					</div>
-					{#if hasChanged(seconds, prevSeconds, position)}
-						<div class="flip-card-top-flip" key={`${seconds}-${position}`}>
-							<span class="flip-card-number">{padZero(prevSeconds)[position]}</span>
-						</div>
-					{/if}
+					{#key `${seconds}-${prevSeconds}-${position}`}
+						{#if hasChanged(seconds, prevSeconds, position)}
+							<div class="flip-card-top-flip">
+								<span class="flip-card-number">{padZero(prevSeconds)[position]}</span>
+							</div>
+						{/if}
+					{/key}
 				</div>
 			{/each}
 		</div>
@@ -182,7 +206,7 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
-		padding-bottom: 1px;
+		padding-bottom: 0px;
 	}
 
 	/* Lower half - static, shows current number's bottom */
@@ -237,6 +261,15 @@
 		font-family: 'Bebas Neue', Impact, sans-serif;
 		line-height: 1;
 		user-select: none;
+	}
+
+	.flip-card-top .flip-card-number,
+	.flip-card-top-flip .flip-card-number {
+		transform: translateY(50%);
+	}
+
+	.flip-card-bottom .flip-card-number {
+		transform: translateY(-50%);
 	}
 
 	/* Horizontal divider line */
