@@ -17,6 +17,12 @@ Online exhibition platform for university showcase built with modern web technol
 
 - **TailwindCSS v4** - Utility-first CSS framework (CSS-based configuration)
 - **PostCSS** - CSS processing with Autoprefixer
+- **Brand Colors**:
+  - **Primary Color**: `#FC451E` (Orange-red, used with `text-primary` or `bg-primary`)
+- **Custom Responsive Breakpoints**:
+  - **Mobile**: 0px - 959px (default, no prefix)
+  - **Small PC (tablet)**: 960px - 1440px (prefix: `tablet:`)
+  - **Large PC (desktop)**: 1441px+ (prefix: `desktop:`)
 - **Custom Fonts**:
   - **Pretendard Variable** - Primary Korean/Latin font with variable weight support
   - **Bebas Neue** - Display font for headlines and emphasis
@@ -49,15 +55,94 @@ Online exhibition platform for university showcase built with modern web technol
 khvd-2025/
 ├── src/
 │   ├── routes/          # SvelteKit routes (file-based routing)
-│   │   ├── +page.svelte      # Home page
-│   │   └── +layout.svelte    # Root layout
+│   │   ├── +page.svelte           # Home page
+│   │   ├── +layout.svelte         # Root layout
+│   │   ├── admin/                 # Admin area (protected)
+│   │   │   ├── +page.svelte       # Admin dashboard
+│   │   │   ├── login/             # Admin login
+│   │   │   └── logout/            # Admin logout
+│   │   ├── exhibition/            # Exhibition pages
+│   │   │   ├── +page.svelte       # Exhibition main page
+│   │   │   └── works/             # Exhibition works
+│   │   │       ├── +page.svelte   # Works listing
+│   │   │       └── [slug]/        # Individual work detail
+│   │   └── teaser/                # Teaser page (date-restricted)
+│   │       └── +page.svelte
 │   ├── lib/             # Shared components and utilities
+│   │   ├── auth.ts      # Authentication utilities
+│   │   └── config.ts    # Exhibition configuration
+│   ├── hooks.server.ts  # Server hooks for authentication
+│   ├── app.d.ts         # TypeScript app types
 │   ├── app.html         # HTML template
 │   └── app.css          # Global styles with Tailwind
 ├── static/              # Static assets (fonts, images, etc.)
 ├── .svelte-kit/         # SvelteKit build output (gitignored)
 └── node_modules/        # Dependencies (gitignored)
 ```
+
+## Route System
+
+### Public Routes
+
+#### Home Page (`/`)
+
+- Landing page with hero section
+- Links to exhibition and teaser
+- Overview of exhibition features
+
+#### Exhibition Routes (`/exhibition`)
+
+- **`/exhibition`** - Main exhibition page with availability check
+- **`/exhibition/works`** - Grid view of all exhibition works
+- **`/exhibition/works/[slug]`** - Individual work detail page
+
+#### Teaser Page (`/teaser`)
+
+- **Date-restricted access** based on configuration
+- Animated landing page with exhibition countdown
+- Available only during teaser period (configured in `$lib/config.ts`)
+
+### Protected Routes
+
+#### Admin Area (`/admin`)
+
+- **Authentication Required**: Username/password: `khvd2025` / `khvd2025`
+- **`/admin/login`** - Login page with form authentication
+- **`/admin`** - Dashboard with management links
+- **`/admin/logout`** - Logout endpoint (POST only)
+
+### Authentication System
+
+**Implementation**: Cookie-based session management
+**Protection**: Server-side hooks in `hooks.server.ts`
+**Credentials**: Defined in `$lib/auth.ts`
+
+```typescript
+// Default credentials (change in production!)
+Username: khvd2025;
+Password: khvd2025;
+```
+
+### Date-Based Access Control
+
+**Configuration** in `src/lib/config.ts`:
+
+```typescript
+export const EXHIBITION_CONFIG = {
+	// Teaser availability
+	teaserStart: new Date('2025-01-01T00:00:00'),
+	teaserEnd: new Date('2025-02-01T00:00:00'),
+
+	// Exhibition dates
+	exhibitionStart: new Date('2025-02-01T00:00:00'),
+	exhibitionEnd: new Date('2025-03-31T23:59:59')
+};
+```
+
+**Helper Functions**:
+
+- `isTeaserAvailable()` - Check if teaser page should be accessible
+- `isExhibitionAvailable()` - Check if exhibition content should be shown
 
 ## Configuration Files
 
@@ -114,11 +199,89 @@ khvd-2025/
 - **Features**: Bold, impactful typography
 - **Fallbacks**: Impact, sans-serif
 
-Custom font configuration in `src/app.css`:
+Custom configuration in `src/app.css`:
 
 ```css
 @theme {
-	--font-sans: Pretendard Variable, ... --font-display: Bebas Neue, Impact, sans-serif;
+	/* Responsive Breakpoints */
+	--breakpoint-tablet: 960px; /* Small PC: 960px - 1440px */
+	--breakpoint-desktop: 1441px; /* Large PC: 1441px+ */
+
+	/* Brand Colors */
+	--color-primary: #fc451e; /* Primary brand color (orange-red) */
+
+	/* Font Families */
+	--font-sans:
+		'Pretendard Variable', Pretendard, ... --font-display: 'Bebas Neue', Impact, sans-serif;
+}
+```
+
+## Brand Colors
+
+### Primary Color
+
+**`#FC451E`** - Vibrant orange-red used for primary branding elements
+
+**Usage:**
+
+- `text-primary` - Apply primary color to text
+- `bg-primary` - Apply primary color to backgrounds
+- `border-primary` - Apply primary color to borders
+
+**Example:**
+
+```svelte
+<button class="bg-primary text-white">Call to Action</button>
+<h2 class="text-primary">Featured Section</h2>
+```
+
+## Responsive Design
+
+### Custom Breakpoints
+
+The project uses custom breakpoints tailored for the exhibition platform:
+
+| Breakpoint                | Range          | Usage                   | Example           |
+| ------------------------- | -------------- | ----------------------- | ----------------- |
+| **Mobile** (default)      | 0px - 959px    | Mobile devices          | `text-5xl`        |
+| **Small PC** (`tablet:`)  | 960px - 1440px | Tablets, small laptops  | `tablet:text-7xl` |
+| **Large PC** (`desktop:`) | 1441px+        | Large screens, desktops | `desktop:px-8`    |
+
+### Responsive Breakpoint Reference
+
+**Quick Reference:**
+
+- **Mobile**: No prefix needed (default)
+- **Small PC**: Use `tablet:` prefix (≥960px)
+- **Large PC**: Use `desktop:` prefix (≥1441px)
+
+### Usage Examples
+
+```svelte
+<!-- Text sizing across breakpoints -->
+<h1 class="text-5xl tablet:text-7xl">KHVD 2025</h1>
+
+<!-- Grid layouts -->
+<div class="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3">
+	<!-- Content -->
+</div>
+
+<!-- Padding adjustments -->
+<div class="px-4 px-6 desktop:px-8">
+	<!-- Content -->
+</div>
+```
+
+### Migration from Default Tailwind Breakpoints
+
+If you need to add back standard Tailwind breakpoints, you can define them in `app.css`:
+
+```css
+@theme {
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
 }
 ```
 
