@@ -5,8 +5,8 @@ export const EXHIBITION_CONFIG = {
 	teaserEnd: new Date('2025-02-01T00:00:00'),
 
 	// Main exhibition dates
-	exhibitionStart: new Date('2025-02-01T00:00:00'),
-	exhibitionEnd: new Date('2025-03-31T23:59:59')
+	exhibitionStart: new Date('2025-11-05T10:00:00'),
+	exhibitionEnd: new Date('2025-12-31T23:59:59')
 };
 
 export function isTeaserAvailable(): boolean {
