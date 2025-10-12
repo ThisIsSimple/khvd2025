@@ -235,6 +235,252 @@ Custom configuration in `src/app.css`:
 <h2 class="text-primary">Featured Section</h2>
 ```
 
+## Typography System
+
+The project uses a comprehensive, responsive typography system with **automatic mobile-to-PC scaling**. All typography classes automatically adjust based on screen size without additional responsive prefixes.
+
+### Font Hierarchy
+
+#### Header Levels (H0-H10)
+
+| Level | Font         | Mobile Size | PC Size | Line Height | Weight  | Usage                       |
+| ----- | ------------ | ----------- | ------- | ----------- | ------- | --------------------------- |
+| **H0** | Bebas Neue   | 120px       | 300px   | 120%        | Regular | Hero titles, main headlines |
+| **H1** | Bebas Neue   | 56px        | 210px   | 120%        | Regular | Page titles                 |
+| **H2** | Bebas Neue   | 48px        | 132px   | 120%        | Regular | Section headers             |
+| **H3** | Bebas Neue   | 40px        | 120px   | 100%        | Regular | Subsection headers          |
+| **H4** | Bebas Neue   | 32px        | 100px   | 100%        | Regular | Component headers           |
+| **H5** | Bebas Neue   | 28px        | 60px    | 120-130%    | Regular | Small headers               |
+| **H6** | Pretendard   | 24px        | 52px    | 100-110%    | Bold    | Card titles                 |
+| **H7** | Pretendard   | 20px        | 40px    | 140-160%    | Bold    | Subheadings                 |
+| **H8** | Mixed        | 18px        | 32px    | 120-140%    | Regular | Small subheadings           |
+| **H9** | Pretendard   | -           | 28px    | 140%        | Regular | PC-only headers             |
+| **H10** | Pretendard   | -           | 24px    | 150%        | Regular | PC-only small headers       |
+
+#### Body Text Levels (B1-B3)
+
+| Level | Font         | Mobile Size | PC Size | Line Height | Weight  | Usage                       |
+| ----- | ------------ | ----------- | ------- | ----------- | ------- | --------------------------- |
+| **B1** | Pretendard   | 16px        | 20px    | 140-150%    | Regular | Main body text, paragraphs  |
+| **B2** | Pretendard   | 15px        | 18px    | 150-140%    | Regular | Secondary text, descriptions|
+| **B3** | Pretendard   | 14px        | 15px    | 120%        | Regular | Small text, captions        |
+
+### Font Weight Reference
+
+- **`font-regular`** - 400 (normal text)
+- **`font-medium`** - 500 (slightly emphasized)
+- **`font-semibold`** - 600 (emphasized)
+- **`font-bold`** - 700 (strong emphasis)
+
+### Usage Examples
+
+#### Headers with Auto-Responsive Sizing
+
+```svelte
+<!-- Automatically responsive: 120px mobile → 300px PC -->
+<h1 class="text-h0">KHVD 2025</h1>
+
+<!-- Automatically responsive: 56px mobile → 210px PC -->
+<h1 class="text-h1">Exhibition Title</h1>
+
+<!-- Automatically responsive: 48px mobile → 132px PC -->
+<h2 class="text-h2">Section Header</h2>
+
+<!-- Mixed fonts with automatic sizing -->
+<h6 class="text-h6">Card Title</h6> <!-- Pretendard Bold -->
+<h7 class="text-h7">Subheading</h7> <!-- Pretendard Bold -->
+```
+
+#### Body Text with Auto-Responsive Sizing
+
+```svelte
+<!-- Main body text: 16px mobile → 20px PC -->
+<p class="text-b1">
+	This is the main body text. It automatically adjusts from 16px on mobile to 20px on PC screens.
+</p>
+
+<!-- Secondary text: 15px mobile → 18px PC -->
+<p class="text-b2">
+	Secondary description text with automatic responsive sizing.
+</p>
+
+<!-- Small text/captions: 14px mobile → 15px PC -->
+<p class="text-b3">
+	Caption or metadata text.
+</p>
+```
+
+#### Font Weight Combinations
+
+```svelte
+<!-- Default weight (regular) -->
+<h1 class="text-h1">Regular Weight</h1>
+
+<!-- Override with custom weight -->
+<h1 class="text-h1 font-bold">Bold Weight</h1>
+
+<!-- Body text with different weights -->
+<p class="text-b1 font-medium">Medium weight paragraph</p>
+<p class="text-b1 font-semibold">Semibold emphasis</p>
+```
+
+#### Font Family Overrides
+
+```svelte
+<!-- Force display font (Bebas Neue) -->
+<div class="text-b1 font-display">Display Font Body Text</div>
+
+<!-- Force sans font (Pretendard) -->
+<h1 class="text-h1 font-sans">Sans Font Header</h1>
+```
+
+### Typography Best Practices
+
+#### 1. Semantic HTML + Typography Classes
+
+```svelte
+<!-- Correct: Semantic markup with typography classes -->
+<h1 class="text-h0">Main Title</h1>
+<h2 class="text-h2">Section Header</h2>
+<p class="text-b1">Body paragraph</p>
+
+<!-- Avoid: Wrong semantic tags -->
+<div class="text-h1">Title</div> <!-- Use <h1> instead -->
+```
+
+#### 2. Consistent Hierarchy
+
+```svelte
+<!-- Good: Proper hierarchy -->
+<h1 class="text-h1">Page Title</h1>
+<h2 class="text-h2">Section 1</h2>
+<h3 class="text-h3">Subsection 1.1</h3>
+<p class="text-b1">Content</p>
+
+<!-- Avoid: Skipping levels -->
+<h1 class="text-h1">Title</h1>
+<h4 class="text-h4">Section</h4> <!-- Skipped h2 and h3 -->
+```
+
+#### 3. Responsive Considerations
+
+```svelte
+<!-- Typography classes are auto-responsive -->
+<h1 class="text-h0">Automatic Sizing</h1>
+
+<!-- No need for manual breakpoint overrides -->
+<!-- ❌ Don't do this: -->
+<h1 class="text-6xl tablet:text-8xl">Manual Sizing</h1>
+
+<!-- ✅ Do this instead: -->
+<h1 class="text-h0">Automatic Sizing</h1>
+```
+
+#### 4. Accessibility
+
+```svelte
+<!-- Maintain proper contrast -->
+<h1 class="text-h1 text-primary">Good contrast with white bg</h1>
+
+<!-- Ensure readable line lengths -->
+<p class="text-b1 max-w-prose">
+	Body text with optimal line length for readability (max-w-prose = ~65 characters)
+</p>
+```
+
+### Font Pairing Guidelines
+
+#### Display + Body Combinations
+
+```svelte
+<!-- Bebas Neue (display) for headers + Pretendard for body -->
+<section>
+	<h1 class="text-h1">EXHIBITION 2025</h1>
+	<p class="text-b1">Explore innovative works from emerging artists.</p>
+</section>
+
+<!-- All Pretendard for content-heavy sections -->
+<article>
+	<h2 class="text-h6">Artist Statement</h2>
+	<p class="text-b1">Detailed description...</p>
+</article>
+```
+
+#### Weight Combinations
+
+```svelte
+<!-- Bold header + regular body -->
+<div>
+	<h3 class="text-h6">Project Title</h3> <!-- Pretendard Bold by default -->
+	<p class="text-b1">Project description in regular weight.</p>
+</div>
+
+<!-- Create emphasis hierarchy -->
+<div>
+	<h4 class="text-h7">Section</h4> <!-- Bold -->
+	<p class="text-b1 font-medium">Emphasized paragraph</p>
+	<p class="text-b2">Supporting text</p>
+</div>
+```
+
+### Technical Details
+
+#### CSS Variables
+
+All typography tokens are defined in [src/app.css](src/app.css) using CSS custom properties:
+
+```css
+/* Mobile-first sizing */
+--font-size-h0: 7.5rem; /* 120px */
+--font-size-b1: 1rem; /* 16px */
+
+/* PC overrides (≥960px) */
+--font-size-h0-tablet: 18.75rem; /* 300px */
+--font-size-b1-tablet: 1.25rem; /* 20px */
+```
+
+#### Responsive Breakpoints
+
+Typography scales automatically at **960px** (tablet/PC breakpoint):
+
+```css
+@media (min-width: 960px) {
+	.text-h0 {
+		font-size: var(--font-size-h0-tablet); /* 120px → 300px */
+	}
+	.text-b1 {
+		font-size: var(--font-size-b1-tablet); /* 16px → 20px */
+	}
+}
+```
+
+#### Letter Spacing
+
+Optimized letter spacing for better legibility:
+
+- **Large headings** (H0-H4): -0.04em to -0.01em (tighter)
+- **Small headings** (H5-H8): Default spacing
+- **Body text**: Default spacing
+
+### Quick Reference Table
+
+| Class       | Mobile     | PC        | Font         | Weight  |
+| ----------- | ---------- | --------- | ------------ | ------- |
+| `text-h0`   | 120px      | 300px     | Bebas Neue   | Regular |
+| `text-h1`   | 56px       | 210px     | Bebas Neue   | Regular |
+| `text-h2`   | 48px       | 132px     | Bebas Neue   | Regular |
+| `text-h3`   | 40px       | 120px     | Bebas Neue   | Regular |
+| `text-h4`   | 32px       | 100px     | Bebas Neue   | Regular |
+| `text-h5`   | 28px       | 60px      | Bebas Neue   | Regular |
+| `text-h6`   | 24px       | 52px      | Pretendard   | Bold    |
+| `text-h7`   | 20px       | 40px      | Pretendard   | Bold    |
+| `text-h8`   | 18px       | 32px      | Mixed        | Regular |
+| `text-h9`   | -          | 28px      | Pretendard   | Regular |
+| `text-h10`  | -          | 24px      | Pretendard   | Regular |
+| `text-b1`   | 16px       | 20px      | Pretendard   | Regular |
+| `text-b2`   | 15px       | 18px      | Pretendard   | Regular |
+| `text-b3`   | 14px       | 15px      | Pretendard   | Regular |
+
 ## Responsive Design
 
 ### Custom Breakpoints
