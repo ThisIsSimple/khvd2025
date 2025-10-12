@@ -100,11 +100,12 @@
 					{#key `${topDays}-${bottomDays}-${position}`}
 						{#if hasChanged(topDays, bottomDays, position)}
 							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
-								<!-- Front side: old value -->
-								<span class="flip-card-number flip-card-front">{padZero(bottomDays)[position]}</span
-								>
-								<!-- Back side: new value (flipped) -->
-								<span class="flip-card-number flip-card-back">{padZero(topDays)[position]}</span>
+								<div class="flip-card-front">
+									<span class="flip-card-number">{padZero(bottomDays)[position]}</span>
+								</div>
+								<div class="flip-card-back">
+									<span class="flip-card-number">{padZero(topDays)[position]}</span>
+								</div>
 							</div>
 						{/if}
 					{/key}
@@ -129,10 +130,12 @@
 					{#key `${topHours}-${bottomHours}-${position}`}
 						{#if hasChanged(topHours, bottomHours, position)}
 							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
-								<!-- Front side: old value -->
-								<span class="flip-card-number flip-card-front">{padZero(bottomHours)[position]}</span>
-								<!-- Back side: new value (flipped) -->
-								<span class="flip-card-number flip-card-back">{padZero(topHours)[position]}</span>
+								<div class="flip-card-front">
+									<span class="flip-card-number">{padZero(bottomHours)[position]}</span>
+								</div>
+								<div class="flip-card-back">
+									<span class="flip-card-number">{padZero(topHours)[position]}</span>
+								</div>
 							</div>
 						{/if}
 					{/key}
@@ -157,10 +160,12 @@
 					{#key `${topMinutes}-${bottomMinutes}-${position}`}
 						{#if hasChanged(topMinutes, bottomMinutes, position)}
 							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
-								<!-- Front side: old value -->
-								<span class="flip-card-number flip-card-front">{padZero(bottomMinutes)[position]}</span>
-								<!-- Back side: new value (flipped) -->
-								<span class="flip-card-number flip-card-back">{padZero(topMinutes)[position]}</span>
+								<div class="flip-card-front">
+									<span class="flip-card-number">{padZero(bottomMinutes)[position]}</span>
+								</div>
+								<div class="flip-card-back">
+									<span class="flip-card-number">{padZero(topMinutes)[position]}</span>
+								</div>
 							</div>
 						{/if}
 					{/key}
