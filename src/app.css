@@ -14,4 +14,252 @@
 		'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 	--font-display: 'Bebas Neue', Impact, sans-serif;
+
+	/* Font Weights */
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Typography - Headers (Mobile First) */
+	--font-size-h0: 7.5rem; /* 120px */
+	--line-height-h0: 0.96; /* 120% = 144px */
+
+	--font-size-h1: 3.5rem; /* 56px */
+	--line-height-h1: 1.2; /* 120% */
+
+	--font-size-h2: 3rem; /* 48px */
+	--line-height-h2: 1.2; /* 120% */
+
+	--font-size-h3: 2.5rem; /* 40px */
+	--line-height-h3: 1; /* 100% */
+
+	--font-size-h4: 2rem; /* 32px */
+	--line-height-h4: 1; /* 100% */
+
+	--font-size-h5: 1.75rem; /* 28px */
+	--line-height-h5: 1.2; /* 120% */
+
+	--font-size-h6: 1.5rem; /* 24px */
+	--line-height-h6: 1; /* 100% */
+
+	--font-size-h7: 1.25rem; /* 20px */
+	--line-height-h7: 1.4; /* 140% */
+
+	--font-size-h8: 1.125rem; /* 18px */
+	--line-height-h8: 1.2; /* 120% */
+
+	/* Typography - Body (Mobile First) */
+	--font-size-b1: 1rem; /* 16px */
+	--line-height-b1: 1.4; /* 140% */
+
+	--font-size-b2: 0.9375rem; /* 15px */
+	--line-height-b2: 1.5; /* 150% */
+
+	--font-size-b3: 0.875rem; /* 14px */
+	--line-height-b3: 1.2; /* 120% */
+
+	/* Typography - Tablet/Desktop Overrides (PC) */
+	--font-size-h0-tablet: 18.75rem; /* 300px */
+	--font-size-h1-tablet: 13.125rem; /* 210px */
+	--font-size-h2-tablet: 8.25rem; /* 132px */
+	--font-size-h3-tablet: 7.5rem; /* 120px */
+	--font-size-h4-tablet: 6.25rem; /* 100px */
+	--font-size-h5-tablet: 3.75rem; /* 60px */
+	--line-height-h5-tablet: 1.3; /* 130% */
+
+	--font-size-h6-tablet: 3.25rem; /* 52px */
+	--line-height-h6-tablet: 1.1; /* 110% */
+
+	--font-size-h7-tablet: 2.5rem; /* 40px */
+	--line-height-h7-tablet: 1.6; /* 160% */
+
+	--font-size-h8-tablet: 2rem; /* 32px */
+	--line-height-h8-tablet: 1.4; /* 140% */
+
+	--font-size-h9-tablet: 1.75rem; /* 28px */
+	--line-height-h9-tablet: 1.4; /* 140% */
+
+	--font-size-h10-tablet: 1.5rem; /* 24px */
+	--line-height-h10-tablet: 1.5; /* 150% */
+
+	--font-size-b1-tablet: 1.25rem; /* 20px */
+	--line-height-b1-tablet: 1.5; /* 150% */
+
+	--font-size-b2-tablet: 1.125rem; /* 18px */
+	--line-height-b2-tablet: 1.4; /* 140% */
+
+	--font-size-b3-tablet: 0.9375rem; /* 15px */
+	--line-height-b3-tablet: 1.2; /* 120% */
+}
+
+/* Typography Utilities */
+
+/* Header Styles - Auto Responsive */
+.text-h0 {
+	font-family: var(--font-display);
+	font-size: var(--font-size-h0);
+	line-height: var(--line-height-h0);
+	font-weight: var(--font-weight-regular);
+	letter-spacing: -0.04em;
+}
+
+.text-h1 {
+	font-family: var(--font-display);
+	font-size: var(--font-size-h1);
+	line-height: var(--line-height-h1);
+	font-weight: var(--font-weight-regular);
+	letter-spacing: -0.02em;
+}
+
+.text-h2 {
+	font-family: var(--font-display);
+	font-size: var(--font-size-h2);
+	line-height: var(--line-height-h2);
+	font-weight: var(--font-weight-regular);
+	letter-spacing: -0.02em;
+}
+
+.text-h3 {
+	font-family: var(--font-display);
+	font-size: var(--font-size-h3);
+	line-height: var(--line-height-h3);
+	font-weight: var(--font-weight-regular);
+	letter-spacing: -0.01em;
+}
+
+.text-h4 {
+	font-family: var(--font-display);
+	font-size: var(--font-size-h4);
+	line-height: var(--line-height-h4);
+	font-weight: var(--font-weight-regular);
+	letter-spacing: -0.01em;
+}
+
+.text-h5 {
+	font-family: var(--font-display);
+	font-size: var(--font-size-h5);
+	line-height: var(--line-height-h5);
+	font-weight: var(--font-weight-regular);
+}
+
+.text-h6 {
+	font-size: var(--font-size-h6);
+	line-height: var(--line-height-h6);
+	font-weight: var(--font-weight-bold);
+}
+
+.text-h7 {
+	font-size: var(--font-size-h7);
+	line-height: var(--line-height-h7);
+	font-weight: var(--font-weight-bold);
+}
+
+.text-h8 {
+	font-size: var(--font-size-h8);
+	line-height: var(--line-height-h8);
+	font-weight: var(--font-weight-regular);
+}
+
+/* Body Styles - Auto Responsive */
+.text-b1 {
+	font-family: var(--font-sans);
+	font-size: var(--font-size-b1);
+	line-height: var(--line-height-b1);
+	font-weight: var(--font-weight-regular);
+}
+
+.text-b2 {
+	font-family: var(--font-sans);
+	font-size: var(--font-size-b2);
+	line-height: var(--line-height-b2);
+	font-weight: var(--font-weight-regular);
+}
+
+.text-b3 {
+	font-family: var(--font-sans);
+	font-size: var(--font-size-b3);
+	line-height: var(--line-height-b3);
+	font-weight: var(--font-weight-regular);
+}
+
+/* Tablet/Desktop Responsive Typography */
+@media (min-width: 960px) {
+	.text-h0 {
+		font-size: var(--font-size-h0-tablet);
+	}
+
+	.text-h1 {
+		font-size: var(--font-size-h1-tablet);
+	}
+
+	.text-h2 {
+		font-size: var(--font-size-h2-tablet);
+	}
+
+	.text-h3 {
+		font-size: var(--font-size-h3-tablet);
+	}
+
+	.text-h4 {
+		font-size: var(--font-size-h4-tablet);
+	}
+
+	.text-h5 {
+		font-size: var(--font-size-h5-tablet);
+		line-height: var(--line-height-h5-tablet);
+	}
+
+	.text-h6 {
+		font-size: var(--font-size-h6-tablet);
+		line-height: var(--line-height-h6-tablet);
+	}
+
+	.text-h7 {
+		font-size: var(--font-size-h7-tablet);
+		line-height: var(--line-height-h7-tablet);
+	}
+
+	.text-h8 {
+		font-size: var(--font-size-h8-tablet);
+		line-height: var(--line-height-h8-tablet);
+	}
+
+	.text-h9 {
+		font-size: var(--font-size-h9-tablet);
+		line-height: var(--line-height-h9-tablet);
+	}
+
+	.text-h10 {
+		font-size: var(--font-size-h10-tablet);
+		line-height: var(--line-height-h10-tablet);
+	}
+
+	.text-b1 {
+		font-size: var(--font-size-b1-tablet);
+		line-height: var(--line-height-b1-tablet);
+	}
+
+	.text-b2 {
+		font-size: var(--font-size-b2-tablet);
+		line-height: var(--line-height-b2-tablet);
+	}
+
+	.text-b3 {
+		font-size: var(--font-size-b3-tablet);
+		line-height: var(--line-height-b3-tablet);
+	}
+
+	/* PC-only header levels */
+	.text-h9 {
+		font-size: var(--font-size-h9-tablet);
+		line-height: var(--line-height-h9-tablet);
+		font-weight: var(--font-weight-regular);
+	}
+
+	.text-h10 {
+		font-size: var(--font-size-h10-tablet);
+		line-height: var(--line-height-h10-tablet);
+		font-weight: var(--font-weight-regular);
+	}
 }
