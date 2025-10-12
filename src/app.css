@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 
 @theme {
+	/* Responsive Breakpoints */
+	--breakpoint-tablet: 960px; /* Small PC: 960px - 1440px */
+	--breakpoint-desktop: 1441px; /* Large PC: 1441px+ */
+
+	/* Brand Colors */
+	--color-primary: #fc451e;
+
 	/* Font Families */
 	--font-sans:
 		'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
