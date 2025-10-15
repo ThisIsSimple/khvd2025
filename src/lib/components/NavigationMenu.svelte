@@ -11,8 +11,14 @@
 		onClose?.();
 	}
 
-	function handleBackdropClick(e: MouseEvent) {
+	function handleBackdropClick(e: MouseEvent | KeyboardEvent) {
 		if (e.target === e.currentTarget) {
+			handleClose();
+		}
+	}
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.key === 'Escape') {
 			handleClose();
 		}
 	}
@@ -32,10 +38,19 @@
 	<div
 		class="fixed inset-0 z-50 flex items-center justify-end"
 		onclick={handleBackdropClick}
+		onkeydown={handleKeyDown}
 		role="presentation"
+		tabindex="-1"
 	>
 		<!-- Background with blur -->
-		<div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+		<div
+			class="absolute inset-0 bg-black/70 backdrop-blur-sm"
+			onclick={handleBackdropClick}
+			onkeydown={handleKeyDown}
+			role="button"
+			tabindex="-1"
+			aria-label="Close menu"
+		></div>
 
 		<!-- Close Button (navigation-icon.svg) - Top Right -->
 		<button
@@ -47,7 +62,13 @@
 		</button>
 
 		<!-- Menu Content -->
-		<div class="relative w-1/2 max-w-[960px] h-screen flex flex-col">
+		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<nav
+			class="relative w-1/2 max-w-[960px] h-screen flex flex-col"
+			onclick={(e) => e.stopPropagation()}
+			aria-label="Main navigation"
+		>
 			<!-- Menu Items -->
 			{#each menuItems as item, index}
 				<!-- Menu Item -->
@@ -76,6 +97,6 @@
 					</div>
 				{/if}
 			{/each}
-		</div>
+		</nav>
 	</div>
 {/if}
