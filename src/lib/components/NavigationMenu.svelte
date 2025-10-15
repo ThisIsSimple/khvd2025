@@ -30,15 +30,24 @@
 <!-- Navigation Drawer Overlay -->
 {#if isOpen}
 	<div
-		class="fixed inset-0 z-50 flex items-center justify-center"
+		class="fixed inset-0 z-50 flex items-center justify-end"
 		onclick={handleBackdropClick}
 		role="presentation"
 	>
 		<!-- Background with blur -->
 		<div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
 
+		<!-- Close Button (navigation-icon.svg) - Top Right -->
+		<button
+			onclick={handleClose}
+			class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-[60]"
+			aria-label="Close menu"
+		>
+			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+		</button>
+
 		<!-- Menu Content -->
-		<div class="relative w-full max-w-[960px] h-screen flex flex-col">
+		<div class="relative w-1/2 max-w-[960px] h-screen flex flex-col">
 			<!-- Menu Items -->
 			{#each menuItems as item, index}
 				<!-- Menu Item -->
@@ -59,25 +68,6 @@
 					</div>
 				{/if}
 			{/each}
-
-			<!-- Close Button (X icon) -->
-			<button
-				onclick={handleClose}
-				class="absolute -right-[60px] bottom-0 w-[60px] h-[60px] bg-black flex items-center justify-center hover:bg-opacity-80 transition-opacity"
-				aria-label="Close menu"
-			>
-				<!-- X icon made with two rotated lines -->
-				<div class="relative w-[32.5px] h-[32.5px]">
-					<!-- Line 1 (45deg rotation) -->
-					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45">
-						<div class="w-[32.5px] h-[3px] bg-white"></div>
-					</div>
-					<!-- Line 2 (315deg rotation / -45deg) -->
-					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45">
-						<div class="w-[32.5px] h-[3px] bg-white"></div>
-					</div>
-				</div>
-			</button>
 		</div>
 	</div>
 {/if}
