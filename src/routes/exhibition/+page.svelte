@@ -4,11 +4,6 @@
 	import MessageBoard from '$lib/components/MessageBoard.svelte';
 
 	let { data }: { data: PageData } = $props();
-	let isMenuOpen = $state(false);
-
-	function toggleMenu() {
-		isMenuOpen = !isMenuOpen;
-	}
 
 	// Exhibition closing date: 2025.11.09 at 5:30 PM
 	const exhibitionEndDate = new Date('2025-11-09T17:30:00');
@@ -30,17 +25,6 @@
 				style="width: 100.67%; height: 112.53%; left: -0.35%; top: -6.33%;"
 			/>
 		</div>
-
-		<!-- Navigation Hamburger Menu -->
-		<button
-			onclick={toggleMenu}
-			class="absolute top-[20px] right-[20px] w-[60px] h-[60px] bg-black flex flex-col items-center justify-center gap-[11px] z-50 transition-opacity hover:opacity-80"
-			aria-label="Toggle menu"
-		>
-			<div class="w-[32.5px] h-[3px] bg-white"></div>
-			<div class="w-[32.5px] h-[3px] bg-white"></div>
-			<div class="w-[32.5px] h-[3px] bg-white"></div>
-		</button>
 
 		<!-- Content will be added here -->
 		<div class="relative z-10 flex items-center justify-center h-full">
@@ -228,20 +212,3 @@
 	<!-- Section 5: Message Board -->
 	<MessageBoard />
 </div>
-
-<!-- Mobile Menu Overlay -->
-{#if isMenuOpen}
-	<div
-		class="fixed inset-0 bg-black bg-opacity-90 z-40 flex items-center justify-center"
-		onclick={toggleMenu}
-	>
-		<nav class="text-white text-center">
-			<ul class="space-y-8">
-				<li><a href="/exhibition" class="text-mobile-h3 tablet:text-pc-h3 font-display hover:text-primary transition-colors">EXHIBITION</a></li>
-				<li><a href="/exhibition/works" class="text-mobile-h3 tablet:text-pc-h3 font-display hover:text-primary transition-colors">WORKS</a></li>
-				<li><a href="/teaser" class="text-mobile-h3 tablet:text-pc-h3 font-display hover:text-primary transition-colors">TEASER</a></li>
-				<li><a href="/" class="text-mobile-h3 tablet:text-pc-h3 font-display hover:text-primary transition-colors">HOME</a></li>
-			</ul>
-		</nav>
-	</div>
-{/if}
