@@ -1,96 +1,134 @@
 <script lang="ts">
-	// Footer component based on design
+	// Footer component - matches Figma design (Footer/Black/1920-1500)
 </script>
 
-<footer class="bg-black text-white">
-	<div class="mx-auto max-w-[1920px] px-4 py-8 tablet:px-6 tablet:py-12 desktop:px-8">
-		<div class="grid grid-cols-1 gap-8 tablet:grid-cols-3 tablet:gap-12">
-			<!-- Left Section: Title and Subtitle -->
-			<div class="space-y-4">
-				<h2 class="text-h7 tablet:text-h6">2025 경희대학교 시각디자인학과 졸업전시회</h2>
-				<p class="text-b2">Reenvision = Visual Design</p>
+<footer class="bg-[#111111] text-[#fefefe] h-[400px]">
+	<div class="flex flex-col tablet:flex-row w-full h-full max-w-[1920px] mx-auto">
+		<!-- Left Section: Title, Subtitle and Logo -->
+		<div
+			class="flex flex-col justify-between p-6 tablet:p-[52px] flex-1 min-w-0 gap-8 tablet:gap-0"
+		>
+			<!-- Text Container -->
+			<div class="flex flex-col gap-[10px]">
+				<h2 class="text-mobile-h6 tablet:text-pc-h10 font-bold text-[#fefefe] tracking-[-0.48px]">
+					2025 경희대학교 시각디자인학과 졸업전시회
+				</h2>
+				<p class="text-mobile-b2 tablet:text-pc-b2 text-[#e0e0e0]">Reenvision = Visual Design</p>
 			</div>
 
-			<!-- Middle Section: Information -->
-			<div class="space-y-4">
-				<h3 class="text-h8 font-bold">INFORMATION</h3>
-				<div class="space-y-2 text-b2">
-					<div class="flex gap-4">
-						<span class="min-w-[80px]">전시 오픈일</span>
-						<span>2025. 11. 5</span>
-					</div>
-					<div class="flex gap-4">
-						<span class="min-w-[80px]">전시 기간</span>
-						<span>2025. 11. 5 - 2025. 11. 9</span>
-					</div>
-					<div class="flex gap-4">
-						<span class="min-w-[80px]">전시 장소</span>
-						<div>
-							<p>경희대학교 국제캠퍼스</p>
-							<p>예술디자인대학 2F A&D 갤러리</p>
+			<!-- Large R=VD Logo -->
+			<div class="w-[280px] h-[138px]">
+				<img src="/logo_white.svg" alt="R=VD" class="w-full h-full object-contain" />
+			</div>
+		</div>
+
+		<!-- Right Section: Information, SNS and Archive -->
+		<div class="flex flex-col tablet:flex-row">
+			<!-- Information Section -->
+			<div
+				class="flex flex-col gap-8 tablet:gap-[72px] p-6 tablet:px-[60px] tablet:py-[52px] border-t tablet:border-t-0 tablet:border-l border-[#999999]"
+			>
+				<div class="flex flex-col gap-[32px]">
+					<h3 class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#fefefe]">INFORMATION</h3>
+					<div class="flex flex-col gap-[16px]">
+						<!-- Exhibition Opening -->
+						<div
+							class="flex gap-[32px] items-center text-mobile-b2 tablet:text-pc-b2 text-[#e0e0e0] tracking-[-0.36px]"
+						>
+							<span class="w-[100px]">전시 오프닝</span>
+							<span class="whitespace-nowrap">2025. 11. 5</span>
+						</div>
+						<!-- Exhibition Period -->
+						<div
+							class="flex gap-[32px] items-center text-mobile-b2 tablet:text-pc-b2 text-[#e0e0e0] tracking-[-0.36px]"
+						>
+							<span class="w-[100px]">전시 기간</span>
+							<span class="whitespace-nowrap">2025. 11. 5 - 2025. 11. 9</span>
+						</div>
+						<!-- Exhibition Location -->
+						<div
+							class="flex gap-[32px] items-start text-mobile-b2 tablet:text-pc-b2 text-[#e0e0e0] tracking-[-0.36px]"
+						>
+							<span class="w-[100px]">전시 장소</span>
+							<span class="whitespace-nowrap">
+								경희대학교 국제캠퍼스<br />
+								예술디자인대학 2F A&D 갤러리
+							</span>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Right Section: SNS and Archive -->
-			<div class="flex flex-col justify-between gap-8">
-				<div class="space-y-4">
-					<h3 class="text-h8 font-bold">SNS</h3>
-					<div class="flex gap-4">
-						<a
-							href="https://instagram.com"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="transition-opacity hover:opacity-70"
-							aria-label="Instagram"
-						>
-							<img src="/icons/insta_fill_white.svg" alt="Instagram" class="h-8 w-8" />
-						</a>
-						<a href="tel:+82" class="transition-opacity hover:opacity-70" aria-label="Phone">
-							<img src="/icons/call_white.svg" alt="Call" class="h-8 w-8" />
-						</a>
-						<a
-							href="https://naver.com"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="transition-opacity hover:opacity-70"
-							aria-label="Naver"
-						>
-							<img src="/icons/naver_white.svg" alt="Naver" class="h-8 w-8" />
-						</a>
+			<!-- SNS and Archive Section -->
+			<div
+				class="flex flex-col justify-between p-6 tablet:p-[52px] border-t tablet:border-t-0 tablet:border-l border-[#999999] gap-8 tablet:gap-0"
+			>
+				<!-- Top: SNS and Archive -->
+				<div class="flex flex-col tablet:flex-row gap-8 tablet:gap-[60px]">
+					<!-- SNS -->
+					<div class="flex flex-col gap-[32px]">
+						<h3 class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#fefefe]">SNS</h3>
+						<div class="flex gap-[16px] items-center">
+							<a
+								href="https://instagram.com"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="border border-[#e0e0e0] rounded-full w-[50px] h-[50px] flex items-center justify-center transition-opacity hover:opacity-70"
+								aria-label="Instagram"
+							>
+								<img src="/icons/insta_fill_white.svg" alt="" class="w-[25px] h-[25px]" />
+							</a>
+							<a
+								href="tel:+82"
+								class="border border-[#e0e0e0] rounded-full w-[50px] h-[50px] flex items-center justify-center transition-opacity hover:opacity-70"
+								aria-label="Phone"
+							>
+								<img src="/icons/call_white.svg" alt="" class="w-[22px] h-[22px]" />
+							</a>
+							<a
+								href="https://naver.com"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="border border-[#e0e0e0] rounded-full w-[50px] h-[50px] flex items-center justify-center transition-opacity hover:opacity-70"
+								aria-label="Naver"
+							>
+								<img src="/icons/naver_white.svg" alt="" class="w-[16px] h-[16px]" />
+							</a>
+						</div>
+					</div>
+
+					<!-- Archive -->
+					<div class="flex flex-col gap-[32px]">
+						<h3 class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#fefefe]">ARCHIVE</h3>
+						<div class="flex gap-[24px]">
+							<a
+								href="/archive/2023"
+								class="flex gap-[4px] items-center transition-opacity hover:opacity-70"
+							>
+								<div class="w-[24px] h-[24px] flex items-center justify-center">
+									<img src="/icons/arrow_diagonal_forward.svg" alt="" class="w-[17px] h-[17px]" />
+								</div>
+								<span class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#e0e0e0]">2023</span>
+							</a>
+							<a
+								href="/archive/2024"
+								class="flex gap-[4px] items-center transition-opacity hover:opacity-70"
+							>
+								<div class="w-[24px] h-[24px] flex items-center justify-center">
+									<img src="/icons/arrow_diagonal_forward.svg" alt="" class="w-[17px] h-[17px]" />
+								</div>
+								<span class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#e0e0e0]">2024</span>
+							</a>
+						</div>
 					</div>
 				</div>
 
-				<div class="space-y-4">
-					<h3 class="text-h8 font-bold">ARCHIVE</h3>
-					<div class="flex gap-4">
-						<a
-							href="/archive/2023"
-							class="flex items-center gap-2 transition-opacity hover:opacity-70"
-						>
-							<img src="/icons/arrow_diagonal_forward.svg" alt="" class="h-6 w-6" />
-							<span class="text-b2">2023</span>
-						</a>
-						<a
-							href="/archive/2024"
-							class="flex items-center gap-2 transition-opacity hover:opacity-70"
-						>
-							<img src="/icons/arrow_diagonal_forward.svg" alt="" class="h-6 w-6" />
-							<span class="text-b2">2024</span>
-						</a>
-					</div>
+				<!-- Bottom: Info logos (placeholder for now) -->
+				<div class="flex gap-[22px] items-end justify-end h-[38px]">
+					<img src="/khu-icon.svg" alt="" />
+					<img src="/khvd-icon.svg" alt="" />
 				</div>
 			</div>
-		</div>
-
-		<!-- Large R=VD Logo -->
-		<div class="mt-12 tablet:mt-16">
-			<img
-				src="/logo_white.svg"
-				alt="R=VD"
-				class="h-auto w-[280px] tablet:w-[420px] desktop:w-[560px]"
-			/>
 		</div>
 	</div>
 </footer>
