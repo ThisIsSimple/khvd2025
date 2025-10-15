@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Hide default cursor globally */
 * {
@@ -98,173 +98,174 @@
 	--line-height-b3-tablet: 1.2; /* 120% */
 }
 
-/* Typography Utilities */
+/* Typography Utilities - Mobile/PC Separated */
 
-/* Header Styles - Auto Responsive */
-.text-h0 {
+/* Mobile Typography Classes */
+.text-mobile-h0 {
 	font-family: var(--font-display);
 	font-size: var(--font-size-h0);
 	line-height: var(--line-height-h0);
-	font-weight: var(--font-weight-regular);
 	letter-spacing: -0.04em;
 }
 
-.text-h1 {
+.text-mobile-h1 {
 	font-family: var(--font-display);
 	font-size: var(--font-size-h1);
 	line-height: var(--line-height-h1);
-	font-weight: var(--font-weight-regular);
 	letter-spacing: -0.02em;
 }
 
-.text-h2 {
+.text-mobile-h2 {
 	font-family: var(--font-display);
 	font-size: var(--font-size-h2);
 	line-height: var(--line-height-h2);
-	font-weight: var(--font-weight-regular);
 	letter-spacing: -0.02em;
 }
 
-.text-h3 {
+.text-mobile-h3 {
 	font-family: var(--font-display);
 	font-size: var(--font-size-h3);
 	line-height: var(--line-height-h3);
-	font-weight: var(--font-weight-regular);
 	letter-spacing: -0.01em;
 }
 
-.text-h4 {
+.text-mobile-h4 {
 	font-family: var(--font-display);
 	font-size: var(--font-size-h4);
 	line-height: var(--line-height-h4);
-	font-weight: var(--font-weight-regular);
 	letter-spacing: -0.01em;
 }
 
-.text-h5 {
+.text-mobile-h5 {
 	font-family: var(--font-display);
 	font-size: var(--font-size-h5);
 	line-height: var(--line-height-h5);
-	font-weight: var(--font-weight-regular);
 }
 
-.text-h6 {
+.text-mobile-h6 {
+	font-family: var(--font-sans);
 	font-size: var(--font-size-h6);
 	line-height: var(--line-height-h6);
-	font-weight: var(--font-weight-bold);
 }
 
-.text-h7 {
+.text-mobile-h7 {
+	font-family: var(--font-sans);
 	font-size: var(--font-size-h7);
 	line-height: var(--line-height-h7);
-	font-weight: var(--font-weight-bold);
 }
 
-.text-h8 {
+.text-mobile-h8 {
+	font-family: var(--font-sans);
 	font-size: var(--font-size-h8);
 	line-height: var(--line-height-h8);
-	font-weight: var(--font-weight-regular);
 }
 
-/* Body Styles - Auto Responsive */
-.text-b1 {
+.text-mobile-b1 {
 	font-family: var(--font-sans);
 	font-size: var(--font-size-b1);
 	line-height: var(--line-height-b1);
-	font-weight: var(--font-weight-regular);
 }
 
-.text-b2 {
+.text-mobile-b2 {
 	font-family: var(--font-sans);
 	font-size: var(--font-size-b2);
 	line-height: var(--line-height-b2);
-	font-weight: var(--font-weight-regular);
 }
 
-.text-b3 {
+.text-mobile-b3 {
 	font-family: var(--font-sans);
 	font-size: var(--font-size-b3);
 	line-height: var(--line-height-b3);
-	font-weight: var(--font-weight-regular);
 }
 
-/* Tablet/Desktop Responsive Typography */
+/* PC Typography Classes (≥960px) */
 @media (min-width: 960px) {
-	.text-h0 {
+	.text-pc-h0 {
+		font-family: var(--font-display);
 		font-size: var(--font-size-h0-tablet);
+		line-height: var(--line-height-h0);
+		letter-spacing: -0.04em;
 	}
 
-	.text-h1 {
+	.text-pc-h1 {
+		font-family: var(--font-display);
 		font-size: var(--font-size-h1-tablet);
+		line-height: var(--line-height-h1);
+		letter-spacing: -0.02em;
 	}
 
-	.text-h2 {
+	.text-pc-h2 {
+		font-family: var(--font-display);
 		font-size: var(--font-size-h2-tablet);
+		line-height: var(--line-height-h2);
+		letter-spacing: -0.02em;
 	}
 
-	.text-h3 {
+	.text-pc-h3 {
+		font-family: var(--font-display);
 		font-size: var(--font-size-h3-tablet);
+		line-height: var(--line-height-h3);
+		letter-spacing: -0.01em;
 	}
 
-	.text-h4 {
+	.text-pc-h4 {
+		font-family: var(--font-display);
 		font-size: var(--font-size-h4-tablet);
+		line-height: var(--line-height-h4);
+		letter-spacing: -0.01em;
 	}
 
-	.text-h5 {
+	.text-pc-h5 {
+		font-family: var(--font-display);
 		font-size: var(--font-size-h5-tablet);
 		line-height: var(--line-height-h5-tablet);
 	}
 
-	.text-h6 {
+	.text-pc-h6 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-h6-tablet);
 		line-height: var(--line-height-h6-tablet);
 	}
 
-	.text-h7 {
+	.text-pc-h7 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-h7-tablet);
 		line-height: var(--line-height-h7-tablet);
 	}
 
-	.text-h8 {
+	.text-pc-h8 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-h8-tablet);
 		line-height: var(--line-height-h8-tablet);
 	}
 
-	.text-h9 {
+	.text-pc-h9 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-h9-tablet);
 		line-height: var(--line-height-h9-tablet);
 	}
 
-	.text-h10 {
+	.text-pc-h10 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-h10-tablet);
 		line-height: var(--line-height-h10-tablet);
 	}
 
-	.text-b1 {
+	.text-pc-b1 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-b1-tablet);
 		line-height: var(--line-height-b1-tablet);
 	}
 
-	.text-b2 {
+	.text-pc-b2 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-b2-tablet);
 		line-height: var(--line-height-b2-tablet);
 	}
 
-	.text-b3 {
+	.text-pc-b3 {
+		font-family: var(--font-sans);
 		font-size: var(--font-size-b3-tablet);
 		line-height: var(--line-height-b3-tablet);
-	}
-
-	/* PC-only header levels */
-	.text-h9 {
-		font-size: var(--font-size-h9-tablet);
-		line-height: var(--line-height-h9-tablet);
-		font-weight: var(--font-weight-regular);
-	}
-
-	.text-h10 {
-		font-size: var(--font-size-h10-tablet);
-		line-height: var(--line-height-h10-tablet);
-		font-weight: var(--font-weight-regular);
 	}
 }

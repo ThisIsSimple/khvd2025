@@ -1,0 +1,17 @@
+{
+	"tailwindCSS.experimental.classRegex": [
+		["class:\\s*[\"'`]([^\"'`]*)[\"'`]", "([a-zA-Z0-9\\-:]+)"],
+		["className:\\s*[\"'`]([^\"'`]*)[\"'`]", "([a-zA-Z0-9\\-:]+)"]
+	],
+	"tailwindCSS.includeLanguages": {
+		"svelte": "html"
+	},
+	"tailwindCSS.classAttributes": [
+		"class",
+		"className",
+		"class:list",
+		"classList",
+		"ngClass"
+	],
+	"css.customData": [".vscode/tailwind.json"]
+}
