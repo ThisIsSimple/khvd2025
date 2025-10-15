@@ -2,6 +2,7 @@
 	import { Motion } from 'svelte-motion';
 	import type { PageData } from './$types';
 	import FlipClock from '$lib/components/FlipClock.svelte';
+	import MessageBoard from '$lib/components/MessageBoard.svelte';
 
 	let { data }: { data: PageData } = $props();
 </script>
@@ -26,7 +27,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="min-h-screen bg-white">
-		<div class="text-h8 font-bold!">전시를 기다리며 응원의 말을 적어주세요</div>
-	</div>
+	<!-- Message Board Section -->
+	<MessageBoard />
 </div>
