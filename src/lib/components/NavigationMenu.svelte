@@ -53,10 +53,18 @@
 				<!-- Menu Item -->
 				<a
 					href={item.href}
-					class="flex-1 bg-primary flex items-center px-[40px] py-[10px] hover:bg-opacity-90 transition-all"
+					class="group flex-1 bg-primary flex items-center px-[40px] py-[10px] relative overflow-hidden transition-all duration-300"
 					onclick={handleClose}
 				>
-					<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black">
+					<!-- Background Image (visible on hover) -->
+					<img
+						src="/nav-hover-bg.png"
+						alt=""
+						class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+					/>
+
+					<!-- Text (changes color on hover) -->
+					<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black group-hover:text-white transition-colors duration-300 relative z-10">
 						{item.title}
 					</p>
 				</a>
