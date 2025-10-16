@@ -13,10 +13,14 @@
 	let isSubmitting = $state(false);
 	let error = $state<string | null>(null);
 
-	const messagesPerPage = 10;
 	const maxCharacters = 120;
 
-	// Calculate total pages
+	// Responsive messages per page
+	// Desktop: 8 (4 per row, 2 rows), Tablet: 6 (3 per row, 2 rows), Mobile: 4 (2 per row, 2 rows)
+	let messagesPerPage = $state(8); // Default to desktop
+	let itemsPerRow = $state(4); // Default to desktop
+
+	// Calculate total pages based on current messagesPerPage
 	let totalPages = $derived(Math.ceil(totalMessages / messagesPerPage));
 
 	// Get current page messages - no slicing needed, API handles pagination
@@ -24,6 +28,26 @@
 
 	// Character count
 	let characterCount = $derived(inputText.length);
+
+	// Update messages per page based on window size
+	function updateMessagesPerPage() {
+		if (typeof window === 'undefined') return;
+
+		const width = window.innerWidth;
+		if (width >= 1351) {
+			// Desktop: 4 per row, 2 rows = 8 messages
+			messagesPerPage = 8;
+			itemsPerRow = 4;
+		} else if (width >= 960) {
+			// Tablet: 3 per row, 2 rows = 6 messages
+			messagesPerPage = 6;
+			itemsPerRow = 3;
+		} else {
+			// Mobile: 2 per row, 2 rows = 4 messages
+			messagesPerPage = 4;
+			itemsPerRow = 2;
+		}
+	}
 
 	// Fetch messages from API
 	async function fetchMessages(page: number = 0) {
@@ -108,7 +132,15 @@
 
 	// Load messages on component mount
 	onMount(() => {
+		updateMessagesPerPage();
 		fetchMessages(0);
+
+		// Listen for window resize
+		window.addEventListener('resize', updateMessagesPerPage);
+
+		return () => {
+			window.removeEventListener('resize', updateMessagesPerPage);
+		};
 	});
 </script>
 
@@ -154,7 +186,7 @@
 							type="text"
 							bind:value={writerName}
 							placeholder="닉네임을 입력해주세요..."
-							maxlength="50"
+							maxlength="10"
 							disabled={isSubmitting}
 							class="w-full font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
 						/>
@@ -175,9 +207,9 @@
 							type="password"
 							bind:value={password}
 							placeholder="0000"
-							maxlength="10"
+							maxlength="4"
 							disabled={isSubmitting}
-							class="w-[80px] tablet:w-[100px] font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+							class="font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
 						/>
 					</div>
 				</div>
@@ -193,6 +225,7 @@
 						placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
 						disabled={isSubmitting}
 						class="w-full h-full resize-none outline-none font-bold text-black text-[20px] tablet:text-[24px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+						maxlength="120"
 					></textarea>
 				</div>
 			</div>
@@ -207,7 +240,7 @@
 	</div>
 
 	<!-- Messages Grid Section -->
-	<div class="relative flex flex-col gap-[40px] items-center w-full max-w-[1920px]">
+	<div class="relative flex flex-col items-center w-full max-w-[1920px]">
 		{#if isLoading}
 			<!-- Loading State -->
 			<div class="flex items-center justify-center py-[100px]">
@@ -219,19 +252,19 @@
 				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">첫 번째 메시지를 남겨주세요!</p>
 			</div>
 		{:else}
-			<!-- Messages Grid -->
-			<div class="flex flex-col gap-[24px] items-start justify-center px-4 tablet:px-[40px] w-full">
-				<!-- Row 1: 5 cards -->
-				<div class="flex flex-wrap tablet:flex-nowrap gap-[16px] w-full justify-center">
-					{#each currentMessages.slice(0, 5) as message (message.id)}
+			<!-- Messages Grid: Responsive 2/3/4 columns -->
+			<div class="flex flex-col gap-[24px] items-center justify-center px-4 tablet:px-[40px] w-full">
+				<!-- Row 1 -->
+				<div class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center">
+					{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
 						<MessageCard writer={message.writer} text={message.text} date={message.date} />
 					{/each}
 				</div>
 
-				<!-- Row 2: 5 cards -->
-				{#if currentMessages.length > 5}
-					<div class="flex flex-wrap tablet:flex-nowrap gap-[16px] w-full justify-center">
-						{#each currentMessages.slice(5, 10) as message (message.id)}
+				<!-- Row 2 -->
+				{#if currentMessages.length > itemsPerRow}
+					<div class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center">
+						{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
 							<MessageCard writer={message.writer} text={message.text} date={message.date} />
 						{/each}
 					</div>
@@ -239,22 +272,25 @@
 			</div>
 		{/if}
 
-		<!-- Pagination Controls -->
+		<!-- Pagination Controls (Figma Design) -->
 		{#if totalPages > 1}
-			<div class="flex items-center gap-[12px] px-[12px]">
+			<div class="flex items-center gap-0 px-[12px] mt-[20px] xs:mt-[40px]">
 				{#each Array(totalPages) as _, index}
 					<button
 						onclick={() => goToPage(index)}
 						class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70"
 						aria-label={`Page ${index + 1}`}
+						disabled={isLoading}
 					>
-						<img
-							src={currentPage === index
-								? '/icons/pagination_active.svg'
-								: '/icons/pagination_inactive.svg'}
-							alt=""
-							class="w-[14px] h-[14px]"
-						/>
+						<div class="w-[14px] h-[14px]">
+							<img
+								src={currentPage === index
+									? '/icons/pagination-active.svg'
+									: '/icons/pagination-default.svg'}
+								alt=""
+								class="w-full h-full"
+							/>
+						</div>
 					</button>
 				{/each}
 			</div>
