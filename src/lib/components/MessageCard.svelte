@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="bg-[#fefefe] flex flex-col gap-[20px] items-end justify-center p-[20px] w-full tablet:w-[448px]"
+	class="bg-[#fefefe] flex flex-col gap-[20px] items-end justify-center p-[20px] w-full"
 >
 	<!-- Text Container -->
 	<div class="flex flex-col gap-[20px] items-start overflow-clip p-[10px] w-full">
