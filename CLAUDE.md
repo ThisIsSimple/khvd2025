@@ -21,8 +21,8 @@ Online exhibition platform for university showcase built with modern web technol
   - **Primary Color**: `#FC451E` (Orange-red, used with `text-primary` or `bg-primary`)
 - **Custom Responsive Breakpoints**:
   - **Mobile**: 0px - 959px (default, no prefix)
-  - **Small PC (tablet)**: 960px - 1440px (prefix: `tablet:`)
-  - **Large PC (desktop)**: 1441px+ (prefix: `desktop:`)
+  - **Tablet**: 960px - 1350px (prefix: `tablet:`)
+  - **Desktop**: 1351px+ (prefix: `desktop:`)
 - **Custom Fonts**:
   - **Pretendard Variable** - Primary Korean/Latin font with variable weight support
   - **Bebas Neue** - Display font for headlines and emphasis
@@ -204,8 +204,8 @@ Custom configuration in `src/app.css`:
 ```css
 @theme {
 	/* Responsive Breakpoints */
-	--breakpoint-tablet: 960px; /* Small PC: 960px - 1440px */
-	--breakpoint-desktop: 1441px; /* Large PC: 1441px+ */
+	--breakpoint-tablet: 960px; /* Tablet: 960px - 1350px */
+	--breakpoint-desktop: 1351px; /* Desktop: 1351px+ */
 
 	/* Brand Colors */
 	--color-primary: #fc451e; /* Primary brand color (orange-red) */
@@ -490,16 +490,16 @@ The project uses custom breakpoints tailored for the exhibition platform:
 | Breakpoint                | Range          | Usage                   | Example           |
 | ------------------------- | -------------- | ----------------------- | ----------------- |
 | **Mobile** (default)      | 0px - 959px    | Mobile devices          | `text-5xl`        |
-| **Small PC** (`tablet:`)  | 960px - 1440px | Tablets, small laptops  | `tablet:text-7xl` |
-| **Large PC** (`desktop:`) | 1441px+        | Large screens, desktops | `desktop:px-8`    |
+| **Tablet** (`tablet:`)    | 960px - 1350px | Tablets, small laptops  | `tablet:text-7xl` |
+| **Desktop** (`desktop:`)  | 1351px+        | Large screens, desktops | `desktop:px-8`    |
 
 ### Responsive Breakpoint Reference
 
 **Quick Reference:**
 
 - **Mobile**: No prefix needed (default)
-- **Small PC**: Use `tablet:` prefix (≥960px)
-- **Large PC**: Use `desktop:` prefix (≥1441px)
+- **Tablet**: Use `tablet:` prefix (≥960px)
+- **Desktop**: Use `desktop:` prefix (≥1351px)
 
 ### Usage Examples
 

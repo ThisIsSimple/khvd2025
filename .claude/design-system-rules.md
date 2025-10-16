@@ -21,7 +21,7 @@ Tokens use **CSS Custom Properties** within the `@theme` directive (TailwindCSS 
 
   /* Responsive Breakpoints */
   --breakpoint-tablet: 960px;
-  --breakpoint-desktop: 1441px;
+  --breakpoint-desktop: 1351px;
 
   /* Font Families */
   --font-sans: 'Pretendard Variable', Pretendard, ...;
@@ -52,8 +52,8 @@ Tokens use **CSS Custom Properties** within the `@theme` directive (TailwindCSS 
 
 #### Breakpoint Tokens
 - **Mobile**: 0px - 959px (no prefix, mobile-first)
-- **Tablet/Small PC**: 960px - 1440px (prefix: `tablet:`)
-- **Desktop/Large PC**: 1441px+ (prefix: `desktop:`)
+- **Tablet**: 960px - 1350px (prefix: `tablet:`)
+- **Desktop**: 1351px+ (prefix: `desktop:`)
 
 #### Typography Tokens
 
@@ -565,8 +565,8 @@ import { EXHIBITION_CONFIG } from '$lib/config';
 | Figma Frame | CSS Class Prefix | Breakpoint |
 |-------------|------------------|------------|
 | Mobile (0-959px) | (none) | Default |
-| Tablet (960-1440px) | `tablet:` | ≥960px |
-| Desktop (1441px+) | `desktop:` | ≥1441px |
+| Tablet (960-1350px) | `tablet:` | ≥960px |
+| Desktop (1351px+) | `desktop:` | ≥1351px |
 
 ### Component Generation Workflow
 
@@ -623,7 +623,7 @@ import { EXHIBITION_CONFIG } from '$lib/config';
 
 3. **Responsive Design**
    - Mobile-first approach
-   - Test at all breakpoints (960px, 1441px)
+   - Test at all breakpoints (960px, 1351px)
    - Use responsive typography classes
 
 4. **Performance Considerations**
@@ -822,7 +822,7 @@ import { EXHIBITION_CONFIG } from '$lib/config';
 
 ### Responsive Classes Not Working
 **Issue**: `tablet:` or `desktop:` prefixes don't apply
-**Solution**: Verify breakpoint tokens in `@theme` are correct (960px, 1441px) and PostCSS is processing Tailwind
+**Solution**: Verify breakpoint tokens in `@theme` are correct (960px, 1351px) and PostCSS is processing Tailwind
 
 ### Animation Jank/Stuttering
 **Issue**: Animations not smooth

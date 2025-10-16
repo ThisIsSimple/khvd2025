@@ -7,8 +7,8 @@
 
 @theme {
 	/* Responsive Breakpoints */
-	--breakpoint-tablet: 960px; /* Small PC: 960px - 1440px */
-	--breakpoint-desktop: 1441px; /* Large PC: 1441px+ */
+	--breakpoint-tablet: 960px; /* Tablet: 960px - 1350px */
+	--breakpoint-desktop: 1351px; /* Desktop: 1351px+ */
 
 	/* Brand Colors */
 	--color-primary: #fc451e;
