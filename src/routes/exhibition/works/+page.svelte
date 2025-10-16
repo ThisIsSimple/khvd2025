@@ -38,14 +38,18 @@
 	let hoveredIndex = $state<number | null>(null);
 
 	// Calculate grid template columns based on hover state
+	// Total should always be 4fr to maintain 100% width
 	function getGridColumns(totalCards: number, hovered: number | null): string {
 		if (hovered === null) {
-			return 'repeat(4, 1fr)'; // Default: equal columns
+			return 'repeat(4, 1fr)'; // Default: equal columns (1fr each = 4fr total)
 		}
-		// When hovered: expanded card gets 2fr, others get 0.66fr
+		// When hovered: total is 4fr
+		// Expanded card gets 1.6fr, others share remaining 2.4fr (0.8fr each)
+		const expandedSize = 1.6;
+		const normalSize = (4 - expandedSize) / (totalCards - 1); // 2.4 / 3 = 0.8
 		const columns = Array(totalCards)
 			.fill(0)
-			.map((_, i) => (i === hovered ? '2fr' : '0.66fr'))
+			.map((_, i) => (i === hovered ? `${expandedSize}fr` : `${normalSize}fr`))
 			.join(' ');
 		return columns;
 	}
@@ -82,12 +86,12 @@
 			class="hidden tablet:grid desktop:hidden gap-[40px] w-full mb-[120px] transition-all duration-500 ease-in-out"
 			style="grid-template-columns: {hoveredIndex !== null && hoveredIndex < 2
 				? hoveredIndex === 0
-					? '2fr 0.66fr'
-					: '0.66fr 2fr'
+					? '1.3fr 0.7fr'
+					: '0.7fr 1.3fr'
 				: hoveredIndex !== null && hoveredIndex >= 2
 					? hoveredIndex === 2
-						? '2fr 0.66fr'
-						: '0.66fr 2fr'
+						? '1.3fr 0.7fr'
+						: '0.7fr 1.3fr'
 					: '1fr 1fr'};"
 		>
 			{#each professorGroups as group, index}
