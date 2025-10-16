@@ -5,22 +5,22 @@
 	const professorGroups = [
 		{
 			number: '0',
-			professors: ['박재연', '조소원', '최성훈'],
+			professors: ['PROF.\nEun Jeong Kim', 'PROF.\nMi Gyeong Jang'],
 			workCount: 15
 		},
 		{
 			number: '1',
-			professors: ['강정림', '박성원', '한승희'],
+			professors: ['PROF.\nJi Yeon Jeong', 'PROF.\nJung Woo Kim'],
 			workCount: 15
 		},
 		{
 			number: '2',
-			professors: ['권명진', '김경국', '최효정'],
+			professors: ['PROF.\nSang Hee Park', 'PROF.\nDae Yeon Kim'],
 			workCount: 15
 		},
 		{
 			number: '3',
-			professors: ['김설희', '최윤주', '황혜욱'],
+			professors: ['PROF.\nTBD', 'PROF.\nTBD'],
 			workCount: 15
 		}
 	];
@@ -49,7 +49,7 @@
 					<!-- Professor Info Box -->
 					<div class="bg-white flex flex-col items-center justify-center gap-[8px] px-[20px] py-[24px] w-full max-w-[280px]">
 						{#each group.professors as professor}
-							<p class="font-sans text-[16px] font-medium leading-[1.4] text-[#111111]">
+							<p class="font-sans text-[16px] font-medium leading-[1.4] text-[#111111] whitespace-pre-line">
 								{professor}
 							</p>
 						{/each}
@@ -68,7 +68,4 @@
 			{/each}
 		</div>
 	</div>
-
-	<!-- Footer -->
-	<Footer />
 </div>
