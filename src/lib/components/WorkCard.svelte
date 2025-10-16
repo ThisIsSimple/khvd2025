@@ -11,28 +11,34 @@
 		workCount: number;
 		category?: string;
 		title?: string;
+		onHoverChange?: (hovered: boolean) => void;
 	}
 
-	let { number, professors, workCount, category, title }: Props = $props();
+	let { number, professors, workCount, category, title, onHoverChange }: Props = $props();
 
 	let isHovered = $state(false);
+
+	function handleMouseEnter() {
+		isHovered = true;
+		onHoverChange?.(true);
+	}
+
+	function handleMouseLeave() {
+		isHovered = false;
+		onHoverChange?.(false);
+	}
 </script>
 
 <!-- Work Card Component for Desktop/Tablet -->
-<Motion
-	initial={{ width: 'auto' }}
-	whileHover={{ width: 'auto' }}
-	transition={{ duration: 0.5, ease: 'easeInOut' }}
-	let:motion
+<div
+	class="flex flex-col gap-[40px] transition-all duration-500 ease-in-out {isHovered
+		? 'col-span-2'
+		: 'col-span-1'}"
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+	role="button"
+	tabindex="0"
 >
-	<div
-		use:motion
-		class="flex flex-col gap-[40px] transition-all duration-500 ease-in-out"
-		onmouseenter={() => (isHovered = true)}
-		onmouseleave={() => (isHovered = false)}
-		role="button"
-		tabindex="0"
-	>
 		<!-- Professor Info Box -->
 		<div
 			class="bg-white flex flex-col gap-[12px] items-center justify-center px-[100px] desktop:px-[100px] tablet:px-[48px] py-[20px] w-full"
@@ -156,4 +162,3 @@
 			{/if}
 		</div>
 	</div>
-</Motion>
