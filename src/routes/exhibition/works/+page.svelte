@@ -8,29 +8,29 @@
 			number: '0',
 			professors: [{ name: 'Eun Jeong Kim' }, { name: 'Sang Hee Park' }],
 			workCount: 15,
-			category: 'Graduation Studies',
+			category: 'Graduation Studies 0',
 			title: '지속 가능한 미래를 위한\n창의적 해법'
 		},
 		{
 			number: '1',
-			professors: [{ name: 'Mi Gyeong Jang' }, { name: 'Dae Yeon Kim' }],
-			workCount: 15,
-			category: 'Brand Design',
-			title: '브랜드의 새로운\n가치 발견'
+			professors: [{ name: 'Kyungwon Lee' }, { name: 'Aeri You' }],
+			workCount: 13,
+			category: 'Graduation Studies 1',
+			title: '아이디어의 근원과\n메세지를 탐구하는\n실전 디자인'
 		},
 		{
 			number: '2',
-			professors: [{ name: 'Ji Yeon Jeong' }],
-			workCount: 15,
-			category: 'UX/UI Design',
-			title: '사용자 중심의\n디지털 경험'
+			professors: [{ name: 'Seung Hwan Yang' }],
+			workCount: 6,
+			category: 'Graduation Studies 2',
+			title: '디자인 비즈니스:\n경험, 혁신, 그리고\n미래 연결성'
 		},
 		{
 			number: '3',
-			professors: [{ name: 'Jung Woo Kim' }],
-			workCount: 15,
-			category: 'Motion Graphics',
-			title: '움직임으로 전하는\n이야기'
+			professors: [{ name: 'Yong Seok Choi' }],
+			workCount: 4,
+			category: 'Graduation Studies 3',
+			title: '시각 언어와\n인터랙션을 결합한\n경험 디자인'
 		}
 	];
 
