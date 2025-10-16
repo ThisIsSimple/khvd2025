@@ -2,9 +2,10 @@
 	interface Props {
 		isOpen?: boolean;
 		onClose?: () => void;
+		noTitle?: boolean; // If true, shows only menu button (Type 1). Default is false (Type 2 with title and logo)
 	}
 
-	let { isOpen = $bindable(false), onClose }: Props = $props();
+	let { isOpen = $bindable(false), onClose, noTitle = false }: Props = $props();
 
 	function handleClose() {
 		isOpen = false;
@@ -32,6 +33,42 @@
 		{ title: 'SEMINAR', href: '/seminar' }
 	];
 </script>
+
+<!-- Navigation Header (Type 2 - with title and logo) -->
+{#if !noTitle}
+	<header class="fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-40 flex items-center justify-between px-[40px]">
+		<!-- Left: Exhibition Info -->
+		<div class="flex items-center gap-[10px]">
+			<div class="flex flex-col justify-end font-sans text-[20px] text-black leading-[1.2] tracking-[-0.8px]">
+				<p class="mb-0">Kyunghee Univ. Visual Design</p>
+				<p>34th Graduation Exhibition</p>
+			</div>
+		</div>
+
+		<!-- Center: Logo -->
+		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+			<img src="/logo.svg" alt="R=VD" class="w-[88px] h-[43px]" />
+		</div>
+
+		<!-- Right: Menu Button -->
+		<button
+			onclick={() => (isOpen = true)}
+			class="w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
+			aria-label="Open menu"
+		>
+			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+		</button>
+	</header>
+{:else}
+	<!-- Type 1: Menu button only (top right) -->
+	<button
+		onclick={() => (isOpen = true)}
+		class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-40"
+		aria-label="Open menu"
+	>
+		<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+	</button>
+{/if}
 
 <!-- Navigation Drawer Overlay -->
 {#if isOpen}
