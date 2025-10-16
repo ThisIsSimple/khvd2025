@@ -1,85 +1,214 @@
 <script lang="ts">
-	import { Motion } from 'svelte-motion';
+	import type { PageData } from './$types';
+	import FlipClock from '$lib/components/FlipClock.svelte';
+	import MessageBoard from '$lib/components/MessageBoard.svelte';
+
+	let { data }: { data: PageData } = $props();
+
+	// Exhibition closing date: 2025.11.09 at 5:30 PM
+	const exhibitionEndDate = new Date('2025-11-09T17:30:00');
 </script>
 
 <svelte:head>
-	<title>KHVD 2025 - University Online Exhibition</title>
+	<title>KHVD 2025 - Exhibition</title>
 </svelte:head>
 
-<div class="min-h-screen">
-	<!-- Hero Section -->
-	<section class="bg-gradient-to-br from-blue-600 to-purple-700 text-white">
-		<div class="max-w-7xl mx-auto px-4 px-6 desktop:px-8 py-24">
-			<Motion
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.8 }}
-			>
-				<h1 class="text-5xl tablet:text-7xl font-display mb-6">KHVD 2025</h1>
-				<p class="text-xl tablet:text-2xl mb-8 max-w-2xl">
-					University Online Exhibition - Showcasing Innovation and Creativity
+<div class="relative min-h-screen">
+	<!-- Section 1: Hero Section with R=VD Logo -->
+	<section class="relative w-full h-screen">
+		<!-- Background Image -->
+		<div class="absolute inset-0 overflow-hidden pointer-events-none">
+			<img
+				src="/exhibition-hero-bg.png"
+				alt=""
+				class="absolute w-full h-full object-cover"
+				style="width: 100.67%; height: 112.53%; left: -0.35%; top: -6.33%;"
+			/>
+		</div>
+
+		<!-- Content will be added here -->
+		<div class="relative z-10 flex items-center justify-center h-full">
+			<!-- R=VD Logo and text content will be in the actual design -->
+		</div>
+	</section>
+
+	<!-- Section 2: Exhibition Concept -->
+	<section class="relative w-full flex flex-col">
+		<!-- Background Image -->
+		<img
+			src="/exhibition-section2-bg.png"
+			alt=""
+			class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+		/>
+
+		<!-- Title Area -->
+		<div class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[389px] py-[200px] tablet:py-[400px] w-full">
+			<div class="flex flex-col font-display gap-[20px] items-center justify-center leading-none text-primary text-[56px] tablet:text-[132px] text-center w-full max-w-[1142px] mx-auto">
+				<p class="w-full">Reenvision = vivid dreams</p>
+				<p class="whitespace-nowrap">Realization = Visual design</p>
+			</div>
+		</div>
+
+		<!-- Reenvision Explanation -->
+		<div class="relative flex flex-col gap-[10px] items-center justify-center px-4 tablet:px-[420px] py-[100px] tablet:py-[200px] w-full">
+			<div class="flex flex-col gap-[49px] items-center text-primary w-full max-w-[1081px]">
+				<!-- Title -->
+				<div class="flex flex-col font-display gap-[14px] items-center w-full max-w-[858px]">
+					<p class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full">
+						REENVISION=VIVID DREAMS
+					</p>
+					<p class="leading-none text-[80px] tablet:text-[210px] w-full">REENVISION =</p>
+				</div>
+
+				<!-- Description -->
+				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[40px] text-center">
+					<p class="text-primary">Reenvision, 무뎌졌던 감각을 다시 일깨우고,</p>
+					<p class="text-primary">범람하는 정보들을 자신만의 것으로 재구상하는 과정.</p>
+					<p>&nbsp;</p>
+					<p class="text-primary">넘쳐나는 정보와 급변하는 환경 속에서</p>
+					<p class="text-primary">우리는 자주 흐려지고 쉽게 흔들립니다.</p>
+					<p>&nbsp;</p>
+					<p class="text-primary">"나는 지금 무엇을, 어떻게 보고 있는가?"</p>
+					<p>&nbsp;</p>
+					<p>이에 우리 디자이너들은 익숙했던 공식 R=VD를 다시 써보며</p>
+					<p>모호해진 자신만의 기준을 뚜렷이 다듬어보고자 했습니다.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Vivid Dreams Explanation -->
+		<div class="relative flex flex-col gap-[10px] items-start px-4 tablet:px-[441px] py-[200px] tablet:py-[400px] w-full pb-[200px]">
+			<div class="flex flex-col gap-[60px] items-center text-primary w-full">
+				<!-- Title -->
+				<div class="flex flex-col font-display gap-[7px] items-center w-full max-w-[882px]">
+					<p class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full">
+						Realization=Visual Design
+					</p>
+					<p class="leading-none text-[80px] tablet:text-[210px] w-full">VIVID DREAMS</p>
+				</div>
+
+				<!-- Description -->
+				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[40px] text-center">
+					<p>다듬어진 시선과 가치들은 시각디자인이라는 매체를 통해</p>
+					<p>Realization, 눈 앞의 현실로 드러납니다.</p>
+					<p>&nbsp;</p>
+					<p>"생생한 꿈은 결국 실현된다"</p>
+					<p>&nbsp;</p>
+					<p>이번 전시는 다시 보는 것에서 시작해</p>
+					<p>흐릿했던 시야를 스스로의 기준으로 정돈하고,</p>
+					<p>자신만의 시선과 태도를 시각적으로 구축해나간 여정의 기록입니다.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Section 3: Countdown Timer & Exhibition Details -->
+	<section class="w-full flex flex-col">
+		<!-- Top Bar: UNTIL CLOSING with FlipClock -->
+		<div class="w-full bg-primary flex flex-col tablet:flex-row items-center justify-center gap-[20px] tablet:gap-[40px] px-4 py-[32px] tablet:py-[52px]">
+			<h2 class="font-display text-[48px] tablet:text-[80px] text-black leading-none">UNTIL CLOSING =</h2>
+			<FlipClock targetDate={exhibitionEndDate} />
+		</div>
+
+		<!-- Bottom Section: Exhibition Details with Pattern Background -->
+		<div
+			class="w-full bg-white relative flex flex-col tablet:flex-row items-start justify-between gap-[40px] tablet:gap-[60px] px-[20px] tablet:px-[52px] py-[60px] tablet:py-[100px]"
+		>
+			<!-- Pattern Overlay -->
+			<img
+				src="/exhibition-section3-bg.png"
+				alt=""
+				class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
+			/>
+
+			<!-- Left Column: Open & Close -->
+			<div class="relative z-10 flex flex-col gap-[16px] tablet:gap-[32px]">
+				<h3 class="font-display text-[40px] tablet:text-[52px] leading-none text-black">Open & Close</h3>
+				<p class="font-display text-[40px] tablet:text-[52px] leading-none text-black opacity-50">
+					10:00 AM - 05:30 PM
 				</p>
-				<div class="flex gap-4">
-					<a
-						href="/exhibition"
-						class="px-6 py-3 bg-white text-purple-900 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-					>
-						View Exhibition
-					</a>
-					<a
-						href="/teaser"
-						class="px-6 py-3 bg-transparent border-2 border-white rounded-lg font-medium hover:bg-white hover:text-purple-900 transition-colors"
-					>
-						Teaser
-					</a>
-				</div>
-			</Motion>
-		</div>
-	</section>
+			</div>
 
-	<!-- About Section -->
-	<section class="py-16 bg-white">
-		<div class="max-w-7xl mx-auto px-4 px-6 desktop:px-8">
-			<h2 class="text-4xl font-display mb-8 text-center">About the Exhibition</h2>
-			<div class="grid grid-cols-1 tablet:grid-cols-3 gap-8">
-				<div class="text-center">
-					<div class="text-4xl mb-4">🎨</div>
-					<h3 class="text-xl font-display mb-2">Creative Works</h3>
-					<p class="text-gray-600">Explore innovative projects from talented students</p>
+			<!-- Right Column: Exhibition Details -->
+			<div class="relative z-10 flex flex-col gap-[32px] tablet:gap-[52px]">
+				<!-- 전시 기간 -->
+				<div class="flex flex-col gap-[12px] tablet:gap-[16px]">
+					<h4 class="text-mobile-h9 tablet:text-pc-h9 font-bold text-black">전시 기간</h4>
+					<p class="text-mobile-h9 tablet:text-pc-h9 text-black opacity-50">
+						2025.11.05 - 2025.11.09
+					</p>
 				</div>
-				<div class="text-center">
-					<div class="text-4xl mb-4">🌟</div>
-					<h3 class="text-xl font-display mb-2">Innovation</h3>
-					<p class="text-gray-600">Discover cutting-edge ideas and solutions</p>
-				</div>
-				<div class="text-center">
-					<div class="text-4xl mb-4">🚀</div>
-					<h3 class="text-xl font-display mb-2">Future Vision</h3>
-					<p class="text-gray-600">Experience the future of design and technology</p>
+
+				<!-- 전시 장소 -->
+				<div class="flex flex-col gap-[12px] tablet:gap-[16px]">
+					<h4 class="text-mobile-h9 tablet:text-pc-h9 font-bold text-black">전시 장소</h4>
+					<p class="text-mobile-h9 tablet:text-pc-h9 text-black opacity-50">
+						경희대학교 국제캠퍼스<br />예술디자인대학 2F A&D홀 갤러리
+					</p>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Quick Links -->
-	<section class="py-16 bg-gray-50">
-		<div class="max-w-7xl mx-auto px-4 px-6 desktop:px-8">
-			<div class="grid grid-cols-1 tablet:grid-cols-2 gap-6">
-				<a
-					href="/exhibition/works"
-					class="block p-8 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
-				>
-					<h3 class="text-2xl font-display mb-2">Browse Works</h3>
-					<p class="text-gray-600">View all exhibition works →</p>
-				</a>
-				<a
-					href="/teaser"
-					class="block p-8 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
-				>
-					<h3 class="text-2xl font-display mb-2">Coming Soon</h3>
-					<p class="text-gray-600">Check out our teaser page →</p>
-				</a>
+	<!-- Section 4: Work Shortcut -->
+	<section class="w-full bg-white flex flex-col gap-[10px] items-start justify-center py-[100px] tablet:pb-[200px] px-[20px] tablet:px-[40px]">
+		<!-- Header -->
+		<div class="w-full flex flex-col items-start px-[12px] py-[32px]">
+			<h2 class="text-h7 text-black tracking-[-0.8px] leading-[1.2]">작품 바로가기</h2>
+			<p class="text-h10 text-[#777777] leading-[1.5]">Work Shortcut</p>
+		</div>
+
+		<!-- Content Area -->
+		<div class="w-full flex flex-col tablet:flex-row items-center tablet:h-[695px] py-[60px] tablet:pl-[40px] tablet:pr-[80px]">
+			<!-- Left: Exhibition Map -->
+			<div class="w-full tablet:flex-1 h-full relative">
+				<div class="absolute inset-0 bg-white">
+					<div class="absolute inset-0 overflow-hidden">
+						<img
+							src="/exhibition-section4-map.png"
+							alt="Exhibition Map"
+							class="absolute w-[157%] h-[126%] left-[-0.38%] top-0 max-w-none object-cover"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right: Work Details with Arrow -->
+			<div class="w-full tablet:flex-1 h-full flex flex-col justify-between items-start mt-[40px] tablet:mt-0">
+				<!-- Arrow Icon (Top Right) -->
+				<div class="w-full flex justify-end items-center">
+					<div class="w-[100px] h-[100px] tablet:w-[150px] tablet:h-[150px] flex items-center justify-center rotate-180 scale-y-[-100%]">
+						<img
+							src="/icons/arrow_diagonal.svg"
+							alt=""
+							class="w-[71px] h-[71px]"
+						/>
+					</div>
+				</div>
+
+				<!-- Text Content (Bottom) -->
+				<div class="w-full flex flex-col gap-[4px] px-[20px] tablet:px-[80px] py-[40px] tablet:py-[60px]">
+					<div class="flex flex-col gap-[4px]">
+						<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black">
+							GRADUATION
+						</p>
+						<div class="flex gap-[10px] items-start">
+							<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black">
+								STUDIES 1
+							</p>
+							<div class="pt-[8px] tablet:pt-[12px]">
+								<span class="font-display text-[28px] tablet:text-[40px] leading-none text-black">[15]</span>
+							</div>
+						</div>
+					</div>
+					<p class="font-display text-[40px] tablet:text-[52px] leading-[1.1] text-black">
+						visual design
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
+
+	<!-- Section 5: Message Board -->
+	<MessageBoard />
 </div>
