@@ -91,8 +91,8 @@
 			{/each}
 		</div>
 
-		<!-- Professor Groups Grid - Tablet (3 columns) -->
-		<div class="hidden tablet:grid desktop:hidden grid-cols-3 gap-[40px] w-full mb-[120px]">
+		<!-- Professor Groups Grid - Tablet (4 columns) -->
+		<div class="hidden tablet:grid desktop:hidden grid-cols-4 gap-[40px] w-full mb-[120px]">
 			{#each professorGroups as group}
 				<div class="flex flex-col gap-[40px]">
 					<!-- Professor Info Box - Tablet Layout -->
@@ -146,7 +146,7 @@
 		</div>
 
 		<!-- Professor Groups Grid - Mobile (2x2 grid) -->
-		<div class="grid tablet:hidden grid-cols-2 w-full mb-[120px]">
+		<div class="hidden xs:grid tablet:hidden grid-cols-2 w-full mb-[120px]">
 			{#each professorGroups as group}
 				<div class="flex flex-col">
 					<!-- Professor Info Box - Mobile Layout -->
@@ -198,6 +198,51 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			{/each}
+		</div>
+
+		<!-- Professor Groups Grid - Extra Small Mobile (1 column) -->
+		<div class="flex xs:hidden flex-col gap-[12px] w-full pb-[60px]">
+			{#each professorGroups as group}
+				<div class="relative flex items-end justify-between px-[16px] w-full">
+					<!-- Background Pattern -->
+					<img
+						src="/works-bg-pattern.png"
+						alt=""
+						class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+					/>
+
+					<!-- Left: Number and Count -->
+					<div class="relative flex gap-[4px] items-start">
+						<!-- Large Number -->
+						<div class="w-[60px]">
+							<p
+								class="font-display text-[120px] leading-[1.2] tracking-[-4.8px] text-center text-[#111111]"
+							>
+								{group.number}
+							</p>
+						</div>
+
+						<!-- Work Count -->
+						<div class="flex h-[144px] items-start pt-[22px] pb-[10px]">
+							<p
+								class="font-display text-[28px] leading-[1.2] tracking-[-0.56px] text-center text-[#111111]"
+							>
+								[{group.workCount}]
+							</p>
+						</div>
+					</div>
+
+					<!-- Right: Professor Info -->
+					<div class="relative flex flex-col gap-[8px] items-end justify-end pb-[32px] w-[212px]">
+						{#each group.professors as professor}
+							<div class="flex items-center justify-end w-full text-[15px] text-[#111111]">
+								<p class="font-bold leading-[1.4] w-[64px]">PROF.</p>
+								<p class="font-sans leading-[1.5] text-right w-[148px]">{professor.name}</p>
+							</div>
+						{/each}
 					</div>
 				</div>
 			{/each}
