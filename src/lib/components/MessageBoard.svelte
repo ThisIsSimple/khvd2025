@@ -136,43 +136,70 @@
 			</div>
 		{/if}
 
-		<!-- Name and Password Row -->
-		<div class="flex gap-[16px] w-full">
-			<input
-				type="text"
-				bind:value={writerName}
-				placeholder="작성자 (최대 50자)"
-				maxlength="50"
-				disabled={isSubmitting}
-				class="flex-1 bg-[#fefefe] px-[20px] py-[16px] text-mobile-b1 tablet:text-pc-b1 font-normal text-black placeholder:text-[#999999] outline-none disabled:opacity-50"
-			/>
-			<input
-				type="password"
-				bind:value={password}
-				placeholder="비밀번호 (4-10자)"
-				maxlength="10"
-				disabled={isSubmitting}
-				class="w-[200px] bg-[#fefefe] px-[20px] py-[16px] text-mobile-b1 tablet:text-pc-b1 font-normal text-black placeholder:text-[#999999] outline-none disabled:opacity-50"
-			/>
-		</div>
+		<!-- Input Box (Figma Design) -->
+		<div class="bg-[#fefefe] flex flex-col items-start w-full">
+			<!-- Top Row: Writer and Password Fields -->
+			<div class="flex items-start justify-end w-full border-b border-[#cccccc]">
+				<!-- Writer Field -->
+				<div class="flex-1 flex items-center border-r border-[#cccccc]">
+					<!-- Label -->
+					<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+						<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+							작성자
+						</p>
+					</div>
+					<!-- Input -->
+					<div class="flex-1 flex items-center h-full px-[16px]">
+						<input
+							type="text"
+							bind:value={writerName}
+							placeholder="닉네임을 입력해주세요..."
+							maxlength="50"
+							disabled={isSubmitting}
+							class="w-full font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+						/>
+					</div>
+				</div>
 
-		<!-- Message Input Box -->
-		<div class="bg-[#fefefe] flex flex-col h-[255px] w-full">
-			<!-- Text Input Area -->
-			<div class="flex-1 flex flex-col gap-[10px] px-[28px] py-[24px]">
-				<textarea
-					bind:value={inputText}
-					oninput={handleInput}
-					onkeydown={handleSubmit}
-					placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
-					disabled={isSubmitting}
-					class="flex-1 w-full resize-none outline-none text-mobile-h6 tablet:text-pc-h10 font-bold text-black placeholder:text-[#999999] tracking-[-0.48px] disabled:opacity-50"
-				></textarea>
+				<!-- Password Field -->
+				<div class="flex items-center border-r border-[#cccccc]">
+					<!-- Label -->
+					<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+						<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+							비밀번호
+						</p>
+					</div>
+					<!-- Input -->
+					<div class="flex items-center h-full px-[16px]">
+						<input
+							type="password"
+							bind:value={password}
+							placeholder="0000"
+							maxlength="10"
+							disabled={isSubmitting}
+							class="w-[80px] tablet:w-[100px] font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<!-- Message Text Area -->
+			<div class="flex flex-col gap-[10px] items-start px-[20px] py-[24px] w-full">
+				<div class="flex gap-[10px] h-[144px] items-start w-full">
+					<textarea
+						bind:value={inputText}
+						oninput={handleInput}
+						onkeydown={handleSubmit}
+						placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
+						disabled={isSubmitting}
+						class="w-full h-full resize-none outline-none font-bold text-black text-[20px] tablet:text-[24px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+					></textarea>
+				</div>
 			</div>
 
 			<!-- Character Counter -->
-			<div class="flex gap-[10px] items-center justify-end p-[16px]">
-				<p class="text-[14px] font-medium text-[#999999] whitespace-nowrap">
+			<div class="flex gap-[10px] items-center justify-end p-[16px] w-full">
+				<p class="font-normal text-[#999999] text-[15px] leading-[1.5] whitespace-nowrap">
 					{characterCount}/{maxCharacters}자
 				</p>
 			</div>
