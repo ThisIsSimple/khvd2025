@@ -11,7 +11,7 @@ import type {
 	MessagesResponse,
 	CreateMessageRequest
 } from '$lib/types/message';
-import { RowDataPacket, ResultSetHeader } from 'mysql2';
+import type { RowDataPacket, ResultSetHeader } from 'mysql2';
 
 /**
  * GET /api/messages
