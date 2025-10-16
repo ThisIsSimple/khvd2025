@@ -74,20 +74,28 @@
 				<!-- Menu Item -->
 				<a
 					href={item.href}
-					class="group flex-1 bg-primary flex items-center px-[40px] py-[10px] relative overflow-hidden transition-all duration-300"
+					class="group flex-1 bg-primary flex items-center px-[40px] py-[10px] relative overflow-hidden"
 					onclick={handleClose}
 				>
-					<!-- Background Image (visible on hover) -->
+					<!-- Background Image (fade in/out on hover) -->
 					<img
 						src="/nav-hover-bg.png"
 						alt=""
-						class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+						class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out pointer-events-none"
 					/>
 
-					<!-- Text (changes color on hover) -->
-					<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black group-hover:text-white transition-colors duration-300 relative z-10">
-						{item.title}
-					</p>
+					<!-- Text Container with slide-up animation -->
+					<div class="relative overflow-hidden h-[80px] tablet:h-[120px] flex items-center">
+						<!-- Black text (default, slides up on hover) -->
+						<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black absolute transition-transform duration-500 ease-in-out group-hover:-translate-y-full">
+							{item.title}
+						</p>
+
+						<!-- White text (hidden below, slides up on hover) -->
+						<p class="font-display text-[80px] tablet:text-[120px] leading-none text-white absolute translate-y-full transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+							{item.title}
+						</p>
+					</div>
 				</a>
 
 				<!-- Divider -->
