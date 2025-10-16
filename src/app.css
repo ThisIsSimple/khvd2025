@@ -7,6 +7,7 @@
 
 @theme {
 	/* Responsive Breakpoints */
+	--breakpoint-xs: 421px; /* Mobile: 421px - 959px */
 	--breakpoint-tablet: 960px; /* Tablet: 960px - 1350px */
 	--breakpoint-desktop: 1351px; /* Desktop: 1351px+ */
 
