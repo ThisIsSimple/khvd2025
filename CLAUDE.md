@@ -20,7 +20,8 @@ Online exhibition platform for university showcase built with modern web technol
 - **Brand Colors**:
   - **Primary Color**: `#FC451E` (Orange-red, used with `text-primary` or `bg-primary`)
 - **Custom Responsive Breakpoints**:
-  - **Mobile**: 0px - 959px (default, no prefix)
+  - **Extra Small Mobile**: 0px - 420px (default, no prefix)
+  - **Mobile**: 421px - 959px (prefix: `xs:`)
   - **Tablet**: 960px - 1350px (prefix: `tablet:`)
   - **Desktop**: 1351px+ (prefix: `desktop:`)
 - **Custom Fonts**:
@@ -204,6 +205,7 @@ Custom configuration in `src/app.css`:
 ```css
 @theme {
 	/* Responsive Breakpoints */
+	--breakpoint-xs: 421px; /* Mobile: 421px - 959px */
 	--breakpoint-tablet: 960px; /* Tablet: 960px - 1350px */
 	--breakpoint-desktop: 1351px; /* Desktop: 1351px+ */
 
@@ -487,17 +489,19 @@ Optimized letter spacing for better legibility:
 
 The project uses custom breakpoints tailored for the exhibition platform:
 
-| Breakpoint                | Range          | Usage                   | Example           |
-| ------------------------- | -------------- | ----------------------- | ----------------- |
-| **Mobile** (default)      | 0px - 959px    | Mobile devices          | `text-5xl`        |
-| **Tablet** (`tablet:`)    | 960px - 1350px | Tablets, small laptops  | `tablet:text-7xl` |
-| **Desktop** (`desktop:`)  | 1351px+        | Large screens, desktops | `desktop:px-8`    |
+| Breakpoint                       | Range          | Usage                   | Example           |
+| -------------------------------- | -------------- | ----------------------- | ----------------- |
+| **Extra Small Mobile** (default) | 0px - 420px    | Small mobile devices    | `text-4xl`        |
+| **Mobile** (`xs:`)               | 421px - 959px  | Mobile devices          | `xs:text-5xl`     |
+| **Tablet** (`tablet:`)           | 960px - 1350px | Tablets, small laptops  | `tablet:text-7xl` |
+| **Desktop** (`desktop:`)         | 1351px+        | Large screens, desktops | `desktop:px-8`    |
 
 ### Responsive Breakpoint Reference
 
 **Quick Reference:**
 
-- **Mobile**: No prefix needed (default)
+- **Extra Small Mobile**: No prefix needed (default, 0-420px)
+- **Mobile**: Use `xs:` prefix (≥421px)
 - **Tablet**: Use `tablet:` prefix (≥960px)
 - **Desktop**: Use `desktop:` prefix (≥1351px)
 
@@ -505,15 +509,15 @@ The project uses custom breakpoints tailored for the exhibition platform:
 
 ```svelte
 <!-- Text sizing across breakpoints -->
-<h1 class="text-5xl tablet:text-7xl">KHVD 2025</h1>
+<h1 class="text-4xl xs:text-5xl tablet:text-7xl">KHVD 2025</h1>
 
 <!-- Grid layouts -->
-<div class="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3">
+<div class="grid grid-cols-1 xs:grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3">
 	<!-- Content -->
 </div>
 
 <!-- Padding adjustments -->
-<div class="px-4 px-6 desktop:px-8">
+<div class="px-3 xs:px-4 tablet:px-6 desktop:px-8">
 	<!-- Content -->
 </div>
 ```

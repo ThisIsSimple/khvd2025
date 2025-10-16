@@ -20,6 +20,7 @@ Tokens use **CSS Custom Properties** within the `@theme` directive (TailwindCSS 
   --color-primary: #fc451e;
 
   /* Responsive Breakpoints */
+  --breakpoint-xs: 421px;
   --breakpoint-tablet: 960px;
   --breakpoint-desktop: 1351px;
 
@@ -51,7 +52,8 @@ Tokens use **CSS Custom Properties** within the `@theme` directive (TailwindCSS 
   - Usage: `text-primary`, `bg-primary`, `border-primary`
 
 #### Breakpoint Tokens
-- **Mobile**: 0px - 959px (no prefix, mobile-first)
+- **Extra Small Mobile**: 0px - 420px (default, no prefix)
+- **Mobile**: 421px - 959px (prefix: `xs:`)
 - **Tablet**: 960px - 1350px (prefix: `tablet:`)
 - **Desktop**: 1351px+ (prefix: `desktop:`)
 
@@ -564,7 +566,8 @@ import { EXHIBITION_CONFIG } from '$lib/config';
 **Breakpoints:**
 | Figma Frame | CSS Class Prefix | Breakpoint |
 |-------------|------------------|------------|
-| Mobile (0-959px) | (none) | Default |
+| Extra Small Mobile (0-420px) | (none) | Default |
+| Mobile (421-959px) | `xs:` | ≥421px |
 | Tablet (960-1350px) | `tablet:` | ≥960px |
 | Desktop (1351px+) | `desktop:` | ≥1351px |
 
@@ -622,8 +625,8 @@ import { EXHIBITION_CONFIG } from '$lib/config';
    - Follow established patterns
 
 3. **Responsive Design**
-   - Mobile-first approach
-   - Test at all breakpoints (960px, 1351px)
+   - Mobile-first approach (extra small mobile default)
+   - Test at all breakpoints (421px, 960px, 1351px)
    - Use responsive typography classes
 
 4. **Performance Considerations**
@@ -821,8 +824,8 @@ import { EXHIBITION_CONFIG } from '$lib/config';
 **Solution**: Check file exists in `static/icons/` and path starts with `/` (e.g., `/icons/name.svg`)
 
 ### Responsive Classes Not Working
-**Issue**: `tablet:` or `desktop:` prefixes don't apply
-**Solution**: Verify breakpoint tokens in `@theme` are correct (960px, 1351px) and PostCSS is processing Tailwind
+**Issue**: `xs:`, `tablet:` or `desktop:` prefixes don't apply
+**Solution**: Verify breakpoint tokens in `@theme` are correct (421px, 960px, 1351px) and PostCSS is processing Tailwind
 
 ### Animation Jank/Stuttering
 **Issue**: Animations not smooth
