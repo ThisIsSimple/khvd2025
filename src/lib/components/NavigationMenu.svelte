@@ -36,7 +36,8 @@
 
 <!-- Navigation Header (Type 2 - with title and logo) -->
 {#if !noTitle}
-	<header class="fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-40 flex items-center justify-between px-[40px]">
+	<!-- Desktop Navigation (≥960px): Full header with title, logo, and menu button -->
+	<header class="hidden tablet:flex fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-40 items-center justify-between px-[40px]">
 		<!-- Left: Exhibition Info -->
 		<div class="flex items-center gap-[10px]">
 			<div class="flex flex-col justify-end font-sans text-[20px] text-black leading-[1.2] tracking-[-0.8px]">
@@ -57,6 +58,23 @@
 			aria-label="Open menu"
 		>
 			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+		</button>
+	</header>
+
+	<!-- Mobile Navigation (<960px): Logo and smaller menu button -->
+	<header class="flex tablet:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[60px] z-40 items-center justify-between px-[20px]">
+		<!-- Logo -->
+		<div class="flex items-center">
+			<img src="/logo-mobile.svg" alt="R=VD" class="w-[50px] h-[25px]" />
+		</div>
+
+		<!-- Menu Button (smaller for mobile) -->
+		<button
+			onclick={() => (isOpen = true)}
+			class="w-[32px] h-[32px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
+			aria-label="Open menu"
+		>
+			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full p-[7px]" />
 		</button>
 	</header>
 {:else}
