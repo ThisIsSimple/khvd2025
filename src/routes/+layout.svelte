@@ -3,6 +3,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import CustomCursor from '$lib/components/CustomCursor.svelte';
 	import NavigationMenu from '$lib/components/NavigationMenu.svelte';
+	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
@@ -11,13 +12,18 @@
 	function toggleMenu() {
 		isMenuOpen = !isMenuOpen;
 	}
+
+	// Check if current page is teaser page
+	let isTeaserPage = $derived($page.url.pathname === '/teaser');
 </script>
 
 <CustomCursor />
 
 <div class="flex min-h-screen flex-col">
-	<!-- Navigation Menu (Type 2 by default: header with title, logo, and menu button) -->
-	<NavigationMenu bind:isOpen={isMenuOpen} />
+	<!-- Navigation Menu (hidden on teaser page) -->
+	{#if !isTeaserPage}
+		<NavigationMenu bind:isOpen={isMenuOpen} />
+	{/if}
 
 	<main class="flex-1">
 		{@render children()}
