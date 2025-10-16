@@ -1,94 +1,95 @@
 <script lang="ts">
 	import MessageCard from './MessageCard.svelte';
+	import type { Message, MessagesResponse } from '$lib/types/message';
+	import { onMount } from 'svelte';
 
-	// Sample messages data (replace with real data from API/database)
-	let messages = $state([
-		{
-			id: 1,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 2,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일',
-			date: '2025.07.08'
-		},
-		{
-			id: 3,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 4,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 5,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 6,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 7,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 8,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 9,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		},
-		{
-			id: 10,
-			text: '졸전 끝나고 나는 일본여행을 떠날 거야, 일본이 아니더라도 어디론가 떠나서 돌아오지 않을테야 아냐 돌아와야지 취업해야하는데 뭔 이상한 소리지 그러게 뭘까 내용 채울 말이 없어서 작업하기 싫어서 주저리주저리아아아아아.',
-			date: '2025.07.08'
-		}
-	]);
-
+	let messages = $state<Message[]>([]);
+	let totalMessages = $state(0);
 	let inputText = $state('');
+	let writerName = $state('');
+	let password = $state('');
 	let currentPage = $state(0);
+	let isLoading = $state(false);
+	let isSubmitting = $state(false);
+	let error = $state<string | null>(null);
+
 	const messagesPerPage = 10;
 	const maxCharacters = 120;
 
 	// Calculate total pages
-	let totalPages = $derived(Math.ceil(messages.length / messagesPerPage));
+	let totalPages = $derived(Math.ceil(totalMessages / messagesPerPage));
 
-	// Get current page messages
-	let currentMessages = $derived(
-		messages.slice(currentPage * messagesPerPage, (currentPage + 1) * messagesPerPage)
-	);
+	// Get current page messages - no slicing needed, API handles pagination
+	let currentMessages = $derived(messages);
 
 	// Character count
 	let characterCount = $derived(inputText.length);
 
+	// Fetch messages from API
+	async function fetchMessages(page: number = 0) {
+		isLoading = true;
+		error = null;
+		try {
+			const response = await fetch(`/api/messages?page=${page}&pageSize=${messagesPerPage}`);
+			if (!response.ok) {
+				throw new Error('Failed to fetch messages');
+			}
+			const data: MessagesResponse = await response.json();
+			messages = data.messages;
+			totalMessages = data.total;
+			currentPage = page;
+		} catch (err) {
+			error = err instanceof Error ? err.message : 'Failed to load messages';
+			console.error('Error fetching messages:', err);
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	// Submit new message
+	async function submitMessage() {
+		if (!writerName.trim() || !password.trim() || !inputText.trim()) {
+			error = '작성자, 비밀번호, 메시지를 모두 입력해주세요.';
+			return;
+		}
+
+		isSubmitting = true;
+		error = null;
+		try {
+			const response = await fetch('/api/messages', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					writer: writerName.trim(),
+					password: password.trim(),
+					message: inputText.trim()
+				})
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				throw new Error(errorData.error || 'Failed to submit message');
+			}
+
+			// Clear form and refresh messages
+			inputText = '';
+			writerName = '';
+			password = '';
+			await fetchMessages(0); // Go to first page to see new message
+		} catch (err) {
+			error = err instanceof Error ? err.message : 'Failed to submit message';
+			console.error('Error submitting message:', err);
+		} finally {
+			isSubmitting = false;
+		}
+	}
+
 	function handleSubmit(e: KeyboardEvent) {
 		if (e.key === 'Enter' && !e.shiftKey && inputText.trim()) {
 			e.preventDefault();
-
-			// Add new message
-			const newMessage = {
-				id: messages.length + 1,
-				text: inputText.trim(),
-				date: new Date().toLocaleDateString('ko-KR', {
-					year: 'numeric',
-					month: '2-digit',
-					day: '2-digit'
-				}).replace(/\. /g, '.').replace('.', '.')
-			};
-
-			messages = [newMessage, ...messages];
-			inputText = '';
-			currentPage = 0; // Go to first page to see new message
+			submitMessage();
 		}
 	}
 
@@ -101,9 +102,14 @@
 		}
 	}
 
-	function goToPage(page: number) {
-		currentPage = page;
+	async function goToPage(page: number) {
+		await fetchMessages(page);
 	}
+
+	// Load messages on component mount
+	onMount(() => {
+		fetchMessages(0);
+	});
 </script>
 
 <section
@@ -123,7 +129,34 @@
 			응원의 말을 적어주세요
 		</h2>
 
-		<!-- Input Box -->
+		<!-- Error Message -->
+		{#if error}
+			<div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+				{error}
+			</div>
+		{/if}
+
+		<!-- Name and Password Row -->
+		<div class="flex gap-[16px] w-full">
+			<input
+				type="text"
+				bind:value={writerName}
+				placeholder="작성자 (최대 50자)"
+				maxlength="50"
+				disabled={isSubmitting}
+				class="flex-1 bg-[#fefefe] px-[20px] py-[16px] text-mobile-b1 tablet:text-pc-b1 font-normal text-black placeholder:text-[#999999] outline-none disabled:opacity-50"
+			/>
+			<input
+				type="password"
+				bind:value={password}
+				placeholder="비밀번호 (4-10자)"
+				maxlength="10"
+				disabled={isSubmitting}
+				class="w-[200px] bg-[#fefefe] px-[20px] py-[16px] text-mobile-b1 tablet:text-pc-b1 font-normal text-black placeholder:text-[#999999] outline-none disabled:opacity-50"
+			/>
+		</div>
+
+		<!-- Message Input Box -->
 		<div class="bg-[#fefefe] flex flex-col h-[255px] w-full">
 			<!-- Text Input Area -->
 			<div class="flex-1 flex flex-col gap-[10px] px-[28px] py-[24px]">
@@ -132,7 +165,8 @@
 					oninput={handleInput}
 					onkeydown={handleSubmit}
 					placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
-					class="flex-1 w-full resize-none outline-none text-mobile-h6 tablet:text-pc-h10 font-bold text-black placeholder:text-[#999999] tracking-[-0.48px]"
+					disabled={isSubmitting}
+					class="flex-1 w-full resize-none outline-none text-mobile-h6 tablet:text-pc-h10 font-bold text-black placeholder:text-[#999999] tracking-[-0.48px] disabled:opacity-50"
 				></textarea>
 			</div>
 
@@ -147,24 +181,36 @@
 
 	<!-- Messages Grid Section -->
 	<div class="relative flex flex-col gap-[40px] items-center w-full max-w-[1920px]">
-		<!-- Messages Grid -->
-		<div class="flex flex-col gap-[24px] items-start justify-center px-4 tablet:px-[40px] w-full">
-			<!-- Row 1: 5 cards -->
-			<div class="flex flex-wrap tablet:flex-nowrap gap-[16px] w-full justify-center">
-				{#each currentMessages.slice(0, 5) as message (message.id)}
-					<MessageCard text={message.text} date={message.date} />
-				{/each}
+		{#if isLoading}
+			<!-- Loading State -->
+			<div class="flex items-center justify-center py-[100px]">
+				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">로딩 중...</p>
 			</div>
-
-			<!-- Row 2: 5 cards -->
-			{#if currentMessages.length > 5}
+		{:else if currentMessages.length === 0}
+			<!-- Empty State -->
+			<div class="flex items-center justify-center py-[100px]">
+				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">첫 번째 메시지를 남겨주세요!</p>
+			</div>
+		{:else}
+			<!-- Messages Grid -->
+			<div class="flex flex-col gap-[24px] items-start justify-center px-4 tablet:px-[40px] w-full">
+				<!-- Row 1: 5 cards -->
 				<div class="flex flex-wrap tablet:flex-nowrap gap-[16px] w-full justify-center">
-					{#each currentMessages.slice(5, 10) as message (message.id)}
-						<MessageCard text={message.text} date={message.date} />
+					{#each currentMessages.slice(0, 5) as message (message.id)}
+						<MessageCard writer={message.writer} text={message.text} date={message.date} />
 					{/each}
 				</div>
-			{/if}
-		</div>
+
+				<!-- Row 2: 5 cards -->
+				{#if currentMessages.length > 5}
+					<div class="flex flex-wrap tablet:flex-nowrap gap-[16px] w-full justify-center">
+						{#each currentMessages.slice(5, 10) as message (message.id)}
+							<MessageCard writer={message.writer} text={message.text} date={message.date} />
+						{/each}
+					</div>
+				{/if}
+			</div>
+		{/if}
 
 		<!-- Pagination Controls -->
 		{#if totalPages > 1}
