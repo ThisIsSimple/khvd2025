@@ -114,7 +114,7 @@
 		</div>
 	</div>
 
-	<span class="text-4xl text-white font-bold -mt-6">:</span>
+	<span class="text-4xl text-black font-bold -mt-6">:</span>
 
 	<!-- Hours -->
 	<div class="flex flex-col items-center">
@@ -144,7 +144,7 @@
 		</div>
 	</div>
 
-	<span class="text-4xl text-white font-bold -mt-6">:</span>
+	<span class="text-4xl text-black font-bold -mt-6">:</span>
 
 	<!-- Minutes -->
 	<div class="flex flex-col items-center">
@@ -175,7 +175,7 @@
 	</div>
 
 	<!-- Seconds (hidden on mobile) -->
-	<span class="text-4xl text-white font-bold -mt-6 hidden tablet:block">:</span>
+	<span class="text-4xl text-black font-bold -mt-6 hidden tablet:block">:</span>
 
 	<div class="hidden tablet:flex flex-col items-center">
 		<div class="flex gap-3">
@@ -213,6 +213,7 @@
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 		background: transparent;
 		perspective: 300px;
+		-webkit-perspective: 300px;
 	}
 
 	/* Upper half - static, shows current number's top */
@@ -251,11 +252,15 @@
 		right: 0;
 		bottom: 0;
 		height: 50%;
-		transform-origin: bottom;
+		transform-origin: bottom center;
+		-webkit-transform-origin: bottom center;
 		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
 		background: transparent;
 		animation: flipDown 0.95s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		-webkit-animation: flipDown 0.95s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 		z-index: 5;
+		will-change: transform;
 	}
 
 	@keyframes flipDown {
@@ -267,6 +272,15 @@
 		}
 	}
 
+	@-webkit-keyframes flipDown {
+		0% {
+			-webkit-transform: rotateX(0deg);
+		}
+		100% {
+			-webkit-transform: rotateX(-180deg);
+		}
+	}
+
 	/* Number styling */
 	.flip-card-number {
 		color: white;
@@ -275,19 +289,23 @@
 		font-family: 'Bebas Neue', Impact, sans-serif;
 		line-height: 1;
 		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	.flip-card-top .flip-card-number,
 	.flip-card-front .flip-card-number {
 		transform: translateY(51.5%);
+		-webkit-transform: translateY(51.5%);
 	}
 
 	.flip-card-bottom .flip-card-number {
 		transform: translateY(-51.5%);
+		-webkit-transform: translateY(-51.5%);
 	}
 
 	.flip-card-back .flip-card-number {
 		transform: translateY(-51.5%) rotateX(0deg);
+		-webkit-transform: translateY(-51.5%) rotateX(0deg);
 	}
 
 	/* Front side of flipping card - shows old value */
@@ -301,8 +319,9 @@
 		justify-content: center;
 		background: #000;
 		transform: rotateX(0deg);
-		-webkit-backface-visibility: hidden; /* Safari */
+		-webkit-transform: rotateX(0deg);
 		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 
 	/* Back side of flipping card - shows new value (initially rotated) */
@@ -316,8 +335,9 @@
 		justify-content: center;
 		background: #000;
 		transform: rotateX(180deg);
-		-webkit-backface-visibility: hidden; /* Safari */
+		-webkit-transform: rotateX(180deg);
 		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 
 	/* Horizontal divider line */
@@ -331,22 +351,35 @@
 		background: rgba(255, 255, 255, 0.1);
 		z-index: 10;
 		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
 		pointer-events: none;
 	}
 
-	/* Tablet and above */
+	/* Mobile and Tablet */
 	@media (max-width: 960px) {
 		.flip-card {
 			width: 40px;
 			height: 55px;
+			perspective: 200px;
+			-webkit-perspective: 200px;
 		}
 
 		.flip-card-number {
 			font-size: 2.5rem;
 		}
 
+		.flip-card-top,
+		.flip-card-bottom {
+			height: 48.5%;
+		}
+
 		.flip-card-top-flip {
-			height: calc(55px / 2);
+			height: 50%;
+		}
+
+		.flip-card-front,
+		.flip-card-back {
+			height: 97%;
 		}
 	}
 </style>
