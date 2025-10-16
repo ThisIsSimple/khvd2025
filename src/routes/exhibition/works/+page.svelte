@@ -33,6 +33,22 @@
 			title: '움직임으로 전하는\n이야기'
 		}
 	];
+
+	// Track which card is hovered
+	let hoveredIndex = $state<number | null>(null);
+
+	// Calculate grid template columns based on hover state
+	function getGridColumns(totalCards: number, hovered: number | null): string {
+		if (hovered === null) {
+			return 'repeat(4, 1fr)'; // Default: equal columns
+		}
+		// When hovered: expanded card gets 2fr, others get 0.66fr
+		const columns = Array(totalCards)
+			.fill(0)
+			.map((_, i) => (i === hovered ? '2fr' : '0.66fr'))
+			.join(' ');
+		return columns;
+	}
 </script>
 
 <!-- Exhibition Works Page -->
@@ -45,27 +61,43 @@
 		</div>
 
 		<!-- Professor Groups Grid - Desktop (4 columns) -->
-		<div class="hidden desktop:grid grid-cols-4 gap-[40px] w-full mb-[120px]">
-			{#each professorGroups as group}
+		<div
+			class="hidden desktop:grid gap-[40px] w-full mb-[120px] transition-all duration-500 ease-in-out"
+			style="grid-template-columns: {getGridColumns(professorGroups.length, hoveredIndex)};"
+		>
+			{#each professorGroups as group, index}
 				<WorkCard
 					number={group.number}
 					professors={group.professors}
 					workCount={group.workCount}
 					category={group.category}
 					title={group.title}
+					onHoverChange={(hovered) => (hoveredIndex = hovered ? index : null)}
 				/>
 			{/each}
 		</div>
 
 		<!-- Professor Groups Grid - Tablet (2x2 grid) -->
-		<div class="hidden tablet:grid desktop:hidden grid-cols-2 gap-[40px] w-full mb-[120px]">
-			{#each professorGroups as group}
+		<div
+			class="hidden tablet:grid desktop:hidden gap-[40px] w-full mb-[120px] transition-all duration-500 ease-in-out"
+			style="grid-template-columns: {hoveredIndex !== null && hoveredIndex < 2
+				? hoveredIndex === 0
+					? '2fr 0.66fr'
+					: '0.66fr 2fr'
+				: hoveredIndex !== null && hoveredIndex >= 2
+					? hoveredIndex === 2
+						? '2fr 0.66fr'
+						: '0.66fr 2fr'
+					: '1fr 1fr'};"
+		>
+			{#each professorGroups as group, index}
 				<WorkCard
 					number={group.number}
 					professors={group.professors}
 					workCount={group.workCount}
 					category={group.category}
 					title={group.title}
+					onHoverChange={(hovered) => (hoveredIndex = hovered ? index : null)}
 				/>
 			{/each}
 		</div>

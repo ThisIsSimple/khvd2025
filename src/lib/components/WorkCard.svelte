@@ -31,9 +31,7 @@
 
 <!-- Work Card Component for Desktop/Tablet -->
 <div
-	class="flex flex-col gap-[40px] transition-all duration-500 ease-in-out {isHovered
-		? 'col-span-2'
-		: 'col-span-1'}"
+	class="flex flex-col gap-[40px]"
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
 	role="button"
