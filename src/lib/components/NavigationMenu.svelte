@@ -85,7 +85,7 @@
 					/>
 
 					<!-- Text Container with slide-up animation -->
-					<div class="relative overflow-hidden h-[80px] tablet:h-[120px] flex items-center">
+					<div class="w-full relative overflow-hidden h-[80px] tablet:h-[120px] flex items-center">
 						<!-- Black text (default, slides up on hover) -->
 						<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black absolute transition-transform duration-500 ease-in-out group-hover:-translate-y-full">
 							{item.title}

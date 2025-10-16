@@ -70,7 +70,7 @@
 						<h3 class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#fefefe]">SNS</h3>
 						<div class="flex gap-[16px] items-center">
 							<a
-								href="https://instagram.com"
+								href="https://instagram.com/khvd_graduation"
 								target="_blank"
 								rel="noopener noreferrer"
 								class="border border-[#e0e0e0] rounded-full w-[50px] h-[50px] flex items-center justify-center transition-opacity hover:opacity-70"
@@ -79,14 +79,14 @@
 								<img src="/icons/insta_fill_white.svg" alt="" class="w-[25px] h-[25px]" />
 							</a>
 							<a
-								href="tel:+82"
+								href="tel:031-201-2672"
 								class="border border-[#e0e0e0] rounded-full w-[50px] h-[50px] flex items-center justify-center transition-opacity hover:opacity-70"
 								aria-label="Phone"
 							>
 								<img src="/icons/call_white.svg" alt="" class="w-[22px] h-[22px]" />
 							</a>
 							<a
-								href="https://naver.com"
+								href="https://and.khu.ac.kr/and_kor/user/main/view.do"
 								target="_blank"
 								rel="noopener noreferrer"
 								class="border border-[#e0e0e0] rounded-full w-[50px] h-[50px] flex items-center justify-center transition-opacity hover:opacity-70"
@@ -102,7 +102,8 @@
 						<h3 class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#fefefe]">ARCHIVE</h3>
 						<div class="flex gap-[24px]">
 							<a
-								href="/archive/2023"
+								href="https://2023.khvd.kr"
+								target="_blank"
 								class="flex gap-[4px] items-center transition-opacity hover:opacity-70"
 							>
 								<div class="w-[24px] h-[24px] flex items-center justify-center">
@@ -111,7 +112,8 @@
 								<span class="text-mobile-b1 tablet:text-pc-b1 font-bold text-[#e0e0e0]">2023</span>
 							</a>
 							<a
-								href="/archive/2024"
+								href="https://2024.khvd.kr"
+								target="_blank"
 								class="flex gap-[4px] items-center transition-opacity hover:opacity-70"
 							>
 								<div class="w-[24px] h-[24px] flex items-center justify-center">
