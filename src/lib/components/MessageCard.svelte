@@ -1,10 +1,21 @@
 <script lang="ts">
 	// Message card component for displaying individual messages
-	let { writer, text, date }: { writer: string; text: string; date: string } = $props();
+	let {
+		id,
+		writer,
+		text,
+		date,
+		onedit
+	}: {
+		id: number;
+		writer: string;
+		text: string;
+		date: string;
+		onedit?: (id: number) => void;
+	} = $props();
 
 	function handleEdit() {
-		// TODO: Implement edit functionality
-		console.log('Edit clicked for message');
+		onedit?.(id);
 	}
 </script>
 
