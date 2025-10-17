@@ -12,6 +12,7 @@
 		isSubmitting?: boolean;
 		onSubmit?: (data: { writer: string; password: string; message: string }) => void;
 		onCancel?: () => void;
+		onMessageChange?: (message: string) => void;
 	}
 
 	let {
@@ -21,12 +22,18 @@
 		mode = 'create',
 		isSubmitting = false,
 		onSubmit,
-		onCancel
+		onCancel,
+		onMessageChange
 	}: Props = $props();
 
 	let writerName = $state(initialWriter);
 	let password = $state(initialPassword);
 	let inputText = $state(initialMessage);
+
+	// Sync initial message changes
+	$effect(() => {
+		inputText = initialMessage;
+	});
 
 	const maxCharacters = 120;
 
@@ -37,6 +44,7 @@
 		const target = e.target as HTMLTextAreaElement;
 		if (target.value.length <= maxCharacters) {
 			inputText = target.value;
+			onMessageChange?.(target.value);
 		} else {
 			target.value = inputText;
 		}
