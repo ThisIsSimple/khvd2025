@@ -22,13 +22,15 @@
 	let isVerifying = $state(false);
 	let isUpdating = $state(false);
 	let error = $state<string | null>(null);
+	let editedMessage = $state('');
 
 	// Reset state when modal opens/closes
 	$effect(() => {
-		if (isOpen) {
+		if (isOpen && message) {
 			currentState = 'password';
 			passwordInput = '';
 			error = null;
+			editedMessage = message.text;
 		}
 	});
 
@@ -222,10 +224,11 @@
 					<MessageInput
 						initialWriter={message.writer}
 						initialPassword={passwordInput}
-						initialMessage={message.text}
+						initialMessage={editedMessage}
 						mode="edit"
 						isSubmitting={isUpdating}
 						onSubmit={handleUpdate}
+						onMessageChange={(msg) => (editedMessage = msg)}
 					/>
 
 					<!-- Buttons -->
@@ -238,7 +241,7 @@
 							취소
 						</button>
 						<button
-							onclick={() => handleUpdate({ writer: message.writer, password: passwordInput, message: message.text })}
+							onclick={() => handleUpdate({ writer: message.writer, password: passwordInput, message: editedMessage })}
 							disabled={isUpdating}
 							class="flex items-center justify-center px-[24px] h-[54px] bg-[#fc451e] text-white font-semibold text-[18px] tablet:text-[20px] transition-opacity hover:opacity-90 disabled:opacity-50"
 						>
