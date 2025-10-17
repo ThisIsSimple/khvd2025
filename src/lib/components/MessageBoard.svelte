@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MessageCard from './MessageCard.svelte';
+	import EditMessageModal from './EditMessageModal.svelte';
 	import type { Message, MessagesResponse } from '$lib/types/message';
 	import { onMount } from 'svelte';
 
@@ -12,6 +13,10 @@
 	let isLoading = $state(false);
 	let isSubmitting = $state(false);
 	let error = $state<string | null>(null);
+
+	// Edit modal state
+	let editingMessage = $state<Message | null>(null);
+	let showEditModal = $state(false);
 
 	const maxCharacters = 120;
 
@@ -128,6 +133,24 @@
 
 	async function goToPage(page: number) {
 		await fetchMessages(page);
+	}
+
+	function handleEdit(messageId: number) {
+		const message = messages.find((m) => m.id === messageId);
+		if (message) {
+			editingMessage = message;
+			showEditModal = true;
+		}
+	}
+
+	function handleCloseModal() {
+		showEditModal = false;
+		editingMessage = null;
+	}
+
+	async function handleUpdateMessage() {
+		// Refresh current page to show updated message
+		await fetchMessages(currentPage);
 	}
 
 	// Load messages on component mount
@@ -257,7 +280,13 @@
 				<!-- Row 1 -->
 				<div class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center">
 					{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
-						<MessageCard writer={message.writer} text={message.text} date={message.date} />
+						<MessageCard
+							id={message.id}
+							writer={message.writer}
+							text={message.text}
+							date={message.date}
+							onedit={handleEdit}
+						/>
 					{/each}
 				</div>
 
@@ -265,7 +294,13 @@
 				{#if currentMessages.length > itemsPerRow}
 					<div class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center">
 						{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
-							<MessageCard writer={message.writer} text={message.text} date={message.date} />
+							<MessageCard
+								id={message.id}
+								writer={message.writer}
+								text={message.text}
+								date={message.date}
+								onedit={handleEdit}
+							/>
 						{/each}
 					</div>
 				{/if}
@@ -297,6 +332,14 @@
 		{/if}
 	</div>
 </section>
+
+<!-- Edit Message Modal -->
+<EditMessageModal
+	message={editingMessage}
+	isOpen={showEditModal}
+	onClose={handleCloseModal}
+	onUpdate={handleUpdateMessage}
+/>
 
 <style>
 	textarea::placeholder {
