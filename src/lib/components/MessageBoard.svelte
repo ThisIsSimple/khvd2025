@@ -168,7 +168,7 @@
 </script>
 
 <section
-	class="relative flex flex-col gap-[80px] items-center justify-center py-[100px] px-4 tablet:px-0 pb-[200px]"
+	class="relative flex flex-col gap-[80px] items-center justify-center py-[100px] px-4 tablet:px-10 pb-[200px]"
 >
 	<!-- Background Image -->
 	<img
@@ -276,7 +276,7 @@
 			</div>
 		{:else}
 			<!-- Messages Grid: Responsive 2/3/4 columns -->
-			<div class="flex flex-col gap-[24px] items-center justify-center px-4 tablet:px-[40px] w-full">
+			<div class="flex flex-col gap-[24px] items-center justify-center w-full">
 				<!-- Row 1 -->
 				<div class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center">
 					{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}

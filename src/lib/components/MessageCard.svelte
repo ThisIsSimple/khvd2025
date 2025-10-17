@@ -20,13 +20,15 @@
 </script>
 
 <div
-	class="bg-[#fefefe] flex flex-col gap-[20px] items-end justify-center p-[20px] w-full"
+	class="bg-[#fefefe] flex flex-col gap-[20px] items-end justify-between py-[20px] px-[14px] tablet:p-[20px] w-full"
 >
 	<!-- Text Container -->
-	<div class="flex flex-col gap-[20px] items-start overflow-clip p-[10px] w-full">
+	<div class="flex flex-col gap-[20px] items-start overflow-clip tablet:p-[10px] w-full">
 		<!-- Writer Name and Edit Button Row -->
 		<div class="flex items-center justify-between w-full">
-			<p class="font-bold text-[#111111] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+			<p
+				class="font-bold text-[#111111] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap"
+			>
 				{writer}
 			</p>
 			<button
@@ -41,7 +43,6 @@
 		<!-- Message Text -->
 		<p
 			class="font-normal text-black text-[16px] tablet:text-[20px] leading-[1.5] w-full overflow-hidden"
-			style="display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; text-overflow: ellipsis;"
 		>
 			{text}
 		</p>
@@ -49,7 +50,9 @@
 
 	<!-- Date Container -->
 	<div class="flex gap-[10px] items-center justify-end w-[100px]">
-		<p class="font-normal text-[#999999] text-[15px] tablet:text-[18px] leading-[1.4] whitespace-nowrap">
+		<p
+			class="font-normal text-[#999999] text-[15px] tablet:text-[18px] leading-[1.4] whitespace-nowrap"
+		>
 			{date}
 		</p>
 	</div>
