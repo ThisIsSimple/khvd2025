@@ -29,6 +29,9 @@
 
 		// Traverse up the DOM tree to check parents
 		while (currentElement && currentElement !== document.body) {
+			// Check data-clickable attribute (for custom interactive elements like exhibition map areas)
+			if (currentElement.getAttribute('data-clickable') === 'true') return true;
+
 			// Check tag name
 			if (clickableTags.includes(currentElement.tagName)) return true;
 

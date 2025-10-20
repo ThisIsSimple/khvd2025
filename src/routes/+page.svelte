@@ -2,11 +2,27 @@
 	import type { PageData } from './$types';
 	import FlipClock from '$lib/components/FlipClock.svelte';
 	import MessageBoard from '$lib/components/MessageBoard.svelte';
+	import ExhibitionMap from '$lib/components/ExhibitionMap.svelte';
 
 	let { data }: { data: PageData } = $props();
 
 	// Exhibition closing date: 2025.11.09 at 5:30 PM
 	const exhibitionEndDate = new Date('2025-11-09T17:30:00');
+
+	// Map area selection state
+	const areaToNumber: Record<string, number> = {
+		'studies-0': 0,
+		'studies-1': 1,
+		'studies-2': 2,
+		'studies-3': 3
+	};
+
+	let selectedStudiesNumber = $state(0); // Default to GRADUATION STUDIES 0
+
+	// Handle area selection from ExhibitionMap
+	function handleAreaSelect(areaId: string) {
+		selectedStudiesNumber = areaToNumber[areaId];
+	}
 </script>
 
 <svelte:head>
@@ -217,11 +233,7 @@
 				<div
 					class="w-full desktop:w-[800px] xl:flex-1 xl:h-full relative shrink-0 sm:shrink-0 tablet:shrink-0 desktop:shrink-0"
 				>
-					<img
-						src="/exhibition-map.svg"
-						alt="Exhibition Map"
-						class="w-full desktop:w-[800px] xl:w-[870px]"
-					/>
+					<ExhibitionMap onAreaSelect={handleAreaSelect} />
 				</div>
 			</div>
 
@@ -238,7 +250,7 @@
 						<p
 							class="font-display text-[40px] leading-none sm:text-[52px] sm:leading-[1.1] tablet:text-[60px] tablet:leading-none desktop:text-[100px] desktop:leading-none xl:text-[120px] xl:leading-none text-[#111111]"
 						>
-							GRADUATION sTUDies 1
+							GRADUATION sTUDies {selectedStudiesNumber}
 						</p>
 						<div class="pt-[6px] sm:pt-[4px] tablet:pt-[2px] desktop:pt-[12px] xl:pt-[12px]">
 							<span
