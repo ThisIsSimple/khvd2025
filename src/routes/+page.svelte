@@ -42,19 +42,27 @@
 		/>
 
 		<!-- Title Area -->
-		<div class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[389px] py-[200px] tablet:py-[400px] w-full">
-			<div class="flex flex-col font-display gap-[20px] items-center justify-center leading-none text-primary text-[56px] tablet:text-[132px] text-center w-full max-w-[1142px] mx-auto">
+		<div
+			class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[389px] py-[200px] tablet:py-[400px] w-full"
+		>
+			<div
+				class="flex flex-col font-display gap-[20px] items-center justify-center leading-none text-primary text-[56px] tablet:text-[132px] text-center w-full max-w-[1142px] mx-auto"
+			>
 				<p class="w-full">Reenvision = vivid dreams</p>
 				<p class="whitespace-nowrap">Realization = Visual design</p>
 			</div>
 		</div>
 
 		<!-- Reenvision Explanation -->
-		<div class="relative flex flex-col gap-[10px] items-center justify-center px-4 tablet:px-[420px] py-[100px] tablet:py-[200px] w-full">
+		<div
+			class="relative flex flex-col gap-[10px] items-center justify-center px-4 tablet:px-[40px] py-[100px] tablet:py-[200px] w-full"
+		>
 			<div class="flex flex-col gap-[49px] items-center text-primary w-full max-w-[1081px]">
 				<!-- Title -->
 				<div class="flex flex-col font-display gap-[14px] items-center w-full max-w-[858px]">
-					<p class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full">
+					<p
+						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full"
+					>
 						REENVISION=VIVID DREAMS
 					</p>
 					<p class="leading-none text-[80px] tablet:text-[210px] w-full">REENVISION =</p>
@@ -77,11 +85,15 @@
 		</div>
 
 		<!-- Vivid Dreams Explanation -->
-		<div class="relative flex flex-col gap-[10px] items-start px-4 tablet:px-[441px] py-[200px] tablet:py-[400px] w-full pb-[200px]">
+		<div
+			class="relative flex flex-col gap-[10px] items-start px-4 tablet:px-[40px] py-[200px] tablet:py-[400px] w-full pb-[200px]"
+		>
 			<div class="flex flex-col gap-[60px] items-center text-primary w-full">
 				<!-- Title -->
 				<div class="flex flex-col font-display gap-[7px] items-center w-full max-w-[882px]">
-					<p class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full">
+					<p
+						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full"
+					>
 						Realization=Visual Design
 					</p>
 					<p class="leading-none text-[80px] tablet:text-[210px] w-full">VIVID DREAMS</p>
@@ -105,45 +117,65 @@
 	<!-- Section 3: Countdown Timer & Exhibition Details -->
 	<section class="w-full flex flex-col">
 		<!-- Top Bar: UNTIL CLOSING with FlipClock -->
-		<div class="w-full bg-primary flex flex-col tablet:flex-row items-center justify-center gap-[20px] tablet:gap-[40px] px-4 py-[32px] tablet:py-[52px]">
-			<h2 class="font-display text-[48px] tablet:text-[80px] text-black leading-none">UNTIL CLOSING =</h2>
+		<div
+			class="w-full bg-primary flex flex-col tablet:flex-row items-center justify-between gap-[20px] tablet:gap-[40px] px-[40px] py-[24px] tablet:py-[44px]"
+		>
+			<h2 class="font-display text-[48px] tablet:text-[80px] text-black leading-none">
+				UNTIL CLOSING =
+			</h2>
 			<FlipClock targetDate={exhibitionEndDate} />
 		</div>
 
 		<!-- Bottom Section: Exhibition Details with Pattern Background -->
-		<div
-			class="w-full bg-white relative flex flex-col tablet:flex-row items-start justify-between gap-[40px] tablet:gap-[60px] px-[20px] tablet:px-[52px] py-[60px] tablet:py-[100px]"
-		>
-			<!-- Pattern Overlay -->
-			<img
-				src="/exhibition-section3-bg.png"
-				alt=""
-				class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
-			/>
+		<div class="w-full bg-white relative flex flex-col tablet:flex-row items-start">
+			<!-- Pattern Background -->
+			<div class="absolute inset-0 opacity-30 overflow-hidden pointer-events-none">
+				<img
+					src="/home-information-pattern.webp"
+					alt=""
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+			</div>
 
 			<!-- Left Column: Open & Close -->
-			<div class="relative z-10 flex flex-col gap-[16px] tablet:gap-[32px]">
-				<h3 class="font-display text-[40px] tablet:text-[52px] leading-none text-black">Open & Close</h3>
-				<p class="font-display text-[40px] tablet:text-[52px] leading-none text-black opacity-50">
+			<div
+				class="flex-1 flex flex-col gap-[8px] px-[20px] tablet:px-[40px] py-[48px] relative z-10"
+			>
+				<h3 class="font-display text-[40px] tablet:text-[52px] leading-[1.1] text-[#111111]">
+					OPEN & CLOSE
+				</h3>
+				<p class="font-display text-[40px] tablet:text-[52px] leading-[1.1] text-[#111111]">
 					10:00 AM - 05:30 PM
 				</p>
 			</div>
 
 			<!-- Right Column: Exhibition Details -->
-			<div class="relative z-10 flex flex-col gap-[32px] tablet:gap-[52px]">
+			<div
+				class="flex-1 flex flex-col gap-[32px] tablet:gap-[52px] px-[20px] tablet:px-[40px] py-[48px] relative z-10"
+			>
 				<!-- 전시 기간 -->
-				<div class="flex flex-col gap-[12px] tablet:gap-[16px]">
-					<h4 class="text-mobile-h9 tablet:text-pc-h9 font-bold text-black">전시 기간</h4>
-					<p class="text-mobile-h9 tablet:text-pc-h9 text-black opacity-50">
-						2025.11.05 - 2025.11.09
-					</p>
+				<div class="flex flex-col gap-[5px]">
+					<h4 class="font-bold text-[20px] tablet:text-[28px] leading-[1.4] text-[#111111]">
+						전시 기간
+					</h4>
+					<div class="flex items-center gap-[32px] font-bold text-[#111111] whitespace-nowrap">
+						<p class="text-[20px] tablet:text-[28px]">
+							<span class="text-[20px] tablet:text-[28px]">2025</span><span
+								class="text-[24px] tablet:text-[32px]">.11.05</span
+							>
+						</p>
+						<p class="text-[24px] tablet:text-[32px]">-</p>
+						<p class="text-[20px] tablet:text-[28px]">2025.11.09</p>
+					</div>
 				</div>
 
 				<!-- 전시 장소 -->
-				<div class="flex flex-col gap-[12px] tablet:gap-[16px]">
-					<h4 class="text-mobile-h9 tablet:text-pc-h9 font-bold text-black">전시 장소</h4>
-					<p class="text-mobile-h9 tablet:text-pc-h9 text-black opacity-50">
-						경희대학교 국제캠퍼스<br />예술디자인대학 2F A&D홀 갤러리
+				<div class="flex flex-col gap-[5px]">
+					<h4 class="font-bold text-[20px] tablet:text-[28px] leading-[1.4] text-[#111111]">
+						전시 장소
+					</h4>
+					<p class="font-bold text-[20px] tablet:text-[28px] leading-[1.4] text-[#111111]">
+						경희대학교 국제캠퍼스 예술디자인대학 2F A&D홀 갤러리
 					</p>
 				</div>
 			</div>
@@ -151,7 +183,9 @@
 	</section>
 
 	<!-- Section 4: Work Shortcut -->
-	<section class="w-full bg-white flex flex-col gap-[10px] items-start justify-center py-[100px] tablet:pb-[200px] px-[20px] tablet:px-[40px]">
+	<section
+		class="w-full bg-white flex flex-col gap-[10px] items-start justify-center py-[100px] tablet:pb-[200px] px-[20px] tablet:px-[40px]"
+	>
 		<!-- Header -->
 		<div class="w-full flex flex-col items-start px-[12px] py-[32px]">
 			<h2 class="text-h7 text-black tracking-[-0.8px] leading-[1.2]">작품 바로가기</h2>
@@ -159,7 +193,9 @@
 		</div>
 
 		<!-- Content Area -->
-		<div class="w-full flex flex-col tablet:flex-row items-center tablet:h-[695px] py-[60px] tablet:pl-[40px] tablet:pr-[80px]">
+		<div
+			class="w-full flex flex-col tablet:flex-row items-center tablet:h-[695px] py-[60px] tablet:pl-[40px] tablet:pr-[80px]"
+		>
 			<!-- Left: Exhibition Map -->
 			<div class="w-full tablet:flex-1 h-full relative">
 				<div class="absolute inset-0 bg-white">
@@ -174,20 +210,22 @@
 			</div>
 
 			<!-- Right: Work Details with Arrow -->
-			<div class="w-full tablet:flex-1 h-full flex flex-col justify-between items-start mt-[40px] tablet:mt-0">
+			<div
+				class="w-full tablet:flex-1 h-full flex flex-col justify-between items-start mt-[40px] tablet:mt-0"
+			>
 				<!-- Arrow Icon (Top Right) -->
 				<div class="w-full flex justify-end items-center">
-					<div class="w-[100px] h-[100px] tablet:w-[150px] tablet:h-[150px] flex items-center justify-center rotate-180 scale-y-[-100%]">
-						<img
-							src="/icons/arrow_diagonal.svg"
-							alt=""
-							class="w-[71px] h-[71px]"
-						/>
+					<div
+						class="w-[100px] h-[100px] tablet:w-[150px] tablet:h-[150px] flex items-center justify-center rotate-180 scale-y-[-100%]"
+					>
+						<img src="/icons/arrow_diagonal.svg" alt="" class="w-[71px] h-[71px]" />
 					</div>
 				</div>
 
 				<!-- Text Content (Bottom) -->
-				<div class="w-full flex flex-col gap-[4px] px-[20px] tablet:px-[80px] py-[40px] tablet:py-[60px]">
+				<div
+					class="w-full flex flex-col gap-[4px] px-[20px] tablet:px-[80px] py-[40px] tablet:py-[60px]"
+				>
 					<div class="flex flex-col gap-[4px]">
 						<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black">
 							GRADUATION
@@ -197,7 +235,9 @@
 								STUDIES 1
 							</p>
 							<div class="pt-[8px] tablet:pt-[12px]">
-								<span class="font-display text-[28px] tablet:text-[40px] leading-none text-black">[15]</span>
+								<span class="font-display text-[28px] tablet:text-[40px] leading-none text-black"
+									>[15]</span
+								>
 							</div>
 						</div>
 					</div>
