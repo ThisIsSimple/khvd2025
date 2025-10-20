@@ -168,19 +168,19 @@
 </script>
 
 <section
-	class="relative flex flex-col gap-[80px] items-center justify-center py-[100px] px-4 tablet:px-10 pb-[200px]"
+	class="relative flex flex-col gap-[80px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]"
 >
 	<!-- Background Image -->
 	<img
-		src="/message-board-bg.png"
+		src="/message-board-bg.webp"
 		alt=""
 		class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
 	/>
 
 	<!-- Input Section -->
-	<div class="relative flex flex-col gap-[32px] items-center w-full max-w-[680px]">
+	<div class="relative flex flex-col gap-[16px] tablet:gap-[32px] items-center w-full max-w-[680px]">
 		<!-- Title -->
-		<h2 class="text-mobile-h8 tablet:text-pc-h8 font-bold text-[#111111] text-center w-full">
+		<h2 class="text-[18px] tablet:text-[24px] desktop:text-[32px] font-bold text-[#111111] text-center w-full">
 			응원의 말을 적어주세요
 		</h2>
 
@@ -225,14 +225,14 @@
 						</p>
 					</div>
 					<!-- Input -->
-					<div class="flex items-center h-full px-[16px]">
+					<div class="w-[80px] flex items-center h-full px-[16px]">
 						<input
 							type="password"
 							bind:value={password}
 							placeholder="0000"
 							maxlength="4"
 							disabled={isSubmitting}
-							class="font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+							class="w-full text-center font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
 						/>
 					</div>
 				</div>
