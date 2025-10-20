@@ -126,8 +126,8 @@
 			<FlipClock targetDate={exhibitionEndDate} />
 		</div>
 
-		<!-- Bottom Section: Exhibition Details with Pattern Background -->
-		<div class="w-full bg-white relative flex flex-col tablet:flex-row items-start">
+		<!-- Bottom Section: Exhibition Details with Pattern Background (Tablet+ only) -->
+		<div class="hidden tablet:flex w-full bg-white relative items-start">
 			<!-- Pattern Background -->
 			<div class="absolute inset-0 opacity-30 overflow-hidden pointer-events-none">
 				<img
@@ -139,42 +139,50 @@
 
 			<!-- Left Column: Open & Close -->
 			<div
-				class="flex-1 flex flex-col gap-[8px] px-[20px] tablet:px-[40px] py-[48px] relative z-10"
+				class="w-[400px] flex flex-col tablet:gap-0 desktop:gap-[8px] p-[40px] relative z-10 shrink-0"
 			>
-				<h3 class="font-display text-[40px] tablet:text-[52px] leading-[1.1] text-[#111111]">
+				<h3
+					class="font-display tablet:text-[32px] desktop:text-[52px] tablet:leading-[1.3] desktop:leading-[1.1] tablet:tracking-[-0.64px] desktop:tracking-normal text-[#111111]"
+				>
 					OPEN & CLOSE
 				</h3>
-				<p class="font-display text-[40px] tablet:text-[52px] leading-[1.1] text-[#111111]">
+				<p
+					class="font-display tablet:text-[32px] desktop:text-[52px] tablet:leading-[1.3] desktop:leading-[1.1] tablet:tracking-[-0.64px] desktop:tracking-normal text-[#111111]"
+				>
 					10:00 AM - 05:30 PM
 				</p>
 			</div>
 
 			<!-- Right Column: Exhibition Details -->
 			<div
-				class="flex-1 flex flex-col gap-[32px] tablet:gap-[52px] px-[20px] tablet:px-[40px] py-[48px] relative z-10"
+				class="flex-1 flex flex-col tablet:gap-[32px] desktop:gap-[52px] p-[40px] relative z-10 tablet:border-l-[0.5px] desktop:border-l-0 border-black"
 			>
 				<!-- 전시 기간 -->
 				<div class="flex flex-col gap-[5px]">
-					<h4 class="font-bold text-[20px] tablet:text-[28px] leading-[1.4] text-[#111111]">
+					<h4
+						class="font-bold tablet:text-[24px] desktop:text-[28px] tablet:tracking-[-0.48px] desktop:tracking-normal leading-[1.4] text-[#111111]"
+					>
 						전시 기간
 					</h4>
-					<div class="flex items-center gap-[32px] font-bold text-[#111111] whitespace-nowrap">
-						<p class="text-[20px] tablet:text-[28px]">
-							<span class="text-[20px] tablet:text-[28px]">2025</span><span
-								class="text-[24px] tablet:text-[32px]">.11.05</span
-							>
-						</p>
-						<p class="text-[24px] tablet:text-[32px]">-</p>
-						<p class="text-[20px] tablet:text-[28px]">2025.11.09</p>
+					<div
+						class="flex items-center tablet:gap-[12px] desktop:gap-[32px] font-bold text-[#111111] whitespace-nowrap"
+					>
+						<p class="tablet:text-[20px] desktop:text-[28px] leading-[1.4]">2025.11.05</p>
+						<p class="tablet:text-[20px] desktop:text-[32px] leading-[1.4]">-</p>
+						<p class="tablet:text-[20px] desktop:text-[28px] leading-[1.4]">2025.11.09</p>
 					</div>
 				</div>
 
 				<!-- 전시 장소 -->
 				<div class="flex flex-col gap-[5px]">
-					<h4 class="font-bold text-[20px] tablet:text-[28px] leading-[1.4] text-[#111111]">
+					<h4
+						class="font-bold tablet:text-[24px] desktop:text-[28px] tablet:tracking-[-0.48px] desktop:tracking-normal leading-[1.4] text-[#111111]"
+					>
 						전시 장소
 					</h4>
-					<p class="font-bold text-[20px] tablet:text-[28px] leading-[1.4] text-[#111111]">
+					<p
+						class="font-bold tablet:text-[20px] desktop:text-[28px] leading-[1.4] text-[#111111]"
+					>
 						경희대학교 국제캠퍼스 예술디자인대학 2F A&D홀 갤러리
 					</p>
 				</div>
