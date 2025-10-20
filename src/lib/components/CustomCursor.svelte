@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { UAParser } from 'ua-parser-js';
 
 	// Mouse position state
 	let mouseX = $state(0);
@@ -7,6 +8,9 @@
 
 	// Hover state for clickable elements
 	let isHovering = $state(false);
+
+	// Device detection state
+	let isMobile = $state(false);
 
 	// Track mouse position
 	function handleMouseMove(e: MouseEvent) {
@@ -53,31 +57,42 @@
 	}
 
 	onMount(() => {
-		// Add event listeners
-		window.addEventListener('mousemove', handleMouseMove);
-		document.body.addEventListener('mouseover', handleMouseOver, true);
+		// Detect if device is mobile
+		const parser = new UAParser();
+		const deviceType = parser.getDevice().type;
+		isMobile = deviceType === 'mobile' || deviceType === 'tablet';
+
+		// Only add event listeners if not mobile
+		if (!isMobile) {
+			window.addEventListener('mousemove', handleMouseMove);
+			document.body.addEventListener('mouseover', handleMouseOver, true);
+		}
 
 		// Cleanup
 		return () => {
-			window.removeEventListener('mousemove', handleMouseMove);
-			document.body.removeEventListener('mouseover', handleMouseOver, true);
+			if (!isMobile) {
+				window.removeEventListener('mousemove', handleMouseMove);
+				document.body.removeEventListener('mouseover', handleMouseOver, true);
+			}
 		};
 	});
 </script>
 
-<!-- Outer Cursor (120x120, delayed) -->
-<div
-	class="custom-cursor-outer"
-	class:hovering={isHovering}
-	style="left: {mouseX}px; top: {mouseY}px;"
-></div>
+{#if !isMobile}
+	<!-- Outer Cursor (120x120, delayed) -->
+	<div
+		class="custom-cursor-outer"
+		class:hovering={isHovering}
+		style="left: {mouseX}px; top: {mouseY}px;"
+	></div>
 
-<!-- Inner Cursor (52x52, instant) -->
-<div
-	class="custom-cursor-inner"
-	class:hovering={isHovering}
-	style="left: {mouseX}px; top: {mouseY}px;"
-></div>
+	<!-- Inner Cursor (52x52, instant) -->
+	<div
+		class="custom-cursor-inner"
+		class:hovering={isHovering}
+		style="left: {mouseX}px; top: {mouseY}px;"
+	></div>
+{/if}
 
 <style>
 	.custom-cursor-outer,
