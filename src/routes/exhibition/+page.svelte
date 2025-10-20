@@ -1,11 +1,14 @@
 <script lang="ts">
-	import Footer from '$lib/components/Footer.svelte';
+	import { uiState } from '$lib/stores/ui.svelte';
 </script>
 
 <!-- Exhibition About Page -->
-<div class="bg-transparent w-full min-h-screen">
+<div class="bg-transparent w-full min-h-screen overflow-hidden">
 	<!-- Main Content -->
-	<div class="bg-[#fefefe] tablet:w-3/4 pb-[180px]">
+	<div
+		class="bg-[#fefefe] tablet:w-3/4 pb-[180px] transition-transform duration-500 ease-in-out"
+		class:translate-x-[-100%]={uiState.isUIHidden}
+	>
 		<!-- Left Column: Content -->
 		<div>
 			<!-- Page Title -->
@@ -165,9 +168,29 @@
 		</div>
 	</div>
 
-	<button class="hidden tablet:block fixed top-[112px] desktop:top-[132px] right-[40px]">
+	<!-- Expand Button (숨기기) - Slides out when UI is hidden -->
+	<button
+		onclick={() => uiState.hideUI()}
+		class="hidden tablet:block fixed top-[112px] desktop:top-[132px] right-[40px] z-40 transition-transform duration-500 ease-in-out hover:scale-110"
+		class:translate-x-[200%]={uiState.isUIHidden}
+		aria-label="Hide UI"
+	>
 		<img
 			src="/icons/expand-icon.svg"
+			alt=""
+			class="w-[40px] h-[40px] desktop:w-[60px] desktop:h-[60px]"
+		/>
+	</button>
+
+	<!-- Close Button (보이기) - Appears at top right when UI is hidden -->
+	<button
+		onclick={() => uiState.showUI()}
+		class="hidden tablet:block fixed top-[20px] right-[40px] z-40 bg-black hover:bg-opacity-80 transition-all duration-500 ease-in-out"
+		class:translate-x-[200%]={!uiState.isUIHidden}
+		aria-label="Show UI"
+	>
+		<img
+			src="/icons/navigation-close-icon.svg"
 			alt=""
 			class="w-[40px] h-[40px] desktop:w-[60px] desktop:h-[60px]"
 		/>
