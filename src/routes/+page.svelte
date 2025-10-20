@@ -127,9 +127,9 @@
 		</div>
 
 		<!-- Bottom Section: Exhibition Details with Pattern Background (Tablet+ only) -->
-		<div class="hidden tablet:flex w-full bg-white relative items-start">
+		<div class="hidden tablet:grid grid-cols-2 w-full relative items-start">
 			<!-- Pattern Background -->
-			<div class="absolute inset-0 opacity-30 overflow-hidden pointer-events-none">
+			<div class="absolute inset-0 overflow-hidden pointer-events-none">
 				<img
 					src="/home-information-pattern.webp"
 					alt=""
@@ -139,7 +139,7 @@
 
 			<!-- Left Column: Open & Close -->
 			<div
-				class="w-[400px] flex flex-col tablet:gap-0 desktop:gap-[8px] p-[40px] relative z-10 shrink-0"
+				class="w-full flex flex-col tablet:gap-0 desktop:gap-[8px] p-[40px] relative z-10 shrink-0"
 			>
 				<h3
 					class="font-display tablet:text-[32px] desktop:text-[52px] tablet:leading-[1.3] desktop:leading-[1.1] tablet:tracking-[-0.64px] desktop:tracking-normal text-[#111111]"
@@ -154,9 +154,7 @@
 			</div>
 
 			<!-- Right Column: Exhibition Details -->
-			<div
-				class="flex-1 flex flex-col tablet:gap-[32px] desktop:gap-[52px] p-[40px] relative z-10 tablet:border-l-[0.5px] desktop:border-l-0 border-black"
-			>
+			<div class="flex-1 flex flex-col tablet:gap-[32px] desktop:gap-[52px] p-[40px] relative z-10">
 				<!-- 전시 기간 -->
 				<div class="flex flex-col gap-[5px]">
 					<h4
@@ -180,9 +178,7 @@
 					>
 						전시 장소
 					</h4>
-					<p
-						class="font-bold tablet:text-[20px] desktop:text-[28px] leading-[1.4] text-[#111111]"
-					>
+					<p class="font-bold tablet:text-[20px] desktop:text-[28px] leading-[1.4] text-[#111111]">
 						경희대학교 국제캠퍼스 예술디자인대학 2F A&D홀 갤러리
 					</p>
 				</div>
