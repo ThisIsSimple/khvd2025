@@ -196,10 +196,14 @@
 		/>
 	</button>
 
-	<!-- TODO: 영상으로 교체 -->
-	<img
-		src="/about-poster-image.png"
-		alt="Exhibition Poster"
+	<!-- Background Video -->
+	<video
+		src="/main-poster-video.webm"
+		autoplay
+		loop
+		muted
+		playsinline
 		class="hidden tablet:block fixed top-0 left-0 w-screen h-screen object-cover -z-10"
-	/>
+		aria-label="Exhibition Background Video"
+	></video>
 </div>
