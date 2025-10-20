@@ -31,7 +31,7 @@
 	{/if}
 
 	{#if !isTeaserPage && !isMainPage}
-		<div class="h-[50px] tablet:h-[100px]"></div>
+		<div class="h-[50px] tablet:h-[80px] desktop:h-[100px]"></div>
 	{/if}
 
 	<main class="flex-1">

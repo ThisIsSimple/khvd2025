@@ -3,25 +3,25 @@
 </script>
 
 <!-- Exhibition About Page -->
-<div class="bg-[#fefefe] flex flex-col items-center w-full min-h-screen">
+<div class="bg-transparent w-full min-h-screen">
 	<!-- Main Content -->
-	<div class="flex items-start justify-between w-full max-w-[1920px] pb-[180px]">
+	<div class="bg-[#fefefe] tablet:w-3/4 pb-[180px]">
 		<!-- Left Column: Content -->
-		<div class="flex flex-col items-start w-full max-w-[1100px]">
+		<div>
 			<!-- Page Title -->
-			<div class="flex items-center px-[40px] py-[48px]">
+			<div class="flex items-center px-[16px] tablet:px-[40px] py-[48px]">
 				<h1 class="font-display text-[120px] leading-none text-[#111111]">ABOUT EXHIBITION</h1>
 			</div>
 
 			<!-- Content Container -->
-			<div class="flex flex-col items-start px-[40px]">
+			<div class="flex flex-col items-start px-[16px] tablet:px-[40px]">
 				<!-- Divider Line -->
 				<div class="flex items-start gap-[20px] h-[24px] px-0 py-[12px] w-full">
 					<div class="w-[20px] h-[2px] bg-[#111111]"></div>
 				</div>
 
 				<!-- Section 1: 전시의도 -->
-				<div class="flex flex-col items-start py-[40px]">
+				<div class="flex flex-col items-start py-[16px] tablet:py-[40px]">
 					<!-- Title -->
 					<div class="flex flex-col gap-[4px] px-0 py-[12px]">
 						<p class="font-bold text-[#fc451e] text-[20px] leading-[1.4]">전시의도</p>
@@ -59,7 +59,7 @@
 				</div>
 
 				<!-- Section 2: 비주얼 -->
-				<div class="flex flex-col items-start py-[40px]">
+				<div class="flex flex-col items-start py-[16px] tablet:py-[40px]">
 					<!-- Title -->
 					<div class="flex flex-col gap-[4px] px-0 py-[8px]">
 						<p class="font-bold text-[#fc451e] text-[20px] leading-[1.4]">비주얼</p>
@@ -94,7 +94,7 @@
 								<div class="flex items-center">
 									<!-- Red Orange Swatch -->
 									<div
-										class="bg-[#e83e15] w-[290px] h-[140px] px-[15px] py-[12px] flex flex-col justify-between"
+										class="bg-[#e83e15] max-w-[200px] w-full h-[100px] tablet:w-[290px] tablet:h-[140px] px-[15px] py-[12px] flex flex-col justify-between"
 									>
 										<p class="font-medium text-white text-[18px] leading-none">Red Orange</p>
 										<div
@@ -106,7 +106,7 @@
 									</div>
 									<!-- Black Swatch -->
 									<div
-										class="bg-black w-[290px] h-[140px] px-[15px] py-[12px] flex flex-col justify-between"
+										class="bg-black max-w-[200px] w-full h-[100px] tablet:w-[290px] tablet:h-[140px] px-[15px] py-[12px] flex flex-col justify-between"
 									>
 										<p class="font-medium text-white text-[18px] leading-none">Black</p>
 										<div
@@ -138,7 +138,7 @@
 				</div>
 
 				<!-- Section 3: 아카이브존 -->
-				<div class="flex flex-col gap-[12px] py-[40px]">
+				<div class="flex flex-col gap-[12px] py-[16px] tablet:py-[40px]">
 					<!-- Title -->
 					<div class="flex flex-col gap-[4px] px-0 py-[8px]">
 						<p class="font-bold text-[#e83e15] text-[20px] leading-[1.4]">아카이브존</p>
@@ -163,26 +163,20 @@
 				</div>
 			</div>
 		</div>
-
-		<button class="hidden tablet:block fixed top-[50px+32px] right-[40px]">
-			<img
-				src="/icons/expand-icon.svg"
-				alt=""
-				class="w-[40px] h-[40px] desktop:w-[60px] desktop:h-[60px]"
-			/>
-		</button>
-
-		<!-- Right Column: Poster Image with Arrow -->
-		<!-- <div
-			class="flex items-start justify-end h-[calc(100vh-50px)] tablet:h-[calc(100vh-100px)] sticky top-[50px] tablet:top-[100px]"
-		>
-			<div class="w-full max-w-[664px] h-full overflow-hidden">
-				<img
-					src="/about-poster-image.png"
-					alt="Exhibition Poster"
-					class="w-full h-full object-cover"
-				/>
-			</div>
-		</div> -->
 	</div>
+
+	<button class="hidden tablet:block fixed top-[112px] desktop:top-[132px] right-[40px]">
+		<img
+			src="/icons/expand-icon.svg"
+			alt=""
+			class="w-[40px] h-[40px] desktop:w-[60px] desktop:h-[60px]"
+		/>
+	</button>
+
+	<!-- TODO: 영상으로 교체 -->
+	<img
+		src="/about-poster-image.png"
+		alt="Exhibition Poster"
+		class="hidden tablet:block fixed top-0 left-0 w-screen h-screen object-cover -z-10"
+	/>
 </div>
