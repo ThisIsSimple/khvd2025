@@ -1,4 +1,6 @@
 <script lang="ts">
+	import NavigationIcon from './NavigationIcon.svelte';
+
 	interface Props {
 		isOpen?: boolean;
 		onClose?: () => void;
@@ -54,10 +56,10 @@
 		<!-- Right: Menu Button -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
+			class="w-[60px] h-[60px] flex items-center justify-center"
 			aria-label="Open menu"
 		>
-			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+			<NavigationIcon />
 		</button>
 	</header>
 
@@ -71,20 +73,20 @@
 		<!-- Menu Button (smaller for mobile) -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="w-[32px] h-[32px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
+			class="w-[32px] h-[32px] flex items-center justify-center scale-[0.53]"
 			aria-label="Open menu"
 		>
-			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full p-[7px]" />
+			<NavigationIcon />
 		</button>
 	</header>
 {:else}
 	<!-- Type 1: Menu button only (top right) -->
 	<button
 		onclick={() => (isOpen = true)}
-		class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-40"
+		class="fixed top-[20px] right-[20px] w-[60px] h-[60px] z-40 flex items-center justify-center"
 		aria-label="Open menu"
 	>
-		<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+		<NavigationIcon />
 	</button>
 {/if}
 
@@ -107,20 +109,20 @@
 			aria-label="Close menu"
 		></div>
 
-		<!-- Close Button (navigation-icon.svg) - Top Right -->
+		<!-- Close Button - Top Right -->
 		<button
 			onclick={handleClose}
-			class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-[60]"
+			class="fixed top-[20px] right-[20px] w-[60px] h-[60px] z-[60] flex items-center justify-center"
 			aria-label="Close menu"
 		>
-			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+			<NavigationIcon isActive={true} />
 		</button>
 
 		<!-- Menu Content -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<nav
-			class="relative w-1/2 max-w-[960px] h-screen flex flex-col"
+			class="relative w-full tablet:w-4/5 desktop:w-3/4 xl:w-1/2 max-w-[960px] h-screen flex flex-col"
 			onclick={(e) => e.stopPropagation()}
 			aria-label="Main navigation"
 		>
