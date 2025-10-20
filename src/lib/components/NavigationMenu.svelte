@@ -38,7 +38,7 @@
 {#if !noTitle}
 	<!-- Desktop Navigation (≥960px): Full header with title, logo, and menu button -->
 	<header
-		class="hidden tablet:flex fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-30 items-center justify-between px-[40px]"
+		class="hidden desktop:flex fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-30 items-center justify-between px-[40px]"
 	>
 		<!-- Left: Exhibition Info -->
 		<div class="flex items-center gap-[10px]">
