@@ -33,10 +33,10 @@
 			</p>
 			<button
 				onclick={handleEdit}
-				class="overflow-clip shrink-0 w-[28px] h-[28px] flex items-center justify-center hover:opacity-70 transition-opacity"
+				class="overflow-clip shrink-0 w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] tablet:w-[28px] tablet:h-[28px] flex items-center justify-center hover:opacity-70 transition-opacity"
 				aria-label="Edit message"
 			>
-				<img src="/icons/edit.svg" alt="" class="w-full h-full" />
+				<img src="/icons/edit.svg" alt="" class="w-full h-full opacity-35" />
 			</button>
 		</div>
 
