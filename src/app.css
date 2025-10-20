@@ -8,6 +8,7 @@
 @theme {
 	/* Responsive Breakpoints */
 	--breakpoint-xs: 421px; /* Mobile: 421px - 959px */
+	--breakpoint-sm: 660px; /* Small Mobile: 660px - 959px */
 	--breakpoint-tablet: 960px; /* Tablet: 960px - 1350px */
 	--breakpoint-desktop: 1350px; /* Desktop: 1350px+ */
 	--breakpoint-xl: 1500px; /* Extra Large Desktop: 1500px+ */

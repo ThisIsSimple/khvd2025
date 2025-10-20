@@ -188,54 +188,79 @@
 
 	<!-- Section 4: Work Shortcut -->
 	<section
-		class="w-full bg-white flex flex-col gap-[1.948px] xs:gap-[10px] tablet:gap-[10px] desktop:gap-[10px] xl:gap-[10px] items-start justify-center py-[80px] xs:py-[100px] xs:pb-[160px] tablet:py-[100px] tablet:pb-[200px] desktop:py-[100px] desktop:pb-[200px] xl:py-[100px] xl:pb-[200px] px-[16px] xs:px-[40px] tablet:px-[40px] desktop:px-[40px] xl:px-[40px]"
+		class="w-full bg-white flex flex-col gap-[1.948px] sm:gap-[10px] tablet:gap-[10px] desktop:gap-[10px] xl:gap-[10px] items-start justify-center py-[80px] sm:py-[100px] sm:pb-[160px] tablet:py-[100px] tablet:pb-[200px] desktop:py-[100px] desktop:pb-[200px] xl:py-[100px] xl:pb-[200px] px-[16px] sm:px-[40px] tablet:px-[40px] desktop:px-[40px] xl:px-[40px]"
 	>
 		<!-- Header -->
-		<div class="w-full flex flex-col items-start pb-[14px] pt-[12px] xs:px-[12px] xs:py-[32px] tablet:px-[12px] tablet:py-[32px] desktop:px-[12px] desktop:py-[32px] xl:px-[12px] xl:py-[32px]">
-			<h2 class="text-[18px] leading-[1.4] font-bold xs:text-[28px] xs:leading-[1.4] xs:font-bold tablet:text-[32px] tablet:leading-[1.4] desktop:text-h7 xl:text-h7 text-[#111111] tracking-[-0.8px]">작품 바로가기</h2>
-			<p class="text-[15px] leading-[1.5] xs:text-[20px] xs:leading-[1.5] tablet:text-h10 desktop:text-h10 xl:text-h10 text-[#777777]">Work Shortcut</p>
+		<div
+			class="w-full flex flex-col items-start pb-[14px] pt-[12px] px-0 sm:px-[12px] sm:py-[32px] tablet:px-[12px] tablet:py-[32px] desktop:px-[12px] desktop:py-[32px] xl:px-[12px] xl:py-[32px]"
+		>
+			<h2
+				class="text-[18px] leading-[1.4] font-bold sm:text-[28px] sm:leading-[1.4] sm:font-bold tablet:text-[32px] tablet:leading-[1.4] desktop:text-h7 xl:text-h7 text-[#111111] tracking-[-0.8px]"
+			>
+				작품 바로가기
+			</h2>
+			<p
+				class="text-[15px] leading-[1.5] sm:text-[20px] sm:leading-[1.5] tablet:text-h10 desktop:text-h10 xl:text-h10 text-[#777777]"
+			>
+				Work Shortcut
+			</p>
 		</div>
 
 		<!-- Content Area -->
 		<div
-			class="w-full flex flex-col tablet:flex-col desktop:flex-row xl:flex-row items-start xs:items-start tablet:items-start desktop:h-[695px] xl:h-[695px] gap-[12px] xs:gap-[32px] tablet:gap-[40px] desktop:gap-[60px] xl:gap-[60px] xs:py-[60px] tablet:py-[60px] desktop:py-[60px] xl:py-[60px] xs:px-[20px] tablet:px-[20px] desktop:px-[20px] xl:px-[20px]"
+			class="w-full flex flex-col tablet:flex-col desktop:flex-row xl:flex-row items-start sm:items-start tablet:items-start desktop:h-[695px] xl:h-[695px] gap-[12px] sm:gap-[32px] tablet:gap-[40px] desktop:gap-[60px] xl:gap-[60px] sm:py-[60px] tablet:py-[60px] desktop:py-[60px] xl:py-[60px] sm:px-[20px] tablet:px-[20px] desktop:px-[20px] xl:px-[20px]"
 		>
 			<!-- Exhibition Map -->
-			<div class="w-full px-[12px] py-[16px] xs:px-0 xs:py-0 tablet:px-0 tablet:py-0 desktop:px-0 desktop:py-0 xl:px-0 xl:py-0">
-				<div class="w-full aspect-[331.749/212.747] xs:aspect-[860/575] tablet:aspect-[860/575] desktop:w-[800px] xl:flex-1 desktop:h-[534.884px] xl:h-full relative shrink-0 xs:shrink-0 tablet:shrink-0 desktop:shrink-0">
-					<div class="absolute inset-0 bg-white">
-						<div class="absolute inset-0 overflow-hidden">
-							<img
-								src="/exhibition-map.svg"
-								alt="Exhibition Map"
-								class="w-full desktop:w-[800px] xl:w-[870px]"
-							/>
-						</div>
-					</div>
+			<div
+				class="w-full px-[12px] py-[16px] sm:px-0 sm:py-0 tablet:px-0 tablet:py-0 desktop:px-0 desktop:py-0 xl:px-0 xl:py-0"
+			>
+				<div
+					class="w-full desktop:w-[800px] xl:flex-1 xl:h-full relative shrink-0 sm:shrink-0 tablet:shrink-0 desktop:shrink-0"
+				>
+					<img
+						src="/exhibition-map.svg"
+						alt="Exhibition Map"
+						class="w-full desktop:w-[800px] xl:w-[870px]"
+					/>
 				</div>
 			</div>
 
 			<!-- Work Details with Arrow -->
 			<div
-				class="w-full tablet:w-full desktop:flex-1 xl:flex-1 h-full flex flex-row xs:flex-col tablet:flex-row desktop:flex-col xl:flex-col justify-between items-center xs:items-start tablet:items-start desktop:items-start px-[12px] xs:px-[12px] tablet:px-[12px] desktop:px-0 xl:px-0 border-t-[0.5px] border-[#111111] xs:border-black tablet:border-[#111111] desktop:border-t-0 xl:border-t-0 pb-[24px] pt-[18px] xs:pt-[24px] xs:pb-0 tablet:pt-[32px] tablet:pb-0 desktop:py-[60px] xl:py-[60px] xs:gap-[10px] tablet:gap-[95px] desktop:gap-0 xl:gap-0"
+				class="w-full tablet:w-full desktop:flex-1 xl:flex-1 h-full flex flex-row sm:flex-col tablet:flex-row desktop:flex-col xl:flex-col justify-between items-center sm:items-start tablet:items-start desktop:items-start px-[12px] sm:px-[12px] tablet:px-[12px] desktop:px-0 xl:px-0 border-t-[0.5px] border-[#111111] sm:border-black tablet:border-[#111111] desktop:border-t-0 xl:border-t-0 pb-[24px] pt-[18px] sm:pt-[24px] sm:pb-0 tablet:pt-[32px] tablet:pb-0 desktop:py-[60px] xl:py-[60px] sm:gap-[10px] tablet:gap-[95px] desktop:gap-0 xl:gap-0"
 			>
 				<!-- Text Content -->
-				<div class="flex-1 xs:w-full tablet:w-[458px] desktop:w-full xl:w-full flex flex-col gap-0">
+				<div class="flex-1 sm:w-full tablet:w-[458px] desktop:w-full xl:w-full flex flex-col gap-0">
 					<!-- Text with [15] -->
-					<div class="flex flex-row items-center gap-[4px] xs:gap-[8px] tablet:gap-[4px] desktop:flex-col desktop:gap-[4px] xl:flex-col xl:gap-[4px]">
-						<p class="font-display text-[40px] leading-none xs:text-[52px] xs:leading-[1.1] tablet:text-[60px] tablet:leading-none desktop:text-[100px] desktop:leading-none xl:text-[120px] xl:leading-none text-[#111111]">
+					<div
+						class="flex flex-row items-center gap-[4px] sm:gap-[8px] tablet:gap-[4px] desktop:flex-col desktop:gap-[4px] xl:flex-col xl:gap-[4px]"
+					>
+						<p
+							class="font-display text-[40px] leading-none sm:text-[52px] sm:leading-[1.1] tablet:text-[60px] tablet:leading-none desktop:text-[100px] desktop:leading-none xl:text-[120px] xl:leading-none text-[#111111]"
+						>
 							GRADUATION sTUDies 1
 						</p>
-						<div class="pt-[6px] xs:pt-[4px] tablet:pt-[2px] desktop:pt-[12px] xl:pt-[12px]">
-							<span class="font-display text-[16px] leading-[1.4] tracking-[-0.32px] xs:text-[28px] xs:leading-[1.2] xs:tracking-[-0.56px] tablet:text-[28px] tablet:leading-[1.2] tablet:tracking-[-0.56px] desktop:text-[32px] desktop:leading-none xl:text-[40px] xl:leading-none text-[#111111]">[15]</span>
+						<div class="pt-[6px] sm:pt-[4px] tablet:pt-[2px] desktop:pt-[12px] xl:pt-[12px]">
+							<span
+								class="font-display text-[16px] leading-[1.4] tracking-[-0.32px] sm:text-[28px] sm:leading-[1.2] sm:tracking-[-0.56px] tablet:text-[28px] tablet:leading-[1.2] tablet:tracking-[-0.56px] desktop:text-[32px] desktop:leading-none xl:text-[40px] xl:leading-none text-[#111111]"
+								>[15]</span
+							>
 						</div>
 					</div>
 				</div>
 
 				<!-- Arrow Icon -->
-				<div class="flex-1 xs:w-full tablet:w-auto desktop:w-full xl:w-full flex justify-end xs:justify-end tablet:justify-end desktop:justify-end xl:justify-end items-start xs:items-center tablet:items-start desktop:items-center xl:items-center">
-					<div class="w-[52px] h-[52px] xs:w-[60px] xs:h-[60px] tablet:w-[80px] tablet:h-[80px] desktop:w-[150px] xl:w-[150px] desktop:h-[150px] xl:h-[150px] flex items-center justify-center rotate-180 scale-y-[-100%]">
-						<img src="/icons/arrow_diagonal.svg" alt="" class="w-[24.613px] h-[24.613px] xs:w-[28.4px] xs:h-[28.4px] tablet:w-[37.867px] tablet:h-[37.867px] desktop:w-[71px] desktop:h-[71px] xl:w-[71px] xl:h-[71px]" />
+				<div
+					class="flex-1 sm:w-full tablet:w-auto desktop:w-full xl:w-full flex justify-end sm:justify-end tablet:justify-end desktop:justify-end xl:justify-end items-start sm:items-center tablet:items-start desktop:items-center xl:items-center"
+				>
+					<div
+						class="w-[52px] h-[52px] sm:w-[60px] sm:h-[60px] tablet:w-[80px] tablet:h-[80px] desktop:w-[150px] xl:w-[150px] desktop:h-[150px] xl:h-[150px] flex items-center justify-center rotate-180 scale-y-[-100%]"
+					>
+						<img
+							src="/icons/arrow_diagonal.svg"
+							alt=""
+							class="w-[24.613px] h-[24.613px] sm:w-[28.4px] sm:h-[28.4px] tablet:w-[37.867px] tablet:h-[37.867px] desktop:w-[71px] desktop:h-[71px] xl:w-[71px] xl:h-[71px]"
+						/>
 					</div>
 				</div>
 			</div>
