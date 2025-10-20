@@ -18,3 +18,8 @@ export function isExhibitionAvailable(): boolean {
 	const now = new Date();
 	return now >= EXHIBITION_CONFIG.exhibitionStart && now <= EXHIBITION_CONFIG.exhibitionEnd;
 }
+
+export function isBeforeExhibition(): boolean {
+	const now = new Date();
+	return now < EXHIBITION_CONFIG.exhibitionStart;
+}
