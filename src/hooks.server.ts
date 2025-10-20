@@ -1,5 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
 import { verifySession } from '$lib/auth';
+import { isBeforeExhibition } from '$lib/config';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	// Get session token from cookie
@@ -15,6 +16,20 @@ export const handle: Handle = async ({ event, resolve }) => {
 			return new Response('Redirect', {
 				status: 303,
 				headers: { Location: '/admin/login' }
+			});
+		}
+	}
+
+	// Redirect to teaser page if before exhibition period (unless admin or accessing allowed paths)
+	if (isBeforeExhibition()) {
+		const allowedPaths = ['/teaser', '/admin/login', '/admin/logout'];
+		const isAllowedPath = allowedPaths.some((path) => event.url.pathname.startsWith(path));
+
+		// Redirect to teaser if not admin and not accessing allowed paths
+		if (!user && !isAllowedPath) {
+			return new Response('Redirect', {
+				status: 303,
+				headers: { Location: '/teaser' }
 			});
 		}
 	}
