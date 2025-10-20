@@ -44,7 +44,7 @@
 
 				<!-- FlipClock Timer -->
 				<div class="relative z-10 flex justify-center w-full">
-					<FlipClock targetDate={new Date(data.exhibitionStart)} />
+					<FlipClock targetDate={new Date(data.exhibitionStart)} hideSecondsOnMobile />
 				</div>
 			</div>
 		</div>

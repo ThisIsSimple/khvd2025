@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 
-	let { targetDate }: { targetDate: Date } = $props();
+	let {
+		targetDate,
+		hideSecondsOnMobile = false
+	}: { targetDate: Date; hideSecondsOnMobile?: boolean } = $props();
 
 	// Top half values (updated immediately when animation starts)
 	let topDays = $state(0);
@@ -175,9 +178,9 @@
 	</div>
 
 	<!-- Seconds (hidden on mobile) -->
-	<span class="text-4xl text-black font-bold -mt-6 hidden tablet:block">:</span>
+	<span class="text-4xl text-black font-bold -mt-6 {hideSecondsOnMobile ? 'hidden tablet:block' : 'block'}">:</span>
 
-	<div class="hidden tablet:flex flex-col items-center">
+	<div class="{hideSecondsOnMobile ? 'hidden tablet:flex' : 'flex'} flex-col items-center">
 		<div class="flex gap-3">
 			{#each [0, 1] as position}
 				<div class="flip-card">
@@ -353,6 +356,34 @@
 		transform: translateY(-50%);
 		-webkit-transform: translateY(-50%);
 		pointer-events: none;
+	}
+
+	/* Mobile and Tablet */
+	@media (max-width: 1350px) {
+		.flip-card {
+			width: 60px;
+			height: 80px;
+			perspective: 200px;
+			-webkit-perspective: 200px;
+		}
+
+		.flip-card-number {
+			font-size: 3.5rem;
+		}
+
+		.flip-card-top,
+		.flip-card-bottom {
+			height: 48.5%;
+		}
+
+		.flip-card-top-flip {
+			height: 50%;
+		}
+
+		.flip-card-front,
+		.flip-card-back {
+			height: 97%;
+		}
 	}
 
 	/* Mobile and Tablet */
