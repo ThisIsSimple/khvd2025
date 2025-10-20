@@ -10,10 +10,6 @@
 	let { children, data }: { children: any; data: LayoutData } = $props();
 	let isMenuOpen = $state(false);
 
-	function toggleMenu() {
-		isMenuOpen = !isMenuOpen;
-	}
-
 	// Check if current page is teaser page
 	let isTeaserPage = $derived($page.url.pathname === '/teaser');
 	let isMainPage = $derived($page.url.pathname === '/');
