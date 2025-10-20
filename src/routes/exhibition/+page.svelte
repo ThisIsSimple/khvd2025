@@ -1,5 +1,28 @@
 <script lang="ts">
 	import { uiState } from '$lib/stores/ui.svelte';
+	import { onMount } from 'svelte';
+
+	let videoElement: HTMLVideoElement;
+
+	// Watch UI state and control video playback
+	$effect(() => {
+		if (videoElement) {
+			if (uiState.isUIHidden) {
+				// UI hidden = play video
+				videoElement.play();
+			} else {
+				// UI visible = pause video
+				videoElement.pause();
+			}
+		}
+	});
+
+	onMount(() => {
+		// Initially pause the video since UI is visible by default
+		if (videoElement) {
+			videoElement.pause();
+		}
+	});
 </script>
 
 <!-- Exhibition About Page -->
@@ -198,8 +221,8 @@
 
 	<!-- Background Video -->
 	<video
+		bind:this={videoElement}
 		src="/main-poster-video.webm"
-		autoplay
 		loop
 		muted
 		playsinline
