@@ -15,14 +15,19 @@
 
 	// Check if current page is teaser page
 	let isTeaserPage = $derived($page.url.pathname === '/teaser');
+	let isMainPage = $derived($page.url.pathname === '/');
 </script>
 
 <CustomCursor />
 
 <div class="flex min-h-screen flex-col">
 	<!-- Navigation Menu (hidden on teaser page) -->
-	{#if !isTeaserPage}
+	{#if !isTeaserPage && !isMainPage}
 		<NavigationMenu bind:isOpen={isMenuOpen} />
+	{/if}
+
+	{#if isMainPage}
+		<NavigationMenu bind:isOpen={isMenuOpen} noTitle />
 	{/if}
 
 	<main class="flex-1">

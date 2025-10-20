@@ -15,7 +15,7 @@
 
 <div class="relative min-h-screen">
 	<!-- Section 1: Hero Section with R=VD Logo -->
-	<section class="relative w-full h-screen">
+	<section class="relative w-full aspect-video">
 		<!-- Background Image -->
 		<div class="absolute inset-0 overflow-hidden pointer-events-none">
 			<img

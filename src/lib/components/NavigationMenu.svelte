@@ -1,6 +1,4 @@
 <script lang="ts">
-	import NavigationIcon from './NavigationIcon.svelte';
-
 	interface Props {
 		isOpen?: boolean;
 		onClose?: () => void;
@@ -56,10 +54,10 @@
 		<!-- Right: Menu Button -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="w-[60px] h-[60px] flex items-center justify-center"
+			class="w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
 			aria-label="Open menu"
 		>
-			<NavigationIcon />
+			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
 		</button>
 	</header>
 
@@ -73,20 +71,20 @@
 		<!-- Menu Button (smaller for mobile) -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="w-[32px] h-[32px] flex items-center justify-center scale-[0.53]"
+			class="w-[32px] h-[32px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
 			aria-label="Open menu"
 		>
-			<NavigationIcon />
+			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full p-[7px]" />
 		</button>
 	</header>
 {:else}
 	<!-- Type 1: Menu button only (top right) -->
 	<button
 		onclick={() => (isOpen = true)}
-		class="fixed top-[20px] right-[20px] w-[60px] h-[60px] z-40 flex items-center justify-center"
+		class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-40"
 		aria-label="Open menu"
 	>
-		<NavigationIcon />
+		<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
 	</button>
 {/if}
 
@@ -112,10 +110,10 @@
 		<!-- Close Button - Top Right -->
 		<button
 			onclick={handleClose}
-			class="fixed top-[20px] right-[20px] w-[60px] h-[60px] z-[60] flex items-center justify-center"
+			class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-[60]"
 			aria-label="Close menu"
 		>
-			<NavigationIcon isActive={true} />
+			<img src="/icons/navigation-close-icon.svg" alt="" class="w-full h-full" />
 		</button>
 
 		<!-- Menu Content -->
