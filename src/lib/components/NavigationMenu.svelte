@@ -37,10 +37,14 @@
 <!-- Navigation Header (Type 2 - with title and logo) -->
 {#if !noTitle}
 	<!-- Desktop Navigation (≥960px): Full header with title, logo, and menu button -->
-	<header class="hidden tablet:flex fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-40 items-center justify-between px-[40px]">
+	<header
+		class="hidden tablet:flex fixed top-0 left-0 right-0 bg-[#fefefe] h-[50px] tablet:h-[100px] z-30 items-center justify-between px-[14px] tablet:px-[40px]"
+	>
 		<!-- Left: Exhibition Info -->
 		<div class="flex items-center gap-[10px]">
-			<div class="flex flex-col justify-end font-sans text-[20px] text-black leading-[1.2] tracking-[-0.8px]">
+			<div
+				class="flex flex-col justify-end font-sans text-[20px] text-black leading-[1.2] tracking-[-0.8px]"
+			>
 				<p class="mb-0">Kyunghee Univ. Visual Design</p>
 				<p>34th Graduation Exhibition</p>
 			</div>
@@ -62,7 +66,9 @@
 	</header>
 
 	<!-- Mobile Navigation (<960px): Logo and smaller menu button -->
-	<header class="flex tablet:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[60px] z-40 items-center justify-between px-[20px]">
+	<header
+		class="flex tablet:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[50px] z-30 items-center justify-between px-[20px]"
+	>
 		<!-- Logo -->
 		<div class="flex items-center">
 			<img src="/logo-mobile.svg" alt="R=VD" class="w-[50px] h-[25px]" />
@@ -71,17 +77,17 @@
 		<!-- Menu Button (smaller for mobile) -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="w-[32px] h-[32px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
+			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-30"
 			aria-label="Open menu"
 		>
-			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full p-[7px]" />
+			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
 		</button>
 	</header>
 {:else}
 	<!-- Type 1: Menu button only (top right) -->
 	<button
 		onclick={() => (isOpen = true)}
-		class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-40"
+		class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-30"
 		aria-label="Open menu"
 	>
 		<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
@@ -110,7 +116,7 @@
 		<!-- Close Button - Top Right -->
 		<button
 			onclick={handleClose}
-			class="fixed top-[20px] right-[20px] w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-[60]"
+			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-[60]"
 			aria-label="Close menu"
 		>
 			<img src="/icons/navigation-close-icon.svg" alt="" class="w-full h-full" />
@@ -129,7 +135,7 @@
 				<!-- Menu Item -->
 				<a
 					href={item.href}
-					class="group flex-1 bg-primary flex items-center px-[40px] py-[10px] relative overflow-hidden"
+					class="group flex-1 bg-primary flex items-center px-[16px] tablet:px-[40px] py-[10px] relative overflow-hidden"
 					onclick={handleClose}
 				>
 					<!-- Background Image (fade in/out on hover) -->
@@ -140,14 +146,18 @@
 					/>
 
 					<!-- Text Container with slide-up animation -->
-					<div class="w-full relative overflow-hidden h-[80px] tablet:h-[120px] flex items-center">
+					<div class="w-full relative overflow-hidden h-[56px] tablet:h-[80px] desktop:h-[120px] flex items-center">
 						<!-- Black text (default, slides up on hover) -->
-						<p class="font-display text-[80px] tablet:text-[120px] leading-none text-black absolute transition-transform duration-500 ease-in-out group-hover:-translate-y-full">
+						<p
+							class="font-display text-[56px] tablet:text-[100px] desktop:text-[120px] leading-none text-black absolute transition-transform duration-500 ease-in-out group-hover:-translate-y-full"
+						>
 							{item.title}
 						</p>
 
 						<!-- White text (hidden below, slides up on hover) -->
-						<p class="font-display text-[80px] tablet:text-[120px] leading-none text-white absolute translate-y-full transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+						<p
+							class="font-display text-[56px] tablet:text-[100px] desktop:text-[120px] leading-none text-white absolute translate-y-full transition-transform duration-500 ease-in-out group-hover:translate-y-0"
+						>
 							{item.title}
 						</p>
 					</div>

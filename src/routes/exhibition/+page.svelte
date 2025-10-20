@@ -145,7 +145,7 @@
 		</div>
 
 		<!-- Right Column: Poster Image with Arrow -->
-		<div class="flex items-start justify-end h-[1080px] sticky top-[100px]">
+		<div class="flex items-start justify-end h-[1080px] sticky top-[50px] tablet:top-[100px]">
 			<!-- Arrow Button -->
 			<button
 				class="bg-black flex items-center justify-center w-[56px] h-[56px] shrink-0 transition-opacity hover:opacity-70"

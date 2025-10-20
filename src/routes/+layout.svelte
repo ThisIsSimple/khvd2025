@@ -30,6 +30,10 @@
 		<NavigationMenu bind:isOpen={isMenuOpen} noTitle />
 	{/if}
 
+	{#if !isTeaserPage && !isMainPage}
+		<div class="h-[50px] tablet:h-[100px]"></div>
+	{/if}
+
 	<main class="flex-1">
 		{@render children()}
 	</main>
