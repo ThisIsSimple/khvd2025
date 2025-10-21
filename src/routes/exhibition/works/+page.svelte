@@ -6,28 +6,28 @@
 	const professorGroups = [
 		{
 			number: '0',
-			professors: [{ name: 'Eun Jeong Kim' }, { name: 'Sang Hee Park' }],
+			professors: [{ name: 'Un Chong Kim ' }, { name: 'Sang Hee Park' }],
 			workCount: 25,
 			category: 'VISUAL DESIGN',
 			title: '지속 가능한 미래를 위한\n창의적 해법'
 		},
 		{
 			number: '1',
-			professors: [{ name: 'Kyungwon Lee' }, { name: 'Aeri You' }],
+			professors: [{ name: 'Mee Kyung Jang' }, { name: 'Dae Yeon Kim' }],
 			workCount: 34,
 			category: 'VISUAL DESIGN',
 			title: '아이디어의 근원과\n메세지를 탐구하는\n실전 디자인'
 		},
 		{
 			number: '2',
-			professors: [{ name: 'Seung Hwan Yang' }],
+			professors: [{ name: 'Je Yon Jung' }],
 			workCount: 21,
 			category: 'VISUAL DESIGN',
 			title: '디자인 비즈니스:\n경험, 혁신, 그리고\n미래 연결성'
 		},
 		{
 			number: '3',
-			professors: [{ name: 'Yong Seok Choi' }],
+			professors: [{ name: 'Jung Woo Kim' }],
 			workCount: 13,
 			category: 'VISUAL DESIGN',
 			title: '시각 언어와\n인터랙션을 결합한\n경험 디자인'
@@ -70,7 +70,7 @@
 			style="grid-template-columns: {getGridColumns(
 				professorGroups.length,
 				hoveredIndex
-			)}; background-image: url('/work-background.webp'); background-repeat: repeat-x repeat-y;"
+			)}; background-image: url('/work-background.webp'); background-size: 100%; background-repeat: repeat-x repeat-y;"
 		>
 			{#each professorGroups as group, index}
 				<WorkCard
@@ -86,7 +86,7 @@
 
 		<!-- Professor Groups Grid - Tablet (2x2 grid) -->
 		<div
-			class="hidden tablet:grid desktop:hidden gap-[40px] w-full mb-[120px] transition-all duration-500 ease-in-out"
+			class="hidden tablet:grid desktop:hidden w-full transition-all duration-500 ease-in-out"
 			style="grid-template-columns: {hoveredIndex !== null && hoveredIndex < 2
 				? hoveredIndex === 0
 					? '1.3fr 0.7fr'
@@ -95,7 +95,7 @@
 					? hoveredIndex === 2
 						? '1.3fr 0.7fr'
 						: '0.7fr 1.3fr'
-					: '1fr 1fr'}; background-image: url('/work-background.webp'); background-repeat: repeat-x repeat-y; background-size: contain;"
+					: '1fr 1fr'}; background-image: url('/work-background.webp'); background-size: 100%; background-repeat: repeat-x repeat-y; background-size: contain;"
 		>
 			{#each professorGroups as group, index}
 				<WorkCard
