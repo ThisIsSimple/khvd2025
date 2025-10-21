@@ -33,7 +33,7 @@
 <div class="flex flex-col">
 	<!-- Professor Info Box -->
 	<div
-		class="flex-1 bg-white flex flex-col gap-[12px] items-start justify-start w-full px-[100px] py-[20px]"
+		class="flex-1 bg-white flex flex-col gap-[12px] items-start justify-start w-full px-[40px] xl:px-[100px] py-[20px]"
 	>
 		{#each professors as professor}
 			<div class="bg-white flex items-center justify-start w-full">
@@ -53,18 +53,18 @@
 		onmouseleave={handleMouseLeave}
 		role="button"
 		tabindex="0"
-		class="relative flex flex-col justify-between h-[720px] pl-[80px] pb-[55px] overflow-hidden transition-colors duration-500 ease-in-out {isHovered
+		class="relative flex flex-col justify-between h-[720px] pl-[40px] xl:pl-[80px] pb-[55px] overflow-hidden transition-colors duration-500 ease-in-out {isHovered
 			? 'bg-primary'
 			: ''}"
 	>
 		<!-- Number and Count Container -->
 		<div class="relative flex items-start justify-between w-full">
 			<!-- Left: Number, Text, and Arrow -->
-			<div class="flex gap-[24px] items-start pt-[12px]">
+			<div class="flex gap-[12px] xl:gap-[24px] items-start pt-[12px]">
 				<!-- Large Number -->
 				<div class="w-">
 					<p
-						class="font-display text-[300px] leading-[1.2] tracking-[-12px] transition-colors duration-500 {isHovered
+						class="font-display text-[210px] xl:text-[300px] leading-[1.2] tracking-[-12px] transition-colors duration-500 {isHovered
 							? 'text-[#fefefe]'
 							: 'text-[#111111]'}"
 					>
@@ -82,15 +82,15 @@
 					>
 						<div
 							use:motion
-							class="flex items-start h-full py-[60px] gap-[8px] overflow-hidden pr-[40px]"
+							class="flex items-start h-full py-[40px] xl:py-[60px] gap-[8px] overflow-hidden pr-[40px]"
 						>
 							{#if category}
-								<div class="flex flex-col font-display text-[60px] leading-none text-[#fefefe]">
+								<div class="flex flex-col font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe]">
 									GRADUATION<br />STUDIES
 								</div>
 							{/if}
 
-							<p class="font-display text-[60px] leading-none text-[#fefefe] whitespace-nowrap">
+							<p class="font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe] whitespace-nowrap">
 								[{workCount}]
 							</p>
 						</div>
@@ -99,8 +99,8 @@
 
 				<!-- Default Count (hidden when hovered) -->
 				{#if !isHovered}
-					<div class="flex items-center h-full py-[60px]">
-						<p class="font-display text-[60px] leading-none text-[#111111]">
+					<div class="flex items-center h-full py-[40px] xl:py-[60px]">
+						<p class="font-display text-[40px] xl:text-[60px] leading-none text-[#111111]">
 							[{workCount}]
 						</p>
 					</div>
@@ -112,7 +112,7 @@
 				<img
 					src="/icons/arrow-top-right.svg"
 					alt=""
-					class="w-[120px] h-[120px] absolute top-[74px] right-[74px]"
+					class="w-[80px] xl:w-[120px] h-[80px] xl:h-[120px] absolute top-[52px] xl:top-[74px] right-[52px] xl:right-[74px]"
 				/>
 			{/if}
 		</div>
@@ -127,11 +127,11 @@
 			>
 				<div use:motion class="flex flex-col text-[#fefefe]">
 					{#if category}
-						<p class="font-display text-[52px] leading-[1.1] uppercase whitespace-nowrap">
+						<p class="font-display text-[40px] xl:text-[52px] leading-[1.1] uppercase whitespace-nowrap">
 							{category}
 						</p>
 					{/if}
-					<p class="font-semibold text-[60px] leading-[1.3] tracking-[-2.4px] whitespace-pre-line">
+					<p class="font-semibold text-[40px] xl:text-[60px] leading-[1.3] tracking-[-2.4px] whitespace-pre-line">
 						{title}
 					</p>
 				</div>
