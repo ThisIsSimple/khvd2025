@@ -5,11 +5,8 @@
 -- CREATE DATABASE IF NOT EXISTS khvd_2025 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- USE khvd_2025;
 
--- Drop table if exists (for clean setup)
-DROP TABLE IF EXISTS `messages`;
-
 -- Create messages table (방명록 테이블)
-CREATE TABLE `messages` (
+CREATE TABLE IF NOT EXISTS `messages` (
   `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Primary key, auto-increment ID',
   `writer` VARCHAR(50) NOT NULL COMMENT 'Writer name (max 50 characters)',
   `password` VARCHAR(10) NOT NULL COMMENT 'Password for message edit/delete (max 10 characters)',
@@ -40,14 +37,8 @@ INSERT INTO `messages` (`writer`, `password`, `message`, `type`, `target_id`) VA
 -- Exhibition Works & Designers Tables
 -- ================================================================
 
--- Drop tables if exists (for clean setup)
-DROP TABLE IF EXISTS `work_designers`;
-DROP TABLE IF EXISTS `work_images`;
-DROP TABLE IF EXISTS `works`;
-DROP TABLE IF EXISTS `designers`;
-
 -- Create works table (작품 테이블)
-CREATE TABLE `works` (
+CREATE TABLE IF NOT EXISTS `works` (
   `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Primary key, auto-increment ID',
   `thumbnail` TEXT NOT NULL COMMENT 'Thumbnail image URL/path',
   `title` TEXT NOT NULL COMMENT 'Work title',
@@ -63,7 +54,7 @@ CREATE TABLE `works` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Exhibition works table';
 
 -- Create work_images table (작품 이미지 테이블)
-CREATE TABLE `work_images` (
+CREATE TABLE IF NOT EXISTS `work_images` (
   `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Primary key, auto-increment ID',
   `work_id` BIGINT NOT NULL COMMENT 'Associated work ID (no foreign key constraint)',
   `image` TEXT NOT NULL COMMENT 'Image URL/path',
@@ -77,7 +68,7 @@ CREATE TABLE `work_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Work images table';
 
 -- Create designers table (디자이너 테이블)
-CREATE TABLE `designers` (
+CREATE TABLE IF NOT EXISTS `designers` (
   `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Primary key, auto-increment ID',
   `name` TEXT NOT NULL COMMENT 'Korean name',
   `eng_name` TEXT NOT NULL COMMENT 'English name',
@@ -95,7 +86,7 @@ CREATE TABLE `designers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Designers table';
 
 -- Create work_designers junction table (작품-디자이너 연결 테이블)
-CREATE TABLE `work_designers` (
+CREATE TABLE IF NOT EXISTS `work_designers` (
   `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Primary key, auto-increment ID',
   `work_id` BIGINT NOT NULL COMMENT 'Work ID',
   `designer_id` BIGINT NOT NULL COMMENT 'Designer ID',
