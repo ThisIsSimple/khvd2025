@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `type` VARCHAR(10) NULL DEFAULT NULL COMMENT 'Message type (optional, e.g., reply, normal)',
   `target_id` BIGINT NULL DEFAULT NULL COMMENT 'Target message ID for replies (optional)',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation timestamp',
-  `updated_at` DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last update timestamp',
   PRIMARY KEY (`id`),
   INDEX `idx_created_at` (`created_at` DESC) COMMENT 'Index for pagination queries',
   INDEX `idx_target_id` (`target_id`) COMMENT 'Index for reply lookups',
@@ -60,7 +59,6 @@ CREATE TABLE IF NOT EXISTS `works` (
   `professor` TEXT NOT NULL COMMENT 'Professor name(s)',
   `group_number` TINYINT NOT NULL COMMENT 'Group number (0-3 for GRADUATION STUDIES 0-3)',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation timestamp',
-  `updated_at` DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last update timestamp',
   PRIMARY KEY (`id`),
   INDEX `idx_group_number` (`group_number`) COMMENT 'Index for filtering by group',
   CHECK (`group_number` >= 0 AND `group_number` <= 3)
@@ -94,7 +92,6 @@ CREATE TABLE IF NOT EXISTS `designers` (
   `instagram_qr_image` TEXT NULL DEFAULT NULL COMMENT 'Instagram QR code image (optional)',
   `homepage` TEXT NULL DEFAULT NULL COMMENT 'Personal homepage URL (optional)',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation timestamp',
-  `updated_at` DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last update timestamp',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Designers table';
 
