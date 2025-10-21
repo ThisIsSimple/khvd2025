@@ -7,29 +7,29 @@
 		{
 			number: '0',
 			professors: [{ name: 'Eun Jeong Kim' }, { name: 'Sang Hee Park' }],
-			workCount: 15,
-			category: 'Graduation Studies 0',
+			workCount: 25,
+			category: 'VISUAL DESIGN',
 			title: '지속 가능한 미래를 위한\n창의적 해법'
 		},
 		{
 			number: '1',
 			professors: [{ name: 'Kyungwon Lee' }, { name: 'Aeri You' }],
-			workCount: 13,
-			category: 'Graduation Studies 1',
+			workCount: 34,
+			category: 'VISUAL DESIGN',
 			title: '아이디어의 근원과\n메세지를 탐구하는\n실전 디자인'
 		},
 		{
 			number: '2',
 			professors: [{ name: 'Seung Hwan Yang' }],
-			workCount: 6,
-			category: 'Graduation Studies 2',
+			workCount: 21,
+			category: 'VISUAL DESIGN',
 			title: '디자인 비즈니스:\n경험, 혁신, 그리고\n미래 연결성'
 		},
 		{
 			number: '3',
 			professors: [{ name: 'Yong Seok Choi' }],
-			workCount: 4,
-			category: 'Graduation Studies 3',
+			workCount: 13,
+			category: 'VISUAL DESIGN',
 			title: '시각 언어와\n인터랙션을 결합한\n경험 디자인'
 		}
 	];
@@ -58,16 +58,19 @@
 <!-- Exhibition Works Page -->
 <div class="bg-[#fefefe] flex flex-col items-center w-full min-h-screen">
 	<!-- Main Content -->
-	<div class="flex flex-col items-center w-full max-w-[1920px] px-[40px] py-[80px]">
+	<div class="flex flex-col items-center w-full">
 		<!-- Page Title -->
-		<div class="flex items-center justify-start w-full mb-[60px]">
+		<div class="flex items-center justify-start w-full mb-[60px] px-[40px] py-[80px]">
 			<h1 class="font-display text-[120px] leading-none text-[#111111]">WORK</h1>
 		</div>
 
 		<!-- Professor Groups Grid - Desktop (4 columns) -->
 		<div
-			class="hidden desktop:grid gap-[40px] w-full mb-[120px] transition-all duration-500 ease-in-out"
-			style="grid-template-columns: {getGridColumns(professorGroups.length, hoveredIndex)};"
+			class="hidden desktop:grid w-full transition-all duration-500 ease-in-out"
+			style="grid-template-columns: {getGridColumns(
+				professorGroups.length,
+				hoveredIndex
+			)}; background-image: url('/work-background.webp'); background-repeat: repeat-x repeat-y;"
 		>
 			{#each professorGroups as group, index}
 				<WorkCard
@@ -92,7 +95,7 @@
 					? hoveredIndex === 2
 						? '1.3fr 0.7fr'
 						: '0.7fr 1.3fr'
-					: '1fr 1fr'};"
+					: '1fr 1fr'}; background-image: url('/work-background.webp'); background-repeat: repeat-x repeat-y; background-size: contain;"
 		>
 			{#each professorGroups as group, index}
 				<WorkCard
@@ -107,7 +110,10 @@
 		</div>
 
 		<!-- Professor Groups Grid - Mobile & XS (1 column horizontal) -->
-		<div class="flex tablet:hidden flex-col gap-[12px] w-full pb-[60px]">
+		<div
+			class="flex tablet:hidden flex-col w-full"
+			style="background-image: url('/work-background.webp'); background-repeat: repeat-x repeat-y; background-size: 200%;"
+		>
 			{#each professorGroups as group}
 				<WorkCardMobile
 					number={group.number}
