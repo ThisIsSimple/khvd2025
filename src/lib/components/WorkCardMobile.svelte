@@ -24,7 +24,7 @@
 
 <!-- Work Card Mobile Component (1-column horizontal with vertical expansion) -->
 <div
-	class="px-[16px] w-full transition-all duration-500 ease-in-out py-[20px] overflow-hidden {isHovered
+	class="relative px-[16px] w-full transition-all duration-500 ease-in-out py-[20px] overflow-hidden {isHovered
 		? 'bg-primary'
 		: ''}"
 	onmouseenter={() => (isHovered = true)}
@@ -34,7 +34,7 @@
 	tabindex="0"
 >
 	<!-- Content Container -->
-	<div class="relative flex items-center justify-between w-full">
+	<div class="flex {!isHovered ? 'items-center' : 'items-end'} justify-between w-full">
 		<!-- Left: Number, Category, and Count -->
 		<div class="flex flex-col gap-[12px] items-start">
 			<!-- Number and Category Row -->
@@ -99,7 +99,7 @@
 		</div>
 
 		<!-- Right: Professor Info and Arrow -->
-		<div class="bg-red-500 flex flex-col items-end justify-between">
+		<div class="flex flex-col items-end justify-between h-full">
 			<!-- Arrow Icon (only when hovered) -->
 			{#if isHovered}
 				<Motion
@@ -108,18 +108,18 @@
 					transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.2 }}
 					let:motion
 				>
-					<div use:motion class="flex items-center justify-end">
+					<div use:motion class="absolute top-[32px] right-[32px]">
 						<img
 							src="/icons/arrow-top-right.svg"
 							alt=""
-							class="w-[60px] h-[60px] relative right-[20px]"
+							class="w-[60px] h-[60px]"
 						/>
 					</div>
 				</Motion>
 			{/if}
 
 			<!-- Professor Info -->
-			<div class="flex flex-col gap-[8px] items-end justify-end w-[212px]">
+			<div class="hidden sm:flex flex-col gap-[8px] items-end justify-end w-[212px]">
 				{#each professors as professor}
 					<div
 						class="flex items-center justify-end w-full text-[15px] transition-colors duration-500 {isHovered
