@@ -7,18 +7,13 @@ services:
       dockerfile: Dockerfile
     container_name: khvd-2025
     ports:
-      - "3000:3000"
+      - "2025:3000"
+    env_file:
+      - .env
     environment:
-      # Database configuration (MySQL is running externally)
-      - DB_HOST=${DB_HOST:-host.docker.internal}
-      - DB_PORT=${DB_PORT:-3306}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME:-khvd_2025}
-      - DB_CONNECTION_LIMIT=${DB_CONNECTION_LIMIT:-10}
       # Application environment
       - NODE_ENV=production
-      - ORIGIN=${ORIGIN:-http://localhost:3000}
+      - ORIGIN=${ORIGIN:-http://localhost:2025}
     extra_hosts:
       # Allow container to connect to host machine's MySQL
       - "host.docker.internal:host-gateway"
