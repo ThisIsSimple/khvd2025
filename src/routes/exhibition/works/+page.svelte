@@ -60,7 +60,7 @@
 	<!-- Main Content -->
 	<div class="flex flex-col items-center w-full">
 		<!-- Page Title -->
-		<div class="flex items-center justify-start w-full mb-[60px] px-[40px] py-[80px]">
+		<div class="flex items-center justify-start w-full px-[40px] py-[40px]">
 			<h1 class="font-display text-[120px] leading-none text-[#111111]">WORK</h1>
 		</div>
 
