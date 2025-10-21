@@ -34,7 +34,7 @@
 	tabindex="0"
 >
 	<!-- Content Container -->
-	<div class="flex {!isHovered ? 'items-center' : 'items-end'} justify-between w-full">
+	<div class="flex {!isHovered ? 'sm:items-center items-end' : 'items-end'} justify-between w-full">
 		<!-- Left: Number, Category, and Count -->
 		<div class="flex flex-col gap-[12px] items-start">
 			<!-- Number and Category Row -->
@@ -109,17 +109,15 @@
 					let:motion
 				>
 					<div use:motion class="absolute top-[32px] right-[32px]">
-						<img
-							src="/icons/arrow-top-right.svg"
-							alt=""
-							class="w-[60px] h-[60px]"
-						/>
+						<img src="/icons/arrow-top-right.svg" alt="" class="w-[60px] h-[60px]" />
 					</div>
 				</Motion>
 			{/if}
 
 			<!-- Professor Info -->
-			<div class="hidden sm:flex flex-col gap-[8px] items-end justify-end w-[212px]">
+			<div
+				class="{isHovered && 'hidden'} sm:flex flex-col gap-[8px] items-end justify-end w-[212px]"
+			>
 				{#each professors as professor}
 					<div
 						class="flex items-center justify-end w-full text-[15px] transition-colors duration-500 {isHovered

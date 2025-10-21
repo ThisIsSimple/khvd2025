@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Motion } from 'svelte-motion';
-
+	import { goto } from '$app/navigation';
 	interface Professor {
 		name: string;
 	}
@@ -26,6 +26,10 @@
 	function handleMouseLeave() {
 		isHovered = false;
 		onHoverChange?.(false);
+	}
+
+	function handleClick() {
+		goto(`/exhibition/works/list/${number}`);
 	}
 </script>
 
@@ -56,6 +60,7 @@
 		class="relative flex flex-col justify-between h-[720px] pl-[40px] xl:pl-[80px] pb-[55px] overflow-hidden transition-colors duration-500 ease-in-out {isHovered
 			? 'bg-primary'
 			: ''}"
+		onclick={handleClick}
 	>
 		<!-- Number and Count Container -->
 		<div class="relative flex items-start justify-between w-full">
@@ -85,12 +90,16 @@
 							class="flex items-start h-full py-[40px] xl:py-[60px] gap-[8px] overflow-hidden pr-[40px]"
 						>
 							{#if category}
-								<div class="flex flex-col font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe]">
+								<div
+									class="flex flex-col font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe]"
+								>
 									GRADUATION<br />STUDIES
 								</div>
 							{/if}
 
-							<p class="font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe] whitespace-nowrap">
+							<p
+								class="font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe] whitespace-nowrap"
+							>
 								[{workCount}]
 							</p>
 						</div>
@@ -127,11 +136,15 @@
 			>
 				<div use:motion class="flex flex-col text-[#fefefe]">
 					{#if category}
-						<p class="font-display text-[40px] xl:text-[52px] leading-[1.1] uppercase whitespace-nowrap">
+						<p
+							class="font-display text-[40px] xl:text-[52px] leading-[1.1] uppercase whitespace-nowrap"
+						>
 							{category}
 						</p>
 					{/if}
-					<p class="font-semibold text-[40px] xl:text-[60px] leading-[1.3] tracking-[-2.4px] whitespace-pre-line">
+					<p
+						class="font-semibold text-[40px] xl:text-[60px] leading-[1.3] tracking-[-2.4px] whitespace-pre-line"
+					>
 						{title}
 					</p>
 				</div>
