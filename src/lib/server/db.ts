@@ -3,25 +3,26 @@
  * Connection pool for efficient database access
  */
 
-import mysql from 'mysql2/promise';
-import {
-	DB_HOST,
-	DB_PORT,
-	DB_USER,
-	DB_PASSWORD,
-	DB_NAME,
-	DB_CONNECTION_LIMIT
-} from '$env/static/private';
+import mysql, { type Pool, type PoolConnection } from 'mysql2/promise';
+import { env } from '$env/dynamic/private';
+
+// Get environment variables with defaults
+const DB_HOST = env.DB_HOST || 'localhost';
+const DB_PORT = env.DB_PORT || '3306';
+const DB_USER = env.DB_USER || 'khvd_user';
+const DB_PASSWORD = env.DB_PASSWORD || '';
+const DB_NAME = env.DB_NAME || 'khvd_2025';
+const DB_CONNECTION_LIMIT = env.DB_CONNECTION_LIMIT || '10';
 
 // Create connection pool
-const pool = mysql.createPool({
+const pool: Pool = mysql.createPool({
 	host: DB_HOST,
 	port: parseInt(DB_PORT),
 	user: DB_USER,
 	password: DB_PASSWORD,
 	database: DB_NAME,
 	waitForConnections: true,
-	connectionLimit: parseInt(DB_CONNECTION_LIMIT) || 10,
+	connectionLimit: parseInt(DB_CONNECTION_LIMIT),
 	queueLimit: 0,
 	enableKeepAlive: true,
 	keepAliveInitialDelay: 0
@@ -30,7 +31,7 @@ const pool = mysql.createPool({
 /**
  * Get a connection from the pool
  */
-export async function getConnection() {
+export async function getConnection(): Promise<PoolConnection> {
 	return await pool.getConnection();
 }
 
@@ -38,9 +39,9 @@ export async function getConnection() {
  * Execute a query with automatic connection management
  */
 export async function query<T>(sql: string, params?: any[]): Promise<T> {
-	const connection = await pool.getConnection();
+	const connection: PoolConnection = await pool.getConnection();
 	try {
-		const [results] = await connection.execute(sql, params);
+		const [results] = await (connection as any).query(sql, params);
 		return results as T;
 	} finally {
 		connection.release();
