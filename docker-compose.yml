@@ -14,12 +14,18 @@ services:
       # Application environment
       - NODE_ENV=production
       - ORIGIN=${ORIGIN:-http://localhost:2025}
+      # Timezone configuration
+      - TZ=Asia/Seoul
     extra_hosts:
       # Allow container to connect to host machine's MySQL
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
     networks:
       - khvd-network
+    volumes:
+      # Mount timezone data for accurate time
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
 
 networks:
   khvd-network:
