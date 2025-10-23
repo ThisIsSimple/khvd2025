@@ -7,6 +7,36 @@
 
 	let { isOpen = $bindable(false), onClose, noTitle = false }: Props = $props();
 
+	// Scroll-based visibility for Type 2 navigation (with title and logo)
+	let visible = $state(true);
+	let lastScrollY = $state(0);
+
+	$effect(() => {
+		// Only apply scroll behavior for Type 2 navigation (NOT noTitle)
+		if (noTitle) return;
+
+		const handleScroll = () => {
+			const currentScrollY = window.scrollY;
+
+			// Scrolling down: hide navigation
+			if (currentScrollY > lastScrollY && currentScrollY > 50) {
+				visible = false;
+			}
+			// Scrolling up: show navigation
+			else if (currentScrollY < lastScrollY) {
+				visible = true;
+			}
+
+			lastScrollY = currentScrollY;
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
+
 	function handleClose() {
 		isOpen = false;
 		onClose?.();
@@ -38,7 +68,9 @@
 {#if !noTitle}
 	<!-- Desktop Navigation (≥960px): Full header with title, logo, and menu button -->
 	<header
-		class="hidden desktop:flex fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-30 items-center justify-between px-[40px]"
+		class="hidden desktop:flex fixed top-0 left-0 right-0 bg-[#fefefe] h-[100px] z-30 items-center justify-between px-[40px] transition-transform duration-300 ease-in-out"
+		class:translate-y-0={visible}
+		class:-translate-y-full={!visible}
 	>
 		<!-- Left: Exhibition Info -->
 		<div class="flex items-center gap-[10px]">
@@ -71,7 +103,9 @@
 
 	<!-- Tablet Navigation (960px-1350px): Logo and smaller menu button -->
 	<header
-		class="hidden tablet:flex desktop:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[80px] z-30 items-center justify-between px-[40px]"
+		class="hidden tablet:flex desktop:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[80px] z-30 items-center justify-between px-[40px] transition-transform duration-300 ease-in-out"
+		class:translate-y-0={visible}
+		class:-translate-y-full={!visible}
 	>
 		<!-- Left: Exhibition Info -->
 		<div class="flex items-center gap-[10px]">
@@ -104,7 +138,9 @@
 
 	<!-- Mobile Navigation (<960px): Logo and smaller menu button -->
 	<header
-		class="flex tablet:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[50px] z-30 items-center justify-between px-[14px]"
+		class="flex tablet:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[50px] z-30 items-center justify-between px-[14px] transition-transform duration-300 ease-in-out"
+		class:translate-y-0={visible}
+		class:-translate-y-full={!visible}
 	>
 		<!-- Logo -->
 		<a
