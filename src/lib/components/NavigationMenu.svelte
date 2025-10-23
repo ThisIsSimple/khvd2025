@@ -259,7 +259,7 @@
 <!-- Navigation Drawer Overlay -->
 {#if isOpen}
 	<div
-		class="fixed inset-0 z-50 flex items-end justify-end"
+		class="white-cursor fixed inset-0 z-50 flex items-end justify-end"
 		onclick={handleBackdropClick}
 		onkeydown={handleKeyDown}
 		role="presentation"

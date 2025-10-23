@@ -31,7 +31,7 @@
 
 <div class="relative min-h-screen">
 	<!-- Section 1: Hero Section with R=VD Logo -->
-	<section class="relative w-full aspect-video">
+	<section class="white-cursor relative w-full aspect-video">
 		<!-- Background Image -->
 		<div class="absolute inset-0 overflow-hidden pointer-events-none">
 			<img
@@ -49,7 +49,7 @@
 	</section>
 
 	<!-- Section 2: Exhibition Concept -->
-	<section class="orange-menu relative w-full flex flex-col">
+	<section class="orange-cursor orange-menu relative w-full flex flex-col">
 		<!-- Background Image -->
 		<img
 			src="/exhibition-section2-bg.png"
@@ -134,7 +134,7 @@
 	<section class="w-full flex flex-col">
 		<!-- Top Bar: UNTIL CLOSING with FlipClock -->
 		<div
-			class="orange-menu w-full bg-primary flex flex-col tablet:flex-row items-center justify-between gap-[20px] tablet:gap-[40px] px-[40px] py-[24px] tablet:py-[44px]"
+			class="white-cursor w-full bg-primary flex flex-col tablet:flex-row items-center justify-between gap-[20px] tablet:gap-[40px] px-[40px] py-[24px] tablet:py-[44px]"
 		>
 			<h2 class="font-display text-[48px] tablet:text-[80px] text-black leading-none">
 				UNTIL CLOSING =
@@ -143,7 +143,7 @@
 		</div>
 
 		<!-- Bottom Section: Exhibition Details with Pattern Background (Tablet+ only) -->
-		<div class="hidden tablet:grid grid-cols-2 w-full relative items-start">
+		<div class="black-cursor hidden tablet:grid grid-cols-2 w-full relative items-start">
 			<!-- Pattern Background -->
 			<div class="absolute inset-0 overflow-hidden pointer-events-none">
 				<img

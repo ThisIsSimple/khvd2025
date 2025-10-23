@@ -83,7 +83,7 @@
 	}
 </script>
 
-<div class="flex items-center justify-center gap-3">
+<div class="white-cursor flex items-center justify-center gap-3">
 	<!-- Days -->
 	<div class="flex flex-col items-center">
 		<div class="flex gap-3">
