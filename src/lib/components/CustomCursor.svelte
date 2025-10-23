@@ -66,6 +66,7 @@
 		// Traverse up to check for special cursor classes first, then background color
 		while (currentElement && currentElement !== document.body) {
 			// Priority 1: Check for special cursor color classes
+			// These override any background color detection
 			if (currentElement.classList.contains('black-cursor')) {
 				return '#545454'; // Force black/dark gray cursor
 			}
@@ -76,38 +77,35 @@
 				return '#ffffff'; // Force white cursor
 			}
 
-			// Priority 2: Check background color
+			// Priority 2: Check background color (only if not transparent)
 			const bgColor = window.getComputedStyle(currentElement).backgroundColor;
 
-			// Skip transparent backgrounds
-			if (bgColor === 'transparent' || bgColor === 'rgba(0, 0, 0, 0)') {
-				currentElement = currentElement.parentElement;
-				continue;
+			// Only check background color if it's not transparent
+			if (bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') {
+				const rgb = parseRgb(bgColor);
+				if (rgb) {
+					// Check if orange/primary background
+					if (isOrangeBackground(rgb.r, rgb.g, rgb.b)) {
+						return '#ffffff'; // White cursor on orange background
+					}
+
+					// Calculate luminance to determine if light or dark
+					const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
+
+					// Light/medium background (white to #999999) -> dark cursor (#545454)
+					// Threshold 0.32 corresponds to approximately #999999 (RGB 153,153,153)
+					if (luminance > 0.32) {
+						return '#545454';
+					}
+					// Dark background (darker than #999) -> orange cursor
+					else {
+						return PRIMARY_COLOR;
+					}
+				}
 			}
 
-			const rgb = parseRgb(bgColor);
-			if (!rgb) {
-				currentElement = currentElement.parentElement;
-				continue;
-			}
-
-			// Check if orange/primary background
-			if (isOrangeBackground(rgb.r, rgb.g, rgb.b)) {
-				return '#ffffff'; // White cursor on orange background
-			}
-
-			// Calculate luminance to determine if light or dark
-			const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
-
-			// Light/medium background (white to #999999) -> dark cursor (#545454)
-			// Threshold 0.32 corresponds to approximately #999999 (RGB 153,153,153)
-			if (luminance > 0.32) {
-				return '#545454';
-			}
-			// Dark background (darker than #999) -> orange cursor
-			else {
-				return PRIMARY_COLOR;
-			}
+			// Move to parent element (whether transparent or color check failed)
+			currentElement = currentElement.parentElement;
 		}
 
 		// Default: check body background and special classes
