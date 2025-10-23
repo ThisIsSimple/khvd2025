@@ -49,7 +49,7 @@
 	</section>
 
 	<!-- Section 2: Exhibition Concept -->
-	<section class="relative w-full flex flex-col">
+	<section class="orange-menu relative w-full flex flex-col">
 		<!-- Background Image -->
 		<img
 			src="/exhibition-section2-bg.png"
