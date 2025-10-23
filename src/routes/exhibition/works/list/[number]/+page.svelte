@@ -1,106 +1,110 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import WorkItem from '$lib/components/WorkItem.svelte';
 
 	let { data }: { data: PageData } = $props();
 
-	// Map group number to title
-	const groupTitles: Record<number, string> = {
-		0: 'GRADUATION STUDIES 0',
-		1: 'GRADUATION STUDIES 1',
-		2: 'GRADUATION STUDIES 2',
-		3: 'GRADUATION STUDIES 3'
+	// Map group number to title and description
+	const groupInfo: Record<
+		number,
+		{ title: string; description: string; professors: { ko: string; en: string } }
+	> = {
+		0: {
+			title: 'gRADUATION STUDIES 0',
+			description: `졸업스튜디오1은 이미 익숙하다고 생각했던 대상을 재해석하는 과정을 통해 새로운 창의적 디자인 문화를 만들어가는 데 초점을 맞춘 과목이다. 수업을 통해 디자인 굿즈 제작과 이에 따른 리서치 및 현장 답사를 통한 실시간 마케팅 경험(Walk in marketing)을 체험할 수 있다. 이번 전시의 타이틀처럼, 디자이너인 우리는 일상의 사소한 이미지를 들이마신 후, 창의적인 아이디어로 발산한다. 여기서 중요한 것은 번뜩이는 아이디어를 통해 디자인적 소통 문제를 어떻게 해결할 수 있는가이다. 이러한 아이디어들이 어디서 비롯되었는지, 그 해결법과 메세지가 무엇인지 고민해 보았으면 한다.`,
+			professors: { ko: '김은정, 박상희', en: 'Eun Jeong Kim / Sang Hee Park' }
+		},
+		1: {
+			title: 'GRADUATION STUDIES 1',
+			description: '',
+			professors: { ko: '', en: '' }
+		},
+		2: {
+			title: 'GRADUATION STUDIES 2',
+			description: '',
+			professors: { ko: '', en: '' }
+		},
+		3: {
+			title: 'GRADUATION STUDIES 3',
+			description: '',
+			professors: { ko: '', en: '' }
+		}
 	};
+
+	const info = groupInfo[data.groupNumber];
 </script>
 
 <svelte:head>
-	<title>{groupTitles[data.groupNumber]} - KHVD 2025</title>
+	<title>{info.title} - KHVD 2025</title>
 </svelte:head>
 
-<!-- Works List Page -->
-<div class="bg-[#fefefe] min-h-screen w-full">
-	<!-- Header Section -->
-	<div class="w-full px-[40px] py-[80px] border-b border-[#e0e0e0]">
-		<div class="max-w-[1400px] mx-auto">
-			<!-- Breadcrumb -->
-			<div class="mb-[24px]">
-				<a
-					href="/exhibition/works"
-					class="font-sans text-[16px] text-[#777777] hover:text-primary transition-colors"
-				>
-					← Back to Works
-				</a>
+<!-- Main Container -->
+<div class="w-full bg-[#fefefe] min-h-screen">
+	<!-- Content Wrapper with horizontal padding -->
+	<div class="w-full px-[60px]">
+		<!-- Header Section -->
+		<div class="w-full bg-[#fefefe] flex flex-col gap-3">
+			<!-- Title and Count Container -->
+			<div class="w-full flex flex-col items-start justify-center">
+				<!-- Title Row -->
+				<div class="w-full flex gap-4 items-center pb-6 pt-12">
+					<!-- Main Title -->
+					<h1 class="font-display text-h3 leading-none text-[#111111] whitespace-nowrap">
+						{info.title}
+					</h1>
+
+					<!-- Work Count -->
+					<div class="flex items-center h-full">
+						<div class="flex gap-2.5 items-start pt-1 pb-0">
+							<p class="font-display text-h7 leading-[1.4] tracking-[-0.02em] text-[#111111]">
+								[{data.works.length}]
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Description -->
+				{#if info.description}
+					<div class="w-full flex gap-2.5 items-center justify-center pr-80">
+						<p class="flex-1 text-b1 leading-[1.5] text-[#222222] whitespace-pre-wrap">
+							{info.description}
+						</p>
+					</div>
+				{/if}
 			</div>
 
-			<!-- Title -->
-			<h1 class="font-display text-[80px] tablet:text-[120px] leading-none text-[#111111]">
-				{groupTitles[data.groupNumber]}
-			</h1>
+			<!-- Professor Info -->
+			{#if info.professors.ko}
+				<div class="w-full flex flex-col items-end justify-end">
+					<div class="flex flex-col gap-[5px] items-end">
+						<!-- Korean Professor Names -->
+						<div class="flex gap-3 items-center justify-center text-b1 font-bold text-[#111111]">
+							<p>지도교수</p>
+							<p>{info.professors.ko}</p>
+						</div>
 
-			<!-- Work Count -->
-			<p class="font-display text-[40px] tablet:text-[60px] leading-none text-[#777777] mt-[12px]">
-				[{data.works.length}]
-			</p>
-		</div>
-	</div>
-
-	<!-- Works Grid -->
-	<div class="w-full px-[40px] py-[60px]">
-		<div class="max-w-[1400px] mx-auto">
-			{#if data.works.length === 0}
-				<!-- Empty State -->
-				<div class="flex flex-col items-center justify-center py-[120px]">
-					<p class="font-sans text-[20px] text-[#777777]">No works found in this group.</p>
-				</div>
-			{:else}
-				<!-- Works Grid -->
-				<div
-					class="grid grid-cols-1 xs:grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[40px]"
-				>
-					{#each data.works as work}
-						<a
-							href="/exhibition/works/detail/{work.id}"
-							class="group flex flex-col gap-[20px] transition-transform duration-300 hover:scale-105"
-						>
-							<!-- Thumbnail -->
-							<div class="aspect-[4/3] overflow-hidden bg-[#f5f5f5] rounded-[8px]">
-								<img
-									src={work.thumbnail}
-									alt={work.title}
-									class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-								/>
-							</div>
-
-							<!-- Work Info -->
-							<div class="flex flex-col gap-[8px]">
-								<!-- Title -->
-								<h3
-									class="font-bold text-[20px] tablet:text-[24px] leading-[1.3] text-[#111111] line-clamp-2"
-								>
-									{work.title}
-								</h3>
-
-								<!-- Description -->
-								<p class="font-sans text-[16px] leading-[1.5] text-[#777777] line-clamp-2">
-									{work.description}
-								</p>
-
-								<!-- Designers -->
-								{#if work.designers.length > 0}
-									<div class="flex flex-wrap gap-[8px] mt-[4px]">
-										{#each work.designers as designer}
-											<span
-												class="font-sans text-[14px] text-[#111111] bg-[#f0f0f0] px-[12px] py-[4px] rounded-full"
-											>
-												{designer.name}
-											</span>
-										{/each}
-									</div>
-								{/if}
-							</div>
-						</a>
-					{/each}
+						<!-- English Professor Names -->
+						<div class="flex gap-2 items-center text-b1 font-bold text-[#111111]">
+							<p>Prof.</p>
+							<p>{info.professors.en}</p>
+						</div>
+					</div>
 				</div>
 			{/if}
+		</div>
+
+		<!-- Works Grid Section -->
+		<div class="w-full flex flex-wrap gap-[52px] items-start justify-between pb-[200px] pt-20">
+			{#each data.works as work}
+				<div class="w-[390px] shrink-0">
+					<WorkItem
+						id={work.id}
+						thumbnail={work.thumbnail}
+						title={work.title}
+						designers={work.designers.map((d: any) => d.name)}
+					/>
+				</div>
+			{/each}
 		</div>
 	</div>
 </div>
