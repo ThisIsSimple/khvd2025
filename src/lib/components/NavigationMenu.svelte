@@ -51,9 +51,13 @@
 		</div>
 
 		<!-- Center: Logo -->
-		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+		<a
+			href="/"
+			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
+			aria-label="Go to home page"
+		>
 			<img src="/logo.svg" alt="R=VD" class="w-[88px] h-[43px]" />
-		</div>
+		</a>
 
 		<!-- Right: Menu Button -->
 		<button
@@ -80,9 +84,13 @@
 		</div>
 
 		<!-- Logo -->
-		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+		<a
+			href="/"
+			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
+			aria-label="Go to home page"
+		>
 			<img src="/logo-mobile.svg" alt="R=VD" class="w-[64px] h-[32px]" />
-		</div>
+		</a>
 
 		<!-- Menu Button (smaller for mobile) -->
 		<button
@@ -99,9 +107,13 @@
 		class="flex tablet:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[50px] z-30 items-center justify-between px-[14px]"
 	>
 		<!-- Logo -->
-		<div class="flex items-center">
+		<a
+			href="/"
+			class="flex items-center hover:opacity-80 transition-opacity"
+			aria-label="Go to home page"
+		>
 			<img src="/logo-mobile.svg" alt="R=VD" class="w-[50px] h-[25px]" />
-		</div>
+		</a>
 
 		<!-- Menu Button (smaller for mobile) -->
 		<button
