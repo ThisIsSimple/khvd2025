@@ -1,4 +1,6 @@
 <script lang="ts">
+	import NavigationIcon from './NavigationIcon.svelte';
+
 	interface Props {
 		isOpen?: boolean;
 		onClose?: () => void;
@@ -10,6 +12,10 @@
 	// Scroll-based visibility for Type 2 navigation (with title and logo)
 	let visible = $state(true);
 	let lastScrollY = $state(0);
+
+	// Orange mode detection for noTitle navigation
+	let isOrangeMode = $state(false);
+	let buttonRef = $state<HTMLButtonElement>();
 
 	$effect(() => {
 		// Only apply scroll behavior for Type 2 navigation (NOT noTitle)
@@ -33,6 +39,84 @@
 		window.addEventListener('scroll', handleScroll, { passive: true });
 
 		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
+
+	// Intersection Observer for orange mode detection (noTitle only)
+	$effect(() => {
+		// Only apply to noTitle navigation
+		if (!noTitle) return;
+
+		// Wait for buttonRef to be assigned
+		if (!buttonRef) return;
+
+		const orangeSections = document.querySelectorAll('.orange-menu');
+		if (orangeSections.length === 0) return;
+
+		// Get button's bounding rect to check intersection
+		const observer = new IntersectionObserver(
+			() => {
+				if (!buttonRef) return;
+
+				// Check if any .orange-menu section intersects with button position
+				const buttonRect = buttonRef.getBoundingClientRect();
+				let hasIntersection = false;
+
+				orangeSections.forEach((section) => {
+					const sectionRect = section.getBoundingClientRect();
+
+					// Check if button overlaps with section
+					const isIntersecting =
+						buttonRect.top < sectionRect.bottom &&
+						buttonRect.bottom > sectionRect.top &&
+						buttonRect.left < sectionRect.right &&
+						buttonRect.right > sectionRect.left;
+
+					if (isIntersecting) {
+						hasIntersection = true;
+					}
+				});
+
+				isOrangeMode = hasIntersection;
+			},
+			{
+				root: null,
+				threshold: 0
+			}
+		);
+
+		// Observe all orange sections
+		orangeSections.forEach((section) => observer.observe(section));
+
+		// Also check on scroll for more precise detection
+		const handleScroll = () => {
+			if (!buttonRef) return;
+
+			const buttonRect = buttonRef.getBoundingClientRect();
+			let hasIntersection = false;
+
+			orangeSections.forEach((section) => {
+				const sectionRect = section.getBoundingClientRect();
+
+				const isIntersecting =
+					buttonRect.top < sectionRect.bottom &&
+					buttonRect.bottom > sectionRect.top &&
+					buttonRect.left < sectionRect.right &&
+					buttonRect.right > sectionRect.left;
+
+				if (isIntersecting) {
+					hasIntersection = true;
+				}
+			});
+
+			isOrangeMode = hasIntersection;
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
+
+		return () => {
+			observer.disconnect();
 			window.removeEventListener('scroll', handleScroll);
 		};
 	});
@@ -94,7 +178,7 @@
 		<!-- Right: Menu Button -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="w-[60px] h-[60px] bg-black hover:bg-opacity-80 transition-opacity flex items-center justify-center"
+			class="w-[60px] h-[60px] bg-black flex items-center justify-center"
 			aria-label="Open menu"
 		>
 			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
@@ -129,7 +213,7 @@
 		<!-- Menu Button (smaller for mobile) -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="fixed top-[20px] right-[40px] w-[40px] h-[40px] bg-black hover:bg-opacity-80 transition-opacity z-30"
+			class="fixed top-[20px] right-[40px] w-[40px] h-[40px] bg-black z-30"
 			aria-label="Open menu"
 		>
 			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
@@ -154,7 +238,7 @@
 		<!-- Menu Button (smaller for mobile) -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-30"
+			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] bg-black z-30"
 			aria-label="Open menu"
 		>
 			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
@@ -163,11 +247,12 @@
 {:else}
 	<!-- Type 1: Menu button only (top right) -->
 	<button
+		bind:this={buttonRef}
 		onclick={() => (isOpen = true)}
-		class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-30"
+		class="nav-button-notitle fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] z-30"
 		aria-label="Open menu"
 	>
-		<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+		<NavigationIcon {isOrangeMode} />
 	</button>
 {/if}
 
@@ -193,7 +278,7 @@
 		<!-- Close Button - Top Right -->
 		<button
 			onclick={handleClose}
-			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[40px] tablet:h-[40px] desktop:w-[60px] desktop:h-[60px] bg-black hover:bg-opacity-80 transition-opacity z-[60]"
+			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[40px] tablet:h-[40px] desktop:w-[60px] desktop:h-[60px] bg-black z-[60]"
 			aria-label="Close menu"
 		>
 			<img src="/icons/navigation-close-icon.svg" alt="" class="w-full h-full" />

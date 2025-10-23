@@ -134,7 +134,7 @@
 	<section class="w-full flex flex-col">
 		<!-- Top Bar: UNTIL CLOSING with FlipClock -->
 		<div
-			class="w-full bg-primary flex flex-col tablet:flex-row items-center justify-between gap-[20px] tablet:gap-[40px] px-[40px] py-[24px] tablet:py-[44px]"
+			class="orange-menu w-full bg-primary flex flex-col tablet:flex-row items-center justify-between gap-[20px] tablet:gap-[40px] px-[40px] py-[24px] tablet:py-[44px]"
 		>
 			<h2 class="font-display text-[48px] tablet:text-[80px] text-black leading-none">
 				UNTIL CLOSING =
