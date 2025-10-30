@@ -16,7 +16,7 @@
 	<!-- Profile Image -->
 	<div class="bg-white h-[465px] overflow-clip relative shrink-0 w-[350px]">
 		<div class="absolute aspect-[289/384] left-0 right-0 top-1/2 translate-y-[-50%]">
-			<img src={profileImage} alt={name} class="absolute inset-0 w-full h-full object-cover" />
+			<img src={encodeURI(profileImage)} alt={name} class="absolute inset-0 w-full h-full object-cover" />
 		</div>
 	</div>
 
@@ -44,12 +44,12 @@
 <div class="flex desktop:hidden flex-col sm:flex-row gap-[20px] items-start py-[20px] w-full">
 	<!-- Profile Image (Smaller) -->
 	<div class="hidden sm:block bg-white w-[200px] h-[260px] overflow-clip relative shrink-0">
-		<img src={profileImage} alt={name} class="w-full h-full object-cover" />
+		<img src={encodeURI(profileImage)} alt={name} class="w-full h-full object-cover" />
 	</div>
 
 	<!-- Profile Image (Smaller) -->
 	<div class="block sm:hidden bg-white w-[180px] h-[320px] overflow-clip relative shrink-0">
-		<img src={profileImage} alt={name} class="w-full h-full object-cover" />
+		<img src={encodeURI(profileImage)} alt={name} class="w-full h-full object-cover" />
 	</div>
 
 	<!-- Text Box -->

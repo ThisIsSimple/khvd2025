@@ -99,7 +99,7 @@ export const GET: RequestHandler = async ({ params, url }) => {
 
 		// 2. Fetch works associated with this designer (limit 2)
 		const workRows = await query<RowDataPacket[]>(
-			`SELECT w.id, w.title, w.description, w.thumbnail, w.group_number
+			`SELECT w.id, w.title, w.description, w.list_thumbnail, w.group_number
 			 FROM works w
 			 INNER JOIN work_designers wd ON w.id = wd.work_id
 			 WHERE wd.designer_id = ?
@@ -112,7 +112,7 @@ export const GET: RequestHandler = async ({ params, url }) => {
 			id: work.id,
 			title: work.title,
 			description: work.description,
-			thumbnail: work.thumbnail,
+			thumbnail: work.list_thumbnail || '',
 			groupNumber: work.group_number
 		}));
 

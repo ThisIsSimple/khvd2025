@@ -11,21 +11,18 @@
 		workCount: number;
 		category?: string;
 		title?: string;
-		onHoverChange?: (hovered: boolean) => void;
 	}
 
-	let { number, professors, workCount, category, title, onHoverChange }: Props = $props();
+	let { number, professors, workCount, category, title }: Props = $props();
 
 	let isHovered = $state(false);
 
 	function handleMouseEnter() {
 		isHovered = true;
-		onHoverChange?.(true);
 	}
 
 	function handleMouseLeave() {
 		isHovered = false;
-		onHoverChange?.(false);
 	}
 
 	function handleClick() {
@@ -34,7 +31,7 @@
 </script>
 
 <!-- Work Card Component for Desktop/Tablet -->
-<div class="flex flex-col">
+<div class="flex flex-col transition-transform duration-500 ease-in-out origin-top {isHovered ? 'scale-y-105' : 'scale-y-100'}">
 	<!-- Professor Info Box -->
 	<div
 		class="flex-1 bg-white flex flex-col gap-[12px] items-start justify-start w-full px-[40px] xl:px-[100px] py-[20px]"

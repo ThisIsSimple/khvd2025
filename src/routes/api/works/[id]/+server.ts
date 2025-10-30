@@ -19,7 +19,7 @@ export const GET: RequestHandler = async ({ params }) => {
 	try {
 		// 1. Fetch work information
 		const workRows = await query<RowDataPacket[]>(
-			`SELECT id, thumbnail, title, description, content, professor, group_number,
+			`SELECT id, detail_thumbnail, list_thumbnail, title, description, content, professor, group_number,
 			        student_id, is_team_work, qr_image, qr_link, pc_link, mobile_link, notes
 			 FROM works
 			 WHERE id = ?`,
@@ -34,7 +34,7 @@ export const GET: RequestHandler = async ({ params }) => {
 
 		const work = {
 			id: workRecord.id,
-			thumbnail: workRecord.thumbnail,
+			detailThumbnail: workRecord.detail_thumbnail || undefined,
 			title: workRecord.title,
 			description: workRecord.description,
 			content: workRecord.content,

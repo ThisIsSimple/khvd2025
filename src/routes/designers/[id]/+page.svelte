@@ -69,7 +69,7 @@
 						rel="noopener noreferrer"
 					>
 						<img
-							src={data.designer.qrImage}
+							src={encodeURI(data.designer.qrImage)}
 							alt={data.designer.name}
 							class="w-full h-full object-cover"
 						/>

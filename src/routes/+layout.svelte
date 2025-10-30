@@ -18,7 +18,8 @@
 	);
 	let isWorkDetailPage = $derived(
 		$page.url.pathname.startsWith('/exhibition/works/') &&
-			$page.url.pathname !== '/exhibition/works'
+			$page.url.pathname !== '/exhibition/works' &&
+			!$page.url.pathname.startsWith('/exhibition/works/list/')
 	);
 </script>
 

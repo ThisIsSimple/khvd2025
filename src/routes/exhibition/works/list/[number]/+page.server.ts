@@ -1,4 +1,3 @@
-import { query } from '$lib/server/db';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -10,27 +9,18 @@ export interface Work {
 	description: string;
 	content: string;
 	professor: string;
-	group_number: number;
+	groupNumber: number;
 	designers: Designer[];
-	images: WorkImage[];
 }
 
 export interface Designer {
 	id: number;
 	name: string;
-	eng_name: string;
-	profile_image: string;
+	nameEn: string;
+	profileImage: string;
 }
 
-export interface WorkImage {
-	id: number;
-	image: string;
-	link: string | null;
-	platform: 'pc' | 'mobile';
-	order: number;
-}
-
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, url, fetch }) => {
 	const groupNumber = parseInt(params.number);
 
 	// Validate group number (0-3)
@@ -39,73 +29,33 @@ export const load: PageServerLoad = async ({ params }) => {
 	}
 
 	try {
-		// Fetch all works for the given group number
-		const works = await query<any[]>(
-			`
-			SELECT
-				w.id,
-				w.thumbnail,
-				w.title,
-				w.description,
-				w.content,
-				w.professor,
-				w.group_number
-			FROM works w
-			WHERE w.group_number = ?
-			ORDER BY w.id ASC
-		`,
-			[groupNumber]
-		);
+		// Get professor filter from query parameters
+		const professor = url.searchParams.get('professor');
 
-		// For each work, fetch designers and images
-		const worksWithDetails = await Promise.all(
-			works.map(async (work) => {
-				// Fetch designers for this work
-				const designers = await query<any[]>(
-					`
-					SELECT
-						d.id,
-						d.name,
-						d.eng_name,
-						d.profile_image
-					FROM designers d
-					INNER JOIN work_designers wd ON d.id = wd.designer_id
-					WHERE wd.work_id = ?
-					ORDER BY wd.id ASC
-				`,
-					[work.id]
-				);
+		// Build API URL
+		let apiUrl = `/api/works/list?group_number=${groupNumber}`;
+		if (professor) {
+			apiUrl += `&professor=${encodeURIComponent(professor)}`;
+		}
 
-				// Fetch images for this work
-				const images = await query<any[]>(
-					`
-					SELECT
-						id,
-						image,
-						link,
-						platform,
-						\`order\`
-					FROM work_images
-					WHERE work_id = ?
-					ORDER BY \`order\` ASC, id ASC
-				`,
-					[work.id]
-				);
+		// Fetch works from API
+		const response = await fetch(apiUrl);
 
-				return {
-					...work,
-					designers,
-					images
-				};
-			})
-		);
+		if (!response.ok) {
+			throw error(response.status, 'Failed to fetch works');
+		}
+
+		const data = await response.json();
 
 		return {
 			groupNumber,
-			works: worksWithDetails as Work[]
+			works: data.works as Work[],
+			totalCount: data.totalCount,
+			professorCounts: data.professorCounts,
+			selectedProfessor: professor
 		};
 	} catch (err) {
-		console.error('Database error:', err);
+		console.error('Failed to load works:', err);
 		throw error(500, 'Failed to load works from database');
 	}
 };

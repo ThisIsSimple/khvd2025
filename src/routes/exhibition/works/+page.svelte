@@ -34,25 +34,6 @@
 		}
 	];
 
-	// Track which card is hovered
-	let hoveredIndex = $state<number | null>(null);
-
-	// Calculate grid template columns based on hover state
-	// Total should always be 4fr to maintain 100% width
-	function getGridColumns(totalCards: number, hovered: number | null): string {
-		if (hovered === null) {
-			return 'repeat(4, 1fr)'; // Default: equal columns (1fr each = 4fr total)
-		}
-		// When hovered: total is 4fr
-		// Expanded card gets 1.6fr, others share remaining 2.4fr (0.8fr each)
-		const expandedSize = 1.6;
-		const normalSize = (4 - expandedSize) / (totalCards - 1); // 2.4 / 3 = 0.8
-		const columns = Array(totalCards)
-			.fill(0)
-			.map((_, i) => (i === hovered ? `${expandedSize}fr` : `${normalSize}fr`))
-			.join(' ');
-		return columns;
-	}
 </script>
 
 <!-- Exhibition Works Page -->
@@ -64,47 +45,18 @@
 			<h1 class="font-display text-[120px] leading-none text-[#111111]">WORK</h1>
 		</div>
 
-		<!-- Professor Groups Grid - Desktop (4 columns) -->
+		<!-- Professor Groups Grid - Tablet+ (2x2 grid) -->
 		<div
-			class="hidden desktop:grid w-full transition-all duration-500 ease-in-out"
-			style="grid-template-columns: {getGridColumns(
-				professorGroups.length,
-				hoveredIndex
-			)}; background-image: url('/work-background.webp'); background-size: 100%; background-repeat: repeat-x repeat-y;"
+			class="hidden tablet:grid w-full grid-cols-2 grid-rows-2 gap-0"
+			style="background-image: url('/work-background.webp'); background-size: 100%; background-repeat: repeat-x repeat-y;"
 		>
-			{#each professorGroups as group, index}
+			{#each professorGroups as group}
 				<WorkCard
 					number={group.number}
 					professors={group.professors}
 					workCount={group.workCount}
 					category={group.category}
 					title={group.title}
-					onHoverChange={(hovered) => (hoveredIndex = hovered ? index : null)}
-				/>
-			{/each}
-		</div>
-
-		<!-- Professor Groups Grid - Tablet (2x2 grid) -->
-		<div
-			class="hidden tablet:grid desktop:hidden w-full transition-all duration-500 ease-in-out"
-			style="grid-template-columns: {hoveredIndex !== null && hoveredIndex < 2
-				? hoveredIndex === 0
-					? '1.3fr 0.7fr'
-					: '0.7fr 1.3fr'
-				: hoveredIndex !== null && hoveredIndex >= 2
-					? hoveredIndex === 2
-						? '1.3fr 0.7fr'
-						: '0.7fr 1.3fr'
-					: '1fr 1fr'}; background-image: url('/work-background.webp'); background-size: 100%; background-repeat: repeat-x repeat-y; background-size: contain;"
-		>
-			{#each professorGroups as group, index}
-				<WorkCard
-					number={group.number}
-					professors={group.professors}
-					workCount={group.workCount}
-					category={group.category}
-					title={group.title}
-					onHoverChange={(hovered) => (hoveredIndex = hovered ? index : null)}
 				/>
 			{/each}
 		</div>

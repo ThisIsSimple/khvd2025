@@ -43,9 +43,8 @@
 	<!-- Image Container with Hover Effects -->
 	<div class="relative w-full aspect-[258/332] bg-white overflow-hidden group mb-4">
 		<!-- Profile Image with Grayscale Effect -->
-		<!-- src={imageUrl} -->
 		<img
-			src="https://i.namu.wiki/i/DtCwhjGV2N6EXrBqBoeDh9BAh2gQvqVcBDK48oZJXu0Dv7ZwTyMGodIHxJ4dBBQTy-2Kwq4EM1pk0JBZjIDOnQ.webp"
+			src={imageUrl}
 			alt={name}
 			class="absolute inset-0 w-full h-full object-cover
 				   grayscale transition-all duration-300 ease-in-out

@@ -49,7 +49,7 @@
 	href={`/exhibition/works/${workId}`}
 >
 	<!-- Background Image -->
-	<img src={thumbnail} alt={title} class="absolute inset-0 w-full h-full object-cover" />
+	<img src={encodeURI(thumbnail)} alt={title} class="absolute inset-0 w-full h-full object-cover" />
 
 	<!-- Desktop: Hover Overlay -->
 	{#if isHovered}

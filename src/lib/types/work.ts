@@ -5,7 +5,8 @@
  */
 export interface WorkRecord {
 	id: number;
-	thumbnail: string;
+	detail_thumbnail: string | null;
+	list_thumbnail: string | null;
 	title: string;
 	description: string;
 	content: string;
@@ -26,7 +27,8 @@ export interface WorkRecord {
  */
 export interface Work {
 	id: number;
-	thumbnail: string;
+	detailThumbnail?: string;
+	listThumbnail?: string;
 	title: string;
 	description: string;
 	content: string;
@@ -96,7 +98,7 @@ export interface WorkDesigner {
 export interface WorkDetailResponse {
 	work: {
 		id: number;
-		thumbnail: string;
+		detailThumbnail?: string;
 		title: string;
 		description: string;
 		content: string;
