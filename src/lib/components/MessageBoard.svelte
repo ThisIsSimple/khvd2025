@@ -4,6 +4,14 @@
 	import type { Message, MessagesResponse } from '$lib/types/message';
 	import { onMount } from 'svelte';
 
+	interface Props {
+		type?: string;
+		targetId?: number;
+		isForTarget?: boolean;
+	}
+
+	let { type, targetId, isForTarget = false }: Props = $props();
+
 	let messages = $state<Message[]>([]);
 	let totalMessages = $state(0);
 	let inputText = $state('');
@@ -21,7 +29,6 @@
 	const maxCharacters = 120;
 
 	// Responsive messages per page
-	// Desktop: 8 (4 per row, 2 rows), Tablet: 6 (3 per row, 2 rows), Mobile: 4 (2 per row, 2 rows)
 	let messagesPerPage = $state(8); // Default to desktop
 	let itemsPerRow = $state(4); // Default to desktop
 
@@ -39,16 +46,22 @@
 		if (typeof window === 'undefined') return;
 
 		const width = window.innerWidth;
+
+		// For target pages, always use 4 per row
+		if (isForTarget) {
+			messagesPerPage = 8;
+			itemsPerRow = 4;
+			return;
+		}
+
+		// For general message board, use responsive layout
 		if (width >= 1351) {
-			// Desktop: 4 per row, 2 rows = 8 messages
 			messagesPerPage = 8;
 			itemsPerRow = 4;
 		} else if (width >= 960) {
-			// Tablet: 3 per row, 2 rows = 6 messages
 			messagesPerPage = 6;
 			itemsPerRow = 3;
 		} else {
-			// Mobile: 2 per row, 2 rows = 4 messages
 			messagesPerPage = 4;
 			itemsPerRow = 2;
 		}
@@ -59,7 +72,20 @@
 		isLoading = true;
 		error = null;
 		try {
-			const response = await fetch(`/api/messages?page=${page}&pageSize=${messagesPerPage}`);
+			const params = new URLSearchParams({
+				page: String(page),
+				pageSize: String(messagesPerPage)
+			});
+
+			if (type) {
+				params.set('type', type);
+			}
+
+			if (targetId !== undefined) {
+				params.set('targetId', String(targetId));
+			}
+
+			const response = await fetch(`/api/messages?${params.toString()}`);
 			if (!response.ok) {
 				throw new Error('Failed to fetch messages');
 			}
@@ -85,16 +111,26 @@
 		isSubmitting = true;
 		error = null;
 		try {
+			const requestBody: any = {
+				writer: writerName.trim(),
+				password: password.trim(),
+				message: inputText.trim()
+			};
+
+			if (type) {
+				requestBody.type = type;
+			}
+
+			if (targetId !== undefined) {
+				requestBody.targetId = targetId;
+			}
+
 			const response = await fetch('/api/messages', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({
-					writer: writerName.trim(),
-					password: password.trim(),
-					message: inputText.trim()
-				})
+				body: JSON.stringify(requestBody)
 			});
 
 			if (!response.ok) {
@@ -102,11 +138,10 @@
 				throw new Error(errorData.error || 'Failed to submit message');
 			}
 
-			// Clear form and refresh messages
 			inputText = '';
 			writerName = '';
 			password = '';
-			await fetchMessages(0); // Go to first page to see new message
+			await fetchMessages(0);
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to submit message';
 			console.error('Error submitting message:', err);
@@ -149,16 +184,13 @@
 	}
 
 	async function handleUpdateMessage() {
-		// Refresh current page to show updated message
 		await fetchMessages(currentPage);
 	}
 
-	// Load messages on component mount
 	onMount(() => {
 		updateMessagesPerPage();
 		fetchMessages(0);
 
-		// Listen for window resize
 		window.addEventListener('resize', updateMessagesPerPage);
 
 		return () => {
@@ -168,25 +200,35 @@
 </script>
 
 <section
-	class="relative flex flex-col gap-[80px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]"
+	class="{isForTarget
+		? 'bg-white flex flex-col gap-[20px] items-stretch pt-[140px] pb-[200px]'
+		: 'relative flex flex-col gap-[80px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]'}"
 >
-	<!-- Background Image -->
-	<img
-		src="/message-board-bg.webp"
-		alt=""
-		class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-	/>
+	<!-- Background Image (only for general message board) -->
+	{#if !isForTarget}
+		<img
+			src="/message-board-bg.webp"
+			alt=""
+			class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+		/>
+	{/if}
 
 	<!-- Input Section -->
 	<div
-		class="relative flex flex-col gap-[16px] tablet:gap-[32px] items-center w-full max-w-[680px]"
+		class="{isForTarget
+			? 'flex flex-col gap-[24px] items-center justify-center w-full'
+			: 'relative flex flex-col gap-[16px] tablet:gap-[32px] items-center w-full max-w-[680px]'}"
 	>
 		<!-- Title -->
-		<h2
-			class="text-[18px] tablet:text-[24px] desktop:text-[32px] font-bold text-[#111111] text-center w-full"
-		>
-			응원의 말을 적어주세요
-		</h2>
+		<div class="flex gap-[10px] items-center w-full {isForTarget ? '' : 'justify-center'}">
+			<h2
+				class="font-bold leading-[1.4] tracking-[-0.48px] {isForTarget
+					? 'text-primary text-[24px]'
+					: 'text-[#111111] text-[18px] tablet:text-[24px] desktop:text-[32px] text-center'}"
+			>
+				응원의 말을 적어주세요
+			</h2>
+		</div>
 
 		<!-- Error Message -->
 		{#if error}
@@ -195,87 +237,152 @@
 			</div>
 		{/if}
 
-		<!-- Input Box (Figma Design) -->
-		<div class="bg-[#fefefe] flex flex-col items-start w-full">
-			<!-- Top Row: Writer and Password Fields -->
-			<div class="flex items-start justify-end w-full border-b border-[#cccccc]">
-				<!-- Writer Field -->
-				<div class="flex-1 flex items-center border-r border-[#cccccc]">
-					<!-- Label -->
-					<div
-						class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
-					>
-						<p
-							class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap"
-						>
-							작성자
-						</p>
+		<!-- Input Box -->
+		{#if isForTarget}
+			<!-- Target Design (Table Layout) -->
+			<div class="bg-[#f6f6f6] flex flex-col items-start w-full">
+				<!-- Top Row: Writer and Password Fields -->
+				<div class="flex items-start justify-end w-full border-b border-[#cccccc]">
+					<!-- Writer Field -->
+					<div class="flex-1 flex items-center border-r border-[#cccccc]">
+						<!-- Label -->
+						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+							<p class="font-bold text-[#777777] text-[16px] leading-[1.4] whitespace-nowrap">
+								작성자
+							</p>
+						</div>
+						<!-- Input -->
+						<div class="flex-1 flex items-center h-full px-[16px]">
+							<input
+								type="text"
+								bind:value={writerName}
+								placeholder="이름을 입력해주세요..."
+								maxlength="50"
+								disabled={isSubmitting}
+								class="w-full font-normal text-[#999999] text-[16px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+							/>
+						</div>
 					</div>
-					<!-- Input -->
-					<div class="flex-1 flex items-center h-full px-[16px]">
-						<input
-							type="text"
-							bind:value={writerName}
-							placeholder="닉네임을 입력해주세요..."
-							maxlength="10"
+
+					<!-- Password Field -->
+					<div class="flex-1 flex items-center">
+						<!-- Label -->
+						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+							<p class="font-bold text-[#777777] text-[16px] leading-[1.4] whitespace-nowrap">
+								비밀번호
+							</p>
+						</div>
+						<!-- Input -->
+						<div class="flex-1 flex items-center h-full px-[16px]">
+							<input
+								type="password"
+								bind:value={password}
+								placeholder="0000"
+								maxlength="10"
+								disabled={isSubmitting}
+								class="w-full font-normal text-[#999999] text-[16px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<!-- Message Text Area -->
+				<div class="flex flex-col gap-[10px] items-start px-[20px] py-[24px] h-[140px] w-full">
+					<div class="flex gap-[10px] items-start w-full h-full">
+						<textarea
+							bind:value={inputText}
+							oninput={handleInput}
+							onkeydown={handleSubmit}
+							placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
 							disabled={isSubmitting}
-							class="w-full font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
-						/>
+							class="w-full h-full resize-none outline-none font-normal text-[#999999] text-[20px] leading-[1.5] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+							maxlength="120"
+						></textarea>
 					</div>
 				</div>
 
-				<!-- Password Field -->
-				<div class="flex items-center border-r border-[#cccccc]">
-					<!-- Label -->
-					<div
-						class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
-					>
-						<p
-							class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap"
-						>
-							비밀번호
-						</p>
+				<!-- Character Counter -->
+				<div class="flex gap-[10px] items-center justify-end p-[16px] w-full">
+					<p class="font-normal text-[#999999] text-[15px] leading-[1.5] whitespace-nowrap">
+						{characterCount}/120자
+					</p>
+				</div>
+			</div>
+		{:else}
+			<!-- General Design (Original) -->
+			<div class="bg-[#fefefe] flex flex-col items-start w-full">
+				<!-- Top Row: Writer and Password Fields -->
+				<div class="flex items-start justify-end w-full border-b border-[#cccccc]">
+					<!-- Writer Field -->
+					<div class="flex-1 flex items-center border-r border-[#cccccc]">
+						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+							<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+								작성자
+							</p>
+						</div>
+						<div class="flex-1 flex items-center h-full px-[16px]">
+							<input
+								type="text"
+								bind:value={writerName}
+								placeholder="닉네임을 입력해주세요..."
+								maxlength="10"
+								disabled={isSubmitting}
+								class="w-full font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+							/>
+						</div>
 					</div>
-					<!-- Input -->
-					<div class="w-[80px] flex items-center h-full px-[16px]">
-						<input
-							type="password"
-							bind:value={password}
-							placeholder="0000"
-							maxlength="4"
+
+					<!-- Password Field -->
+					<div class="flex items-center border-r border-[#cccccc]">
+						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+							<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+								비밀번호
+							</p>
+						</div>
+						<div class="w-[80px] flex items-center h-full px-[16px]">
+							<input
+								type="password"
+								bind:value={password}
+								placeholder="0000"
+								maxlength="4"
+								disabled={isSubmitting}
+								class="w-full text-center font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<!-- Message Text Area -->
+				<div class="flex flex-col gap-[10px] items-start px-[20px] py-[24px] w-full">
+					<div class="flex gap-[10px] h-[144px] items-start w-full">
+						<textarea
+							bind:value={inputText}
+							oninput={handleInput}
+							onkeydown={handleSubmit}
+							placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
 							disabled={isSubmitting}
-							class="w-full text-center font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
-						/>
+							class="w-full h-full resize-none outline-none font-bold text-black text-[20px] tablet:text-[24px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+							maxlength="120"
+						></textarea>
 					</div>
 				</div>
-			</div>
 
-			<!-- Message Text Area -->
-			<div class="flex flex-col gap-[10px] items-start px-[20px] py-[24px] w-full">
-				<div class="flex gap-[10px] h-[144px] items-start w-full">
-					<textarea
-						bind:value={inputText}
-						oninput={handleInput}
-						onkeydown={handleSubmit}
-						placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
-						disabled={isSubmitting}
-						class="w-full h-full resize-none outline-none font-bold text-black text-[20px] tablet:text-[24px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
-						maxlength="120"
-					></textarea>
+				<!-- Character Counter -->
+				<div class="flex gap-[10px] items-center justify-end p-[16px] w-full">
+					<p class="font-normal text-[#999999] text-[15px] leading-[1.5] whitespace-nowrap">
+						{characterCount}/{maxCharacters}자
+					</p>
 				</div>
 			</div>
-
-			<!-- Character Counter -->
-			<div class="flex gap-[10px] items-center justify-end p-[16px] w-full">
-				<p class="font-normal text-[#999999] text-[15px] leading-[1.5] whitespace-nowrap">
-					{characterCount}/{maxCharacters}자
-				</p>
-			</div>
-		</div>
+		{/if}
 	</div>
 
 	<!-- Messages Grid Section -->
-	<div class="relative flex flex-col items-center w-full max-w-[1920px]">
+	<div
+		class="{isForTarget
+			? 'flex flex-col gap-[40px] items-center justify-end px-0 py-[32px] w-full'
+			: 'relative flex flex-col items-center w-full max-w-[1920px]'}"
+	>
 		{#if isLoading}
 			<!-- Loading State -->
 			<div class="flex items-center justify-center py-[100px]">
@@ -287,11 +394,13 @@
 				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">첫 번째 메시지를 남겨주세요!</p>
 			</div>
 		{:else}
-			<!-- Messages Grid: Responsive 2/3/4 columns -->
+			<!-- Messages Grid -->
 			<div class="flex flex-col gap-[24px] items-center justify-center w-full">
 				<!-- Row 1 -->
 				<div
-					class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center"
+					class="grid {isForTarget
+						? 'grid-cols-4'
+						: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
 				>
 					{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
 						<MessageCard
@@ -307,7 +416,9 @@
 				<!-- Row 2 -->
 				{#if currentMessages.length > itemsPerRow}
 					<div
-						class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center"
+						class="grid {isForTarget
+							? 'grid-cols-4'
+							: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
 					>
 						{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
 							<MessageCard
@@ -323,13 +434,13 @@
 			</div>
 		{/if}
 
-		<!-- Pagination Controls (Figma Design) -->
+		<!-- Pagination Controls -->
 		{#if totalPages > 1}
-			<div class="flex items-center gap-0 px-[12px] mt-[20px] xs:mt-[40px]">
+			<div class="flex items-center {isForTarget ? 'gap-0 px-[12px]' : 'gap-0 px-[12px] mt-[20px] xs:mt-[40px]'}">
 				{#each Array(totalPages) as _, index}
 					<button
 						onclick={() => goToPage(index)}
-						class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70"
+						class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 cursor-pointer"
 						aria-label={`Page ${index + 1}`}
 						disabled={isLoading}
 					>

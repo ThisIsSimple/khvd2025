@@ -13,14 +13,17 @@
 	// Check if current page is teaser page
 	let isTeaserPage = $derived($page.url.pathname === '/teaser');
 	let isMainPage = $derived($page.url.pathname === '/');
+	let isDesignerDetailPage = $derived(
+		$page.url.pathname.startsWith('/designers/') && $page.url.pathname !== '/designers'
+	);
 </script>
 
 <CustomCursor />
 
 <div class="flex min-h-screen flex-col">
-	<!-- Navigation Menu (hidden on teaser page or when UI is hidden) -->
+	<!-- Navigation Menu (hidden on teaser page, designer detail page, or when UI is hidden) -->
 	{#if !uiState.isUIHidden}
-		{#if !isTeaserPage && !isMainPage}
+		{#if !isTeaserPage && !isMainPage && !isDesignerDetailPage}
 			<NavigationMenu bind:isOpen={isMenuOpen} />
 		{/if}
 
@@ -28,7 +31,7 @@
 			<NavigationMenu bind:isOpen={isMenuOpen} noTitle />
 		{/if}
 
-		{#if !isTeaserPage && !isMainPage}
+		{#if !isTeaserPage && !isMainPage && !isDesignerDetailPage}
 			<div class="h-[50px] tablet:h-[80px] desktop:h-[100px]"></div>
 		{/if}
 	{/if}

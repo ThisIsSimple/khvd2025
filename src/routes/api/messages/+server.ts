@@ -16,25 +16,47 @@ import type { RowDataPacket, ResultSetHeader } from 'mysql2';
 /**
  * GET /api/messages
  * Retrieve paginated messages
- * Query params: page (default: 0), pageSize (default: 10)
+ * Query params: page (default: 0), pageSize (default: 10), type, targetId
  */
 export const GET: RequestHandler = async ({ url }) => {
 	try {
 		const page = parseInt(url.searchParams.get('page') || '0');
 		const pageSize = parseInt(url.searchParams.get('pageSize') || '10');
+		const type = url.searchParams.get('type');
+		const targetId = url.searchParams.get('targetId');
 		const offset = page * pageSize;
 
+		// Build WHERE clause for filtering
+		const whereConditions: string[] = [];
+		const queryParams: any[] = [];
+
+		if (type) {
+			whereConditions.push('type = ?');
+			queryParams.push(type);
+		}
+
+		if (targetId) {
+			whereConditions.push('target_id = ?');
+			queryParams.push(parseInt(targetId));
+		}
+
+		const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
+
 		// Get total count
-		const countResult = await query<RowDataPacket[]>('SELECT COUNT(*) as total FROM messages');
+		const countResult = await query<RowDataPacket[]>(
+			`SELECT COUNT(*) as total FROM messages ${whereClause}`,
+			queryParams
+		);
 		const total = countResult[0].total;
 
 		// Get paginated messages
 		const rows = await query<RowDataPacket[]>(
 			`SELECT id, writer, message, type, target_id, created_at
        FROM messages
+       ${whereClause}
        ORDER BY created_at DESC
        LIMIT ? OFFSET ?`,
-			[pageSize, offset]
+			[...queryParams, pageSize, offset]
 		);
 
 		// Transform to Message format
