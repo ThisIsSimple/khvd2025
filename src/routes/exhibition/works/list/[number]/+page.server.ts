@@ -30,7 +30,11 @@ export const load: PageServerLoad = async ({ params, url, fetch }) => {
 
 	try {
 		// Get professor filter from query parameters
-		const professor = url.searchParams.get('professor');
+		// For group 0, default to first professor (김은정) if no professor selected
+		let professor = url.searchParams.get('professor');
+		if (groupNumber === 0 && !professor) {
+			professor = '김은정';
+		}
 
 		// Build API URL
 		let apiUrl = `/api/works/list?group_number=${groupNumber}`;

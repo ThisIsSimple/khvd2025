@@ -2,8 +2,30 @@
 	import type { PageData } from './$types';
 	import WorkItem from '$lib/components/WorkItem.svelte';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 
 	let { data }: { data: PageData } = $props();
+
+	// Scroll direction detection for mobile collapsible header
+	let scrollY = $state(0);
+	let lastScrollY = $state(0);
+	let scrollingDown = $state(false);
+
+	$effect(() => {
+		if (browser) {
+			const handleScroll = () => {
+				scrollY = window.scrollY;
+				scrollingDown = scrollY > lastScrollY && scrollY > 100;
+				lastScrollY = scrollY;
+			};
+
+			window.addEventListener('scroll', handleScroll, { passive: true });
+
+			return () => {
+				window.removeEventListener('scroll', handleScroll);
+			};
+		}
+	});
 
 	// Map group number to title and description
 	const groupInfo: Record<
@@ -61,10 +83,10 @@
 </svelte:head>
 
 <!-- Main Container -->
-<div class="w-full bg-[#fefefe] min-h-screen flex">
-	<!-- Left Navigation (150px) -->
+<div class="w-full bg-[#fefefe] min-h-screen tablet:flex">
+	<!-- Left Navigation (150px) - Desktop Only -->
 	<nav
-		class="sticky left-0 top-0 h-fit w-[150px] bg-[#fefefe] flex flex-col items-center pt-[24px] shrink-0"
+		class="hidden tablet:flex sticky left-0 top-0 h-fit w-[150px] bg-[#fefefe] flex-col items-center pt-[24px] shrink-0"
 	>
 		<!-- Back Arrow Button (sticky) -->
 		<button
@@ -127,9 +149,107 @@
 	</nav>
 
 	<!-- Main Content Area -->
-	<main class="flex-1 px-[8px] xs:px-[12px] tablet:px-[40px] desktop:px-[60px]">
-		<!-- Header Section -->
-		<div class="w-full bg-[#fefefe] flex flex-col gap-[12px] pt-[48px]">
+	<main class="w-full tablet:flex-1">
+		<!-- Mobile Header - Collapsible Sticky (Hidden on Desktop) -->
+		<div
+			class="tablet:hidden sticky top-0 bg-[#fefefe] z-20 transition-transform duration-300"
+			class:translate-y-[-100%]={scrollingDown && scrollY > 100}
+		>
+			<div class="flex items-center gap-[6px] h-[74px] pl-[8px] pr-[16px]">
+				<!-- Back button (72×72) -->
+				<button
+					onclick={handleBack}
+					class="size-[72px] flex items-center justify-center shrink-0"
+					aria-label="Go back"
+				>
+					<img
+						src="/icons/arrow_diagonal_before.svg"
+						alt="Back"
+						class="w-[34px] h-[34px]"
+					/>
+				</button>
+
+				<!-- Title + Count -->
+				<div class="flex gap-[6px] items-end min-w-0">
+					<h1 class="font-display text-[52px] leading-[1.1] text-[#111111] truncate">
+						{info.title}
+					</h1>
+					<div class="flex items-center pb-[5px] shrink-0">
+						<p class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] text-[#111111]">
+							[{data.works.length}]
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Description -->
+			{#if info.description}
+				<div class="px-[24px] py-[12px]">
+					<p class="text-[15px] leading-[1.5] text-[#222222] text-justify whitespace-pre-wrap">
+						{info.description}
+					</p>
+				</div>
+			{/if}
+
+			<!-- Professor info -->
+			{#if info.professors.ko}
+				<div class="px-[24px] py-[32px] flex flex-col gap-[2px] items-end">
+					<!-- Korean Professor Names -->
+					<div class="flex gap-[10px] items-center text-[15px] font-bold leading-[1.4] text-[#111111]">
+						<p>지도교수</p>
+						<p>{info.professors.ko}</p>
+					</div>
+
+					<!-- English Professor Names -->
+					<div class="flex gap-[6px] items-center text-[15px] font-bold leading-[1.4] text-[#111111]">
+						<p>Prof.</p>
+						<p>{info.professors.en}</p>
+					</div>
+				</div>
+			{/if}
+		</div>
+
+		<!-- Mobile Professor Filter - Horizontal Sticky (only for group 0, hidden on desktop) -->
+		{#if data.groupNumber === 0 && data.professorCounts}
+			<div class="tablet:hidden sticky top-0 z-10 flex h-[82px] w-full">
+				<button
+					onclick={() => handleProfessorFilter('김은정')}
+					class="flex-1 px-[24px] py-[16px] flex items-start justify-between transition-colors {isProfessorActive(
+						'김은정'
+					)
+						? 'bg-primary text-white'
+						: 'bg-[#eeeeee] text-black'}"
+				>
+					<div class="font-bold text-[18px] leading-[1.4]">
+						<p class="mb-0">지도교수</p>
+						<p>김은정</p>
+					</div>
+					<div class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] flex items-center py-[3px]">
+						[{data.professorCounts['김은정'] || 0}]
+					</div>
+				</button>
+
+				<button
+					onclick={() => handleProfessorFilter('박상희')}
+					class="flex-1 px-[24px] py-[16px] flex items-start justify-between transition-colors {isProfessorActive(
+						'박상희'
+					)
+						? 'bg-primary text-white'
+						: 'bg-[#eeeeee] text-black'}"
+				>
+					<div class="font-bold text-[18px] leading-[1.4]">
+						<p class="mb-0">지도교수</p>
+						<p>박상희</p>
+					</div>
+					<div class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] flex items-center py-[3px]">
+						[{data.professorCounts['박상희'] || 0}]
+					</div>
+				</button>
+			</div>
+		{/if}
+
+		<!-- Desktop Header Section (Hidden on Mobile) -->
+		<div class="hidden tablet:flex w-full bg-[#fefefe] flex-col gap-[12px] pt-[48px] px-[40px] desktop:px-[60px]">
 			<!-- Title and Count Container -->
 			<div class="w-full flex flex-col items-start justify-center">
 				<!-- Title Row -->
@@ -182,11 +302,13 @@
 		<!-- Works Grid Section -->
 		<!--
 			Responsive grid:
-			- Mobile (< 421px): 2 columns, 16px gap
-			- Tablet/SM (421px - 1350px): 3 columns, 24px gap
-			- Desktop (≥ 1351px): 4 columns, 40px gap
+			- Mobile (< 421px): 2 columns, 16px gap, 24px padding, 28px top padding
+			- Tablet/SM (421px - 1350px): 3 columns, 24px gap, 24px padding, 28px top padding
+			- Desktop (≥ 1351px): 4 columns, 40px gap, 60px padding, 80px top padding
 		-->
-		<div class="w-full grid grid-cols-2 gap-[16px] xs:grid-cols-3 xs:gap-[24px] desktop:grid-cols-4 desktop:gap-[40px] items-start pb-[200px] pt-[80px]">
+		<div
+			class="w-full grid grid-cols-2 gap-[16px] xs:grid-cols-3 xs:gap-[24px] desktop:grid-cols-4 desktop:gap-[40px] items-start pb-[200px] pt-[28px] px-[24px] tablet:pt-[80px] tablet:px-[40px] desktop:px-[60px]"
+		>
 			{#each data.works as work}
 				<WorkItem
 					id={work.id}
