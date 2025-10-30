@@ -223,7 +223,7 @@
 		<div class="flex gap-[10px] items-center w-full {isForTarget ? '' : 'justify-center'}">
 			<h2
 				class="font-bold leading-[1.4] tracking-[-0.48px] {isForTarget
-					? 'text-primary text-[24px]'
+					? 'text-primary text-[18px] tablet:text-[24px]'
 					: 'text-[#111111] text-[18px] tablet:text-[24px] desktop:text-[32px] text-center'}"
 			>
 				응원의 말을 적어주세요

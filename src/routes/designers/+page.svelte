@@ -153,7 +153,7 @@
 <div class="relative min-h-screen bg-white">
 	<!-- Navigation Section -->
 	<nav
-		class="sticky top-0 z-50 bg-white
+		class="sticky top-0 z-30 bg-white
 		px-4 sm:px-6 tablet:px-[40px]
 		py-2 sm:py-2 tablet:py-[24px] desktop:py-[48px]
 		flex flex-col tablet:flex-row gap-4 tablet:gap-[52px] items-start tablet:items-center
@@ -283,12 +283,8 @@
 						name={designer.name}
 						nameEn={designer.nameEn}
 						imageUrl={designer.imageUrl}
-						instagramUrl={designer.instagramUrl}
+						instagramUrl={designer.qrLink}
 						email={designer.email}
-						contact1Text={designer.contact1Text}
-						contact1Url={designer.contact1Url}
-						contact2Text={designer.contact2Text}
-						contact2Url={designer.contact2Url}
 					/>
 				{/each}
 			</div>

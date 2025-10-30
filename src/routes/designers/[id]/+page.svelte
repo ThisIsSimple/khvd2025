@@ -79,7 +79,7 @@
 							href={data.designer.instagramUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="break-all text-center text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] hover:text-primary transition-colors"
+							class="break-all text-center text-[14px] tablet:text-[16px] leading-[1.2] tablet:leading-[1.4] tracking-[-0.64px] text-[#222222] hover:text-primary transition-colors"
 						>
 							@{data.designer.instagramUrl.split('/').pop()}
 						</a>
@@ -92,14 +92,14 @@
 						href={data.designer.contact1Url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.contact1Text}
 					</a>
 				{:else if data.designer.email}
 					<a
 						href="mailto:{data.designer.email}"
-						class="text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.email}
 					</a>
@@ -110,7 +110,7 @@
 						href={data.designer.contact2Url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.contact2Text}
 					</a>
@@ -185,8 +185,8 @@
 
 			<div class="block desktop:hidden px-[20px] pt-[28px]">
 				<!-- Designer Name -->
-				<div class="flex gap-[20px] items-center h-[156px] justify-start">
-					<h1 class="font-display text-[100px] leading-none text-[#111111]">
+				<div class="flex gap-[20px] items-center h-[100px] tablet:h-[156px] justify-start">
+					<h1 class="font-display text-[40px] tablet:text-[100px] leading-none text-[#111111]">
 						{data.designer.nameEn}
 					</h1>
 				</div>

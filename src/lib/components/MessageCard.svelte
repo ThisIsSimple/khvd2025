@@ -23,20 +23,20 @@
 
 <div
 	class="{isForTarget
-		? 'bg-[#f6f6f6] flex flex-col gap-[20px] items-end justify-between p-[24px] w-full'
+		? 'bg-[#f6f6f6] flex flex-col gap-[20px] tablet:gap-[24px] items-end justify-between pt-[20px] pb-[12px] px-[14px] tablet:p-[24px] w-full'
 		: 'bg-[#fefefe] flex flex-col gap-[20px] items-end justify-between py-[20px] px-[14px] tablet:p-[20px] w-full'}"
 >
 	<!-- Text Container -->
 	<div
 		class="flex flex-col {isForTarget
-			? 'gap-[24px]'
+			? 'gap-[20px] tablet:gap-[24px]'
 			: 'gap-[20px]'} items-start overflow-clip {isForTarget ? '' : 'tablet:p-[10px]'} w-full"
 	>
 		<!-- Writer Name and Edit Button Row -->
 		<div class="flex items-center justify-between w-full">
 			<p
 				class="{isForTarget
-					? 'font-bold text-[#111111] text-[18px] leading-[1.4] whitespace-nowrap'
+					? 'font-bold text-[#111111] text-[16px] tablet:text-[18px] leading-[1.4] whitespace-nowrap'
 					: 'font-bold text-[#111111] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap'}"
 			>
 				{writer}
@@ -44,7 +44,7 @@
 			<button
 				onclick={handleEdit}
 				class="{isForTarget
-					? 'overflow-clip shrink-0 w-[24.5px] h-[24.5px] flex items-center justify-center hover:opacity-70 transition-opacity'
+					? 'overflow-clip shrink-0 w-[20px] h-[20px] tablet:w-[24.5px] tablet:h-[24.5px] flex items-center justify-center hover:opacity-70 transition-opacity'
 					: 'overflow-clip shrink-0 w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] tablet:w-[28px] tablet:h-[28px] flex items-center justify-center hover:opacity-70 transition-opacity'}"
 				aria-label="Edit message"
 			>
@@ -55,7 +55,7 @@
 		<!-- Message Text -->
 		<p
 			class="{isForTarget
-				? 'font-normal text-black text-[18px] leading-[1.5] w-full overflow-hidden'
+				? 'font-normal text-black text-[15px] tablet:text-[18px] leading-[1.5] w-full overflow-hidden'
 				: 'font-normal text-black text-[16px] tablet:text-[20px] leading-[1.5] w-full overflow-hidden'}"
 		>
 			{text}
@@ -66,7 +66,7 @@
 	<div class="flex gap-[10px] items-center justify-end w-[100px]">
 		<p
 			class="{isForTarget
-				? 'font-normal text-[#999999] text-[18px] leading-[1.4] whitespace-nowrap'
+				? 'font-normal text-[#999999] text-[14px] tablet:text-[18px] leading-[1.5] whitespace-nowrap'
 				: 'font-normal text-[#999999] text-[15px] tablet:text-[18px] leading-[1.4] whitespace-nowrap'}"
 		>
 			{date}

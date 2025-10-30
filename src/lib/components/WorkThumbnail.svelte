@@ -115,9 +115,9 @@
 
 	<!-- Tablet: Fixed Title at Bottom -->
 	{#if showTitle && !isSticky}
-		<div class="absolute bottom-0 left-0 right-0 bg-white py-[16px]">
-			<p class="font-bold text-[18px] leading-[1.4] text-[#111111]">{title}</p>
-			<p class="text-[15px] leading-[1.5] text-[#777777]">{description}</p>
+		<div class="absolute bottom-0 left-0 right-0 bg-white py-[12px] tablet:py-[16px]">
+			<p class="font-bold text-[18px] tablet:text-[18px] leading-[1.4] text-[#111111]">{title}</p>
+			<p class="text-[16px] tablet:text-[15px] leading-[1.5] text-[#777777]">{description}</p>
 		</div>
 	{/if}
 </a>

@@ -16,6 +16,10 @@
 	let isDesignerDetailPage = $derived(
 		$page.url.pathname.startsWith('/designers/') && $page.url.pathname !== '/designers'
 	);
+	let isWorkDetailPage = $derived(
+		$page.url.pathname.startsWith('/exhibition/works/') &&
+			$page.url.pathname !== '/exhibition/works'
+	);
 </script>
 
 <CustomCursor />
@@ -23,7 +27,7 @@
 <div class="flex min-h-screen flex-col">
 	<!-- Navigation Menu (hidden on teaser page, designer detail page, or when UI is hidden) -->
 	{#if !uiState.isUIHidden}
-		{#if !isTeaserPage && !isMainPage && !isDesignerDetailPage}
+		{#if !isTeaserPage && !isMainPage && !isDesignerDetailPage && !isWorkDetailPage}
 			<NavigationMenu bind:isOpen={isMenuOpen} />
 		{/if}
 
@@ -31,7 +35,7 @@
 			<NavigationMenu bind:isOpen={isMenuOpen} noTitle />
 		{/if}
 
-		{#if !isTeaserPage && !isMainPage && !isDesignerDetailPage}
+		{#if !isTeaserPage && !isMainPage && !isDesignerDetailPage && !isWorkDetailPage}
 			<div class="h-[50px] tablet:h-[80px] desktop:h-[100px]"></div>
 		{/if}
 	{/if}
