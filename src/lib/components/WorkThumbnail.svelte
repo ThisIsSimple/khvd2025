@@ -41,7 +41,9 @@
 </script>
 
 <a
-	class="relative w-full h-1/2 overflow-hidden cursor-pointer group block"
+	class="{isSticky
+		? 'h-1/2'
+		: 'h-[360px] sm:h-[420px] tablet:h-[480px]'} relative w-full overflow-hidden cursor-pointer group block"
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
 	href={`/exhibition/works/${workId}`}
@@ -50,7 +52,7 @@
 	<img src={thumbnail} alt={title} class="absolute inset-0 w-full h-full object-cover" />
 
 	<!-- Desktop: Hover Overlay -->
-	{#if isSticky && isHovered}
+	{#if isHovered}
 		<div
 			class="absolute inset-0 bg-primary/70 flex flex-col items-center justify-center gap-[16px] transition-opacity duration-300"
 		>
@@ -113,7 +115,7 @@
 
 	<!-- Tablet: Fixed Title at Bottom -->
 	{#if showTitle && !isSticky}
-		<div class="absolute bottom-0 left-0 right-0 bg-white px-[20px] py-[16px]">
+		<div class="absolute bottom-0 left-0 right-0 bg-white py-[16px]">
 			<p class="font-bold text-[18px] leading-[1.4] text-[#111111]">{title}</p>
 			<p class="text-[15px] leading-[1.5] text-[#777777]">{description}</p>
 		</div>

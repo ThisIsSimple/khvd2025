@@ -45,8 +45,8 @@
 	</div>
 </div>
 
-<!-- Tablet Layout (960px-1350px) -->
-<div class="tablet:flex desktop:hidden hidden gap-[20px] items-start py-[20px] w-full">
+
+<div class="flex desktop:hidden flex-col sm:flex-row gap-[20px] items-start py-[20px] w-full">
 	<!-- Profile Image (Smaller) -->
 	<div class="bg-white w-[200px] h-[260px] overflow-clip relative shrink-0">
 		<img src={profileImage} alt={name} class="w-full h-full object-cover" />

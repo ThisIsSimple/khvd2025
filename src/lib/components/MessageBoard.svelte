@@ -201,7 +201,7 @@
 
 <section
 	class="{isForTarget
-		? 'bg-white flex flex-col gap-[20px] items-stretch pt-[140px] pb-[200px]'
+		? 'bg-white flex flex-col gap-[20px] items-stretch'
 		: 'relative flex flex-col gap-[80px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]'}"
 >
 	<!-- Background Image (only for general message board) -->
@@ -399,7 +399,7 @@
 				<!-- Row 1 -->
 				<div
 					class="grid {isForTarget
-						? 'grid-cols-4'
+						? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
 						: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
 				>
 					{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
@@ -409,6 +409,7 @@
 							text={message.text}
 							date={message.date}
 							onedit={handleEdit}
+							isForTarget={isForTarget}
 						/>
 					{/each}
 				</div>
@@ -427,6 +428,7 @@
 								text={message.text}
 								date={message.date}
 								onedit={handleEdit}
+								isForTarget={isForTarget}
 							/>
 						{/each}
 					</div>

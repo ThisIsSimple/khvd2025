@@ -41,34 +41,45 @@
 	<div class="relative min-h-screen bg-white flex">
 		<!-- Sticky Left Navigation (150px) -->
 		<nav
-			class="sticky left-0 top-0 h-screen w-[150px] bg-white z-50 flex flex-col items-center pt-[20px] shrink-0"
+			class="sticky left-0 top-0 h-fit w-[90px] tablet:w-[150px] bg-white z-50 flex flex-col items-center pt-[20px] shrink-0 overflow-hidden"
 		>
 			<!-- Back Arrow Button -->
 			<button
 				onclick={handleBack}
-				class="w-[150px] h-[150px] flex items-center justify-center hover:bg-[#f5f5f5] transition-colors mb-[80px]"
+				class="w-[90px] tablet:w-[150px] h-[90px] tablet:h-[150px] flex items-center justify-center hover:bg-[#f5f5f5] transition-colors mb-[80px]"
 				aria-label="Go back"
 			>
-				<img src="/icons/arrow_diagonal_before.svg" alt="Back" class="w-[71px] h-[71px]" />
+				<img
+					src="/icons/arrow_diagonal_before.svg"
+					alt="Back"
+					class="w-[35px] h-[35px] tablet:w-[70px] tablet:h-[70px]"
+				/>
 			</button>
 
 			<!-- Designer Contact Info -->
-			<div class="flex flex-col gap-[40px] items-center w-[91.644px]">
+			<div
+				class="w-full overflow-hidden flex flex-col gap-[40px] items-center px-[16px] tablet:px-[36px]"
+			>
 				<!-- Profile Image + Instagram -->
-				<div class="flex flex-col gap-[6px] items-center justify-center">
-					<div class="w-[80px] h-[81px] overflow-hidden">
+				<div class="w-full flex flex-col gap-[6px] items-center justify-center overflow-hidden">
+					<a
+						href={data.designer.qrLink}
+						class="w-full block aspect-square"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						<img
-							src={data.designer.profileImage}
+							src={data.designer.qrImage}
 							alt={data.designer.name}
 							class="w-full h-full object-cover"
 						/>
-					</div>
+					</a>
 					{#if data.designer.instagramUrl}
 						<a
 							href={data.designer.instagramUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] hover:text-primary transition-colors"
+							class="break-all text-center text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] hover:text-primary transition-colors"
 						>
 							@{data.designer.instagramUrl.split('/').pop()}
 						</a>
@@ -172,12 +183,11 @@
 				</div>
 			</div>
 
-			<!-- Tablet Layout (960px-1350px) -->
-			<div class="tablet:block desktop:hidden hidden px-[20px] pt-[28px]">
+			<div class="block desktop:hidden px-[20px] pt-[28px]">
 				<!-- Designer Name -->
 				<div class="flex gap-[20px] items-center h-[156px] justify-start">
 					<h1 class="font-display text-[100px] leading-none text-[#111111]">
-						{data.designer.name}
+						{data.designer.nameEn}
 					</h1>
 				</div>
 
@@ -225,9 +235,12 @@
 			</div>
 
 			<!-- Messages Section (Full Width) -->
-			<div class="mt-[60px]">
-				<MessageBoard type="designer" targetId={data.designer.id} />
+			<div class="hidden sm:block mt-[60px] px-[20px] tablet:pt-[120px]">
+				<MessageBoard type="designer" targetId={data.designer.id} isForTarget={true} />
 			</div>
 		</main>
+	</div>
+	<div class="block sm:hidden px-[24px] tablet:px-[40px] pt-[160px]">
+		<MessageBoard type="designer" targetId={data.designer.id} isForTarget={true} />
 	</div>
 {/if}
