@@ -25,9 +25,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		const offset = page * pageSize;
 
 		// Get total count
-		const countResult = await query<RowDataPacket[]>(
-			'SELECT COUNT(*) as total FROM messages'
-		);
+		const countResult = await query<RowDataPacket[]>('SELECT COUNT(*) as total FROM messages');
 		const total = countResult[0].total;
 
 		// Get paginated messages
@@ -82,10 +80,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		if (!data.password || data.password.length < 4 || data.password.length > 10) {
-			return json(
-				{ error: 'Password must be between 4 and 10 characters' },
-				{ status: 400 }
-			);
+			return json({ error: 'Password must be between 4 and 10 characters' }, { status: 400 });
 		}
 
 		if (!data.message || data.message.trim().length === 0) {

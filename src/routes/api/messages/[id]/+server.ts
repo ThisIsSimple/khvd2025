@@ -31,10 +31,9 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
 		}
 
 		// Check if message exists and verify password
-		const rows = await query<RowDataPacket[]>(
-			'SELECT id, password FROM messages WHERE id = ?',
-			[id]
-		);
+		const rows = await query<RowDataPacket[]>('SELECT id, password FROM messages WHERE id = ?', [
+			id
+		]);
 
 		if (rows.length === 0) {
 			return json({ error: 'Message not found' }, { status: 404 });

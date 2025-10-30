@@ -178,9 +178,13 @@
 	/>
 
 	<!-- Input Section -->
-	<div class="relative flex flex-col gap-[16px] tablet:gap-[32px] items-center w-full max-w-[680px]">
+	<div
+		class="relative flex flex-col gap-[16px] tablet:gap-[32px] items-center w-full max-w-[680px]"
+	>
 		<!-- Title -->
-		<h2 class="text-[18px] tablet:text-[24px] desktop:text-[32px] font-bold text-[#111111] text-center w-full">
+		<h2
+			class="text-[18px] tablet:text-[24px] desktop:text-[32px] font-bold text-[#111111] text-center w-full"
+		>
 			응원의 말을 적어주세요
 		</h2>
 
@@ -198,8 +202,12 @@
 				<!-- Writer Field -->
 				<div class="flex-1 flex items-center border-r border-[#cccccc]">
 					<!-- Label -->
-					<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
-						<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+					<div
+						class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
+					>
+						<p
+							class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap"
+						>
 							작성자
 						</p>
 					</div>
@@ -219,8 +227,12 @@
 				<!-- Password Field -->
 				<div class="flex items-center border-r border-[#cccccc]">
 					<!-- Label -->
-					<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
-						<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+					<div
+						class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
+					>
+						<p
+							class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap"
+						>
 							비밀번호
 						</p>
 					</div>
@@ -278,7 +290,9 @@
 			<!-- Messages Grid: Responsive 2/3/4 columns -->
 			<div class="flex flex-col gap-[24px] items-center justify-center w-full">
 				<!-- Row 1 -->
-				<div class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center">
+				<div
+					class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center"
+				>
 					{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
 						<MessageCard
 							id={message.id}
@@ -292,7 +306,9 @@
 
 				<!-- Row 2 -->
 				{#if currentMessages.length > itemsPerRow}
-					<div class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center">
+					<div
+						class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[16px] w-full justify-items-center"
+					>
 						{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
 							<MessageCard
 								id={message.id}

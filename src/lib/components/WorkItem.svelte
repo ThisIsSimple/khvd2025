@@ -9,10 +9,7 @@
 	let { id, thumbnail, title, designers }: Props = $props();
 </script>
 
-<a
-	href="/exhibition/works/detail/{id}"
-	class="flex flex-col gap-4 w-full group cursor-pointer"
->
+<a href="/exhibition/works/detail/{id}" class="flex flex-col gap-4 w-full group cursor-pointer">
 	<!-- Thumbnail (390x390px square) -->
 	<div class="relative w-full aspect-square overflow-hidden bg-[#f5f5f5]">
 		<img

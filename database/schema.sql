@@ -58,9 +58,17 @@ CREATE TABLE IF NOT EXISTS `works` (
   `content` TEXT NOT NULL COMMENT 'Detailed content/explanation',
   `professor` TEXT NOT NULL COMMENT 'Professor name(s)',
   `group_number` TINYINT NOT NULL COMMENT 'Group number (0-3 for GRADUATION STUDIES 0-3)',
+  `student_id` VARCHAR(20) NULL DEFAULT NULL COMMENT 'Student ID number (학번)',
+  `is_team_work` BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Whether this is a team work or individual work',
+  `qr_image` TEXT NULL DEFAULT NULL COMMENT 'Team work Instagram QR code image URL/path',
+  `qr_link` TEXT NULL DEFAULT NULL COMMENT 'Team work Instagram QR code link',
+  `pc_link` TEXT NULL DEFAULT NULL COMMENT 'PC version content link (YouTube embed or clickable image)',
+  `mobile_link` TEXT NULL DEFAULT NULL COMMENT 'Mobile version content link (YouTube embed or clickable image)',
+  `notes` TEXT NULL DEFAULT NULL COMMENT 'Additional notes (비고)',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation timestamp',
   PRIMARY KEY (`id`),
   INDEX `idx_group_number` (`group_number`) COMMENT 'Index for filtering by group',
+  INDEX `idx_is_team_work` (`is_team_work`) COMMENT 'Index for filtering by work type',
   CHECK (`group_number` >= 0 AND `group_number` <= 3)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Exhibition works table';
 
@@ -91,6 +99,12 @@ CREATE TABLE IF NOT EXISTS `designers` (
   `instagram` TEXT NULL DEFAULT NULL COMMENT 'Instagram handle (optional)',
   `instagram_qr_image` TEXT NULL DEFAULT NULL COMMENT 'Instagram QR code image (optional)',
   `homepage` TEXT NULL DEFAULT NULL COMMENT 'Personal homepage URL (optional)',
+  `qr_image` TEXT NULL DEFAULT NULL COMMENT 'QR code image URL/path (인스타 QR 이미지)',
+  `qr_link` TEXT NULL DEFAULT NULL COMMENT 'QR code link URL (인스타 QR 링크)',
+  `contact1_text` TEXT NULL DEFAULT NULL COMMENT 'Contact 1 display text (연락처1에 표시할 텍스트)',
+  `contact1_url` TEXT NULL DEFAULT NULL COMMENT 'Contact 1 URL (연락처1에 연결할 URL)',
+  `contact2_text` TEXT NULL DEFAULT NULL COMMENT 'Contact 2 display text (optional) (연락처2에 표시할 텍스트)',
+  `contact2_url` TEXT NULL DEFAULT NULL COMMENT 'Contact 2 URL (optional) (연락처2에 연결할 URL)',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation timestamp',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Designers table';
@@ -113,8 +127,8 @@ CREATE TABLE IF NOT EXISTS `work_designers` (
 
 -- Insert sample designers
 INSERT INTO `designers` (`id`, `name`, `eng_name`, `profile_image`, `introduction`, `interview1`, `interview2`, `email`, `instagram`) VALUES
-(1, '김디자인', 'Kim Design', '/images/designers/kim.jpg', '안녕하세요, 시각디자이너 김디자인입니다.', '디자인은 문제를 해결하는 창의적인 과정이라고 생각합니다.', '졸업 후에는 브랜딩 전문 디자이너로 성장하고 싶습니다.', 'kim@example.com', '@kim_design'),
-(2, '이비주얼', 'Lee Visual', '/images/designers/lee.jpg', '경험 디자인에 관심이 많은 이비주얼입니다.', 'UX/UI 디자인을 통해 사용자에게 가치를 전달하고 싶습니다.', '인터랙티브 미디어 분야에서 일하고 싶습니다.', 'lee@example.com', '@lee_visual');
+(1, '김디자인', 'Kim Design', 'https://i.namu.wiki/i/DtCwhjGV2N6EXrBqBoeDh9BAh2gQvqVcBDK48oZJXu0Dv7ZwTyMGodIHxJ4dBBQTy-2Kwq4EM1pk0JBZjIDOnQ.webp', '안녕하세요, 시각디자이너 김디자인입니다.', '디자인은 문제를 해결하는 창의적인 과정이라고 생각합니다.', '졸업 후에는 브랜딩 전문 디자이너로 성장하고 싶습니다.', 'kim@example.com', '@kim_design'),
+(2, '이비주얼', 'Lee Visual', 'https://i.namu.wiki/i/DtCwhjGV2N6EXrBqBoeDh9BAh2gQvqVcBDK48oZJXu0Dv7ZwTyMGodIHxJ4dBBQTy-2Kwq4EM1pk0JBZjIDOnQ.webp', '경험 디자인에 관심이 많은 이비주얼입니다.', 'UX/UI 디자인을 통해 사용자에게 가치를 전달하고 싶습니다.', '인터랙티브 미디어 분야에서 일하고 싶습니다.', 'lee@example.com', '@lee_visual');
 
 -- Insert sample works
 INSERT INTO `works` (`id`, `thumbnail`, `title`, `description`, `content`, `professor`, `group_number`) VALUES

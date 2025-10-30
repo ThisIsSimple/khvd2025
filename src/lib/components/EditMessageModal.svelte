@@ -149,7 +149,9 @@
 
 					<!-- Password Input -->
 					<div class="flex flex-col gap-[20px]">
-						<div class="flex items-center justify-center border border-[#cccccc] px-[20px] py-[16px]">
+						<div
+							class="flex items-center justify-center border border-[#cccccc] px-[20px] py-[16px]"
+						>
 							<input
 								type="password"
 								bind:value={passwordInput}
@@ -241,7 +243,12 @@
 							취소
 						</button>
 						<button
-							onclick={() => handleUpdate({ writer: message.writer, password: passwordInput, message: editedMessage })}
+							onclick={() =>
+								handleUpdate({
+									writer: message.writer,
+									password: passwordInput,
+									message: editedMessage
+								})}
 							disabled={isUpdating}
 							class="flex items-center justify-center px-[24px] h-[54px] bg-[#fc451e] text-white font-semibold text-[18px] tablet:text-[20px] transition-opacity hover:opacity-90 disabled:opacity-50"
 						>

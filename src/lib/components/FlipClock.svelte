@@ -178,7 +178,11 @@
 	</div>
 
 	<!-- Seconds (hidden on mobile) -->
-	<span class="text-4xl text-black font-bold -mt-6 {hideSecondsOnMobile ? 'hidden tablet:block' : 'block'}">:</span>
+	<span
+		class="text-4xl text-black font-bold -mt-6 {hideSecondsOnMobile
+			? 'hidden tablet:block'
+			: 'block'}">:</span
+	>
 
 	<div class="{hideSecondsOnMobile ? 'hidden tablet:flex' : 'flex'} flex-col items-center">
 		<div class="flex gap-3">

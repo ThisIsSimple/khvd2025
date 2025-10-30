@@ -78,11 +78,13 @@ docker run -d \
 Before running the application, ensure your MySQL database is set up:
 
 1. Create the database:
+
 ```sql
 CREATE DATABASE IF NOT EXISTS khvd_2025 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
 2. Run the schema:
+
 ```bash
 mysql -u your_db_user -p khvd_2025 < database/schema.sql
 ```
@@ -111,7 +113,7 @@ To use a different host port:
 ```yaml
 # docker-compose.yml
 ports:
-  - "8080:3000"  # Maps host port 8080 to container port 3000
+  - '8080:3000' # Maps host port 8080 to container port 3000
 ```
 
 ## Health Check
@@ -129,16 +131,19 @@ docker inspect --format='{{.State.Health.Status}}' khvd-2025
 ### Cannot connect to MySQL
 
 1. Verify MySQL is running on host:
+
 ```bash
 mysql -u your_db_user -p -e "SELECT 1"
 ```
 
 2. Check if host.docker.internal resolves:
+
 ```bash
 docker run --rm khvd-2025:latest ping -c 1 host.docker.internal
 ```
 
 3. For Linux, you may need to use your host IP instead:
+
 ```bash
 ip addr show docker0 | grep inet
 # Use the IP address as DB_HOST
@@ -179,6 +184,7 @@ docker build -t khvd-2025:latest . && docker run ...
 ### Environment Variables
 
 For production, consider using:
+
 - Docker secrets for sensitive data
 - External configuration management
 - Proper ORIGIN setting for CORS
@@ -186,6 +192,7 @@ For production, consider using:
 ### Networking
 
 For production deployment with external MySQL:
+
 - Use proper network configuration
 - Set up firewall rules
 - Use TLS/SSL for database connections
@@ -214,6 +221,7 @@ server {
 ## Performance
 
 The Docker image is optimized for production:
+
 - Multi-stage build reduces image size
 - Alpine Linux base (minimal footprint)
 - Production-only dependencies
@@ -224,6 +232,7 @@ Typical image size: ~200MB
 ## Support
 
 For issues related to Docker deployment, check:
+
 1. Docker logs: `docker-compose logs`
 2. Container health: `docker ps`
 3. Database connectivity: Test from container shell

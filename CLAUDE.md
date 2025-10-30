@@ -245,27 +245,27 @@ The project uses a comprehensive, responsive typography system with **automatic 
 
 #### Header Levels (H0-H10)
 
-| Level | Font         | Mobile Size | PC Size | Line Height | Weight  | Usage                       |
-| ----- | ------------ | ----------- | ------- | ----------- | ------- | --------------------------- |
-| **H0** | Bebas Neue   | 120px       | 300px   | 120%        | Regular | Hero titles, main headlines |
-| **H1** | Bebas Neue   | 56px        | 210px   | 120%        | Regular | Page titles                 |
-| **H2** | Bebas Neue   | 48px        | 132px   | 120%        | Regular | Section headers             |
-| **H3** | Bebas Neue   | 40px        | 120px   | 100%        | Regular | Subsection headers          |
-| **H4** | Bebas Neue   | 32px        | 100px   | 100%        | Regular | Component headers           |
-| **H5** | Bebas Neue   | 28px        | 60px    | 120-130%    | Regular | Small headers               |
-| **H6** | Pretendard   | 24px        | 52px    | 100-110%    | Bold    | Card titles                 |
-| **H7** | Pretendard   | 20px        | 40px    | 140-160%    | Bold    | Subheadings                 |
-| **H8** | Mixed        | 18px        | 32px    | 120-140%    | Regular | Small subheadings           |
-| **H9** | Pretendard   | -           | 28px    | 140%        | Regular | PC-only headers             |
-| **H10** | Pretendard   | -           | 24px    | 150%        | Regular | PC-only small headers       |
+| Level   | Font       | Mobile Size | PC Size | Line Height | Weight  | Usage                       |
+| ------- | ---------- | ----------- | ------- | ----------- | ------- | --------------------------- |
+| **H0**  | Bebas Neue | 120px       | 300px   | 120%        | Regular | Hero titles, main headlines |
+| **H1**  | Bebas Neue | 56px        | 210px   | 120%        | Regular | Page titles                 |
+| **H2**  | Bebas Neue | 48px        | 132px   | 120%        | Regular | Section headers             |
+| **H3**  | Bebas Neue | 40px        | 120px   | 100%        | Regular | Subsection headers          |
+| **H4**  | Bebas Neue | 32px        | 100px   | 100%        | Regular | Component headers           |
+| **H5**  | Bebas Neue | 28px        | 60px    | 120-130%    | Regular | Small headers               |
+| **H6**  | Pretendard | 24px        | 52px    | 100-110%    | Bold    | Card titles                 |
+| **H7**  | Pretendard | 20px        | 40px    | 140-160%    | Bold    | Subheadings                 |
+| **H8**  | Mixed      | 18px        | 32px    | 120-140%    | Regular | Small subheadings           |
+| **H9**  | Pretendard | -           | 28px    | 140%        | Regular | PC-only headers             |
+| **H10** | Pretendard | -           | 24px    | 150%        | Regular | PC-only small headers       |
 
 #### Body Text Levels (B1-B3)
 
-| Level | Font         | Mobile Size | PC Size | Line Height | Weight  | Usage                       |
-| ----- | ------------ | ----------- | ------- | ----------- | ------- | --------------------------- |
-| **B1** | Pretendard   | 16px        | 20px    | 140-150%    | Regular | Main body text, paragraphs  |
-| **B2** | Pretendard   | 15px        | 18px    | 150-140%    | Regular | Secondary text, descriptions|
-| **B3** | Pretendard   | 14px        | 15px    | 120%        | Regular | Small text, captions        |
+| Level  | Font       | Mobile Size | PC Size | Line Height | Weight  | Usage                        |
+| ------ | ---------- | ----------- | ------- | ----------- | ------- | ---------------------------- |
+| **B1** | Pretendard | 16px        | 20px    | 140-150%    | Regular | Main body text, paragraphs   |
+| **B2** | Pretendard | 15px        | 18px    | 150-140%    | Regular | Secondary text, descriptions |
+| **B3** | Pretendard | 14px        | 15px    | 120%        | Regular | Small text, captions         |
 
 ### Font Weight Reference
 
@@ -289,8 +289,10 @@ The project uses a comprehensive, responsive typography system with **automatic 
 <h2 class="text-h2">Section Header</h2>
 
 <!-- Mixed fonts with automatic sizing -->
-<h6 class="text-h6">Card Title</h6> <!-- Pretendard Bold -->
-<h7 class="text-h7">Subheading</h7> <!-- Pretendard Bold -->
+<h6 class="text-h6">Card Title</h6>
+<!-- Pretendard Bold -->
+<h7 class="text-h7">Subheading</h7>
+<!-- Pretendard Bold -->
 ```
 
 #### Body Text with Auto-Responsive Sizing
@@ -302,14 +304,10 @@ The project uses a comprehensive, responsive typography system with **automatic 
 </p>
 
 <!-- Secondary text: 15px mobile → 18px PC -->
-<p class="text-b2">
-	Secondary description text with automatic responsive sizing.
-</p>
+<p class="text-b2">Secondary description text with automatic responsive sizing.</p>
 
 <!-- Small text/captions: 14px mobile → 15px PC -->
-<p class="text-b3">
-	Caption or metadata text.
-</p>
+<p class="text-b3">Caption or metadata text.</p>
 ```
 
 #### Font Weight Combinations
@@ -347,7 +345,8 @@ The project uses a comprehensive, responsive typography system with **automatic 
 <p class="text-b1">Body paragraph</p>
 
 <!-- Avoid: Wrong semantic tags -->
-<div class="text-h1">Title</div> <!-- Use <h1> instead -->
+<div class="text-h1">Title</div>
+<!-- Use <h1> instead -->
 ```
 
 #### 2. Consistent Hierarchy
@@ -361,7 +360,8 @@ The project uses a comprehensive, responsive typography system with **automatic 
 
 <!-- Avoid: Skipping levels -->
 <h1 class="text-h1">Title</h1>
-<h4 class="text-h4">Section</h4> <!-- Skipped h2 and h3 -->
+<h4 class="text-h4">Section</h4>
+<!-- Skipped h2 and h3 -->
 ```
 
 #### 3. Responsive Considerations
@@ -413,13 +413,15 @@ The project uses a comprehensive, responsive typography system with **automatic 
 ```svelte
 <!-- Bold header + regular body -->
 <div>
-	<h3 class="text-h6">Project Title</h3> <!-- Pretendard Bold by default -->
+	<h3 class="text-h6">Project Title</h3>
+	<!-- Pretendard Bold by default -->
 	<p class="text-b1">Project description in regular weight.</p>
 </div>
 
 <!-- Create emphasis hierarchy -->
 <div>
-	<h4 class="text-h7">Section</h4> <!-- Bold -->
+	<h4 class="text-h7">Section</h4>
+	<!-- Bold -->
 	<p class="text-b1 font-medium">Emphasized paragraph</p>
 	<p class="text-b2">Supporting text</p>
 </div>
@@ -466,22 +468,22 @@ Optimized letter spacing for better legibility:
 
 ### Quick Reference Table
 
-| Class       | Mobile     | PC        | Font         | Weight  |
-| ----------- | ---------- | --------- | ------------ | ------- |
-| `text-h0`   | 120px      | 300px     | Bebas Neue   | Regular |
-| `text-h1`   | 56px       | 210px     | Bebas Neue   | Regular |
-| `text-h2`   | 48px       | 132px     | Bebas Neue   | Regular |
-| `text-h3`   | 40px       | 120px     | Bebas Neue   | Regular |
-| `text-h4`   | 32px       | 100px     | Bebas Neue   | Regular |
-| `text-h5`   | 28px       | 60px      | Bebas Neue   | Regular |
-| `text-h6`   | 24px       | 52px      | Pretendard   | Bold    |
-| `text-h7`   | 20px       | 40px      | Pretendard   | Bold    |
-| `text-h8`   | 18px       | 32px      | Mixed        | Regular |
-| `text-h9`   | -          | 28px      | Pretendard   | Regular |
-| `text-h10`  | -          | 24px      | Pretendard   | Regular |
-| `text-b1`   | 16px       | 20px      | Pretendard   | Regular |
-| `text-b2`   | 15px       | 18px      | Pretendard   | Regular |
-| `text-b3`   | 14px       | 15px      | Pretendard   | Regular |
+| Class      | Mobile | PC    | Font       | Weight  |
+| ---------- | ------ | ----- | ---------- | ------- |
+| `text-h0`  | 120px  | 300px | Bebas Neue | Regular |
+| `text-h1`  | 56px   | 210px | Bebas Neue | Regular |
+| `text-h2`  | 48px   | 132px | Bebas Neue | Regular |
+| `text-h3`  | 40px   | 120px | Bebas Neue | Regular |
+| `text-h4`  | 32px   | 100px | Bebas Neue | Regular |
+| `text-h5`  | 28px   | 60px  | Bebas Neue | Regular |
+| `text-h6`  | 24px   | 52px  | Pretendard | Bold    |
+| `text-h7`  | 20px   | 40px  | Pretendard | Bold    |
+| `text-h8`  | 18px   | 32px  | Mixed      | Regular |
+| `text-h9`  | -      | 28px  | Pretendard | Regular |
+| `text-h10` | -      | 24px  | Pretendard | Regular |
+| `text-b1`  | 16px   | 20px  | Pretendard | Regular |
+| `text-b2`  | 15px   | 18px  | Pretendard | Regular |
+| `text-b3`  | 14px   | 15px  | Pretendard | Regular |
 
 ## Responsive Design
 

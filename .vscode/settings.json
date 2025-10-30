@@ -6,12 +6,6 @@
 	"tailwindCSS.includeLanguages": {
 		"svelte": "html"
 	},
-	"tailwindCSS.classAttributes": [
-		"class",
-		"className",
-		"class:list",
-		"classList",
-		"ngClass"
-	],
+	"tailwindCSS.classAttributes": ["class", "className", "class:list", "classList", "ngClass"],
 	"css.customData": [".vscode/tailwind.json"]
 }
