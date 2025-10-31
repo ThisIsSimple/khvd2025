@@ -41,18 +41,18 @@
 	<div class="relative min-h-screen bg-white flex">
 		<!-- Sticky Left Navigation (150px) -->
 		<nav
-			class="sticky left-0 top-0 h-fit w-[90px] tablet:w-[150px] bg-white z-50 flex flex-col items-center pt-[20px] shrink-0 overflow-hidden"
+			class="sticky left-0 top-0 h-fit w-[90px] tablet:w-[150px] bg-white z-50 flex flex-col items-center pt-[40px] shrink-0 overflow-hidden"
 		>
 			<!-- Back Arrow Button -->
 			<button
 				onclick={handleBack}
-				class="w-[90px] tablet:w-[150px] h-[90px] tablet:h-[150px] flex items-center justify-center hover:bg-[#f5f5f5] transition-colors mb-[80px]"
+				class="group w-[90px] tablet:w-[150px] h-[90px] tablet:h-[150px] flex items-center justify-center mb-[80px]"
 				aria-label="Go back"
 			>
 				<img
 					src="/icons/arrow_diagonal_before.svg"
 					alt="Back"
-					class="w-[35px] h-[35px] tablet:w-[70px] tablet:h-[70px]"
+					class="group-hover:scale-110 transition-transform duration-300 w-[35px] h-[35px] tablet:w-[70px] tablet:h-[70px]"
 				/>
 			</button>
 
@@ -64,14 +64,14 @@
 				<div class="w-full flex flex-col gap-[6px] items-center justify-center">
 					<a
 						href={data.designer.qrLink}
-						class="w-full block scale-115"
+						class="w-[115%] block"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
 						<img
 							src={encodeURI(data.designer.qrImage)}
 							alt={data.designer.name}
-							class="w-full h-full object-cover"
+							class="w-full h-full object-contain"
 						/>
 					</a>
 					{#if data.designer.instagramUrl}
@@ -123,9 +123,11 @@
 			<!-- Desktop Layout (≥1351px) -->
 			<div class="hidden desktop:flex">
 				<!-- Center Content (830px) -->
-				<div class="w-2/3 flex flex-col gap-[28px] px-[40px] pt-[48px]">
+				<div
+					class="w-2/3 flex flex-col gap-[28px] px-[16px] tablet:px-[40px] desktop:px-[60px] pt-[48px]"
+				>
 					<!-- Designer Name -->
-					<div class="flex gap-[40px] items-center h-[216px] justify-start">
+					<div class="flex gap-[40px] items-center h-[156px] justify-start">
 						<h1 class="font-display text-[120px] leading-none text-[#111111]">
 							{data.designer.nameEn}
 						</h1>
@@ -183,9 +185,11 @@
 				</div>
 			</div>
 
-			<div class="block desktop:hidden px-[20px] pt-[28px]">
+			<div
+				class="block desktop:hidden px-[16px] sm:px-[24px] tablet:px-[40px] desktop:px-[60px] pt-[40px]"
+			>
 				<!-- Designer Name -->
-				<div class="flex gap-[20px] items-center h-[100px] tablet:h-[156px] justify-start">
+				<div class="flex gap-[20px] items-center h-[86px] tablet:h-[156px] justify-start">
 					<h1 class="font-display text-[40px] tablet:text-[100px] leading-none text-[#111111]">
 						{data.designer.nameEn}
 					</h1>

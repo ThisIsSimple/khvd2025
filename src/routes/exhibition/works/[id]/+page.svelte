@@ -42,15 +42,19 @@
 	<div class="hidden tablet:flex relative min-h-screen bg-white">
 		<!-- Sticky Left Navigation (120px on tablet) - Hidden on mobile -->
 		<nav
-			class="hidden tablet:flex sticky left-0 top-0 h-fit w-[120px] bg-white z-50 flex-col items-center pt-[36px] shrink-0 overflow-hidden"
+			class="hidden tablet:flex sticky left-0 top-0 h-fit w-[150px] bg-white z-50 flex-col items-center pt-[40px] shrink-0 overflow-hidden"
 		>
 			<!-- Back Arrow Button -->
 			<button
 				onclick={handleBack}
-				class="w-[120px] h-[120px] flex items-center justify-center hover:bg-[#f5f5f5] transition-colors mb-[80px]"
+				class="group w-[150px] h-[150px] flex items-center justify-center mb-[80px]"
 				aria-label="Go back"
 			>
-				<img src="/icons/arrow_diagonal_before.svg" alt="Back" class="w-[56.8px] h-[56.8px]" />
+				<img
+					src="/icons/arrow_diagonal_before.svg"
+					alt="Back"
+					class="group-hover:scale-110 transition-transform duration-300 w-[70px] h-[70px]"
+				/>
 			</button>
 
 			<!-- Designer Contact Info -->
@@ -105,11 +109,11 @@
 										class="flex flex-col gap-[16px] group hover:opacity-80 transition-opacity"
 									>
 										<!-- Designer Profile Image (205x264) -->
-										<div class="w-[205px] h-[264px] overflow-hidden bg-white">
+										<div class="group w-[205px] h-[264px] overflow-hidden bg-white">
 											<img
 												src={encodeURI(designer.profileImage)}
 												alt={designer.name}
-												class="w-full h-full object-cover"
+												class="group-hover:scale-110 transition-transform duration-300 w-full h-full object-cover"
 											/>
 										</div>
 
@@ -170,14 +174,18 @@
 		<!-- Top Section: Back Arrow + Work Info -->
 		<div class="flex flex-col gap-[24px] items-center py-[40px]">
 			<!-- Back Arrow + Title Row -->
-			<div class="flex gap-[10px] items-start pl-[8px] pr-[16px] w-full">
+			<div class="flex gap-[10px] items-start w-full">
 				<!-- Back Arrow -->
 				<button
 					onclick={handleBack}
-					class="shrink-0 w-[72px] h-[72px] flex items-center justify-center sticky top-0"
+					class="group shrink-0 w-[90px] h-[90px] flex items-center justify-center sticky top-0"
 					aria-label="Go back"
 				>
-					<img src="/icons/arrow_diagonal_before.svg" alt="Back" class="w-[34.08px] h-[34.08px]" />
+					<img
+						src="/icons/arrow_diagonal_before.svg"
+						alt="Back"
+						class="group-hover:scale-110 transition-transform duration-300 w-[34.08px] h-[34.08px]"
+					/>
 				</button>
 
 				<!-- Work Title and Description -->
@@ -245,16 +253,13 @@
 			{#each Array(Math.ceil(data.designers.length / 2)) as _, rowIndex}
 				<div class="grid grid-cols-2 gap-[20px] items-center">
 					{#each data.designers.slice(rowIndex * 2, rowIndex * 2 + 2) as designer}
-						<a
-							href="/designers/{designer.id}"
-							class="flex flex-col gap-[14px] group hover:opacity-80 transition-opacity"
-						>
+						<a href="/designers/{designer.id}" class="flex flex-col gap-[14px] group">
 							<!-- Designer Profile Image (196x252) -->
 							<div class="w-[196px] h-[252px] overflow-hidden bg-white">
 								<img
 									src={encodeURI(designer.profileImage)}
 									alt={designer.name}
-									class="w-full h-full object-cover"
+									class="group-hover:scale-110 transition-transform duration-300 w-full h-full object-cover"
 								/>
 							</div>
 

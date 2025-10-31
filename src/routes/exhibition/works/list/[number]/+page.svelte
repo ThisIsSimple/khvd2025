@@ -91,13 +91,13 @@
 		<!-- Back Arrow Button (sticky) -->
 		<button
 			onclick={handleBack}
-			class="w-[150px] h-[150px] flex items-center justify-center hover:bg-[#f5f5f5] transition-colors sticky top-0"
+			class="group w-[150px] h-[150px] flex items-center justify-center sticky top-0"
 			aria-label="Go back"
 		>
 			<img
 				src="/icons/arrow_diagonal_before.svg"
 				alt="Back"
-				class="w-[71px] h-[71px]"
+				class="group-hover:scale-110 transition-transform duration-300 w-[70px] h-[70px]"
 			/>
 		</button>
 
@@ -156,16 +156,16 @@
 			class:translate-y-[-100%]={scrollingDown && scrollY > 100}
 		>
 			<div class="flex items-center gap-[6px] h-[74px] pl-[8px] pr-[16px]">
-				<!-- Back button (72×72) -->
+				<!-- Back button (70×70) -->
 				<button
 					onclick={handleBack}
-					class="size-[72px] flex items-center justify-center shrink-0"
+					class="group size-[90px] flex items-center justify-center shrink-0"
 					aria-label="Go back"
 				>
 					<img
 						src="/icons/arrow_diagonal_before.svg"
 						alt="Back"
-						class="w-[34px] h-[34px]"
+						class="group-hover:scale-110 transition-transform duration-300 w-[35px] h-[35px]"
 					/>
 				</button>
 
@@ -195,13 +195,17 @@
 			{#if info.professors.ko}
 				<div class="px-[24px] py-[32px] flex flex-col gap-[2px] items-end">
 					<!-- Korean Professor Names -->
-					<div class="flex gap-[10px] items-center text-[15px] font-bold leading-[1.4] text-[#111111]">
+					<div
+						class="flex gap-[10px] items-center text-[15px] font-bold leading-[1.4] text-[#111111]"
+					>
 						<p>지도교수</p>
 						<p>{info.professors.ko}</p>
 					</div>
 
 					<!-- English Professor Names -->
-					<div class="flex gap-[6px] items-center text-[15px] font-bold leading-[1.4] text-[#111111]">
+					<div
+						class="flex gap-[6px] items-center text-[15px] font-bold leading-[1.4] text-[#111111]"
+					>
 						<p>Prof.</p>
 						<p>{info.professors.en}</p>
 					</div>
@@ -224,7 +228,9 @@
 						<p class="mb-0">지도교수</p>
 						<p>김은정</p>
 					</div>
-					<div class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] flex items-center py-[3px]">
+					<div
+						class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] flex items-center py-[3px]"
+					>
 						[{data.professorCounts['김은정'] || 0}]
 					</div>
 				</button>
@@ -241,7 +247,9 @@
 						<p class="mb-0">지도교수</p>
 						<p>박상희</p>
 					</div>
-					<div class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] flex items-center py-[3px]">
+					<div
+						class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] flex items-center py-[3px]"
+					>
 						[{data.professorCounts['박상희'] || 0}]
 					</div>
 				</button>
@@ -249,7 +257,9 @@
 		{/if}
 
 		<!-- Desktop Header Section (Hidden on Mobile) -->
-		<div class="hidden tablet:flex w-full bg-[#fefefe] flex-col gap-[12px] pt-[48px] px-[40px] desktop:px-[60px]">
+		<div
+			class="hidden tablet:flex w-full bg-[#fefefe] flex-col gap-[12px] pt-[48px] px-[40px] desktop:px-[60px]"
+		>
 			<!-- Title and Count Container -->
 			<div class="w-full flex flex-col items-start justify-center">
 				<!-- Title Row -->
@@ -284,13 +294,17 @@
 				<div class="w-full flex flex-col items-end justify-end">
 					<div class="flex flex-col gap-[5px] items-end">
 						<!-- Korean Professor Names -->
-						<div class="flex gap-[12px] items-center text-[20px] font-bold leading-[1.4] text-[#111111]">
+						<div
+							class="flex gap-[12px] items-center text-[20px] font-bold leading-[1.4] text-[#111111]"
+						>
 							<p>지도교수</p>
 							<p>{info.professors.ko}</p>
 						</div>
 
 						<!-- English Professor Names -->
-						<div class="flex gap-[8px] items-center text-[20px] font-bold leading-[1.4] text-[#111111]">
+						<div
+							class="flex gap-[8px] items-center text-[20px] font-bold leading-[1.4] text-[#111111]"
+						>
 							<p>Prof.</p>
 							<p>{info.professors.en}</p>
 						</div>
