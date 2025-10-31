@@ -48,7 +48,7 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
 
 		// Update message
 		await query<ResultSetHeader>(
-			'UPDATE messages SET message = ?, updated_at = NOW() WHERE id = ?',
+			'UPDATE messages SET message = ? WHERE id = ?',
 			[data.message.trim(), id]
 		);
 
