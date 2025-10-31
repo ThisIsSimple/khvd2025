@@ -121,30 +121,3 @@ CREATE TABLE IF NOT EXISTS `work_designers` (
   INDEX `idx_designer_id` (`designer_id`) COMMENT 'Index for finding works by designer',
   UNIQUE KEY `unique_work_designer` (`work_id`, `designer_id`) COMMENT 'Prevent duplicate associations'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Work-Designer association table';
-
--- ================================================================
--- Sample data for testing (optional)
--- ================================================================
-
--- Insert sample designers
-INSERT INTO `designers` (`id`, `name`, `eng_name`, `profile_image`, `introduction`, `interview1`, `interview2`, `email`, `instagram`) VALUES
-(1, '김디자인', 'Kim Design', '/images/designers/kim.jpg', '안녕하세요, 시각디자이너 김디자인입니다.', '디자인은 문제를 해결하는 창의적인 과정이라고 생각합니다.', '졸업 후에는 브랜딩 전문 디자이너로 성장하고 싶습니다.', 'kim@example.com', '@kim_design'),
-(2, '이비주얼', 'Lee Visual', '/images/designers/lee.jpg', '경험 디자인에 관심이 많은 이비주얼입니다.', 'UX/UI 디자인을 통해 사용자에게 가치를 전달하고 싶습니다.', '인터랙티브 미디어 분야에서 일하고 싶습니다.', 'lee@example.com', '@lee_visual');
-
--- Insert sample works
-INSERT INTO `works` (`id`, `thumbnail`, `title`, `description`, `content`, `professor`, `group_number`) VALUES
-(1, '/images/works/work1-thumb.jpg', '지속 가능한 패키지 디자인', '친환경 소재를 활용한 패키지 디자인 프로젝트', '환경을 생각하는 디자인으로 플라스틱 사용을 최소화하고 재활용 가능한 소재를 활용했습니다. 제품의 본질을 해치지 않으면서도 지구를 생각하는 디자인을 제안합니다.', 'Eun Jeong Kim, Sang Hee Park', 0),
-(2, '/images/works/work2-thumb.jpg', '도시 재생 브랜딩', '지역 커뮤니티를 위한 통합 브랜딩 프로젝트', '낡은 도시에 새로운 생명을 불어넣는 브랜딩 작업입니다. 지역 주민들과 함께 만들어가는 브랜드 아이덴티티를 통해 커뮤니티의 가치를 높입니다.', 'Kyungwon Lee, Aeri You', 1);
-
--- Link designers to works
-INSERT INTO `work_designers` (`work_id`, `designer_id`) VALUES
-(1, 1),
-(2, 2);
-
--- Insert sample work images
-INSERT INTO `work_images` (`work_id`, `image`, `platform`, `order`) VALUES
-(1, '/images/works/work1-img1.jpg', 'pc', 1),
-(1, '/images/works/work1-img2.jpg', 'pc', 2),
-(1, '/images/works/work1-mobile.jpg', 'mobile', 1),
-(2, '/images/works/work2-img1.jpg', 'pc', 1),
-(2, '/images/works/work2-img2.jpg', 'pc', 2);
