@@ -237,7 +237,7 @@
 <section
 	class={isForTarget
 		? 'bg-white flex flex-col gap-[20px] items-stretch'
-		: 'relative flex flex-col gap-[80px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]'}
+		: 'relative flex flex-col gap-[40px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]'}
 >
 	<!-- Background Image (only for general message board) -->
 	{#if !isForTarget}
@@ -404,7 +404,7 @@
 							onkeydown={handleSubmit}
 							placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
 							disabled={isSubmitting}
-							class="w-full h-full resize-none outline-none text-black text-[16px] tablet:text-[20px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+							class="w-full h-full resize-none outline-none text-black text-[16px] tablet:text-[18px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
 							maxlength="120"
 						></textarea>
 					</div>
@@ -447,7 +447,7 @@
 						let:motion
 					>
 						<div use:motion class="absolute inset-0 w-full" style="z-index: 1;">
-							<div class="flex flex-col gap-[24px] items-center justify-center w-full">
+							<div class="flex flex-col gap-[12px] items-center justify-center w-full">
 								<!-- Row 1 -->
 								<div
 									class="grid {isForTarget
@@ -527,7 +527,7 @@
 						class="absolute inset-0 w-full cursor-grab active:cursor-grabbing"
 						style="z-index: {isTransitioning ? 2 : 1};"
 					>
-						<div class="flex flex-col gap-[24px] items-center justify-center w-full">
+						<div class="flex flex-col gap-[12px] items-center justify-center w-full">
 							<!-- Row 1 -->
 							<div
 								class="grid {isForTarget

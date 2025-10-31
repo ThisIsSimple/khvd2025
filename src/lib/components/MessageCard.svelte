@@ -23,8 +23,8 @@
 
 <div
 	class={isForTarget
-		? 'bg-[#f6f6f6] flex flex-col gap-[20px] tablet:gap-[24px] items-end justify-between pt-[20px] pb-[12px] px-[14px] tablet:p-[24px] w-full'
-		: 'bg-[#fefefe] flex flex-col gap-[20px] items-end justify-between py-[20px] px-[14px] tablet:p-[20px] w-full'}
+		? 'bg-[#f6f6f6] flex flex-col gap-[40px] tablet:gap-[24px] items-end justify-between pt-[20px] pb-[12px] px-[14px] tablet:p-[24px] w-full'
+		: 'bg-[#fefefe] flex flex-col gap-[40px] items-end justify-between py-[20px] px-[14px] tablet:p-[20px] w-full'}
 >
 	<!-- Text Container -->
 	<div
