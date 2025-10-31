@@ -14,6 +14,7 @@
 	let { type, targetId, isForTarget = false }: Props = $props();
 
 	let messages = $state<Message[]>([]);
+	let prevMessages = $state<Message[]>([]); // Previous page messages for smooth transition
 	let totalMessages = $state(0);
 	let inputText = $state('');
 	let writerName = $state('');
@@ -177,6 +178,10 @@
 		pageDirection = page > currentPage ? 'forward' : 'backward';
 		isTransitioning = true;
 
+		// Store current messages as previous
+		prevMessages = [...messages];
+
+		// Fetch new messages
 		await fetchMessages(page);
 
 		// Reset after animation completes
@@ -399,7 +404,7 @@
 							onkeydown={handleSubmit}
 							placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
 							disabled={isSubmitting}
-							class="w-full h-full resize-none outline-none text-black text-[20px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+							class="w-full h-full resize-none outline-none text-black text-[16px] tablet:text-[20px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
 							maxlength="120"
 						></textarea>
 					</div>
@@ -432,35 +437,16 @@
 				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">첫 번째 메시지를 남겨주세요!</p>
 			</div>
 		{:else}
-			<!-- Messages Grid with Animation - Fixed Height Container with Swipe Support -->
+			<!-- Messages Grid with Two-Layer Animation System -->
 			<div class="relative min-h-[400px] tablet:min-h-[480px] w-full overflow-hidden">
-				{#key currentPage}
+				<!-- Previous Messages Layer (fading out during transition) -->
+				{#if isTransitioning && prevMessages.length > 0}
 					<Motion
-						initial={{ opacity: 0, x: pageDirection === 'forward' ? 100 : -100 }}
-						animate={{ opacity: 1, x: 0 }}
+						animate={{ opacity: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						drag="x"
-						dragConstraints={{ left: 0, right: 0 }}
-						dragElastic={0.2}
-						onDragEnd={(_event, info) => {
-							const swipeThreshold = 50;
-							const swipeVelocity = 500;
-
-							if (info.offset.x < -swipeThreshold || info.velocity.x < -swipeVelocity) {
-								// Swiped left - go to next page
-								if (currentPage < totalPages - 1) {
-									goToPage(currentPage + 1);
-								}
-							} else if (info.offset.x > swipeThreshold || info.velocity.x > swipeVelocity) {
-								// Swiped right - go to previous page
-								if (currentPage > 0) {
-									goToPage(currentPage - 1);
-								}
-							}
-						}}
 						let:motion
 					>
-						<div use:motion class="absolute inset-0 w-full cursor-grab active:cursor-grabbing">
+						<div use:motion class="absolute inset-0 w-full" style="z-index: 1;">
 							<div class="flex flex-col gap-[24px] items-center justify-center w-full">
 								<!-- Row 1 -->
 								<div
@@ -468,7 +454,7 @@
 										? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
 										: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
 								>
-									{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
+									{#each prevMessages.slice(0, itemsPerRow) as message (message.id)}
 										<MessageCard
 											id={message.id}
 											writer={message.writer}
@@ -481,13 +467,13 @@
 								</div>
 
 								<!-- Row 2 -->
-								{#if currentMessages.length > itemsPerRow}
+								{#if prevMessages.length > itemsPerRow}
 									<div
 										class="grid {isForTarget
 											? 'grid-cols-4'
 											: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
 									>
-										{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
+										{#each prevMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
 											<MessageCard
 												id={message.id}
 												writer={message.writer}
@@ -502,7 +488,86 @@
 							</div>
 						</div>
 					</Motion>
-				{/key}
+				{/if}
+
+				<!-- Current Messages Layer (always rendered, fading in during transition) -->
+				<Motion
+					animate={{
+						opacity: isTransitioning ? 1 : 1,
+						x: isTransitioning ? 0 : 0
+					}}
+					initial={{
+						opacity: isTransitioning ? 0 : 1,
+						x: isTransitioning ? (pageDirection === 'forward' ? 100 : -100) : 0
+					}}
+					transition={{ duration: 0.4, ease: 'easeInOut' }}
+					drag="x"
+					dragConstraints={{ left: 0, right: 0 }}
+					dragElastic={0.2}
+					onDragEnd={(_event, info) => {
+						const swipeThreshold = 50;
+						const swipeVelocity = 500;
+
+						if (info.offset.x < -swipeThreshold || info.velocity.x < -swipeVelocity) {
+							// Swiped left - go to next page
+							if (currentPage < totalPages - 1) {
+								goToPage(currentPage + 1);
+							}
+						} else if (info.offset.x > swipeThreshold || info.velocity.x > swipeVelocity) {
+							// Swiped right - go to previous page
+							if (currentPage > 0) {
+								goToPage(currentPage - 1);
+							}
+						}
+					}}
+					let:motion
+				>
+					<div
+						use:motion
+						class="absolute inset-0 w-full cursor-grab active:cursor-grabbing"
+						style="z-index: {isTransitioning ? 2 : 1};"
+					>
+						<div class="flex flex-col gap-[24px] items-center justify-center w-full">
+							<!-- Row 1 -->
+							<div
+								class="grid {isForTarget
+									? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
+									: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
+							>
+								{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
+									<MessageCard
+										id={message.id}
+										writer={message.writer}
+										text={message.text}
+										date={message.date}
+										onedit={handleEdit}
+										{isForTarget}
+									/>
+								{/each}
+							</div>
+
+							<!-- Row 2 -->
+							{#if currentMessages.length > itemsPerRow}
+								<div
+									class="grid {isForTarget
+										? 'grid-cols-4'
+										: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
+								>
+									{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
+										<MessageCard
+											id={message.id}
+											writer={message.writer}
+											text={message.text}
+											date={message.date}
+											onedit={handleEdit}
+											{isForTarget}
+										/>
+									{/each}
+								</div>
+							{/if}
+						</div>
+					</div>
+				</Motion>
 			</div>
 		{/if}
 
