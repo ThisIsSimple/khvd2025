@@ -3,6 +3,7 @@
 	import EditMessageModal from './EditMessageModal.svelte';
 	import type { Message, MessagesResponse } from '$lib/types/message';
 	import { onMount } from 'svelte';
+	import { Motion } from 'svelte-motion';
 
 	interface Props {
 		type?: string;
@@ -21,6 +22,10 @@
 	let isLoading = $state(false);
 	let isSubmitting = $state(false);
 	let error = $state<string | null>(null);
+
+	// Animation state
+	let pageDirection = $state<'forward' | 'backward' | null>(null);
+	let isTransitioning = $state(false);
 
 	// Edit modal state
 	let editingMessage = $state<Message | null>(null);
@@ -167,7 +172,18 @@
 	}
 
 	async function goToPage(page: number) {
+		if (isTransitioning || page < 0 || page >= totalPages) return;
+
+		pageDirection = page > currentPage ? 'forward' : 'backward';
+		isTransitioning = true;
+
 		await fetchMessages(page);
+
+		// Reset after animation completes
+		setTimeout(() => {
+			isTransitioning = false;
+			pageDirection = null;
+		}, 400);
 	}
 
 	function handleEdit(messageId: number) {
@@ -193,8 +209,22 @@
 
 		window.addEventListener('resize', updateMessagesPerPage);
 
+		// Keyboard navigation
+		function handleKeyboard(e: KeyboardEvent) {
+			if (e.key === 'ArrowLeft' && currentPage > 0) {
+				e.preventDefault();
+				goToPage(currentPage - 1);
+			} else if (e.key === 'ArrowRight' && currentPage < totalPages - 1) {
+				e.preventDefault();
+				goToPage(currentPage + 1);
+			}
+		}
+
+		window.addEventListener('keydown', handleKeyboard);
+
 		return () => {
 			window.removeEventListener('resize', updateMessagesPerPage);
+			window.removeEventListener('keydown', handleKeyboard);
 		};
 	});
 </script>
@@ -402,45 +432,77 @@
 				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">첫 번째 메시지를 남겨주세요!</p>
 			</div>
 		{:else}
-			<!-- Messages Grid -->
-			<div class="flex flex-col gap-[24px] items-center justify-center w-full">
-				<!-- Row 1 -->
-				<div
-					class="grid {isForTarget
-						? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
-						: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
-				>
-					{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
-						<MessageCard
-							id={message.id}
-							writer={message.writer}
-							text={message.text}
-							date={message.date}
-							onedit={handleEdit}
-							{isForTarget}
-						/>
-					{/each}
-				</div>
+			<!-- Messages Grid with Animation - Fixed Height Container with Swipe Support -->
+			<div class="relative min-h-[400px] tablet:min-h-[480px] w-full overflow-hidden">
+				{#key currentPage}
+					<Motion
+						initial={{ opacity: 0, x: pageDirection === 'forward' ? 100 : -100 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.4, ease: 'easeInOut' }}
+						drag="x"
+						dragConstraints={{ left: 0, right: 0 }}
+						dragElastic={0.2}
+						onDragEnd={(_event, info) => {
+							const swipeThreshold = 50;
+							const swipeVelocity = 500;
 
-				<!-- Row 2 -->
-				{#if currentMessages.length > itemsPerRow}
-					<div
-						class="grid {isForTarget
-							? 'grid-cols-4'
-							: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
+							if (info.offset.x < -swipeThreshold || info.velocity.x < -swipeVelocity) {
+								// Swiped left - go to next page
+								if (currentPage < totalPages - 1) {
+									goToPage(currentPage + 1);
+								}
+							} else if (info.offset.x > swipeThreshold || info.velocity.x > swipeVelocity) {
+								// Swiped right - go to previous page
+								if (currentPage > 0) {
+									goToPage(currentPage - 1);
+								}
+							}
+						}}
+						let:motion
 					>
-						{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
-							<MessageCard
-								id={message.id}
-								writer={message.writer}
-								text={message.text}
-								date={message.date}
-								onedit={handleEdit}
-								{isForTarget}
-							/>
-						{/each}
-					</div>
-				{/if}
+						<div use:motion class="absolute inset-0 w-full cursor-grab active:cursor-grabbing">
+							<div class="flex flex-col gap-[24px] items-center justify-center w-full">
+								<!-- Row 1 -->
+								<div
+									class="grid {isForTarget
+										? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
+										: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
+								>
+									{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
+										<MessageCard
+											id={message.id}
+											writer={message.writer}
+											text={message.text}
+											date={message.date}
+											onedit={handleEdit}
+											{isForTarget}
+										/>
+									{/each}
+								</div>
+
+								<!-- Row 2 -->
+								{#if currentMessages.length > itemsPerRow}
+									<div
+										class="grid {isForTarget
+											? 'grid-cols-4'
+											: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
+									>
+										{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
+											<MessageCard
+												id={message.id}
+												writer={message.writer}
+												text={message.text}
+												date={message.date}
+												onedit={handleEdit}
+												{isForTarget}
+											/>
+										{/each}
+									</div>
+								{/if}
+							</div>
+						</div>
+					</Motion>
+				{/key}
 			</div>
 		{/if}
 
@@ -448,27 +510,78 @@
 		{#if totalPages > 1}
 			<div
 				class="flex items-center {isForTarget
-					? 'gap-0 px-[12px]'
-					: 'gap-0 px-[12px] mt-[20px] xs:mt-[40px]'}"
+					? 'gap-4 px-[12px]'
+					: 'gap-4 px-[12px] mt-[20px] xs:mt-[40px]'}"
 			>
-				{#each Array(totalPages) as _, index}
-					<button
-						onclick={() => goToPage(index)}
-						class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 cursor-pointer"
-						aria-label={`Page ${index + 1}`}
-						disabled={isLoading}
+				<!-- Previous Button -->
+				<button
+					onclick={() => goToPage(currentPage - 1)}
+					disabled={currentPage === 0 || isLoading || isTransitioning}
+					class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 disabled:opacity-30 disabled:cursor-not-allowed"
+					aria-label="Previous page"
+				>
+					<svg
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
 					>
-						<div class="w-[14px] h-[14px]">
-							<img
-								src={currentPage === index
-									? '/icons/pagination-active.svg'
-									: '/icons/pagination-default.svg'}
-								alt=""
-								class="w-full h-full"
-							/>
-						</div>
-					</button>
-				{/each}
+						<path
+							d="M15 18L9 12L15 6"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</button>
+
+				<!-- Page Dots -->
+				<div class="flex items-center gap-0">
+					{#each Array(totalPages) as _, index}
+						<button
+							onclick={() => goToPage(index)}
+							class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 cursor-pointer disabled:opacity-50"
+							aria-label={`Page ${index + 1}`}
+							disabled={isLoading || isTransitioning}
+						>
+							<div class="w-[14px] h-[14px]">
+								<img
+									src={currentPage === index
+										? '/icons/pagination-active.svg'
+										: '/icons/pagination-default.svg'}
+									alt=""
+									class="w-full h-full"
+								/>
+							</div>
+						</button>
+					{/each}
+				</div>
+
+				<!-- Next Button -->
+				<button
+					onclick={() => goToPage(currentPage + 1)}
+					disabled={currentPage === totalPages - 1 || isLoading || isTransitioning}
+					class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 disabled:opacity-30 disabled:cursor-not-allowed"
+					aria-label="Next page"
+				>
+					<svg
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M9 18L15 12L9 6"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</button>
 			</div>
 		{/if}
 	</div>
