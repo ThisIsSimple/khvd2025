@@ -200,9 +200,9 @@
 </script>
 
 <section
-	class="{isForTarget
+	class={isForTarget
 		? 'bg-white flex flex-col gap-[20px] items-stretch'
-		: 'relative flex flex-col gap-[80px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]'}"
+		: 'relative flex flex-col gap-[80px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]'}
 >
 	<!-- Background Image (only for general message board) -->
 	{#if !isForTarget}
@@ -215,9 +215,9 @@
 
 	<!-- Input Section -->
 	<div
-		class="{isForTarget
+		class={isForTarget
 			? 'flex flex-col gap-[24px] items-center justify-center w-full'
-			: 'relative flex flex-col gap-[16px] tablet:gap-[32px] items-center w-full max-w-[680px]'}"
+			: 'relative flex flex-col gap-[16px] tablet:gap-[32px] items-center w-full max-w-[680px]'}
 	>
 		<!-- Title -->
 		<div class="flex gap-[10px] items-center w-full {isForTarget ? '' : 'justify-center'}">
@@ -246,7 +246,9 @@
 					<!-- Writer Field -->
 					<div class="flex-1 flex items-center border-r border-[#cccccc]">
 						<!-- Label -->
-						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+						<div
+							class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
+						>
 							<p class="font-bold text-[#777777] text-[16px] leading-[1.4] whitespace-nowrap">
 								작성자
 							</p>
@@ -267,7 +269,9 @@
 					<!-- Password Field -->
 					<div class="flex-1 flex items-center">
 						<!-- Label -->
-						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
+						<div
+							class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
+						>
 							<p class="font-bold text-[#777777] text-[16px] leading-[1.4] whitespace-nowrap">
 								비밀번호
 							</p>
@@ -278,7 +282,7 @@
 								type="password"
 								bind:value={password}
 								placeholder="0000"
-								maxlength="10"
+								maxlength="4"
 								disabled={isSubmitting}
 								class="w-full font-normal text-[#999999] text-[16px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
 							/>
@@ -295,7 +299,7 @@
 							onkeydown={handleSubmit}
 							placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
 							disabled={isSubmitting}
-							class="w-full h-full resize-none outline-none font-normal text-[#999999] text-[20px] leading-[1.5] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+							class="w-full h-full resize-none outline-none font-normal text-[#999999] text-[15px] sm:text-[18px] tablet:text-[20px] leading-[1.5] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
 							maxlength="120"
 						></textarea>
 					</div>
@@ -315,8 +319,10 @@
 				<div class="flex items-start justify-end w-full border-b border-[#cccccc]">
 					<!-- Writer Field -->
 					<div class="flex-1 flex items-center border-r border-[#cccccc]">
-						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
-							<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+						<div
+							class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
+						>
+							<p class="font-semibold text-[#777777] text-[16px] leading-[1.4] whitespace-nowrap">
 								작성자
 							</p>
 						</div>
@@ -327,15 +333,17 @@
 								placeholder="닉네임을 입력해주세요..."
 								maxlength="10"
 								disabled={isSubmitting}
-								class="w-full font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+								class="w-full font-normal text-black text-[16px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
 							/>
 						</div>
 					</div>
 
 					<!-- Password Field -->
-					<div class="flex items-center border-r border-[#cccccc]">
-						<div class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]">
-							<p class="font-bold text-[#777777] text-[16px] tablet:text-[20px] leading-[1.4] whitespace-nowrap">
+					<div class="flex items-center">
+						<div
+							class="flex items-center justify-center px-[16px] py-[14px] border-r border-[#cccccc]"
+						>
+							<p class="font-semibold text-[#777777] text-[16px] leading-[1.4] whitespace-nowrap">
 								비밀번호
 							</p>
 						</div>
@@ -346,7 +354,7 @@
 								placeholder="0000"
 								maxlength="4"
 								disabled={isSubmitting}
-								class="w-full text-center font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
+								class="w-full text-center font-normal text-black text-[16px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
 							/>
 						</div>
 					</div>
@@ -361,7 +369,7 @@
 							onkeydown={handleSubmit}
 							placeholder="글 작성 후 엔터(ENTER)를 눌러주세요..."
 							disabled={isSubmitting}
-							class="w-full h-full resize-none outline-none font-bold text-black text-[20px] tablet:text-[24px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
+							class="w-full h-full resize-none outline-none text-black text-[20px] leading-[1.4] tracking-[-0.48px] placeholder:text-[#999999] bg-transparent disabled:opacity-50"
 							maxlength="120"
 						></textarea>
 					</div>
@@ -379,9 +387,9 @@
 
 	<!-- Messages Grid Section -->
 	<div
-		class="{isForTarget
+		class={isForTarget
 			? 'flex flex-col gap-[40px] items-center justify-end px-0 py-[32px] w-full'
-			: 'relative flex flex-col items-center w-full max-w-[1920px]'}"
+			: 'relative flex flex-col items-center w-full max-w-[1920px]'}
 	>
 		{#if isLoading}
 			<!-- Loading State -->
@@ -409,7 +417,7 @@
 							text={message.text}
 							date={message.date}
 							onedit={handleEdit}
-							isForTarget={isForTarget}
+							{isForTarget}
 						/>
 					{/each}
 				</div>
@@ -428,7 +436,7 @@
 								text={message.text}
 								date={message.date}
 								onedit={handleEdit}
-								isForTarget={isForTarget}
+								{isForTarget}
 							/>
 						{/each}
 					</div>
@@ -438,7 +446,11 @@
 
 		<!-- Pagination Controls -->
 		{#if totalPages > 1}
-			<div class="flex items-center {isForTarget ? 'gap-0 px-[12px]' : 'gap-0 px-[12px] mt-[20px] xs:mt-[40px]'}">
+			<div
+				class="flex items-center {isForTarget
+					? 'gap-0 px-[12px]'
+					: 'gap-0 px-[12px] mt-[20px] xs:mt-[40px]'}"
+			>
 				{#each Array(totalPages) as _, index}
 					<button
 						onclick={() => goToPage(index)}
