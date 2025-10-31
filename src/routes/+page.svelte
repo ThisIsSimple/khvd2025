@@ -32,14 +32,18 @@
 <div class="relative min-h-screen">
 	<!-- Section 1: Hero Section with R=VD Logo -->
 	<section class="white-cursor relative w-full aspect-video">
-		<!-- Background Image -->
+		<!-- Background Video -->
 		<div class="absolute inset-0 overflow-hidden pointer-events-none">
-			<img
-				src="/exhibition-hero-bg.png"
-				alt=""
+			<video
+				src="/main-poster-video.webm"
+				autoplay
+				loop
+				muted
+				playsinline
 				class="absolute w-full h-full object-cover"
-				style="width: 100.67%; height: 112.53%; left: -0.35%; top: -6.33%;"
-			/>
+			>
+				<track kind="captions" />
+			</video>
 		</div>
 
 		<!-- Content will be added here -->
@@ -49,7 +53,7 @@
 	</section>
 
 	<!-- Section 2: Exhibition Concept -->
-	<section class="orange-cursor orange-menu relative w-full flex flex-col">
+	<section class="orange-menu relative w-full flex flex-col">
 		<!-- Background Image -->
 		<img
 			src="/exhibition-section2-bg.png"
@@ -85,7 +89,7 @@
 				</div>
 
 				<!-- Description -->
-				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[40px] text-center">
+				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-center">
 					<p class="text-primary">Reenvision, 무뎌졌던 감각을 다시 일깨우고,</p>
 					<p class="text-primary">범람하는 정보들을 자신만의 것으로 재구상하는 과정.</p>
 					<p>&nbsp;</p>
@@ -116,7 +120,7 @@
 				</div>
 
 				<!-- Description -->
-				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[40px] text-center">
+				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-center">
 					<p>다듬어진 시선과 가치들은 시각디자인이라는 매체를 통해</p>
 					<p>Realization, 눈 앞의 현실로 드러납니다.</p>
 					<p>&nbsp;</p>
@@ -165,7 +169,7 @@
 				<p
 					class="font-display tablet:text-[32px] desktop:text-[52px] tablet:leading-[1.3] desktop:leading-[1.1] tablet:tracking-[-0.64px] desktop:tracking-normal text-[#111111]"
 				>
-					10:00 AM - 05:30 PM
+					10:00 AM - 08:00 PM
 				</p>
 			</div>
 
@@ -182,13 +186,13 @@
 						class="flex items-center tablet:gap-[12px] desktop:gap-[32px] font-bold text-[#111111] whitespace-nowrap"
 					>
 						<p class="tablet:text-[20px] desktop:text-[28px] leading-[1.4]">2025.11.05</p>
-						<p class="tablet:text-[20px] desktop:text-[32px] leading-[1.4]">-</p>
+						<p class="tablet:text-[20px] desktop:text-[28px] leading-[1.4]">-</p>
 						<p class="tablet:text-[20px] desktop:text-[28px] leading-[1.4]">2025.11.09</p>
 					</div>
 				</div>
 
 				<!-- 전시 장소 -->
-				<div class="flex flex-col gap-[5px]">
+				<div class="flex flex-col gap-[9px]">
 					<h4
 						class="font-bold tablet:text-[24px] desktop:text-[28px] tablet:tracking-[-0.48px] desktop:tracking-normal leading-[1.4] text-[#111111]"
 					>

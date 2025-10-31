@@ -21,18 +21,18 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	// Redirect to teaser page if before exhibition period (unless admin or accessing allowed paths)
-	if (isBeforeExhibition()) {
-		const allowedPaths = ['/teaser', '/admin/login', '/admin/logout', '/api'];
-		const isAllowedPath = allowedPaths.some((path) => event.url.pathname.startsWith(path));
+	// if (isBeforeExhibition()) {
+	// 	const allowedPaths = ['/teaser', '/admin/login', '/admin/logout', '/api'];
+	// 	const isAllowedPath = allowedPaths.some((path) => event.url.pathname.startsWith(path));
 
-		// Redirect to teaser if not admin and not accessing allowed paths
-		if (!user && !isAllowedPath) {
-			return new Response('Redirect', {
-				status: 303,
-				headers: { Location: '/teaser' }
-			});
-		}
-	}
+	// 	// Redirect to teaser if not admin and not accessing allowed paths
+	// 	if (!user && !isAllowedPath) {
+	// 		return new Response('Redirect', {
+	// 			status: 303,
+	// 			headers: { Location: '/teaser' }
+	// 		});
+	// 	}
+	// }
 
 	return resolve(event);
 };

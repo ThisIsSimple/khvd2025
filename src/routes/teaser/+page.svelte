@@ -11,7 +11,7 @@
 </svelte:head>
 
 <div class="relative min-h-screen">
-	<div class="relative inset-0 w-full h-screen">
+	<div class="white-cursor relative inset-0 w-full h-screen">
 		<!-- Background Video - Mobile -->
 		<video
 			src="/teaser-background-mobile.webm"

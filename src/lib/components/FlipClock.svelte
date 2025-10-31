@@ -76,6 +76,13 @@
 		return num.toString().padStart(2, '0');
 	}
 
+	function formatDayDigit(dayValue: number, position: number): string {
+		if (position === 0) {
+			return 'D';
+		}
+		return padZero(dayValue)[position];
+	}
+
 	function hasChanged(current: number, previous: number, position: number): boolean {
 		const currentDigit = padZero(current)[position];
 		const prevDigit = padZero(previous)[position];
@@ -91,12 +98,12 @@
 				<div class="flip-card">
 					<!-- Upper half - updates immediately -->
 					<div class="flip-card-top">
-						<span class="flip-card-number">{padZero(topDays)[position]}</span>
+						<span class="flip-card-number">{formatDayDigit(topDays, position)}</span>
 					</div>
 
 					<!-- Lower half - updates after animation ends -->
 					<div class="flip-card-bottom">
-						<span class="flip-card-number">{padZero(bottomDays)[position]}</span>
+						<span class="flip-card-number">{formatDayDigit(bottomDays, position)}</span>
 					</div>
 
 					<!-- Flipping piece - shows old bottom value during animation -->
@@ -104,10 +111,10 @@
 						{#if hasChanged(topDays, bottomDays, position)}
 							<div class="flip-card-top-flip" onanimationend={applyBottomValues}>
 								<div class="flip-card-front">
-									<span class="flip-card-number">{padZero(bottomDays)[position]}</span>
+									<span class="flip-card-number">{formatDayDigit(bottomDays, position)}</span>
 								</div>
 								<div class="flip-card-back">
-									<span class="flip-card-number">{padZero(topDays)[position]}</span>
+									<span class="flip-card-number">{formatDayDigit(topDays, position)}</span>
 								</div>
 							</div>
 						{/if}
@@ -117,7 +124,7 @@
 		</div>
 	</div>
 
-	<span class="text-4xl text-black font-bold -mt-6">:</span>
+	<span class="text-4xl text-black font-bold -mt-6 opacity-0">:</span>
 
 	<!-- Hours -->
 	<div class="flex flex-col items-center">

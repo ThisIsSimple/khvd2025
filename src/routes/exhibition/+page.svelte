@@ -26,7 +26,11 @@
 </script>
 
 <!-- Exhibition About Page -->
-<div class="bg-transparent w-full min-h-screen overflow-hidden">
+<div
+	class="{uiState.isUIHidden
+		? 'white-cursor'
+		: ''} bg-transparent w-full min-h-screen overflow-hidden"
+>
 	<!-- Main Content -->
 	<div
 		class="bg-[#fefefe] tablet:w-3/4 pb-[180px] transition-transform duration-500 ease-in-out"

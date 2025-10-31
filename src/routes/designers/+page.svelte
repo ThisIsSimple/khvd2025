@@ -143,6 +143,8 @@
 	// Handle filter selection
 	function selectFilter(filter: FilterType) {
 		selectedFilter = filter;
+		// Smooth scroll to top when filter changes
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 </script>
 
@@ -155,18 +157,18 @@
 	<nav
 		class="sticky top-0 z-30 bg-white
 		px-4 sm:px-6 tablet:px-[40px]
-		py-2 sm:py-2 tablet:py-[24px] desktop:py-[48px]
-		flex flex-col tablet:flex-row gap-4 tablet:gap-[52px] items-start tablet:items-center
+		pt-4 pb-2 sm:pt-4 sm:pb-2 tablet:py-[24px]
+		flex flex-col tablet:flex-row tablet:gap-[52px] items-start tablet:items-center
 		border-b border-[#e5e5e5]"
 	>
 		<!-- Title Section -->
-		<div class="flex gap-[16px] items-center shrink-0">
+		<div class="flex gap-[16px] items-start shrink-0">
 			<h1 class="font-display text-[56px] tablet:text-[120px] leading-none text-[#111111]">
 				DESIGNER
 			</h1>
 			<div class="flex items-start pt-[4px]">
 				<span
-					class="font-display text-[24px] tablet:text-[40px] leading-[1.4] tracking-[-0.8px] text-[#111111]"
+					class="font-display text-[24px] tablet:text-[40px] leading-none tracking-[-0.8px] text-[#111111]"
 				>
 					[{data.total}]
 				</span>
@@ -255,7 +257,7 @@
 	</nav>
 
 	<!-- Content Section -->
-	<main class="px-[16px] tablet:px-[40px] py-[60px] tablet:py-[100px]">
+	<main class="px-[16px] tablet:px-[40px] py-[40px] tablet:py-[60px]">
 		{#if data.error}
 			<!-- Error state -->
 			<div class="text-center py-[100px]">
@@ -272,10 +274,10 @@
 			<!-- Designers Grid with Responsive Breakpoints -->
 			<div
 				class="grid
-				   grid-cols-2 gap-[12px]
-				   sm:grid-cols-3 sm:gap-[16px]
-				   tablet:grid-cols-4 tablet:gap-[20px]
-				   desktop:grid-cols-5 desktop:gap-[24px]"
+				   grid-cols-2 gap-x-[12px] gap-y-[24px]
+				   sm:grid-cols-3 sm:gap-x-[16px] sm:gap-y-[32px]
+				   tablet:grid-cols-4 tablet:gap-x-[20px] tablet:gap-y-[40px]
+				   desktop:grid-cols-5 desktop:gap-x-[24px] desktop:gap-y-[60px]"
 			>
 				{#each filteredDesigners() as designer (designer.id)}
 					<DesignerCard

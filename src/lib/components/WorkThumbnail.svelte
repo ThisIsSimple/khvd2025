@@ -58,8 +58,8 @@
 		>
 			<!-- Work Info -->
 			<div class="flex flex-col items-center text-center text-white">
-				<p class="font-bold text-[28px] leading-[1.4]">{title}</p>
-				<p class="text-[20px] leading-[1.5] text-[#eeeeee]">{groupName}</p>
+				<p class="text-[22px] desktop:text-[28px] leading-[1.4] font-bold">{title}</p>
+				<p class="text-[16px] desktop:text-[20px] leading-[1.5] text-[#eeeeee]">{groupName}</p>
 			</div>
 
 			<!-- Action Icons -->

@@ -36,12 +36,12 @@
 <div
 	role="link"
 	tabindex="0"
-	class="gap-[16px] w-full group/card block cursor-pointer"
+	class="w-full group/card block cursor-pointer"
 	onclick={handleCardClick}
 	onkeydown={handleCardKeydown}
 >
 	<!-- Image Container with Hover Effects -->
-	<div class="relative w-full aspect-[258/332] bg-white overflow-hidden group mb-4">
+	<div class="relative w-full aspect-[258/332] bg-white overflow-hidden group mb-2 tablet:mb-4">
 		<!-- Profile Image with Grayscale Effect -->
 		<img
 			src={imageUrl}

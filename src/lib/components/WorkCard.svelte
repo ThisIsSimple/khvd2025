@@ -62,7 +62,7 @@
 		<!-- Number and Count Container -->
 		<div class="relative flex items-start justify-between w-full">
 			<!-- Left: Number, Text, and Arrow -->
-			<div class="flex gap-[12px] xl:gap-[24px] items-start pt-[12px]">
+			<div class="flex gap-[12px] tablet:gap-[20px] xl:gap-[24px] items-start pt-[12px]">
 				<!-- Large Number -->
 				<div class="w-">
 					<p
@@ -88,14 +88,14 @@
 						>
 							{#if category}
 								<div
-									class="flex flex-col font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe]"
+									class="flex flex-col font-display text-[52px] xl:text-[60px] leading-none text-[#fefefe]"
 								>
 									GRADUATION<br />STUDIES
 								</div>
 							{/if}
 
 							<p
-								class="font-display text-[40px] xl:text-[60px] leading-none text-[#fefefe] whitespace-nowrap"
+								class="font-display text-[52px] xl:text-[60px] leading-none text-[#fefefe] whitespace-nowrap"
 							>
 								[{workCount}]
 							</p>
@@ -106,7 +106,7 @@
 				<!-- Default Count (hidden when hovered) -->
 				{#if !isHovered}
 					<div class="flex items-center h-full py-[40px] xl:py-[60px]">
-						<p class="font-display text-[40px] xl:text-[60px] leading-none text-[#111111]">
+						<p class="font-display text-[52px] xl:text-[60px] leading-none text-[#111111]">
 							[{workCount}]
 						</p>
 					</div>
@@ -134,13 +134,13 @@
 				<div use:motion class="flex flex-col text-[#fefefe]">
 					{#if category}
 						<p
-							class="font-display text-[40px] xl:text-[52px] leading-[1.1] uppercase whitespace-nowrap"
+							class="font-display text-[40px] xl:text-[48px] leading-[1.1] uppercase whitespace-nowrap"
 						>
 							{category}
 						</p>
 					{/if}
 					<p
-						class="font-semibold text-[40px] xl:text-[60px] leading-[1.3] tracking-[-2.4px] whitespace-pre-line"
+						class="font-semibold text-[40px] xl:text-[52px] leading-[1.3] tracking-[-2.4px] whitespace-pre-line"
 					>
 						{title}
 					</p>

@@ -58,13 +58,13 @@
 
 			<!-- Designer Contact Info -->
 			<div
-				class="w-full overflow-hidden flex flex-col gap-[40px] items-center px-[16px] tablet:px-[36px]"
+				class="w-full overflow-hidden flex flex-col gap-[40px] items-center px-[12px] tablet:px-[24px]"
 			>
 				<!-- Profile Image + Instagram -->
-				<div class="w-full flex flex-col gap-[6px] items-center justify-center overflow-hidden">
+				<div class="w-full flex flex-col gap-[6px] items-center justify-center">
 					<a
 						href={data.designer.qrLink}
-						class="w-full block aspect-square"
+						class="w-full block scale-115"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -92,14 +92,14 @@
 						href={data.designer.contact1Url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.contact1Text}
 					</a>
 				{:else if data.designer.email}
 					<a
 						href="mailto:{data.designer.email}"
-						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.email}
 					</a>
@@ -110,7 +110,7 @@
 						href={data.designer.contact2Url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-center underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.contact2Text}
 					</a>
@@ -147,7 +147,7 @@
 						/>
 
 						<!-- Divider Line -->
-						<div class="h-0 border-t border-[#e5e5e5] my-[12px]"></div>
+						<div class="w-[20px] h-0 border-t border-[#222] my-[30px] tablet:my-[60px]"></div>
 
 						<!-- Interview Sections -->
 						<div class="flex flex-col gap-[12px] w-full">

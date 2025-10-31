@@ -39,7 +39,7 @@
 		</div>
 	</div>
 {:else}
-	<div class="relative min-h-screen bg-white flex">
+	<div class="hidden tablet:flex relative min-h-screen bg-white">
 		<!-- Sticky Left Navigation (120px on tablet) - Hidden on mobile -->
 		<nav
 			class="hidden tablet:flex sticky left-0 top-0 h-fit w-[120px] bg-white z-50 flex-col items-center pt-[36px] shrink-0 overflow-hidden"
@@ -58,20 +58,17 @@
 				{#each data.designers as designer}
 					<div class="w-full flex flex-col gap-[8px] items-start overflow-hidden">
 						<!-- Designer Name -->
-						<p class="text-[18px] leading-[1.4] text-[#111111]">
+						<p class="text-[18px] leading-[1.4] text-[#111111] text-left break-all">
 							{designer.name}
 						</p>
 
 						<!-- Designer Email (3-line format on tablet) -->
 						{#if designer.email}
 							{@const emailParts = designer.email.split('@')}
-							<div class="text-[15px] leading-[1.2] text-[#111111]">
-								<p class="mb-0">{emailParts[0]}</p>
-								{#if emailParts[1]}
-									{@const domainParts = emailParts[1].split('.')}
-									<p class="mb-0">{domainParts[0]} @</p>
-									<p class="mb-0">{domainParts.slice(1).join('.')}</p>
-								{/if}
+							<div
+								class="text-[15px] leading-[1.2] text-[#111111] text-left break-all underline underline-offset-2"
+							>
+								{designer.email}
 							</div>
 						{/if}
 					</div>
@@ -84,27 +81,16 @@
 			<!-- Desktop/Tablet Layout (≥960px) -->
 			<div class="hidden tablet:block tablet:flex-1">
 				<!-- PC Images Container (Tablet+) -->
-				<div class="hidden tablet:flex tablet:flex-col gap-[24px] w-full">
-					{#if pcImages.length > 0}
-						{#each pcImages as image}
-							<div class="w-full flex justify-center bg-[#f6f6f6]">
-								<img
-									src={encodeURI(image.image)}
-									alt={data.work.title}
-									class="w-full h-auto object-contain"
-								/>
-							</div>
-						{/each}
-					{:else if data.work.detailThumbnail}
-						<!-- Fallback to detailThumbnail if no PC images -->
+				<div class="hidden tablet:flex tablet:flex-col w-full tablet:px-[40px] desktop:px-[60px]">
+					{#each pcImages as image}
 						<div class="w-full flex justify-center bg-[#f6f6f6]">
 							<img
-								src={encodeURI(data.work.detailThumbnail)}
+								src={encodeURI(image.image)}
 								alt={data.work.title}
 								class="w-full h-auto object-contain"
 							/>
 						</div>
-					{/if}
+					{/each}
 				</div>
 
 				<!-- Content Sections Container -->
@@ -206,14 +192,16 @@
 			</div>
 
 			<!-- Work Content (설명글) -->
-			<div class="flex gap-[10px] items-center justify-center pt-[12px] px-[24px] w-full">
+			<div
+				class="flex gap-[10px] items-center justify-center pt-[12px] px-[16px] sm:px-[24px] w-full"
+			>
 				<p class="flex-1 text-[18px] leading-[1.4] text-[#111111]">
 					{data.work.content}
 				</p>
 			</div>
 
 			<!-- Designer Names -->
-			<div class="flex flex-col items-end px-[24px] w-full">
+			<div class="flex flex-col items-end px-[16px] sm:px-[24px] w-full">
 				<!-- Korean Names -->
 				<div
 					class="flex gap-[12px] items-center text-[18px] font-bold leading-[1.4] text-[#111111]"
@@ -238,46 +226,24 @@
 		</div>
 
 		<!-- Mobile Images Container (Mobile only) -->
-		<div class="tablet:hidden flex flex-col gap-[24px] px-[24px] w-full">
-			{#if mobileImages.length > 0}
-				{#each mobileImages as image}
-					<div class="w-full flex justify-center bg-[#f6f6f6]">
-						<img
-							src={encodeURI(image.image)}
-							alt={data.work.title}
-							class="w-full h-auto object-contain"
-						/>
-					</div>
-				{/each}
-			{:else if pcImages.length > 0}
-				<!-- Fallback to PC images if no mobile images -->
-				{#each pcImages as image}
-					<div class="w-full flex justify-center bg-[#f6f6f6]">
-						<img
-							src={encodeURI(image.image)}
-							alt={data.work.title}
-							class="w-full h-auto object-contain"
-						/>
-					</div>
-				{/each}
-			{:else if data.work.detailThumbnail}
-				<!-- Final fallback to detailThumbnail -->
+		<div class="tablet:hidden flex flex-col px-[16px] sm:px-[24px] w-full">
+			{#each mobileImages as image}
 				<div class="w-full flex justify-center bg-[#f6f6f6]">
 					<img
-						src={encodeURI(data.work.detailThumbnail)}
+						src={encodeURI(image.image)}
 						alt={data.work.title}
 						class="w-full h-auto object-contain"
 					/>
 				</div>
-			{/if}
+			{/each}
 		</div>
 
 		<!-- Designers Grid -->
 		<div
-			class="flex flex-wrap gap-[18px] items-start justify-end pt-[140px] pb-[80px] px-[24px] xs:px-0 w-full"
+			class="flex gap-[18px] items-start justify-end pt-[140px] pb-[80px] px-[16px] sm:px-[24px] w-full"
 		>
 			{#each Array(Math.ceil(data.designers.length / 2)) as _, rowIndex}
-				<div class="flex gap-[20px] items-center">
+				<div class="grid grid-cols-2 gap-[20px] items-center">
 					{#each data.designers.slice(rowIndex * 2, rowIndex * 2 + 2) as designer}
 						<a
 							href="/designers/{designer.id}"

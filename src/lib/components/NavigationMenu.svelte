@@ -1,5 +1,6 @@
 <script lang="ts">
 	import NavigationIcon from './NavigationIcon.svelte';
+	import NavLogo from './NavLogo.svelte';
 
 	interface Props {
 		isOpen?: boolean;
@@ -161,18 +162,22 @@
 			<div
 				class="flex flex-col justify-end font-sans text-[20px] text-black leading-[1.2] tracking-[-0.8px]"
 			>
-				<p class="mb-0">Kyunghee Univ. Visual Design</p>
-				<p>34th Graduation Exhibition</p>
+				<a href="/" class="group">
+					<p class="mb-0 group-hover:text-primary transition-colors">
+						Kyunghee Univ. Visual Design
+					</p>
+					<p class="group-hover:text-primary transition-colors">34th Graduation Exhibition</p>
+				</a>
 			</div>
 		</div>
 
 		<!-- Center: Logo -->
 		<a
 			href="/"
-			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
+			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
 			aria-label="Go to home page"
 		>
-			<img src="/logo.svg" alt="R=VD" class="w-[88px] h-[43px]" />
+			<NavLogo variant="desktop" />
 		</a>
 
 		<!-- Right: Menu Button -->
@@ -196,18 +201,22 @@
 			<div
 				class="flex flex-col justify-end font-sans text-[20px] text-black leading-[1.2] tracking-[-0.8px]"
 			>
-				<p class="mb-0">Kyunghee Univ. Visual Design</p>
-				<p>34th Graduation Exhibition</p>
+				<a href="/" class="group">
+					<p class="mb-0 group-hover:text-primary transition-colors">
+						Kyunghee Univ. Visual Design
+					</p>
+					<p class="group-hover:text-primary transition-colors">34th Graduation Exhibition</p>
+				</a>
 			</div>
 		</div>
 
 		<!-- Logo -->
 		<a
 			href="/"
-			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
+			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
 			aria-label="Go to home page"
 		>
-			<img src="/logo-mobile.svg" alt="R=VD" class="w-[64px] h-[32px]" />
+			<NavLogo variant="mobile" />
 		</a>
 
 		<!-- Menu Button (smaller for mobile) -->
@@ -227,12 +236,8 @@
 		class:-translate-y-full={!visible}
 	>
 		<!-- Logo -->
-		<a
-			href="/"
-			class="flex items-center hover:opacity-80 transition-opacity"
-			aria-label="Go to home page"
-		>
-			<img src="/logo-mobile.svg" alt="R=VD" class="w-[50px] h-[25px]" />
+		<a href="/" class="flex items-center" aria-label="Go to home page">
+			<NavLogo variant="mobile" />
 		</a>
 
 		<!-- Menu Button (smaller for mobile) -->
