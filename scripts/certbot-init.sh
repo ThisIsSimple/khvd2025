@@ -18,24 +18,27 @@ echo -e "${GREEN}========================================${NC}"
 echo ""
 
 # Parse arguments
-DOMAIN=$1
-EMAIL=$2
-STAGING=${3:-false}
+PRIMARY_DOMAIN=$1
+ADDITIONAL_DOMAINS=$2
+EMAIL=$3
+STAGING=${4:-false}
 
 # Show usage if arguments are missing
-if [ -z "$DOMAIN" ] || [ -z "$EMAIL" ]; then
+if [ -z "$PRIMARY_DOMAIN" ] || [ -z "$EMAIL" ]; then
     echo -e "${RED}Error: Missing required arguments${NC}"
     echo ""
-    echo "Usage: $0 <domain> <email> [staging]"
+    echo "Usage: $0 <primary-domain> <additional-domains> <email> [staging]"
     echo ""
     echo "Arguments:"
-    echo "  domain  - Your domain name (e.g., khvd2025.com)"
-    echo "  email   - Your email for Let's Encrypt notifications"
-    echo "  staging - Optional: Use 'staging' for testing (doesn't count toward rate limits)"
+    echo "  primary-domain      - Your primary domain (e.g., khvd.kr)"
+    echo "  additional-domains  - Additional domains separated by spaces (e.g., \"2025.khvd.kr\" or \"\")"
+    echo "  email              - Your email for Let's Encrypt notifications"
+    echo "  staging            - Optional: Use 'staging' for testing (doesn't count toward rate limits)"
     echo ""
     echo "Examples:"
-    echo "  $0 khvd2025.com admin@khvd2025.com"
-    echo "  $0 khvd2025.com admin@khvd2025.com staging"
+    echo "  $0 khvd.kr \"2025.khvd.kr\" admin@khvd.kr"
+    echo "  $0 khvd.kr \"\" admin@khvd.kr"
+    echo "  $0 khvd.kr \"2025.khvd.kr www.khvd.kr\" admin@khvd.kr staging"
     exit 1
 fi
 
@@ -69,18 +72,29 @@ echo -e "${GREEN}✓ Certbot directory exists${NC}"
 if ! docker ps | grep -q khvd-nginx; then
     echo -e "${YELLOW}⚠️  NGINX container is not running${NC}"
     echo "Starting Docker Compose services..."
-    docker-compose up -d nginx
+    docker compose up -d nginx
     echo -e "${GREEN}✓ NGINX started${NC}"
     sleep 3
 else
     echo -e "${GREEN}✓ NGINX is running${NC}"
 fi
 
+# Build domain arguments
+DOMAIN_ARGS="-d $PRIMARY_DOMAIN"
+ALL_DOMAINS="$PRIMARY_DOMAIN"
+
+if [ -n "$ADDITIONAL_DOMAINS" ]; then
+    for domain in $ADDITIONAL_DOMAINS; do
+        DOMAIN_ARGS="$DOMAIN_ARGS -d $domain"
+        ALL_DOMAINS="$ALL_DOMAINS, $domain"
+    done
+fi
+
 echo ""
 echo -e "${BLUE}Certificate Request Details:${NC}"
-echo "  Domain: $DOMAIN"
-echo "  Email:  $EMAIL"
-echo "  Mode:   $([ "$STAGING" = "staging" ] && echo "STAGING (test)" || echo "PRODUCTION")"
+echo "  Domains: $ALL_DOMAINS"
+echo "  Email:   $EMAIL"
+echo "  Mode:    $([ "$STAGING" = "staging" ] && echo "STAGING (test)" || echo "PRODUCTION")"
 echo ""
 
 # Confirmation prompt
@@ -95,8 +109,8 @@ echo ""
 echo -e "${GREEN}Requesting certificate from Let's Encrypt...${NC}"
 echo ""
 
-# Run Certbot
-docker-compose run --rm certbot certonly \
+# Run Certbot with all domains
+docker compose run --rm certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
     --email "$EMAIL" \
@@ -104,7 +118,7 @@ docker-compose run --rm certbot certonly \
     --no-eff-email \
     --force-renewal \
     $STAGING_FLAG \
-    -d "$DOMAIN"
+    $DOMAIN_ARGS
 
 # Check if certificate was issued successfully
 if [ $? -eq 0 ]; then
@@ -117,30 +131,34 @@ if [ $? -eq 0 ]; then
     if [ "$STAGING" = "staging" ]; then
         echo -e "${YELLOW}⚠️  This is a STAGING certificate (not trusted by browsers)${NC}"
         echo "To issue a production certificate, run:"
-        echo -e "${BLUE}  $0 $DOMAIN $EMAIL${NC}"
+        echo -e "${BLUE}  $0 $PRIMARY_DOMAIN \"$ADDITIONAL_DOMAINS\" $EMAIL${NC}"
         echo ""
     else
         echo "Certificate location:"
-        echo "  Full chain: /etc/letsencrypt/live/$DOMAIN/fullchain.pem"
-        echo "  Private key: /etc/letsencrypt/live/$DOMAIN/privkey.pem"
+        echo "  Full chain: /etc/letsencrypt/live/$PRIMARY_DOMAIN/fullchain.pem"
+        echo "  Private key: /etc/letsencrypt/live/$PRIMARY_DOMAIN/privkey.pem"
+        echo ""
+        echo "Certificate covers the following domains:"
+        echo "  $ALL_DOMAINS"
         echo ""
         echo -e "${YELLOW}Next steps:${NC}"
         echo ""
-        echo "1. Update NGINX configuration to use the new certificates:"
-        echo "   Edit: nginx/conf.d/default.conf"
-        echo ""
-        echo "   Change the SSL certificate paths to:"
-        echo -e "${BLUE}   ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;${NC}"
-        echo -e "${BLUE}   ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;${NC}"
+        echo "1. NGINX configuration is already set to use Let's Encrypt certificates"
+        echo "   (nginx/conf.d/default.conf already configured)"
         echo ""
         echo "2. Restart NGINX to apply changes:"
-        echo -e "${BLUE}   docker-compose restart nginx${NC}"
+        echo -e "${BLUE}   docker compose restart nginx${NC}"
         echo ""
-        echo "3. Verify your site:"
-        echo -e "${BLUE}   https://$DOMAIN${NC}"
+        echo "3. Verify your sites:"
+        echo -e "${BLUE}   https://$PRIMARY_DOMAIN${NC}"
+        if [ -n "$ADDITIONAL_DOMAINS" ]; then
+            for domain in $ADDITIONAL_DOMAINS; do
+                echo -e "${BLUE}   https://$domain${NC}"
+            done
+        fi
         echo ""
         echo "4. Test SSL configuration:"
-        echo -e "${BLUE}   https://www.ssllabs.com/ssltest/analyze.html?d=$DOMAIN${NC}"
+        echo -e "${BLUE}   https://www.ssllabs.com/ssltest/analyze.html?d=$PRIMARY_DOMAIN${NC}"
         echo ""
     fi
 
@@ -153,16 +171,16 @@ else
     echo -e "${RED}========================================${NC}"
     echo ""
     echo -e "${YELLOW}Common issues:${NC}"
-    echo "  1. DNS not configured correctly (domain not pointing to this server)"
+    echo "  1. DNS not configured correctly (domains not pointing to this server)"
     echo "  2. Port 80 not accessible from the internet"
     echo "  3. Domain validation failed"
     echo "  4. Rate limit exceeded (try staging mode first)"
     echo ""
     echo "Troubleshooting:"
-    echo "  - Check DNS: dig $DOMAIN"
-    echo "  - Check port 80: curl http://$DOMAIN/.well-known/acme-challenge/test"
-    echo "  - View NGINX logs: docker-compose logs nginx"
-    echo "  - Try staging mode: $0 $DOMAIN $EMAIL staging"
+    echo "  - Check DNS: dig $PRIMARY_DOMAIN"
+    echo "  - Check port 80: curl http://$PRIMARY_DOMAIN/.well-known/acme-challenge/test"
+    echo "  - View NGINX logs: docker compose logs nginx"
+    echo "  - Try staging mode: $0 $PRIMARY_DOMAIN \"$ADDITIONAL_DOMAINS\" $EMAIL staging"
     echo ""
     exit 1
 fi

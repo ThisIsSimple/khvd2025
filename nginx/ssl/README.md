@@ -13,7 +13,7 @@ This directory contains SSL certificates for HTTPS support in KHVD 2025.
 
 2. **Start Docker Compose:**
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 3. **Access your site:**
@@ -43,7 +43,7 @@ Let's Encrypt provides free, automated SSL certificates that are trusted by all 
 
 3. **Initial certificate generation:**
    ```bash
-   docker-compose run --rm certbot certonly \
+   docker compose run --rm certbot certonly \
      --webroot \
      --webroot-path=/var/www/certbot \
      --email ${SSL_EMAIL} \
@@ -61,12 +61,12 @@ Let's Encrypt provides free, automated SSL certificates that are trusted by all 
 
 5. **Restart NGINX:**
    ```bash
-   docker-compose restart nginx
+   docker compose restart nginx
    ```
 
 ### Option 2: Using Docker Compose Certbot Service
 
-1. **Add Certbot service to `docker-compose.yml`:**
+1. **Add Certbot service to `docker compose.yml`:**
    ```yaml
    certbot:
      image: certbot/certbot
@@ -79,7 +79,7 @@ Let's Encrypt provides free, automated SSL certificates that are trusted by all 
 
 2. **Initial certificate issuance:**
    ```bash
-   docker-compose run --rm certbot certonly \
+   docker compose run --rm certbot certonly \
      --webroot -w /var/www/certbot \
      --email ${SSL_EMAIL} \
      -d ${DOMAIN} \
@@ -88,7 +88,7 @@ Let's Encrypt provides free, automated SSL certificates that are trusted by all 
 
 3. **Start Certbot for auto-renewal:**
    ```bash
-   docker-compose up -d certbot
+   docker compose up -d certbot
    ```
 
 ---
@@ -97,8 +97,8 @@ Let's Encrypt provides free, automated SSL certificates that are trusted by all 
 
 ### Manual Renewal
 ```bash
-docker-compose run --rm certbot renew
-docker-compose restart nginx
+docker compose run --rm certbot renew
+docker compose restart nginx
 ```
 
 ### Automatic Renewal (Recommended)
@@ -106,7 +106,7 @@ Let's Encrypt certificates are valid for 90 days. The Certbot container automati
 
 To verify auto-renewal is working:
 ```bash
-docker-compose logs certbot
+docker compose logs certbot
 ```
 
 ---
@@ -133,10 +133,10 @@ docker-compose logs certbot
 ### NGINX fails to start
 ```bash
 # Check NGINX configuration
-docker-compose exec nginx nginx -t
+docker compose exec nginx nginx -t
 
 # View NGINX logs
-docker-compose logs nginx
+docker compose logs nginx
 ```
 
 ---

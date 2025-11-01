@@ -106,7 +106,7 @@ openssl x509 -in "$CERT_FILE" -noout -subject -issuer -dates
 echo ""
 echo -e "${GREEN}Next steps:${NC}"
 echo "1. Start Docker Compose:"
-echo "   ${YELLOW}docker-compose up -d${NC}"
+echo "   ${YELLOW}docker compose up -d${NC}"
 echo ""
 echo "2. Access your site:"
 echo "   ${YELLOW}https://$CN${NC}"
