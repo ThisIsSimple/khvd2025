@@ -32,6 +32,10 @@
 	let editingMessage = $state<Message | null>(null);
 	let showEditModal = $state(false);
 
+	// Dynamic container height
+	let containerHeight = $state<number | null>(null);
+	let messagesContainerRef = $state<HTMLDivElement | null>(null);
+
 	const maxCharacters = 120;
 
 	// Responsive messages per page
@@ -73,6 +77,60 @@
 		}
 	}
 
+	// Calculate and update container height based on content
+	function updateContainerHeight() {
+		if (!messagesContainerRef) return;
+
+		// Use requestAnimationFrame to ensure DOM is updated
+		requestAnimationFrame(() => {
+			// Find the current messages container (non-transitioning layer)
+			const currentLayer = messagesContainerRef?.querySelector('[data-current-layer]');
+			if (currentLayer) {
+				const height = currentLayer.scrollHeight;
+				// Set minimum height based on breakpoint
+				const minHeight = typeof window !== 'undefined' && window.innerWidth >= 960 ? 480 : 400;
+				// Allow height to decrease by using actual height (just ensure minimum)
+				containerHeight = height < minHeight ? minHeight : height;
+			}
+		});
+	}
+
+	// Pre-calculate height for next page before animation
+	async function preCalculateHeight(page: number) {
+		try {
+			const params = new URLSearchParams({
+				page: String(page),
+				pageSize: String(messagesPerPage)
+			});
+
+			if (type) {
+				params.set('type', type);
+			}
+
+			if (targetId !== undefined) {
+				params.set('targetId', String(targetId));
+			}
+
+			const response = await fetch(`/api/messages?${params.toString()}`);
+			if (!response.ok) return;
+
+			const data: MessagesResponse = await response.json();
+
+			// Calculate approximate height based on next page messages
+			// Average card height varies by device and content
+			const avgCardHeight = typeof window !== 'undefined' && window.innerWidth >= 960 ? 220 : 200;
+			const rows = Math.ceil(data.messages.length / itemsPerRow);
+			const gap = 12; // Gap between rows
+			const estimatedHeight = avgCardHeight * rows + gap * Math.max(0, rows - 1);
+			const minHeight = typeof window !== 'undefined' && window.innerWidth >= 960 ? 480 : 400;
+
+			// Set container height before animation starts
+			containerHeight = Math.max(estimatedHeight, minHeight);
+		} catch (err) {
+			console.error('Height pre-calculation failed:', err);
+		}
+	}
+
 	// Fetch messages from API
 	async function fetchMessages(page: number = 0) {
 		isLoading = true;
@@ -104,6 +162,8 @@
 			console.error('Error fetching messages:', err);
 		} finally {
 			isLoading = false;
+			// Update container height after messages are loaded and DOM is ready
+			setTimeout(() => updateContainerHeight(), 50);
 		}
 	}
 
@@ -175,6 +235,9 @@
 	async function goToPage(page: number) {
 		if (isTransitioning || page < 0 || page >= totalPages) return;
 
+		// Pre-calculate target height before animation starts
+		await preCalculateHeight(page);
+
 		pageDirection = page > currentPage ? 'forward' : 'backward';
 		isTransitioning = true;
 
@@ -188,6 +251,8 @@
 		setTimeout(() => {
 			isTransitioning = false;
 			pageDirection = null;
+			// Fine-tune container height after actual content is rendered
+			setTimeout(() => updateContainerHeight(), 50);
 		}, 400);
 	}
 
@@ -212,7 +277,13 @@
 		updateMessagesPerPage();
 		fetchMessages(0);
 
-		window.addEventListener('resize', updateMessagesPerPage);
+		// Combined resize handler
+		function handleResize() {
+			updateMessagesPerPage();
+			updateContainerHeight();
+		}
+
+		window.addEventListener('resize', handleResize);
 
 		// Keyboard navigation
 		function handleKeyboard(e: KeyboardEvent) {
@@ -228,7 +299,7 @@
 		window.addEventListener('keydown', handleKeyboard);
 
 		return () => {
-			window.removeEventListener('resize', updateMessagesPerPage);
+			window.removeEventListener('resize', handleResize);
 			window.removeEventListener('keydown', handleKeyboard);
 		};
 	});
@@ -438,7 +509,11 @@
 			</div>
 		{:else}
 			<!-- Messages Grid with Two-Layer Animation System -->
-			<div class="relative min-h-[400px] tablet:min-h-[480px] w-full overflow-hidden">
+			<div
+				bind:this={messagesContainerRef}
+				class="relative w-full overflow-hidden transition-[height] duration-300"
+				style="height: {containerHeight ? `${containerHeight}px` : 'auto'}; min-height: 400px;"
+			>
 				<!-- Previous Messages Layer (fading out during transition) -->
 				{#if isTransitioning && prevMessages.length > 0}
 					<Motion
@@ -524,6 +599,7 @@
 				>
 					<div
 						use:motion
+						data-current-layer
 						class="absolute inset-0 w-full cursor-grab active:cursor-grabbing"
 						style="z-index: {isTransitioning ? 2 : 1};"
 					>
