@@ -37,3 +37,11 @@ coverage
 # Misc
 *.log
 .cache
+
+# Docker/Infrastructure (not needed in build)
+nginx
+docker-compose.yml
+Dockerfile
+DOCKER.md
+DOCKER_DEPLOYMENT.md
+database
