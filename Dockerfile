@@ -35,8 +35,8 @@ COPY package*.json ./
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/node_modules ./node_modules
 
-# Copy static files
-COPY --from=builder /app/static ./static
+# Note: Static files are already included in the build/client directory by SvelteKit
+# No need to copy static separately - adapter-node handles this automatically
 
 # Expose port (default SvelteKit port is 3000)
 EXPOSE 3000
