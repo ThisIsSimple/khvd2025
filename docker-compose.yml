@@ -21,6 +21,8 @@ services:
   mariadb:
     image: mariadb:latest
     container_name: khvd-mariadb
+    expose:
+      - '3306'
     ports:
       - '3306:3306'
     environment:
