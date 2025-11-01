@@ -577,11 +577,12 @@
 					}}
 					transition={{ duration: 0.4, ease: 'easeInOut' }}
 					drag="x"
-					dragConstraints={{ left: 0, right: 0 }}
+					dragConstraints={{ left: -100, right: 100 }}
 					dragElastic={0.2}
 					onDragEnd={(_event, info) => {
-						const swipeThreshold = 50;
-						const swipeVelocity = 500;
+						// Lower thresholds for better mobile responsiveness
+						const swipeThreshold = 30;
+						const swipeVelocity = 300;
 
 						if (info.offset.x < -swipeThreshold || info.velocity.x < -swipeVelocity) {
 							// Swiped left - go to next page
@@ -600,8 +601,8 @@
 					<div
 						use:motion
 						data-current-layer
-						class="absolute inset-0 w-full cursor-grab active:cursor-grabbing"
-						style="z-index: {isTransitioning ? 2 : 1};"
+						class="absolute inset-0 w-full cursor-grab active:cursor-grabbing touch-pan-x"
+						style="z-index: {isTransitioning ? 2 : 1}; touch-action: pan-x;"
 					>
 						<div class="flex flex-col gap-[12px] items-center justify-center w-full">
 							<!-- Row 1 -->
