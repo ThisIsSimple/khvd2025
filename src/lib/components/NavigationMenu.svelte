@@ -250,15 +250,28 @@
 		</button>
 	</header>
 {:else}
-	<!-- Type 1: Menu button only (top right) -->
-	<button
-		bind:this={buttonRef}
-		onclick={() => (isOpen = true)}
-		class="nav-button-notitle fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] z-30"
-		aria-label="Open menu"
-	>
-		<NavigationIcon {isOrangeMode} />
-	</button>
+	<!-- Header for noTitle mode when menu is open (mobile/tablet only) -->
+	{#if isOpen}
+		<header
+			class="tablet:hidden fixed top-0 left-0 right-0 bg-[#fefefe] h-[50px] tablet:h-[80px] z-[55] flex items-center px-[14px] tablet:px-[40px]"
+		>
+			<a href="/" class="flex items-center" aria-label="Go to home page">
+				<NavLogo variant="mobile" />
+			</a>
+		</header>
+	{/if}
+
+	<!-- Type 1: Menu button only (top right) - Hidden when menu is open -->
+	{#if !isOpen}
+		<button
+			bind:this={buttonRef}
+			onclick={() => (isOpen = true)}
+			class="nav-button-notitle fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] z-30"
+			aria-label="Open menu"
+		>
+			<NavigationIcon {isOrangeMode} />
+		</button>
+	{/if}
 {/if}
 
 <!-- Navigation Drawer Overlay -->

@@ -66,7 +66,7 @@
 			class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[40px] py-[200px] tablet:py-[400px] w-full"
 		>
 			<div
-				class="flex flex-col font-display gap-[20px] items-center justify-center leading-none text-primary text-[56px] tablet:text-[132px] text-center w-full max-w-[1142px] mx-auto"
+				class="flex flex-col font-display gap-[20px] items-start tablet:items-center justify-center leading-none text-primary text-[56px] tablet:text-[132px] text-left tablet:text-center w-full max-w-[1142px] tablet:mx-auto"
 			>
 				<p class="w-full">Reenvision = vivid dreams</p>
 				<p class="whitespace-nowrap">Realization = Visual design</p>
@@ -75,21 +75,21 @@
 
 		<!-- Reenvision Explanation -->
 		<div
-			class="relative flex flex-col gap-[10px] items-center justify-center px-4 tablet:px-[40px] py-[100px] tablet:py-[200px] w-full"
+			class="relative flex flex-col gap-[10px] items-start tablet:items-center justify-center px-4 tablet:px-[40px] py-[100px] tablet:py-[200px] w-full"
 		>
-			<div class="flex flex-col gap-[49px] items-center text-primary w-full max-w-[1081px]">
+			<div class="flex flex-col gap-[49px] items-start tablet:items-center text-primary w-full max-w-[1081px]">
 				<!-- Title -->
-				<div class="flex flex-col font-display gap-[14px] items-center w-full max-w-[858px]">
+				<div class="flex flex-col font-display gap-[14px] items-start tablet:items-center w-full max-w-[858px]">
 					<p
-						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full"
+						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-left tablet:text-center tracking-[-0.8px] w-full"
 					>
 						REENVISION=VIVID DREAMS
 					</p>
-					<p class="leading-none text-[80px] tablet:text-[210px] w-full">REENVISION =</p>
+					<p class="leading-none text-[80px] tablet:text-[210px] w-full text-left tablet:text-center">REENVISION =</p>
 				</div>
 
 				<!-- Description -->
-				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-justify sm:text-center">
+				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full">
 					<p class="text-primary">Reenvision, 무뎌졌던 감각을 다시 일깨우고,</p>
 					<p class="text-primary">범람하는 정보들을 자신만의 것으로 재구상하는 과정.</p>
 					<p>&nbsp;</p>
@@ -106,21 +106,21 @@
 
 		<!-- Vivid Dreams Explanation -->
 		<div
-			class="relative flex flex-col gap-[10px] items-start px-4 tablet:px-[40px] py-[200px] tablet:py-[400px] w-full pb-[200px]"
+			class="relative flex flex-col gap-[10px] items-start tablet:items-center px-4 tablet:px-[40px] py-[200px] tablet:py-[400px] w-full pb-[200px]"
 		>
-			<div class="flex flex-col gap-[60px] items-center text-primary w-full">
+			<div class="flex flex-col gap-[60px] items-start tablet:items-center text-primary w-full">
 				<!-- Title -->
-				<div class="flex flex-col font-display gap-[7px] items-center w-full max-w-[882px]">
+				<div class="flex flex-col font-display gap-[7px] items-start tablet:items-center w-full max-w-[882px]">
 					<p
-						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-center tracking-[-0.8px] w-full"
+						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-left tablet:text-center tracking-[-0.8px] w-full"
 					>
 						Realization=Visual Design
 					</p>
-					<p class="leading-none text-[80px] tablet:text-[210px] w-full">VIVID DREAMS</p>
+					<p class="leading-none text-[80px] tablet:text-[210px] w-full text-left tablet:text-center">VIVID DREAMS</p>
 				</div>
 
 				<!-- Description -->
-				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-center">
+				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full">
 					<p>다듬어진 시선과 가치들은 시각디자인이라는 매체를 통해</p>
 					<p>Realization, 눈 앞의 현실로 드러납니다.</p>
 					<p>&nbsp;</p>
