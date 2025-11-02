@@ -63,7 +63,7 @@
 
 		<!-- Title Area -->
 		<div
-			class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[389px] py-[200px] tablet:py-[400px] w-full"
+			class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[40px] py-[200px] tablet:py-[400px] w-full"
 		>
 			<div
 				class="flex flex-col font-display gap-[20px] items-center justify-center leading-none text-primary text-[56px] tablet:text-[132px] text-center w-full max-w-[1142px] mx-auto"
@@ -89,7 +89,7 @@
 				</div>
 
 				<!-- Description -->
-				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-center">
+				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-justify sm:text-center">
 					<p class="text-primary">Reenvision, 무뎌졌던 감각을 다시 일깨우고,</p>
 					<p class="text-primary">범람하는 정보들을 자신만의 것으로 재구상하는 과정.</p>
 					<p>&nbsp;</p>

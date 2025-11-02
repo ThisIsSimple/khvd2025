@@ -181,7 +181,7 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '12',
 					time: '16:00 - 16:30',
-					category: 'VFX',
+					category: '마케팅',
 					title: '정성진',
 					description:
 						'영화·광고 등 다양한 영상 콘텐츠의 VFX(시각효과) 감독 및 슈퍼바이저로 활동하며, 수많은 상업영화와 프로젝트의 시각효과 기획, 연출, 제작 총괄을 담당했습니다.',

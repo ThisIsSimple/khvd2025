@@ -10,7 +10,9 @@
 
 <div class="flex flex-col gap-[12px] bg-[#ffeae0] overflow-clip rounded-[8px]">
 	<!-- Title Section -->
-	<div class="flex flex-col gap-[32px] items-start justify-center px-[40px] pt-[32px] pb-[24px]">
+	<div
+		class="flex flex-col gap-[32px] items-start justify-center px-[24px] tablet:px-[24px] desktop:px-[40px] pt-[20px] tablet:pt-[24px] desktop:pt-[32px] pb-[16px] tablet:pb-[20px] desktop:pb-[24px]"
+	>
 		<div class="flex flex-col gap-[2px] items-start justify-center overflow-clip w-full">
 			<!-- Category Tag -->
 			<div class="flex gap-[10px] items-center justify-center px-[3px]">
@@ -28,7 +30,9 @@
 
 	<!-- Description Section -->
 	{#if seminar.description}
-		<div class="flex flex-col gap-[12px] items-start justify-center px-[40px] py-[24px]">
+		<div
+			class="flex flex-col gap-[12px] items-start justify-center px-[24px] tablet:px-[24px] desktop:px-[40px] py-[16px] tablet:py-[20px] desktop:py-[24px]"
+		>
 			<p class="font-bold text-[20px] leading-[1.4] text-[#111111] w-full">세미나 내용</p>
 			<p class="text-[20px] leading-[1.5] text-[#222222] w-full">
 				{seminar.description}
@@ -37,7 +41,9 @@
 	{/if}
 
 	<!-- Schedule Section -->
-	<div class="flex flex-col gap-[12px] items-start justify-center px-[40px] py-[24px]">
+	<div
+		class="flex flex-col gap-[12px] items-start justify-center px-[24px] tablet:px-[24px] desktop:px-[40px] py-[16px] tablet:py-[20px] desktop:py-[24px]"
+	>
 		<p class="font-bold text-[20px] leading-[1.4] text-[#111111] w-full">일정</p>
 		<p class="font-bold text-[20px] leading-[1.4] text-[#222222] w-full whitespace-pre-wrap">
 			{seminar.fullSchedule || seminar.time}
@@ -46,7 +52,9 @@
 
 	<!-- Speaker Section -->
 	{#if seminar.speakers && seminar.speakers.length > 0}
-		<div class="flex flex-col gap-[24px] items-start justify-center px-[40px] pt-[24px] pb-[40px]">
+		<div
+			class="flex flex-col gap-[24px] items-start justify-center px-[24px] tablet:px-[24px] desktop:px-[40px] pt-[16px] tablet:pt-[20px] desktop:pt-[24px] pb-[28px] tablet:pb-[32px] desktop:pb-[40px]"
+		>
 			<p class="font-bold text-[20px] leading-[1.4] text-[#111111] w-full">연설자</p>
 
 			{#each seminar.speakers as speaker}
