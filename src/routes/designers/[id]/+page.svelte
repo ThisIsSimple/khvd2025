@@ -64,7 +64,7 @@
 				<div class="w-full flex flex-col gap-[6px] items-center justify-center">
 					<a
 						href={data.designer.qrLink}
-						class="w-[115%] block"
+						class="w-[115%] block transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
