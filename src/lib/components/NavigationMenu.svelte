@@ -24,6 +24,43 @@
 	let isOrangeMode = $state(false);
 	let buttonRef = $state<HTMLButtonElement>();
 
+	// Window width tracking for responsive navigation height
+	let windowWidth = $state(0);
+
+	// Calculate navigation height based on screen size and visibility
+	let navHeight = $derived.by(() => {
+		// noTitle mode has no header, only floating button
+		if (noTitle) return 0;
+		// Hidden navigation has no height
+		if (!visible) return 0;
+
+		// Responsive heights matching NavigationMenu breakpoints
+		if (windowWidth < 960) return 50; // Mobile
+		if (windowWidth < 1351) return 80; // Tablet
+		return 100; // Desktop
+	});
+
+	// Initialize window width and set up resize listener
+	$effect(() => {
+		// Initialize on mount
+		windowWidth = window.innerWidth;
+
+		const handleResize = () => {
+			windowWidth = window.innerWidth;
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	});
+
+	// Update CSS variable when navigation height changes
+	$effect(() => {
+		document.documentElement.style.setProperty('--nav-height', `${navHeight}px`);
+	});
+
 	$effect(() => {
 		// Only apply scroll behavior for Type 2 navigation (NOT noTitle) and if not disabled
 		if (noTitle || disableHideOnScroll) return;

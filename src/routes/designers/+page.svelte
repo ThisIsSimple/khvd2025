@@ -155,11 +155,12 @@
 <div class="relative min-h-screen bg-white">
 	<!-- Navigation Section -->
 	<nav
-		class="sticky top-0 z-30 bg-white
+		class="sticky z-30 bg-white
 		px-4 sm:px-6 tablet:px-[40px]
 		pt-4 pb-2 sm:pt-4 sm:pb-2 tablet:py-[24px]
 		flex flex-col tablet:flex-row tablet:gap-[52px] items-start tablet:items-center
 		border-b border-[#e5e5e5]"
+		style="top: var(--nav-height, 0px)"
 	>
 		<!-- Title Section -->
 		<div class="flex gap-[16px] items-start shrink-0">

@@ -45,7 +45,8 @@
 		<div class="flex flex-col">
 			<!-- Sticky Date Header -->
 			<div
-				class="sticky top-0 bg-white z-10 flex gap-[16px] h-[80px] sm:h-[80px] tablet:h-[120px] items-center"
+				class="sticky bg-white z-10 flex gap-[16px] h-[80px] sm:h-[80px] tablet:h-[120px] items-center"
+				style="top: var(--nav-height, 0px)"
 			>
 				<p
 					class="font-display text-[24px] sm:text-[32px] tablet:text-[60px] leading-none text-[#111111]"
@@ -71,14 +72,28 @@
 	<div class="hidden tablet:flex flex-col">
 		<!-- Sticky INFO Header -->
 		<div
-			class="sticky top-0 bg-white z-10 flex gap-[10px] h-[60px] sm:h-[80px] tablet:h-[120px] items-center"
+			class="sticky bg-white z-10 flex gap-[10px] h-[60px] sm:h-[80px] tablet:h-[120px] items-center"
+			style="top: var(--nav-height, 0px); --info-header-height: 60px;"
 		>
+			<style>
+				@media (min-width: 421px) {
+					div {
+						--info-header-height: 80px;
+					}
+				}
+				@media (min-width: 960px) {
+					div {
+						--info-header-height: 120px;
+					}
+				}
+			</style>
 			<p class="font-display text-[60px] leading-none text-[#111111]">INFO</p>
 		</div>
 
 		<!-- Sticky INFO Content -->
 		<div
-			class="sticky top-[60px] sm:top-[80px] tablet:top-[120px] px-[8px] py-[24px] sm:py-[32px] tablet:py-[72px]"
+			class="sticky px-[8px] py-[24px] sm:py-[32px] tablet:py-[72px]"
+			style="top: calc(var(--nav-height, 0px) + var(--info-header-height, 60px));"
 		>
 			<SeminarInfo seminar={selectedSeminar} />
 		</div>

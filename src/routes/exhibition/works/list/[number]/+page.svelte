@@ -86,7 +86,8 @@
 <div class="w-full bg-[#fefefe] min-h-screen tablet:flex">
 	<!-- Left Navigation (150px) - Desktop Only -->
 	<nav
-		class="hidden tablet:flex sticky left-0 top-0 h-fit w-[150px] bg-[#fefefe] flex-col items-center pt-[24px] shrink-0"
+		class="hidden tablet:flex sticky left-0 h-fit w-[150px] bg-[#fefefe] flex-col items-center pt-[24px] shrink-0"
+		style="top: var(--nav-height, 0px)"
 	>
 		<!-- Back Arrow Button (sticky) -->
 		<button
@@ -152,7 +153,8 @@
 	<main class="w-full tablet:flex-1">
 		<!-- Mobile Header - Collapsible Sticky (Hidden on Desktop) -->
 		<div
-			class="tablet:hidden sticky top-0 bg-[#fefefe] z-20 transition-transform duration-300"
+			class="tablet:hidden sticky bg-[#fefefe] z-20 transition-transform duration-300"
+			style="top: var(--nav-height, 0px)"
 			class:translate-y-[-100%]={scrollingDown && scrollY > 100}
 		>
 			<div class="flex items-center gap-[6px] h-[74px] pl-[8px] pr-[16px]">
@@ -215,7 +217,7 @@
 
 		<!-- Mobile Professor Filter - Horizontal Sticky (only for group 0, hidden on desktop) -->
 		{#if data.groupNumber === 0 && data.professorCounts}
-			<div class="tablet:hidden sticky top-0 z-10 flex h-[82px] w-full">
+			<div class="tablet:hidden sticky z-10 flex h-[82px] w-full" style="top: var(--nav-height, 0px)">
 				<button
 					onclick={() => handleProfessorFilter('김은정')}
 					class="flex-1 px-[24px] py-[16px] flex items-start justify-between transition-colors {isProfessorActive(

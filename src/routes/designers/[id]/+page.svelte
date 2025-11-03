@@ -41,7 +41,8 @@
 	<div class="relative min-h-screen bg-white flex">
 		<!-- Sticky Left Navigation (150px) -->
 		<nav
-			class="sticky left-0 top-0 h-fit w-[90px] tablet:w-[150px] bg-white z-50 flex flex-col items-center pt-[40px] shrink-0 overflow-hidden"
+			class="sticky left-0 h-fit w-[90px] tablet:w-[150px] bg-white z-50 flex flex-col items-center pt-[40px] shrink-0 overflow-hidden"
+			style="top: var(--nav-height, 0px)"
 		>
 			<!-- Back Arrow Button -->
 			<button
@@ -169,7 +170,7 @@
 				</div>
 
 				<!-- Right Sticky Works (520px) -->
-				<div class="w-1/3 sticky top-0 h-screen flex-shrink-0">
+				<div class="w-1/3 sticky h-screen flex-shrink-0" style="top: var(--nav-height, 0px)">
 					{#if data.works.length > 0}
 						{#each data.works.slice(0, 2) as work}
 							<WorkThumbnail

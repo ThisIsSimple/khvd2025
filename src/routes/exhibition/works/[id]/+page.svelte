@@ -42,7 +42,8 @@
 	<div class="hidden tablet:flex relative min-h-screen bg-white">
 		<!-- Sticky Left Navigation (120px on tablet) - Hidden on mobile -->
 		<nav
-			class="hidden tablet:flex sticky left-0 top-0 h-fit w-[150px] bg-white z-50 flex-col items-center pt-[40px] shrink-0 overflow-hidden"
+			class="hidden tablet:flex sticky left-0 h-fit w-[150px] bg-white z-50 flex-col items-center pt-[40px] shrink-0 overflow-hidden"
+			style="top: var(--nav-height, 0px)"
 		>
 			<!-- Back Arrow Button -->
 			<button
@@ -178,7 +179,8 @@
 				<!-- Back Arrow -->
 				<button
 					onclick={handleBack}
-					class="group shrink-0 w-[90px] h-[90px] flex items-center justify-center sticky top-0"
+					class="group shrink-0 w-[90px] h-[90px] flex items-center justify-center sticky"
+					style="top: var(--nav-height, 0px)"
 					aria-label="Go back"
 				>
 					<img
