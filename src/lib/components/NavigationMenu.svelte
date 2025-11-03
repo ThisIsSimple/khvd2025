@@ -1,6 +1,7 @@
 <script lang="ts">
 	import NavigationIcon from './NavigationIcon.svelte';
 	import NavLogo from './NavLogo.svelte';
+	import { afterNavigate } from '$app/navigation';
 
 	interface Props {
 		isOpen?: boolean;
@@ -15,6 +16,14 @@
 		noTitle = false,
 		disableHideOnScroll = false
 	}: Props = $props();
+
+	// Reset navigation state on page navigation
+	afterNavigate(() => {
+		// Reset navigation visibility
+		visible = true;
+		// Reset --nav-height CSS variable to recalculate
+		document.documentElement.style.setProperty('--nav-height', `${navHeight}px`);
+	});
 
 	// Scroll-based visibility for Type 2 navigation (with title and logo)
 	let visible = $state(true);

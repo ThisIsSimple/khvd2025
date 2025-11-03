@@ -204,19 +204,19 @@ DESIGN FOR ALL + PASSION + OPEN, MIND + CREATIVITY + :)`
 				<!-- Back button (70×70) -->
 				<button
 					onclick={handleBack}
-					class="group size-[90px] flex items-center justify-center shrink-0"
+					class="group size-[52px] flex items-center justify-center shrink-0"
 					aria-label="Go back"
 				>
 					<img
 						src="/icons/arrow_diagonal_before.svg"
 						alt="Back"
-						class="group-hover:scale-110 transition-transform duration-300 w-[35px] h-[35px]"
+						class="group-hover:scale-110 transition-transform duration-300 w-[28px] h-[28px]"
 					/>
 				</button>
 
 				<!-- Title + Count -->
 				<div class="flex gap-[6px] items-start min-w-0">
-					<h1 class="font-display text-[52px] leading-[1.1] text-[#111111] truncate">
+					<h1 class="font-display text-[40px] leading-[1.1] text-[#111111] truncate">
 						{info.title}
 					</h1>
 					<div class="flex items-center pt-[5px] shrink-0">

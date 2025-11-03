@@ -42,7 +42,7 @@
 	<div class="hidden tablet:flex relative min-h-screen bg-white">
 		<!-- Sticky Left Navigation (120px on tablet) - Hidden on mobile -->
 		<nav
-			class="hidden tablet:flex sticky left-0 h-fit w-[150px] bg-white z-50 flex-col items-center pt-[40px] shrink-0 overflow-hidden"
+			class="hidden tablet:flex sticky left-0 h-fit w-[150px] bg-white z-50 flex-col items-center pt-[40px] shrink-0 overflow-hidden pb-[32px]"
 			style="top: var(--nav-height, 0px)"
 		>
 			<!-- Back Arrow Button -->
@@ -99,7 +99,7 @@
 				</div>
 
 				<!-- Content Sections Container -->
-				<div class="px-[40px] pt-[160px] pb-[100px] flex flex-col gap-[140px]">
+				<div class="px-[40px] pt-[160px] pb-[100px] flex flex-col desktop:flex-row-reverse gap-[70px] tablet:gap-[140px]">
 					<!-- Designers Grid Section (comes first) -->
 					<div class="flex flex-col gap-[32px] items-end px-[16px]">
 						{#each Array(Math.ceil(data.designers.length / 2)) as _, rowIndex}
@@ -250,7 +250,7 @@
 
 		<!-- Designers Grid -->
 		<div
-			class="flex gap-[18px] items-start justify-end pt-[140px] pb-[80px] px-[16px] sm:px-[24px] w-full"
+			class="flex-col tablet:flex-row flex gap-[18px] items-start justify-end pt-[70px] tablet:pt-[140px] pb-[80px] px-[16px] sm:px-[24px] w-full"
 		>
 			{#each Array(Math.ceil(data.designers.length / 2)) as _, rowIndex}
 				<div class="grid grid-cols-2 gap-[20px] items-center">
@@ -281,7 +281,7 @@
 		</div>
 
 		<!-- Messages Section (Mobile - full width, no left nav) -->
-		<div class="flex flex-col gap-[40px] items-center justify-center py-[60px]">
+		<div class="flex flex-col gap-[40px] items-center justify-center px-[16px] py-[60px]">
 			<MessageBoard type="work" targetId={data.work.id} isForTarget={true} />
 		</div>
 	</div>

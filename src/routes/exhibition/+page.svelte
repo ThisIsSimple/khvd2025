@@ -39,8 +39,12 @@
 		<!-- Left Column: Content -->
 		<div>
 			<!-- Page Title -->
-			<div class="flex items-center px-[16px] tablet:px-[40px] py-[48px]">
-				<h1 class="font-display text-[120px] leading-none text-[#111111]">ABOUT EXHIBITION</h1>
+			<div class="flex items-center px-[16px] tablet:px-[40px] py-[8px] tablet:py-[48px]">
+				<h1
+					class="font-display text-[48px] tablet:text-[100px] desktop:text-[120px] leading-none text-[#111111]"
+				>
+					ABOUT EXHIBITION
+				</h1>
 			</div>
 
 			<!-- Content Container -->
@@ -62,7 +66,7 @@
 
 					<!-- Content -->
 					<div class="flex flex-col gap-[10px] py-[32px]">
-						<div class="text-[#222222] text-[20px] leading-[1.5]">
+						<div class="text-[#222222] text-[15px] tablet:text-[18px] leading-[1.5]">
 							<p>
 								재구상(Reenvision)하는 행위는 끊임없이 다시 그려내는 시각디자인(Visual Design) 그
 								자체이며,
@@ -102,7 +106,9 @@
 					<div class="flex flex-col gap-[32px] py-[32px]">
 						<div class="flex flex-col gap-[80px]">
 							<!-- Text Content -->
-							<div class="flex flex-col gap-[28px] text-[#222222] text-[20px] leading-[1.5]">
+							<div
+								class="flex flex-col gap-[28px] text-[#222222] text-[15px] tablet:text-[18px] leading-[1.5]"
+							>
 								<p>
 									그래픽의 선과 면, 그리고 분절된 형태는 범람하는 정보사회에 맞서 우리만의 명확한
 									시선과 꿈을 찾아가는 과정을 담고 있습니다.
@@ -149,7 +155,9 @@
 								</div>
 
 								<!-- Color Description -->
-								<div class="flex flex-col gap-[28px] text-[20px] text-black leading-[1.5]">
+								<div
+									class="flex flex-col gap-[28px] text-[15px] tablet:text-[18px] text-black leading-[1.5]"
+								>
 									<p>아이덴티티 컬러는 오렌지와 블랙으로 설정하였습니다.</p>
 									<p>
 										오렌지는 강렬하면서도 따뜻한 에너지를 지닌 색입니다. 타인에 의해 흔들리지 않는
@@ -177,24 +185,16 @@
 
 					<!-- Content -->
 					<div class="flex flex-col gap-[32px] pt-[32px]">
-						<p class="text-[20px] text-black leading-[1.5]">
-							과거의 기록은 단절이 아니라, 앞으로 이어질 길의 토대가 됩니다. 경희 시디가 쌓아온
-							역사가 지금도 흐릅니다.<br /><br />
+						<p class="text-[15px] tablet:text-[18px] text-black leading-[1.5]">
+							과거의 기록은 단절이 아니라, 앞으로 이어질 길의 토대가 됩니다. <br />
+							경희 시디가 쌓아온 역사가 지금도 흐릅니다.<br /><br />
 
-							이 공간은 덜 보거나 더 볼 필요 없이 오롯이 디자인에만 몰입할 수 있도록 합니다.<br
-							/><br />
+							이 공간은 덜 보거나 더 볼 필요 없이 <br />
+							오롯이 디자인에만 몰입할 수 있도록 합니다.<br /><br />
 
-							잠시 발걸음을 멈추는 동안, 지금까지의 경희대학교 시각디자인학과가 34년간 쌓아온 기록을
-							영상과 함께 즐겨주시길 바랍니다.
+							잠시 발걸음을 멈추는 동안, 지금까지의 경희대학교 시각디자인학과가 <br />
+							34년간 쌓아온 기록을 영상과 함께 즐겨주시길 바랍니다.
 						</p>
-						<!-- Archive Image -->
-						<div class="w-[415.979px] h-[245.261px]">
-							<img
-								src="/about-archive-image.png"
-								alt="Archive Zone"
-								class="w-full h-full object-cover"
-							/>
-						</div>
 					</div>
 				</div>
 			</div>

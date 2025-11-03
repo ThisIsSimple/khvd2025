@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Motion } from 'svelte-motion';
+	import { goto } from '$app/navigation';
 
 	interface Professor {
 		name: string;
@@ -17,8 +18,18 @@
 
 	let isHovered = $state(false);
 
-	function handleToggle() {
-		isHovered = !isHovered;
+	function handleMouseEnter() {
+		isHovered = true;
+	}
+
+	function handleMouseLeave() {
+		isHovered = false;
+	}
+
+	function handleClick() {
+		setTimeout(() => {
+			goto(`/exhibition/works/list/${number}`);
+		}, 750);
 	}
 </script>
 
@@ -27,9 +38,10 @@
 	class="relative px-[16px] w-full transition-all duration-500 ease-in-out py-[20px] overflow-hidden {isHovered
 		? 'bg-primary'
 		: ''}"
-	onmouseenter={() => (isHovered = true)}
-	onmouseleave={() => (isHovered = false)}
-	ontouchstart={handleToggle}
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+	ontouchstart={handleMouseEnter}
+	onclick={handleClick}
 	role="button"
 	tabindex="0"
 >

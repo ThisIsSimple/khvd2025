@@ -40,22 +40,29 @@
 	<!-- Main Content -->
 	<div class="flex flex-col items-center w-full">
 		<!-- Page Title -->
-		<div class="flex items-center justify-start w-full px-[40px] py-[40px]">
-			<h1 class="font-display text-[120px] leading-none text-[#111111]">WORK</h1>
+		<div
+			class="flex items-center justify-start w-full px-[16px] tablet:px-[40px] py-[8px] tablet:py-[48px]"
+		>
+			<h1
+				class="font-display text-[48px] tablet:text-[100px] desktop:text-[120px] leading-none text-[#111111]"
+			>
+				WORK
+			</h1>
 		</div>
 
 		<!-- Professor Groups Grid - Tablet+ (2x2 grid) -->
 		<div
-			class="hidden tablet:grid w-full grid-cols-2 grid-rows-2 gap-0"
+			class="hidden tablet:grid w-full grid-cols-2 gap-0"
 			style="background-image: url('/work-background.webp'); background-size: 100%; background-repeat: repeat-x repeat-y;"
 		>
-			{#each professorGroups as group}
+			{#each professorGroups as group, index}
 				<WorkCard
 					number={group.number}
 					professors={group.professors}
 					workCount={group.workCount}
 					category={group.category}
 					title={group.title}
+					isBottom={index === 2 || index === 3}
 				/>
 			{/each}
 		</div>

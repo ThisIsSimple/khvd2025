@@ -307,7 +307,7 @@
 
 <section
 	class={isForTarget
-		? 'bg-white flex flex-col gap-[20px] items-stretch'
+		? 'w-full bg-white flex flex-col gap-[20px] items-stretch'
 		: 'relative flex flex-col gap-[40px] items-center justify-center py-[60px] tablet:py-[100px] px-4 tablet:px-10 pb-[200px]'}
 >
 	<!-- Background Image (only for general message board) -->

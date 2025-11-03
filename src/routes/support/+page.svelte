@@ -59,11 +59,15 @@
 
 	// Sponsors
 	const sponsors = [
-		{ name: 'LISN', logo: '/sponsors/support1.png', link: 'https://www.lisn.co.kr/' },
-		{ name: 'Risfont', logo: '/sponsors/support2.png', link: 'https://www.risfont.com/' },
-		{ name: 'Yoondesign', logo: '/sponsors/support3.png', link: 'https://www.yoondesign.com/' },
-		{ name: 'sandoll', logo: '/sponsors/support4.png', link: 'https://www.sandoll.com/' },
-		{ name: 'DdayB', logo: '/sponsors/support5.png', link: 'https://www.ddayb.com/' }
+		{
+			name: '다인어리',
+			logo: '/sponsors/다인어리.png',
+			link: 'https://www.instagram.com/dainary.official'
+		},
+		{ name: '산돌구름', logo: '/sponsors/산돌구름.png', link: 'https://www.sandollcloud.com/' },
+		{ name: '리즌디자인', logo: '/sponsors/리즌디자인.png', link: 'https://www.rixfontcloud.com' },
+		{ name: '릭스폰트', logo: '/sponsors/릭스폰트.png', link: 'https://www.rixfontcloud.com' },
+		{ name: '윤디자인', logo: '/sponsors/윤디자인.png', link: 'https://yoondesign.com' }
 	];
 </script>
 
@@ -73,8 +77,10 @@
 
 <div class="min-h-screen bg-white">
 	<!-- Main Title -->
-	<section class="px-[20px] tablet:px-[40px] py-[28px] tablet:py-[28px]">
-		<h1 class="font-display text-[80px] tablet:text-[100px] leading-[1.2] text-[#111111]">
+	<section class="px-[16px] tablet:px-[40px] py-[8px] tablet:py-[48px]">
+		<h1
+			class="font-display text-[48px] tablet:text-[100px] desktop:text-[120px] leading-[1.2] text-[#111111]"
+		>
 			TEACH & SUPPORT
 		</h1>
 	</section>
@@ -197,7 +203,7 @@
 		<div class="flex flex-col sm:flex-row gap-[40px] tablet:gap-[40px]">
 			<!-- Left: Committee Photo -->
 			<div class="w-full aspect-[480/350] bg-gray-200 max-w-[900px]">
-				<img src="/support-group.png" alt="졸업전시위원회" class="w-full h-full object-cover" />
+				<img src="/support-group.jpeg" alt="졸업전시위원회" class="w-full h-full object-cover" />
 			</div>
 
 			<!-- Right: Member List -->
@@ -218,7 +224,7 @@
 					{/each}
 				</div>
 				<div class="flex flex-col gap-[8px]">
-					<div class="hidden sm:block h-[1px] bg-[#111111] w-[20px]"></div>
+					<div class="hidden sm:block h-[1px] bg-[#111111] w-[20px] mb-[8px]"></div>
 					{#each committeeMembers2 as member}
 						<div class="flex gap-y-[8px] gap-x-[12px] py-[10px]">
 							<p class="text-b1 text-[#111111] w-[60px] shrink-0">{member.role}</p>
@@ -247,9 +253,14 @@
 
 		<div class="grid grid-cols-2 tablet:grid-cols-5 gap-[20px]">
 			{#each sponsors as sponsor}
-				<div class="flex items-center justify-center aspect-square bg-[#F6F6F6]">
+				<a
+					href={sponsor.link}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center justify-center aspect-square bg-[#F6F6F6] hover:bg-[#EEEEEE] transition-colors duration-300"
+				>
 					<img src={sponsor.logo} alt={sponsor.name} class="max-w-full max-h-full object-contain" />
-				</div>
+				</a>
 			{/each}
 		</div>
 	</section>

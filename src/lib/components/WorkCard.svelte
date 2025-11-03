@@ -11,9 +11,10 @@
 		workCount: number;
 		category?: string;
 		title?: string;
+		isBottom?: boolean;
 	}
 
-	let { number, professors, workCount, category, title }: Props = $props();
+	let { number, professors, workCount, category, title, isBottom }: Props = $props();
 
 	let isHovered = $state(false);
 
@@ -32,36 +33,37 @@
 
 <!-- Work Card Component for Desktop/Tablet -->
 <div
-	class="flex flex-col transition-transform duration-500 ease-in-out origin-top {isHovered
-		? 'scale-y-105'
+	class="flex flex-col transition-transform duration-500 ease-in-out origin-top relative {isHovered
+		? 'scale-y-[1.02] z-10'
 		: 'scale-y-100'}"
 >
+	{#if isBottom}
+		<div class="bg-white h-[80px] w-full"></div>
+	{/if}
 	<!-- Professor Info Box -->
 	<div
-		class="flex-1 bg-white flex flex-col gap-[12px] items-start justify-start w-full px-[40px] xl:px-[100px] py-[20px]"
+		class=" bg-white flex flex-col gap-[12px] items-start justify-start w-full px-[40px] xl:px-[100px] pb-[40px]"
 	>
 		{#each professors as professor}
 			<div class="bg-white flex items-center justify-start w-full">
 				<p class="font-semibold text-[20px] leading-[1.2] text-[#111111] w-[64px]">PROF.</p>
-				<p class="font-sans text-[20px] leading-[1.5] text-[#111111] whitespace-nowrap">
+				<p class="font-sans text-[20px] text-[#111111] whitespace-nowrap">
 					{professor.name}
 				</p>
 			</div>
 		{/each}
 	</div>
 
-	<div class="bg-white h-[40px] w-full"></div>
-
 	<!-- Number Display Section with Background Pattern -->
 	<div
 		onmouseenter={handleMouseEnter}
 		onmouseleave={handleMouseLeave}
-		role="button"
-		tabindex="0"
-		class="relative flex flex-col justify-between h-[500px] pl-[40px] xl:pl-[80px] pb-[55px] overflow-hidden transition-colors duration-500 ease-in-out {isHovered
+		class="relative flex flex-col justify-between h-[450px] desktop:h-[500px] pl-[40px] xl:pl-[80px] pb-[55px] overflow-hidden transition-colors duration-500 ease-in-out {isHovered
 			? 'bg-primary'
 			: ''}"
 		onclick={handleClick}
+		role="button"
+		tabindex="0"
 	>
 		<!-- Number and Count Container -->
 		<div class="relative flex items-start justify-between w-full">
