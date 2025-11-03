@@ -5,37 +5,43 @@
 			name: '장미경',
 			nameEn: 'Jang Mikyung',
 			image: '/professors/Jang Mikyung.webp',
-			number: 1
+			number: 1,
+			link: '/exhibition/works/list/1'
 		},
 		{
 			name: '김은정',
 			nameEn: 'Kim Eunjung',
 			image: '/professors/Kim Eunjung.webp',
-			number: 0
+			number: 0,
+			link: '/exhibition/works/list/0'
 		},
 		{
 			name: '정지연',
 			nameEn: 'Jung Jiyeon',
 			image: '/professors/Jung Jiyeon.webp',
-			number: 2
+			number: 2,
+			link: '/exhibition/works/list/2'
 		},
 		{
 			name: '박상희',
 			nameEn: 'Park Sanghee',
 			image: '/professors/Park Sanghee.webp',
-			number: 0
+			number: 0,
+			link: '/exhibition/works/list/0?professor=박상희'
 		},
 		{
 			name: '김정우',
 			nameEn: 'Kim Jungwoo',
 			image: '/professors/Kim Jungwoo.webp',
-			number: 3
+			number: 3,
+			link: '/exhibition/works/list/3'
 		},
 		{
 			name: '김대연',
 			nameEn: 'Kim Daeyeon',
 			image: '/professors/Kim Daeyeon.webp',
-			number: 1
+			number: 1,
+			link: '/exhibition/works/list/1'
 		}
 	];
 
@@ -76,10 +82,12 @@
 	<!-- Introduction Section: 생생한 꿈은 실현된다 -->
 	<section class="px-[20px] tablet:px-[40px] pt-[40px] pb-[60px] tablet:pb-[120px]">
 		<div
-			class="flex flex-col tablet:flex-row gap-[40px] tablet:gap-[80px] items-start tablet:items-center"
+			class="flex flex-col tablet:flex-row gap-[20px] tablet:gap-[40px] desktop:gap-[80px] items-start tablet:items-center"
 		>
 			<!-- Left: Chairman's Message -->
-			<div class="flex-1 flex flex-col justify-between h-full min-h-[400px] tablet:min-h-[556px]">
+			<div
+				class="flex-1 flex flex-col gap-[16px] justify-between h-full min-h-[400px] tablet:min-h-[480px]"
+			>
 				<!-- Title -->
 				<h2
 					class="font-bold text-[24px] tablet:text-[32px] leading-[1.4] text-[#111111] mb-[24px] tablet:mb-0"
@@ -119,10 +127,10 @@
 			</div>
 
 			<!-- Right: University Building Image -->
-			<div class="flex-1 h-[300px] tablet:h-[556px] bg-[#eeeeee] relative overflow-hidden">
+			<div class="flex-1 h-[300px] tablet:h-[480px] bg-[#eeeeee] relative overflow-hidden">
 				<img
-					src="/support-building.png"
-					alt="경희대학교 건물"
+					src="/support-intro.jpeg"
+					alt="경희대학교"
 					class="w-full h-full object-cover object-center"
 				/>
 			</div>
@@ -141,7 +149,7 @@
 
 		<div class="grid grid-cols-2 sm:grid-cols-3 gap-[8px]">
 			{#each professors as professor}
-				<div class="group relative aspect-square overflow-hidden flex flex-col">
+				<a href={professor.link} class="group relative aspect-square overflow-hidden flex flex-col">
 					<!-- Professor Image -->
 					<div class="w-full h-full bg-gray-300">
 						<img
@@ -160,18 +168,18 @@
 					</div>
 
 					<div
-						class="group-hover:scale-100 scale-0 transition-transform duration-300 ease-in-out z-[1] absolute left-0 top-0 w-full h-full flex flex-col items-start justify-end gap-[4px] p-[20px] bg-primary"
+						class="group-hover:scale-100 scale-0 transition-transform duration-300 ease-in-out z-[1] absolute left-0 top-0 w-full h-full flex flex-col items-start justify-end gap-[4px] desktop:gap-[8px] p-[24px] desktop:px-[32px] desktop:py-[26px] bg-primary"
 					>
 						<h3
-							class="text-[40px] tablet:text-[52px] leading-[1.1] font-bold text-white font-display"
+							class="text-[40px] tablet:text-[52px] leading-[0.9] font-regular text-white font-display"
 						>
 							GRADUATION<br />STUDIES {professor.number}
 						</h3>
-						<p class="text-[20px] tablet:text-[24px] text-white font-display">
-							졸업연구 {professor.number}
+						<p class="text-[20px] tablet:text-[24px] text-white tracking-[-0.4px]">
+							졸업연구{professor.number}
 						</p>
 					</div>
-				</div>
+				</a>
 			{/each}
 		</div>
 	</section>

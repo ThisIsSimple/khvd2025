@@ -90,7 +90,7 @@
 					let:motion
 				>
 					<div use:motion class="relative flex flex-col overflow-hidden pt-[20px]">
-						<p class="font-semibold text-[28px] leading-[1.3] text-[#fefefe] max-w-[280px]">
+						<p class="font-semibold text-[28px] leading-[1.3] text-[#fefefe] whitespace-pre-line">
 							{title}
 						</p>
 					</div>

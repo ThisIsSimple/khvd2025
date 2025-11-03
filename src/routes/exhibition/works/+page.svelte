@@ -6,34 +6,33 @@
 	const professorGroups = [
 		{
 			number: '0',
-			professors: [{ name: 'Un Chong Kim ' }, { name: 'Sang Hee Park' }],
-			workCount: 25,
-			category: 'VISUAL DESIGN',
+			professors: [{ name: 'Eun Jeong Kim' }, { name: 'Sang Hee Park' }],
+			workCount: 24,
+			category: 'SDGs design Solutions',
 			title: '지속 가능한 미래를 위한\n창의적 해법'
 		},
 		{
 			number: '1',
-			professors: [{ name: 'Mee Kyung Jang' }, { name: 'Dae Yeon Kim' }],
+			professors: [{ name: 'Mi Kyeong Jang' }, { name: 'Dae Yeon Kim' }],
 			workCount: 34,
-			category: 'VISUAL DESIGN',
-			title: '아이디어의 근원과\n메세지를 탐구하는\n실전 디자인'
+			category: 'GRAPHIC & BRANGDING',
+			title: '아이디어의 근원과\n메세지를 탐구하는 실전 디자인'
 		},
 		{
 			number: '2',
-			professors: [{ name: 'Je Yon Jung' }],
+			professors: [{ name: 'Ji Yeon Jung' }],
 			workCount: 21,
-			category: 'VISUAL DESIGN',
-			title: '디자인 비즈니스:\n경험, 혁신, 그리고\n미래 연결성'
+			category: 'DESIGN BUSINESS',
+			title: '디자인 비즈니스:\n경험, 혁신, 그리고 미래 연결성'
 		},
 		{
 			number: '3',
 			professors: [{ name: 'Jung Woo Kim' }],
 			workCount: 13,
-			category: 'VISUAL DESIGN',
-			title: '시각 언어와\n인터랙션을 결합한\n경험 디자인'
+			category: 'INTERACTION',
+			title: '시각 언어와 인터랙션을 결합한\n경험 디자인'
 		}
 	];
-
 </script>
 
 <!-- Exhibition Works Page -->
@@ -63,8 +62,8 @@
 
 		<!-- Professor Groups Grid - Mobile & XS (1 column horizontal) -->
 		<div
-			class="flex tablet:hidden flex-col w-full"
-			style="background-image: url('/work-background.webp'); background-repeat: repeat-x repeat-y; background-size: 200%;"
+			class="flex tablet:hidden flex-col w-full bg-size-[200%] sm:bg-size-[150%]"
+			style="background-image: url('/work-background.webp'); background-repeat: repeat-x repeat-y;"
 		>
 			{#each professorGroups as group}
 				<WorkCardMobile

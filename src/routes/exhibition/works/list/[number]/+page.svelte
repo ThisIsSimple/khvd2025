@@ -316,7 +316,9 @@ DESIGN FOR ALL + PASSION + OPEN, MIND + CREATIVITY + :)`
 				<!-- Title Row -->
 				<div class="w-full flex gap-[16px] items-start pb-[24px]">
 					<!-- Main Title -->
-					<h1 class="font-display text-[120px] leading-none text-[#111111] whitespace-nowrap">
+					<h1
+						class="font-display text-[100px] xl:text-[120px] leading-none text-[#111111] whitespace-nowrap"
+					>
 						{info.title}
 					</h1>
 
@@ -334,7 +336,7 @@ DESIGN FOR ALL + PASSION + OPEN, MIND + CREATIVITY + :)`
 						{#each filteredProfessors as professor}
 							<div class="w-full flex flex-col gap-[12px]">
 								<!-- Professor Description -->
-								<div class="w-full flex items-center justify-center pr-[320px]">
+								<div class="w-3/4 flex items-center justify-center">
 									<p class="flex-1 text-[20px] leading-[1.5] text-[#222222] whitespace-pre-wrap">
 										{professor.description}
 									</p>

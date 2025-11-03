@@ -2,7 +2,7 @@ import type { SeminarDay } from '$lib/types/seminar';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	// Seminar data from Figma design
+	//Seminar data from Figma design
 	const seminarData: SeminarDay[] = [
 		{
 			date: '11.06',
@@ -18,7 +18,7 @@ export const load: PageServerLoad = async () => {
 					speakers: [
 						{
 							name: '이묘정',
-							team: '졸업스튜디오 1 · 이묘정'
+							team: '이묘정'
 						}
 					]
 				},
@@ -33,7 +33,7 @@ export const load: PageServerLoad = async () => {
 					speakers: [
 						{
 							name: '이윤서',
-							team: '졸업스튜디오 1 · 이윤서'
+							team: '이윤서'
 						}
 					]
 				},
@@ -48,7 +48,7 @@ export const load: PageServerLoad = async () => {
 					speakers: [
 						{
 							name: '신혜원',
-							team: '졸업스튜디오 2 · 신혜원'
+							team: '신혜원'
 						}
 					]
 				},
@@ -63,7 +63,7 @@ export const load: PageServerLoad = async () => {
 					speakers: [
 						{
 							name: '김주영',
-							team: '졸업스튜디오 2 · 김주영'
+							team: '김주영'
 						}
 					]
 				},
@@ -77,8 +77,8 @@ export const load: PageServerLoad = async () => {
 					fullSchedule: '11.06 (목)  13:45-14:00',
 					speakers: [
 						{
-							name: 'T김다은/ 임주은',
-							team: '졸업스튜디오 3 · T김다은/ 임주은'
+							name: 'T김다은 / 임주은',
+							team: 'T김다은 / 임주은'
 						}
 					]
 				},
@@ -92,8 +92,8 @@ export const load: PageServerLoad = async () => {
 					fullSchedule: '11.06 (목)  14:00-14:15',
 					speakers: [
 						{
-							name: 'T김은진/ 이채서',
-							team: '졸업스튜디오 3 · T김은진/ 이채서'
+							name: 'T김은진 / 이채서',
+							team: 'T김은진 / 이채서'
 						}
 					]
 				},
@@ -107,8 +107,8 @@ export const load: PageServerLoad = async () => {
 					fullSchedule: '11.06 (목)  14:15-14:30',
 					speakers: [
 						{
-							name: 'T이수빈/ 정혜원/ 오경진',
-							team: '졸업스튜디오 0 · T이수빈/ 정혜원/ 오경진'
+							name: 'T이수빈 / 정혜원 / 오경진',
+							team: 'T이수빈 / 정혜원 / 오경진'
 						}
 					]
 				},
@@ -122,8 +122,8 @@ export const load: PageServerLoad = async () => {
 					fullSchedule: '11.06 (목)  14:30-14:45',
 					speakers: [
 						{
-							name: 'T강희승/ 김의진/ 신혜원',
-							team: '졸업스튜디오 0 · T강희승/ 김의진/ 신혜원'
+							name: 'T강희승 / 김의진 / 신혜원',
+							team: 'T강희승 / 김의진 / 신혜원'
 						}
 					]
 				},
@@ -137,8 +137,8 @@ export const load: PageServerLoad = async () => {
 					fullSchedule: '11.06 (목)  14:45-15:00',
 					speakers: [
 						{
-							name: 'T김주영/ 방서연/ 이윤서',
-							team: '졸업스튜디오 0 - 다답 · T김주영/ 방서연/ 이윤서'
+							name: 'T김주영 / 방서연 / 이윤서',
+							team: 'T김주영 / 방서연 / 이윤서'
 						}
 					]
 				},
@@ -152,8 +152,8 @@ export const load: PageServerLoad = async () => {
 					fullSchedule: '11.06 (목)  15:00-15:15',
 					speakers: [
 						{
-							name: 'T안효정/정시은/ 만령연/김성욱',
-							team: '졸업스튜디오 0 - 다답 · T안효정/정시은/ 만령연/김성욱'
+							name: 'T안효정 / 정시은 / 만령연 / 김성욱',
+							team: 'T안효정 / 정시은 / 만령연 / 김성욱'
 						}
 					]
 				}

@@ -29,27 +29,27 @@
 			: 'bg-[#f6f6f6]'}"
 	>
 		<div
-			class="flex flex-wrap gap-[8px] tablet:gap-[10px] desktop:gap-[12px] items-center justify-center w-full"
+			class="flex gap-[8px] tablet:gap-[10px] desktop:gap-[12px] items-center justify-center w-full min-w-0"
 		>
-			<!-- Category -->
+			<!-- Category (fixed width, no truncation) -->
 			<p
-				class="font-bold text-[16px] tablet:text-[20px] desktop:text-[24px] leading-[1.4] tracking-[-0.48px] {isSelected
+				class="font-bold text-[16px] tablet:text-[20px] desktop:text-[24px] leading-[1.4] tracking-[-0.48px] shrink-0 {isSelected
 					? 'text-white'
 					: 'text-[#222222]'}"
 			>
 				{seminar.category}
 			</p>
 
-			<!-- Separator Dot -->
+			<!-- Separator Dot (fixed width) -->
 			<div
-				class="w-[4px] tablet:w-[5px] desktop:w-[5px] h-[4px] tablet:h-[5px] desktop:h-[5px] rounded-full {isSelected
+				class="w-[4px] tablet:w-[5px] desktop:w-[5px] h-[4px] tablet:h-[5px] desktop:h-[5px] rounded-full shrink-0 {isSelected
 					? 'bg-white'
 					: 'bg-[#222222]'}"
 			></div>
 
-			<!-- Title -->
+			<!-- Title (truncate with ellipsis) -->
 			<p
-				class="text-[16px] tablet:text-[20px] desktop:text-[24px] leading-[1.5] font-sans {isSelected
+				class="text-[16px] tablet:text-[20px] desktop:text-[24px] leading-[1.5] font-sans truncate min-w-0 {isSelected
 					? 'text-white'
 					: 'text-[#222222]'}"
 			>

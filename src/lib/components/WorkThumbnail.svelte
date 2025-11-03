@@ -59,64 +59,50 @@
 
 	<!-- Desktop: Hover Overlay -->
 	<div
-		class="absolute inset-0 bg-primary/70 flex flex-col items-center justify-center gap-[16px] transition-opacity duration-300 ease-out {isHovered
+		class="white-cursor absolute inset-0 bg-primary/70 flex flex-col items-center justify-center gap-[16px] transition-opacity duration-300 ease-out {isHovered
 			? 'opacity-100 pointer-events-auto'
 			: 'opacity-0 pointer-events-none'}"
 	>
-			<!-- Work Info -->
-			<div class="flex flex-col items-center text-center text-white">
-				<p class="text-[22px] desktop:text-[28px] leading-[1.4] font-bold">{title}</p>
-				<p class="text-[16px] desktop:text-[20px] leading-[1.5] text-[#eeeeee]">{groupName}</p>
+		<!-- Work Info -->
+		<div class="flex flex-col items-center text-center text-white">
+			<p class="text-[22px] desktop:text-[28px] leading-[1.4] font-bold">{title}</p>
+			<p class="text-[16px] desktop:text-[20px] leading-[1.5] text-[#eeeeee]">{groupName}</p>
+		</div>
+
+		<!-- Action Icons -->
+		<div class="flex gap-[10px] items-center">
+			<!-- Edit Icon (Pencil) -->
+			<div class="w-[44px] h-[44px] bg-[#111111] rounded-full flex items-center justify-center">
+				<svg
+					width="17"
+					height="17"
+					viewBox="0 0 17 17"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M0 13.4167V16.5H3.08333L12.2583 7.325L9.175 4.24167L0 13.4167ZM14.5417 4.94167C14.8583 4.625 14.8583 4.11667 14.5417 3.8L12.7 1.95833C12.3833 1.64167 11.875 1.64167 11.5583 1.95833L10.1083 3.40833L13.1917 6.49167L14.5417 4.94167Z"
+						fill="white"
+					/>
+				</svg>
 			</div>
 
-			<!-- Action Icons -->
-			<div class="flex gap-[10px] items-center">
-				<!-- Edit Icon (Pencil) -->
-				<button
-					class="w-[44px] h-[44px] bg-[#111111] rounded-full flex items-center justify-center hover:bg-[#333333] transition-colors"
-					onclick={(e) => {
-						e.stopPropagation();
-						window.location.href = `/exhibition/works/${workId}`;
-					}}
-					aria-label="View work details"
+			<!-- Arrow Icon -->
+			<div class="w-[44px] h-[44px] bg-[#111111] rounded-full flex items-center justify-center">
+				<svg
+					width="17"
+					height="17"
+					viewBox="0 0 17 17"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
 				>
-					<svg
-						width="17"
-						height="17"
-						viewBox="0 0 17 17"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M0 13.4167V16.5H3.08333L12.2583 7.325L9.175 4.24167L0 13.4167ZM14.5417 4.94167C14.8583 4.625 14.8583 4.11667 14.5417 3.8L12.7 1.95833C12.3833 1.64167 11.875 1.64167 11.5583 1.95833L10.1083 3.40833L13.1917 6.49167L14.5417 4.94167Z"
-							fill="white"
-						/>
-					</svg>
-				</button>
-
-				<!-- Arrow Icon -->
-				<button
-					class="w-[44px] h-[44px] bg-[#111111] rounded-full flex items-center justify-center hover:bg-[#333333] transition-colors"
-					onclick={(e) => {
-						e.stopPropagation();
-						window.location.href = `/exhibition/works/${workId}`;
-					}}
-					aria-label="Go to work page"
-				>
-					<svg
-						width="17"
-						height="17"
-						viewBox="0 0 17 17"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M8.5 0.5C3.8 0.5 0 4.3 0 9C0 13.7 3.8 17.5 8.5 17.5C13.2 17.5 17 13.7 17 9C17 4.3 13.2 0.5 8.5 0.5ZM12.325 9.85L9.575 12.6C9.4 12.775 9.175 12.85 8.95 12.85C8.725 12.85 8.5 12.775 8.325 12.6C7.975 12.25 7.975 11.675 8.325 11.325L9.65 10H5C4.5 10 4.1 9.6 4.1 9.1C4.1 8.6 4.5 8.2 5 8.2H9.65L8.325 6.875C7.975 6.525 7.975 5.95 8.325 5.6C8.675 5.25 9.25 5.25 9.6 5.6L12.35 8.35C12.675 8.675 12.675 9.5 12.325 9.85Z"
-							fill="white"
-						/>
-					</svg>
-				</button>
+					<path
+						d="M8.5 0.5C3.8 0.5 0 4.3 0 9C0 13.7 3.8 17.5 8.5 17.5C13.2 17.5 17 13.7 17 9C17 4.3 13.2 0.5 8.5 0.5ZM12.325 9.85L9.575 12.6C9.4 12.775 9.175 12.85 8.95 12.85C8.725 12.85 8.5 12.775 8.325 12.6C7.975 12.25 7.975 11.675 8.325 11.325L9.65 10H5C4.5 10 4.1 9.6 4.1 9.1C4.1 8.6 4.5 8.2 5 8.2H9.65L8.325 6.875C7.975 6.525 7.975 5.95 8.325 5.6C8.675 5.25 9.25 5.25 9.6 5.6L12.35 8.35C12.675 8.675 12.675 9.5 12.325 9.85Z"
+						fill="white"
+					/>
+				</svg>
 			</div>
+		</div>
 	</div>
 
 	<!-- Tablet: Fixed Title at Bottom -->

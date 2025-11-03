@@ -43,13 +43,19 @@
 	<!-- Image Container with Hover Effects -->
 	<div class="relative w-full aspect-[258/332] bg-white overflow-hidden group mb-2 tablet:mb-4">
 		<!-- Profile Image with Grayscale Effect -->
-		<img
-			src={imageUrl}
-			alt={name}
-			class="absolute inset-0 w-full h-full object-cover
+		{#if imageUrl}
+			<img
+				src={imageUrl}
+				alt={name}
+				class="absolute inset-0 w-full h-full object-cover
 				   grayscale transition-all duration-300 ease-in-out
 				   group-hover:grayscale-0 group-hover:scale-105"
-		/>
+			/>
+		{:else}
+			<div
+				class="absolute inset-0 w-full h-full bg-[#808080] flex items-center justify-center"
+			></div>
+		{/if}
 
 		<!-- Contact Icons (Top Right) -->
 		{#if hasLegacyInstagram || hasLegacyEmail}

@@ -33,7 +33,7 @@
 >
 	<!-- Main Content -->
 	<div
-		class="bg-[#fefefe] tablet:w-3/4 pb-[180px] transition-transform duration-500 ease-in-out"
+		class="black-cursor bg-[#fefefe] tablet:w-3/4 pb-[180px] transition-transform duration-500 ease-in-out"
 		class:translate-x-[-100%]={uiState.isUIHidden}
 	>
 		<!-- Left Column: Content -->
@@ -178,8 +178,14 @@
 					<!-- Content -->
 					<div class="flex flex-col gap-[32px] pt-[32px]">
 						<p class="text-[20px] text-black leading-[1.5]">
-							기획팀 회의 끝나고<br />
-							미디어실 의도 설명문
+							과거의 기록은 단절이 아니라, 앞으로 이어질 길의 토대가 됩니다. 경희 시디가 쌓아온
+							역사가 지금도 흐릅니다.<br /><br />
+
+							이 공간은 덜 보거나 더 볼 필요 없이 오롯이 디자인에만 몰입할 수 있도록 합니다.<br
+							/><br />
+
+							잠시 발걸음을 멈추는 동안, 지금까지의 경희대학교 시각디자인학과가 34년간 쌓아온 기록을
+							영상과 함께 즐겨주시길 바랍니다.
 						</p>
 						<!-- Archive Image -->
 						<div class="w-[415.979px] h-[245.261px]">

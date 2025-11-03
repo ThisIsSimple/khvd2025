@@ -19,6 +19,14 @@
 
 	let selectedStudiesNumber = $state(0); // Default to GRADUATION STUDIES 0
 
+	// Map group number to work count
+	const workCounts: Record<number, number> = {
+		0: 24,
+		1: 34,
+		2: 21,
+		3: 13
+	};
+
 	// Handle area selection from ExhibitionMap
 	function handleAreaSelect(areaId: string) {
 		selectedStudiesNumber = areaToNumber[areaId];
@@ -66,7 +74,7 @@
 			class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[40px] py-[200px] tablet:py-[400px] w-full"
 		>
 			<div
-				class="flex flex-col font-display gap-[20px] items-start tablet:items-center justify-center leading-none text-primary text-[56px] tablet:text-[132px] text-left tablet:text-center w-full max-w-[1142px] tablet:mx-auto"
+				class="flex flex-col font-display gap-[20px] items-start tablet:items-center justify-center leading-none text-primary text-[56px] tablet:text-[100px] desktop:text-[132px] text-left tablet:text-center w-full max-w-[1142px] tablet:mx-auto"
 			>
 				<p class="w-full">Reenvision = vivid dreams</p>
 				<p class="whitespace-nowrap">Realization = Visual design</p>
@@ -273,7 +281,7 @@
 							STUDIES {selectedStudiesNumber}
 							<span
 								class="items-start relative top-[10px] font-display text-[16px] leading-[1.4] tracking-[-0.32px] sm:text-[28px] sm:leading-[1.2] sm:tracking-[-0.56px] tablet:text-[28px] tablet:leading-[1.2] tablet:tracking-[-0.56px] desktop:text-[32px] desktop:leading-none xl:text-[40px] xl:leading-none text-[#111111]"
-								>[15]
+								>[{workCounts[selectedStudiesNumber]}]
 							</span>
 						</p>
 					</div>
