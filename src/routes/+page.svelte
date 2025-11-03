@@ -77,19 +77,29 @@
 		<div
 			class="relative flex flex-col gap-[10px] items-start tablet:items-center justify-center px-4 tablet:px-[40px] py-[100px] tablet:py-[200px] w-full"
 		>
-			<div class="flex flex-col gap-[49px] items-start tablet:items-center text-primary w-full max-w-[1081px]">
+			<div
+				class="flex flex-col gap-[49px] items-start tablet:items-center text-primary w-full max-w-[1081px]"
+			>
 				<!-- Title -->
-				<div class="flex flex-col font-display gap-[14px] items-start tablet:items-center w-full max-w-[858px]">
+				<div
+					class="flex flex-col font-display gap-[14px] items-start tablet:items-center w-full max-w-[858px]"
+				>
 					<p
 						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-left tablet:text-center tracking-[-0.8px] w-full"
 					>
 						REENVISION=VIVID DREAMS
 					</p>
-					<p class="leading-none text-[80px] tablet:text-[210px] w-full text-left tablet:text-center">REENVISION =</p>
+					<p
+						class="leading-none text-[80px] tablet:text-[210px] w-full text-left tablet:text-center"
+					>
+						REENVISION =
+					</p>
 				</div>
 
 				<!-- Description -->
-				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full">
+				<div
+					class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full"
+				>
 					<p class="text-primary">Reenvision, 무뎌졌던 감각을 다시 일깨우고,</p>
 					<p class="text-primary">범람하는 정보들을 자신만의 것으로 재구상하는 과정.</p>
 					<p>&nbsp;</p>
@@ -110,17 +120,25 @@
 		>
 			<div class="flex flex-col gap-[60px] items-start tablet:items-center text-primary w-full">
 				<!-- Title -->
-				<div class="flex flex-col font-display gap-[7px] items-start tablet:items-center w-full max-w-[882px]">
+				<div
+					class="flex flex-col font-display gap-[7px] items-start tablet:items-center w-full max-w-[882px]"
+				>
 					<p
 						class="leading-[1.4] opacity-50 text-[24px] tablet:text-[40px] text-left tablet:text-center tracking-[-0.8px] w-full"
 					>
 						Realization=Visual Design
 					</p>
-					<p class="leading-none text-[80px] tablet:text-[210px] w-full text-left tablet:text-center">VIVID DREAMS</p>
+					<p
+						class="leading-none text-[80px] tablet:text-[210px] w-full text-left tablet:text-center"
+					>
+						VIVID DREAMS
+					</p>
 				</div>
 
 				<!-- Description -->
-				<div class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full">
+				<div
+					class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full"
+				>
 					<p>다듬어진 시선과 가치들은 시각디자인이라는 매체를 통해</p>
 					<p>Realization, 눈 앞의 현실로 드러납니다.</p>
 					<p>&nbsp;</p>
@@ -228,46 +246,44 @@
 
 		<!-- Content Area -->
 		<div
-			class="w-full flex flex-col tablet:flex-col desktop:flex-row xl:flex-row items-start sm:items-start tablet:items-start desktop:h-[695px] xl:h-[695px] gap-[12px] sm:gap-[32px] tablet:gap-[40px] desktop:gap-[60px] xl:gap-[60px] sm:py-[60px] tablet:py-[60px] desktop:py-[60px] xl:py-[60px] sm:px-[20px] tablet:px-[20px] desktop:px-[20px] xl:px-[20px]"
+			class="w-full grid tablet:grid-cols-2 items-start sm:items-start tablet:items-start desktop:h-[695px] xl:h-[695px] gap-[12px] sm:gap-[32px] tablet:gap-[40px] desktop:gap-[60px] xl:gap-[60px] sm:py-[60px] tablet:py-[60px] desktop:py-[60px] xl:py-[60px] sm:px-[20px] tablet:px-[20px] desktop:px-[20px] xl:px-[20px]"
 		>
 			<!-- Exhibition Map -->
 			<div
 				class="w-full px-[12px] py-[16px] sm:px-0 sm:py-0 tablet:px-0 tablet:py-0 desktop:px-0 desktop:py-0 xl:px-0 xl:py-0"
 			>
-				<div
-					class="w-full desktop:w-[800px] xl:flex-1 xl:h-full relative shrink-0 sm:shrink-0 tablet:shrink-0 desktop:shrink-0"
-				>
+				<div class="w-full relative shrink-0 sm:shrink-0 tablet:shrink-0 desktop:shrink-0">
 					<ExhibitionMap onAreaSelect={handleAreaSelect} />
 				</div>
 			</div>
 
 			<!-- Work Details with Arrow -->
-			<div
-				class="w-full tablet:w-full desktop:flex-1 xl:flex-1 h-full flex flex-row sm:flex-col tablet:flex-row desktop:flex-col xl:flex-col justify-between items-center sm:items-start tablet:items-start desktop:items-start px-[12px] sm:px-[12px] tablet:px-[12px] desktop:px-0 xl:px-0 border-t-[0.5px] border-[#111111] sm:border-black tablet:border-[#111111] desktop:border-t-0 xl:border-t-0 pb-[24px] pt-[18px] sm:pt-[24px] sm:pb-0 tablet:pt-[32px] tablet:pb-0 desktop:py-[60px] xl:py-[60px] sm:gap-[10px] tablet:gap-[95px] desktop:gap-0 xl:gap-0"
-			>
+			<div class="w-full h-full flex justify-between">
 				<!-- Text Content -->
-				<div class="flex-1 sm:w-full tablet:w-[458px] desktop:w-full xl:w-full flex flex-col gap-0">
-					<!-- Text with [15] -->
-					<div
-						class="flex flex-row items-center gap-[4px] sm:gap-[8px] tablet:gap-[4px] desktop:flex-col desktop:gap-[4px] xl:flex-col xl:gap-[4px]"
-					>
+				<div class="flex-1 w-full flex items-end">
+					<div class="flex flex-col gap-[4px] sm:gap-[8px] tablet:gap-[12px]">
 						<p
 							class="font-display text-[40px] leading-none sm:text-[52px] sm:leading-[1.1] tablet:text-[60px] tablet:leading-none desktop:text-[100px] desktop:leading-none xl:text-[120px] xl:leading-none text-[#111111]"
 						>
-							GRADUATION sTUDies {selectedStudiesNumber}
+							GRADUATION
 						</p>
-						<div class="pt-[6px] sm:pt-[4px] tablet:pt-[2px] desktop:pt-[12px] xl:pt-[12px]">
+						<p
+							class="flex gap-4 font-display text-[40px] leading-none sm:text-[52px] sm:leading-[1.1] tablet:text-[60px] tablet:leading-none desktop:text-[100px] desktop:leading-none xl:text-[120px] xl:leading-none text-[#111111]"
+						>
+							STUDIES {selectedStudiesNumber}
 							<span
-								class="font-display text-[16px] leading-[1.4] tracking-[-0.32px] sm:text-[28px] sm:leading-[1.2] sm:tracking-[-0.56px] tablet:text-[28px] tablet:leading-[1.2] tablet:tracking-[-0.56px] desktop:text-[32px] desktop:leading-none xl:text-[40px] xl:leading-none text-[#111111]"
-								>[15]</span
-							>
-						</div>
+								class="items-start relative top-[10px] font-display text-[16px] leading-[1.4] tracking-[-0.32px] sm:text-[28px] sm:leading-[1.2] sm:tracking-[-0.56px] tablet:text-[28px] tablet:leading-[1.2] tablet:tracking-[-0.56px] desktop:text-[32px] desktop:leading-none xl:text-[40px] xl:leading-none text-[#111111]"
+								>[15]
+							</span>
+						</p>
 					</div>
 				</div>
 
 				<!-- Arrow Icon -->
-				<div
-					class="flex-1 sm:w-full tablet:w-auto desktop:w-full xl:w-full flex justify-end sm:justify-end tablet:justify-end desktop:justify-end xl:justify-end items-start sm:items-center tablet:items-start desktop:items-center xl:items-center"
+				<a
+					href={`/exhibition/works/list/${selectedStudiesNumber}`}
+					class="flex justify-end items-start"
+					aria-label={`Go to Graduation Studies ${selectedStudiesNumber}`}
 				>
 					<div
 						class="w-[52px] h-[52px] sm:w-[60px] sm:h-[60px] tablet:w-[80px] tablet:h-[80px] desktop:w-[150px] xl:w-[150px] desktop:h-[150px] xl:h-[150px] flex items-center justify-center rotate-180 scale-y-[-100%]"
@@ -275,10 +291,10 @@
 						<img
 							src="/icons/arrow_diagonal.svg"
 							alt=""
-							class="w-[24.613px] h-[24.613px] sm:w-[28.4px] sm:h-[28.4px] tablet:w-[37.867px] tablet:h-[37.867px] desktop:w-[71px] desktop:h-[71px] xl:w-[71px] xl:h-[71px]"
+							class="w-[24.613px] h-[24.613px] sm:w-[28.4px] sm:h-[28.4px] tablet:w-[37.867px] tablet:h-[37.867px] desktop:w-[71px] desktop:h-[71px] xl:w-[71px] xl:h-[71px] group-hover:scale-110 transition-transform duration-300"
 						/>
 					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</section>
