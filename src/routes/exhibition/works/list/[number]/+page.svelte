@@ -91,7 +91,7 @@
 		<!-- Back Arrow Button (sticky) -->
 		<button
 			onclick={handleBack}
-			class="group w-[150px] h-[150px] flex items-center justify-center sticky top-0"
+			class="group w-[150px] h-[150px] flex items-center justify-center"
 			aria-label="Go back"
 		>
 			<img
@@ -107,7 +107,7 @@
 				<!-- Filter Button: 김은정 -->
 				<button
 					onclick={() => handleProfessorFilter('김은정')}
-					class="w-[134px] h-[202px] p-[32px] flex flex-col items-start justify-between cursor-pointer transition-colors {isProfessorActive(
+					class="w-full h-[202px] p-[32px] flex flex-col items-start justify-between cursor-pointer transition-colors {isProfessorActive(
 						'김은정'
 					)
 						? 'bg-primary text-white'
@@ -130,7 +130,7 @@
 				<!-- Filter Button: 박상희 -->
 				<button
 					onclick={() => handleProfessorFilter('박상희')}
-					class="w-[134px] h-[202px] p-[32px] flex flex-col items-start justify-between cursor-pointer transition-colors {isProfessorActive(
+					class="w-full h-[202px] p-[32px] flex flex-col items-start justify-between cursor-pointer transition-colors {isProfessorActive(
 						'박상희'
 					)
 						? 'bg-primary text-white'
