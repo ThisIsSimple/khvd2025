@@ -49,13 +49,20 @@
 	href={`/exhibition/works/${workId}`}
 >
 	<!-- Background Image -->
-	<img src={encodeURI(thumbnail)} alt={title} class="absolute inset-0 w-full h-full object-cover" />
+	<img
+		src={encodeURI(thumbnail)}
+		alt={title}
+		class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out {isHovered
+			? 'scale-105'
+			: 'scale-100'}"
+	/>
 
 	<!-- Desktop: Hover Overlay -->
-	{#if isHovered}
-		<div
-			class="absolute inset-0 bg-primary/70 flex flex-col items-center justify-center gap-[16px] transition-opacity duration-300"
-		>
+	<div
+		class="absolute inset-0 bg-primary/70 flex flex-col items-center justify-center gap-[16px] transition-opacity duration-300 ease-out {isHovered
+			? 'opacity-100 pointer-events-auto'
+			: 'opacity-0 pointer-events-none'}"
+	>
 			<!-- Work Info -->
 			<div class="flex flex-col items-center text-center text-white">
 				<p class="text-[22px] desktop:text-[28px] leading-[1.4] font-bold">{title}</p>
@@ -110,8 +117,7 @@
 					</svg>
 				</button>
 			</div>
-		</div>
-	{/if}
+	</div>
 
 	<!-- Tablet: Fixed Title at Bottom -->
 	{#if showTitle && !isSticky}
