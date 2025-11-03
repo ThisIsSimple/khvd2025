@@ -189,10 +189,10 @@
 		<!-- Right: Menu Button -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="w-[60px] h-[60px] bg-black flex items-center justify-center"
+			class="w-[60px] h-[60px] flex items-center justify-center"
 			aria-label="Open menu"
 		>
-			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+			<NavigationIcon isOpened={isOpen} />
 		</button>
 	</header>
 
@@ -228,10 +228,10 @@
 		<!-- Menu Button (smaller for mobile) -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="fixed top-[20px] right-[40px] w-[40px] h-[40px] bg-black z-30"
+			class="fixed top-[20px] right-[40px] w-[40px] h-[40px] z-30"
 			aria-label="Open menu"
 		>
-			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+			<NavigationIcon isOpened={isOpen} />
 		</button>
 	</header>
 
@@ -249,10 +249,10 @@
 		<!-- Menu Button (smaller for mobile) -->
 		<button
 			onclick={() => (isOpen = true)}
-			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] bg-black z-30"
+			class="fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] z-30"
 			aria-label="Open menu"
 		>
-			<img src="/icons/navigation-icon.svg" alt="" class="w-full h-full" />
+			<NavigationIcon isOpened={isOpen} />
 		</button>
 	</header>
 {:else}
@@ -275,7 +275,7 @@
 			class="nav-button-notitle fixed top-[9px] right-[14px] tablet:top-[20px] tablet:right-[40px] w-[32px] h-[32px] tablet:w-[60px] tablet:h-[60px] z-30"
 			aria-label="Open menu"
 		>
-			<NavigationIcon {isOrangeMode} />
+			<NavigationIcon {isOrangeMode} isOpened={isOpen} />
 		</button>
 	{/if}
 {/if}
