@@ -33,7 +33,7 @@
 		{/if}
 
 		{#if isMainPage}
-			<NavigationMenu bind:isOpen={isMenuOpen} noTitle />
+			<NavigationMenu bind:isOpen={isMenuOpen} noTitle={!isMenuOpen} disableHideOnScroll={isMenuOpen} />
 		{/if}
 
 		{#if !isTeaserPage && !isMainPage && !isDesignerDetailPage && !isWorkDetailPage}

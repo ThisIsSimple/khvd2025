@@ -6,9 +6,15 @@
 		isOpen?: boolean;
 		onClose?: () => void;
 		noTitle?: boolean; // If true, shows only menu button (Type 1). Default is false (Type 2 with title and logo)
+		disableHideOnScroll?: boolean; // If true, disables auto-hide on scroll for Type 2 navigation. Default is false
 	}
 
-	let { isOpen = $bindable(false), onClose, noTitle = false }: Props = $props();
+	let {
+		isOpen = $bindable(false),
+		onClose,
+		noTitle = false,
+		disableHideOnScroll = false
+	}: Props = $props();
 
 	// Scroll-based visibility for Type 2 navigation (with title and logo)
 	let visible = $state(true);
@@ -19,8 +25,8 @@
 	let buttonRef = $state<HTMLButtonElement>();
 
 	$effect(() => {
-		// Only apply scroll behavior for Type 2 navigation (NOT noTitle)
-		if (noTitle) return;
+		// Only apply scroll behavior for Type 2 navigation (NOT noTitle) and if not disabled
+		if (noTitle || disableHideOnScroll) return;
 
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
