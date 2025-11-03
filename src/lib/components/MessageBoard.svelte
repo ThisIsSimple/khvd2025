@@ -537,6 +537,8 @@
 											date={message.date}
 											onedit={handleEdit}
 											{isForTarget}
+											type={message.type}
+											targetId={message.targetId}
 										/>
 									{/each}
 								</div>
@@ -556,6 +558,8 @@
 												date={message.date}
 												onedit={handleEdit}
 												{isForTarget}
+												type={message.type}
+												targetId={message.targetId}
 											/>
 										{/each}
 									</div>
@@ -619,6 +623,8 @@
 										date={message.date}
 										onedit={handleEdit}
 										{isForTarget}
+										type={message.type}
+										targetId={message.targetId}
 									/>
 								{/each}
 							</div>
@@ -638,6 +644,8 @@
 											date={message.date}
 											onedit={handleEdit}
 											{isForTarget}
+											type={message.type}
+											targetId={message.targetId}
 										/>
 									{/each}
 								</div>

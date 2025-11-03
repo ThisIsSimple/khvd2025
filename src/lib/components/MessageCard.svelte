@@ -6,7 +6,9 @@
 		text,
 		date,
 		onedit,
-		isForTarget = false
+		isForTarget = false,
+		type,
+		targetId
 	}: {
 		id: number;
 		writer: string;
@@ -14,7 +16,22 @@
 		date: string;
 		onedit?: (id: number) => void;
 		isForTarget?: boolean;
+		type?: 'work' | 'designer' | 'normal';
+		targetId?: number;
 	} = $props();
+
+	// Generate target URL based on type and targetId
+	const showLink = $derived(type && targetId && type !== 'normal');
+	const targetUrl = $derived(
+		type && targetId && type !== 'normal'
+			? type === 'work'
+				? `/exhibition/works/${targetId}`
+				: `/designers/${targetId}`
+			: null
+	);
+
+	// Get label text based on type
+	const targetLabel = $derived(type === 'work' ? '작품 보기' : '디자이너 보기');
 
 	function handleEdit() {
 		onedit?.(id);
@@ -63,13 +80,42 @@
 	</div>
 
 	<!-- Date Container -->
-	<div class="flex gap-[10px] items-center justify-end w-[100px]">
-		<p
-			class={isForTarget
-				? 'font-normal text-[#999999] text-[16px] tablet:text-[18px] leading-[1.5] whitespace-nowrap'
-				: 'font-normal text-[#999999] text-[16px] tablet:text-[18px] leading-[1.4] whitespace-nowrap'}
-		>
-			{date}
-		</p>
-	</div>
+	{#if showLink}
+		<div class="flex gap-[10px] items-center justify-between w-full">
+			<!-- Navigation link to target (work/designer) -->
+			{#if targetUrl}
+				<a
+					href={targetUrl}
+					class="group flex gap-[6px] items-center hover:opacity-70 transition-opacity"
+				>
+					<span class="font-normal text-[#111111] text-[14px] tablet:text-[16px] leading-[1.5]">
+						{targetLabel}
+					</span>
+					<img
+						src="/icons/arrow_diagonal_before.svg"
+						alt=""
+						class="w-[12px] h-[12px] tablet:w-[14px] tablet:h-[14px] rotate-180 group-hover:scale-110 transition-transform duration-300"
+					/>
+				</a>
+			{:else}
+				<!-- Empty spacer when no target -->
+				<div></div>
+			{/if}
+
+			<!-- Date -->
+			<p
+				class="font-normal text-[#999999] text-[16px] tablet:text-[18px] leading-[1.5] whitespace-nowrap"
+			>
+				{date}
+			</p>
+		</div>
+	{:else}
+		<div class="flex gap-[10px] items-center justify-end w-[100px]">
+			<p
+				class="font-normal text-[#999999] text-[16px] tablet:text-[18px] leading-[1.4] whitespace-nowrap"
+			>
+				{date}
+			</p>
+		</div>
+	{/if}
 </div>

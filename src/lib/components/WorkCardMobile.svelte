@@ -40,7 +40,6 @@
 		: ''}"
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
-	ontouchstart={handleMouseEnter}
 	onclick={handleClick}
 	role="button"
 	tabindex="0"

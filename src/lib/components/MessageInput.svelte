@@ -90,7 +90,7 @@
 					bind:value={writerName}
 					placeholder="닉네임을 입력해주세요..."
 					maxlength="10"
-					disabled={isSubmitting || mode === 'edit'}
+					disabled={isSubmitting}
 					class="w-full font-normal text-black text-[15px] tablet:text-[18px] leading-[1.4] placeholder:text-[#999999] outline-none bg-transparent disabled:opacity-50"
 				/>
 			</div>

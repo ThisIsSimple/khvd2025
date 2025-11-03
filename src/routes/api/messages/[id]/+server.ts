@@ -22,6 +22,14 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
 			return json({ error: 'Password is required' }, { status: 400 });
 		}
 
+		if (!data.writer || data.writer.trim().length === 0) {
+			return json({ error: 'Writer name is required' }, { status: 400 });
+		}
+
+		if (data.writer.length > 10) {
+			return json({ error: 'Writer name cannot exceed 10 characters' }, { status: 400 });
+		}
+
 		if (!data.message || data.message.trim().length === 0) {
 			return json({ error: 'Message content is required' }, { status: 400 });
 		}
@@ -46,10 +54,10 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
 			return json({ error: 'Incorrect password' }, { status: 401 });
 		}
 
-		// Update message
+		// Update message and writer
 		await query<ResultSetHeader>(
-			'UPDATE messages SET message = ? WHERE id = ?',
-			[data.message.trim(), id]
+			'UPDATE messages SET writer = ?, message = ? WHERE id = ?',
+			[data.writer.trim(), data.message.trim(), id]
 		);
 
 		// Fetch updated message

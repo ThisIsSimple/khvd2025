@@ -3,42 +3,42 @@
 	const professors = [
 		{
 			name: '장미경',
-			nameEn: 'Jang Mikyung',
+			nameEn: 'Mi Kyung Jang',
 			image: '/professors/Jang Mikyung.webp',
 			number: 1,
 			link: '/exhibition/works/list/1'
 		},
 		{
 			name: '김은정',
-			nameEn: 'Kim Eunjung',
+			nameEn: 'Eun Jung Kim',
 			image: '/professors/Kim Eunjung.webp',
 			number: 0,
 			link: '/exhibition/works/list/0'
 		},
 		{
 			name: '정지연',
-			nameEn: 'Jung Jiyeon',
+			nameEn: 'Ji Yeon Jung',
 			image: '/professors/Jung Jiyeon.webp',
 			number: 2,
 			link: '/exhibition/works/list/2'
 		},
 		{
 			name: '박상희',
-			nameEn: 'Park Sanghee',
+			nameEn: 'Sang Hee Park',
 			image: '/professors/Park Sanghee.webp',
 			number: 0,
 			link: '/exhibition/works/list/0?professor=박상희'
 		},
 		{
 			name: '김정우',
-			nameEn: 'Kim Jungwoo',
+			nameEn: 'Jung Woo Kim',
 			image: '/professors/Kim Jungwoo.webp',
 			number: 3,
 			link: '/exhibition/works/list/3'
 		},
 		{
 			name: '김대연',
-			nameEn: 'Kim Daeyeon',
+			nameEn: 'Dae Yeon Kim',
 			image: '/professors/Kim Daeyeon.webp',
 			number: 1,
 			link: '/exhibition/works/list/1'
@@ -60,14 +60,26 @@
 	// Sponsors
 	const sponsors = [
 		{
+			name: '리즌디자인',
+			logo: '/sponsors/리즌디자인.png',
+			link: 'https://www.rixfontcloud.com'
+		},
+		{
+			name: '산돌구름',
+			logo: '/sponsors/산돌구름.png',
+			link: 'https://www.sandollcloud.com/'
+		},
+		{
+			name: '릭스폰트',
+			logo: '/sponsors/릭스폰트.png',
+			link: 'https://www.rixfontcloud.com'
+		},
+		{ name: '윤디자인', logo: '/sponsors/윤디자인.png', link: 'https://yoondesign.com' },
+		{
 			name: '다인어리',
 			logo: '/sponsors/다인어리.png',
 			link: 'https://www.instagram.com/dainary.official'
-		},
-		{ name: '산돌구름', logo: '/sponsors/산돌구름.png', link: 'https://www.sandollcloud.com/' },
-		{ name: '리즌디자인', logo: '/sponsors/리즌디자인.png', link: 'https://www.rixfontcloud.com' },
-		{ name: '릭스폰트', logo: '/sponsors/릭스폰트.png', link: 'https://www.rixfontcloud.com' },
-		{ name: '윤디자인', logo: '/sponsors/윤디자인.png', link: 'https://yoondesign.com' }
+		}
 	];
 </script>
 

@@ -23,6 +23,7 @@
 	let isUpdating = $state(false);
 	let error = $state<string | null>(null);
 	let editedMessage = $state('');
+	let editedWriter = $state('');
 
 	// Reset state when modal opens/closes
 	$effect(() => {
@@ -31,6 +32,7 @@
 			passwordInput = '';
 			error = null;
 			editedMessage = message.text;
+			editedWriter = message.writer;
 		}
 	});
 
@@ -78,6 +80,7 @@
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 					password: passwordInput,
+					writer: data.writer,
 					message: data.message
 				})
 			});
@@ -224,7 +227,7 @@
 
 					<!-- Message Input Component -->
 					<MessageInput
-						initialWriter={message.writer}
+						initialWriter={editedWriter}
 						initialPassword={passwordInput}
 						initialMessage={editedMessage}
 						mode="edit"
@@ -245,7 +248,7 @@
 						<button
 							onclick={() =>
 								handleUpdate({
-									writer: message.writer,
+									writer: editedWriter,
 									password: passwordInput,
 									message: editedMessage
 								})}

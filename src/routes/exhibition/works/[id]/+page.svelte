@@ -4,6 +4,34 @@
 
 	let { data }: { data: PageData } = $props();
 
+	// Scroll-based visibility for mobile nav
+	let visible = $state(true);
+	let lastScrollY = $state(0);
+
+	// Scroll event handler for mobile nav
+	$effect(() => {
+		const handleScroll = () => {
+			const currentScrollY = window.scrollY;
+
+			// Scrolling down: hide nav (after 50px)
+			if (currentScrollY > lastScrollY && currentScrollY > 50) {
+				visible = false;
+			}
+			// Scrolling up: show nav
+			else if (currentScrollY < lastScrollY) {
+				visible = true;
+			}
+
+			lastScrollY = currentScrollY;
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
+
 	// Back navigation handler
 	function handleBack() {
 		window.history.back();
@@ -172,15 +200,17 @@
 
 	<!-- Mobile Layout (<960px) - Completely separate structure -->
 	<div class="tablet:hidden bg-white">
-		<!-- Top Section: Back Arrow + Work Info -->
-		<div class="flex flex-col gap-[24px] items-center py-[40px]">
-			<!-- Back Arrow + Title Row -->
-			<div class="flex gap-[10px] items-start w-full">
+		<!-- Fixed Nav: Back Arrow + Title Row -->
+		<nav
+			class="tablet:hidden fixed top-0 left-0 right-0 bg-white z-40 transition-transform duration-300 ease-in-out"
+			class:translate-y-0={visible}
+			class:-translate-y-full={!visible}
+		>
+			<div class="flex gap-[10px] items-start w-full py-[20px]">
 				<!-- Back Arrow -->
 				<button
 					onclick={handleBack}
-					class="group shrink-0 w-[90px] h-[90px] flex items-center justify-center sticky"
-					style="top: var(--nav-height, 0px)"
+					class="group shrink-0 w-[90px] h-[90px] flex items-center justify-center"
 					aria-label="Go back"
 				>
 					<img
@@ -200,6 +230,13 @@
 					</p>
 				</div>
 			</div>
+		</nav>
+
+		<!-- Spacer to prevent content jump -->
+		<div class="tablet:hidden h-[130px]"></div>
+
+		<!-- Top Section: Work Info -->
+		<div class="flex flex-col gap-[24px] items-center py-[40px]">
 
 			<!-- Work Content (설명글) -->
 			<div
