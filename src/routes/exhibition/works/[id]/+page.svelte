@@ -117,7 +117,6 @@
 
 							<!-- Designer Email (3-line format on tablet) -->
 							{#if designer.email}
-								{@const emailParts = designer.email.split('@')}
 								<a
 									href={`mailto:${designer.email}`}
 									class="text-[15px] leading-[1.2] text-[#111111] text-left break-all underline underline-offset-2"
@@ -138,13 +137,36 @@
 				<!-- PC Images Container (Tablet+) -->
 				<div class="hidden tablet:flex tablet:flex-col w-full tablet:px-[40px] desktop:px-[60px]">
 					{#each pcImages as image}
-						<div class="w-full flex justify-center bg-[#f6f6f6]">
-							<img
-								src={encodeURI(image.image)}
-								alt={data.work.title}
-								class="w-full h-auto object-contain"
-							/>
-						</div>
+						{#if image.link}
+							<a href={image.link} target="_blank" rel="noopener noreferrer">
+								<div class="w-full flex justify-center bg-[#f6f6f6]">
+									<img
+										src={encodeURI(image.image)}
+										alt={data.work.title}
+										class="w-full h-auto object-contain"
+									/>
+								</div>
+							</a>
+						{:else if image.image.includes('txt') || image.image.includes('doc')}
+							<div class="relative w-full aspect-video">
+								<iframe
+									src="https://www.youtube.com/embed/{image.link}"
+									frameborder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowfullscreen
+									title="YouTube Video"
+									class="absolute top-0 left-0 w-full h-full"
+								></iframe>
+							</div>
+						{:else}
+							<div class="w-full flex justify-center bg-[#f6f6f6]">
+								<img
+									src={encodeURI(image.image)}
+									alt={data.work.title}
+									class="w-full h-auto object-contain"
+								/>
+							</div>
+						{/if}
 					{/each}
 				</div>
 

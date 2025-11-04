@@ -108,9 +108,7 @@
 
 				{#if data.designer.contact2Text && data.designer.contact2Url}
 					<a
-						href={data.designer.contact2Url}
-						target="_blank"
-						rel="noopener noreferrer"
+						href="tel:{data.designer.contact2Url}"
 						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.contact2Text}
