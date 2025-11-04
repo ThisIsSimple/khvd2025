@@ -34,7 +34,21 @@
 </script>
 
 <svelte:head>
-	<title>KHVD 2025 - Exhibition</title>
+	<title>KHVD 2025</title>
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="KHVD 2025" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="/ogimage.png" />
+	<meta property="og:description" content="2025년 경희대학교 시각디자인학과 졸업전시회 웹사이트" />
+	<meta property="og:locale" content="ko_KR" />
+	<meta property="og:locale:alternate" content="en_US" />
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="KHVD 2025" />
+	<meta name="twitter:description" content="2025년 경희대학교 시각디자인학과 졸업전시회 웹사이트" />
+	<meta name="twitter:image" content="/ogimage.png" />
 </svelte:head>
 
 <div class="relative min-h-screen">

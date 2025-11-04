@@ -50,6 +50,20 @@
 
 <svelte:head>
 	<title>{data.work.title} - KHVD 2025</title>
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="{data.work.title} - KHVD 2025" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content={data.work.detailThumbnail || '/ogimage.png'} />
+	<meta property="og:description" content={data.work.description} />
+	<meta property="og:locale" content="ko_KR" />
+	<meta property="og:locale:alternate" content="en_US" />
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="{data.work.title} - KHVD 2025" />
+	<meta name="twitter:description" content={data.work.description} />
+	<meta name="twitter:image" content={data.work.detailThumbnail || '/ogimage.png'} />
 </svelte:head>
 
 {#if !data.work}
@@ -137,7 +151,7 @@
 				<!-- PC Images Container (Tablet+) -->
 				<div class="hidden tablet:flex tablet:flex-col w-full tablet:px-[40px] desktop:px-[60px]">
 					{#each pcImages as image}
-						{#if image.link}
+						{#if image.link && !image.image.includes('txt') && !image.image.includes('doc')}
 							<a href={image.link} target="_blank" rel="noopener noreferrer">
 								<div class="w-full flex justify-center bg-[#f6f6f6]">
 									<img
@@ -147,15 +161,16 @@
 									/>
 								</div>
 							</a>
-						{:else if image.image.includes('txt') || image.image.includes('doc')}
+						{:else if image.link && (image.image.includes('txt') || image.image.includes('doc'))}
 							<div class="relative w-full aspect-video">
 								<iframe
-									src="https://www.youtube.com/embed/{image.link}"
-									frameborder="0"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-									allowfullscreen
-									title="YouTube Video"
 									class="absolute top-0 left-0 w-full h-full"
+									src={image.link}
+									title="YouTube video player"
+									frameborder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									referrerpolicy="strict-origin-when-cross-origin"
+									allowfullscreen
 								></iframe>
 							</div>
 						{:else}
@@ -322,13 +337,39 @@
 		<!-- Mobile Images Container (Mobile only) -->
 		<div class="tablet:hidden flex flex-col px-[16px] sm:px-[24px] w-full">
 			{#each mobileImages as image}
-				<div class="w-full flex justify-center bg-[#f6f6f6]">
-					<img
-						src={encodeURI(image.image)}
-						alt={data.work.title}
-						class="w-full h-auto object-contain"
-					/>
-				</div>
+				{#if image.link && !image.image.includes('txt') && !image.image.includes('doc')}
+					<a href={image.link} target="_blank" rel="noopener noreferrer">
+						<div class="w-full flex justify-center bg-[#f6f6f6]">
+							<img
+								src={encodeURI(image.image)}
+								alt={data.work.title}
+								class="w-full h-auto object-contain"
+							/>
+						</div>
+					</a>
+				{:else if image.link && (image.image.includes('txt') || image.image.includes('doc'))}
+					<div class="relative w-full aspect-video">
+						<iframe
+							class="absolute top-0 left-0 w-full h-full"
+							width="100%"
+							height="100%"
+							src={image.link}
+							frameborder="0"
+							title="YouTube video player"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						></iframe>
+					</div>
+				{:else}
+					<div class="w-full flex justify-center bg-[#f6f6f6]">
+						<img
+							src={encodeURI(image.image)}
+							alt={data.work.title}
+							class="w-full h-auto object-contain"
+						/>
+					</div>
+				{/if}
 			{/each}
 		</div>
 

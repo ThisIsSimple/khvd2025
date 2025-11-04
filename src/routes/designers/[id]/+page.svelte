@@ -21,6 +21,26 @@
 
 <svelte:head>
 	<title>{data.designer?.name || 'Designer'} - KHVD 2025</title>
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="{data.designer?.name || 'Designer'} - KHVD 2025" />
+	<meta property="og:type" content="website" />
+	<meta
+		property="og:image"
+		content={data.designer?.profileImage || data.designer?.qrImage || '/ogimage.png'}
+	/>
+	<meta property="og:description" content="{data.designer?.name} - 경희대학교 시각디자인학과" />
+	<meta property="og:locale" content="ko_KR" />
+	<meta property="og:locale:alternate" content="en_US" />
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="{data.designer?.name || 'Designer'} - KHVD 2025" />
+	<meta name="twitter:description" content="{data.designer?.name} - 경희대학교 시각디자인학과" />
+	<meta
+		name="twitter:image"
+		content={data.designer?.profileImage || data.designer?.qrImage || '/ogimage.png'}
+	/>
 </svelte:head>
 
 {#if data.error || !data.designer}

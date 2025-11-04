@@ -1,0 +1,16 @@
+# KHVD 2025 - 경희대학교 시각디자인학과 졸업전시회
+# Robots.txt for search engine crawlers
+
+User-agent: *
+
+# Disallow admin area (authentication required)
+Disallow: /admin/
+
+# Disallow API endpoints (if any)
+Disallow: /api/
+
+# Allow everything else
+Allow: /
+
+# Sitemap location (uncomment when sitemap is created)
+# Sitemap: https://khvd2025.com/sitemap.xml
