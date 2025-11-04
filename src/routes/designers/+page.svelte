@@ -5,6 +5,14 @@
 	// Get data from server
 	let { data }: { data: PageData } = $props();
 
+	// Active card ID for mobile touch interaction
+	let activeCardId = $state<number | null>(null);
+
+	// Handle card activation (mobile 2-stage touch)
+	function handleCardActivate(id: number) {
+		activeCardId = id;
+	}
+
 	// Scroll state management
 	let scrollY = $state(0);
 	let lastScrollY = $state(0);
@@ -288,6 +296,8 @@
 						imageUrl={designer.imageUrl}
 						instagramUrl={designer.qrLink}
 						email={designer.email}
+						activeCardId={activeCardId}
+						onActivate={handleCardActivate}
 					/>
 				{/each}
 			</div>

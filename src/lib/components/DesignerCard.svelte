@@ -7,9 +7,30 @@
 		imageUrl: string;
 		instagramUrl?: string;
 		email?: string;
+		activeCardId?: number | null;
+		onActivate?: (id: number) => void;
 	}
 
-	let { id, name, nameEn, imageUrl, instagramUrl, email }: Props = $props();
+	let { id, name, nameEn, imageUrl, instagramUrl, email, activeCardId, onActivate }: Props =
+		$props();
+
+	// Device detection: Check if mouse/hover is supported (PC) vs touch-only (mobile)
+	let hasMouseSupport = $state(false);
+
+	// Active state (controlled by parent via activeCardId)
+	let isActive = $derived(activeCardId === id);
+
+	// Hover state (PC only - for mouse hover)
+	let isHovered = $state(false);
+
+	// Final color display state (PC: use hover, Mobile: use active)
+	let showColor = $derived(hasMouseSupport ? isHovered : isActive);
+
+	// Detect mouse support on mount
+	$effect(() => {
+		// Check if device supports hover and has a fine pointer (mouse)
+		hasMouseSupport = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+	});
 
 	// Handle icon clicks to prevent card click propagation
 	function handleIconClick(e: MouseEvent) {
@@ -24,12 +45,38 @@
 	function handleCardKeydown(e: KeyboardEvent) {
 		if (e.key === 'Enter' || e.key === ' ') {
 			e.preventDefault();
+			goto(`/designers/${id}`); // Keyboard always navigates immediately
+		}
+	}
+
+	function handleCardClick(event: MouseEvent) {
+		// PC (mouse support): Navigate immediately
+		if (hasMouseSupport) {
+			goto(`/designers/${id}`);
+			return;
+		}
+
+		// Mobile (touch only): 2-stage touch logic
+		if (!isActive) {
+			// First touch: Activate card (show color)
+			event.preventDefault();
+			onActivate?.(id);
+		} else {
+			// Second touch: Navigate to page
 			goto(`/designers/${id}`);
 		}
 	}
 
-	function handleCardClick() {
-		goto(`/designers/${id}`);
+	function handleMouseEnter() {
+		if (hasMouseSupport) {
+			isHovered = true;
+		}
+	}
+
+	function handleMouseLeave() {
+		if (hasMouseSupport) {
+			isHovered = false;
+		}
 	}
 </script>
 
@@ -39,6 +86,8 @@
 	class="w-full group/card block cursor-pointer"
 	onclick={handleCardClick}
 	onkeydown={handleCardKeydown}
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
 >
 	<!-- Image Container with Hover Effects -->
 	<div class="relative w-full aspect-[258/332] bg-white overflow-hidden group mb-2 tablet:mb-4">
@@ -48,8 +97,8 @@
 				src={imageUrl}
 				alt={name}
 				class="absolute inset-0 w-full h-full object-cover
-				   grayscale transition-all duration-300 ease-in-out
-				   group-hover:grayscale-0 group-hover:scale-105"
+				   transition-all duration-300 ease-in-out
+				   {showColor ? 'grayscale-0 scale-105' : 'grayscale'}"
 			/>
 		{:else}
 			<div

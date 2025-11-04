@@ -22,12 +22,12 @@
 	<!-- Work Info -->
 	<div class="flex flex-col gap-[2px]">
 		<!-- Title (Pretendard Bold, 20px) -->
-		<p class="font-bold text-[20px] leading-[1.4] text-[#111111]">
+		<p class="font-bold text-[15px] tablet:text-[20px] leading-[1.4] text-[#111111]">
 			{title}
 		</p>
 
 		<!-- Designer Names (Pretendard Regular, 18px) -->
-		<p class="text-[18px] leading-[1.4] text-[#111111]">
+		<p class="text-[15px] tablet:text-[18px] leading-[1.4] text-[#111111]">
 			{designers.join(', ')}
 		</p>
 	</div>

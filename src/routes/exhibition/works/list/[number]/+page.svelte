@@ -230,7 +230,7 @@ DESIGN FOR ALL + PASSION + OPEN, MIND + CREATIVITY + :)`
 
 		<!-- Professors Info -->
 		{#if filteredProfessors.length > 0}
-			<div class="tablet:hidden px-[24px] py-[12px] flex flex-col gap-[24px]">
+			<div class="tablet:hidden px-[16px] py-[12px] flex flex-col gap-[24px]">
 				{#each filteredProfessors as professor}
 					<!-- Professor Description -->
 					<div>
@@ -377,7 +377,15 @@ DESIGN FOR ALL + PASSION + OPEN, MIND + CREATIVITY + :)`
 			- Desktop (≥ 1351px): 4 columns, 40px gap, 60px padding, 80px top padding
 		-->
 		<div
-			class="w-full grid grid-cols-2 gap-[16px] xs:grid-cols-3 xs:gap-[24px] desktop:grid-cols-4 desktop:gap-[40px] items-start pb-[200px] pt-[28px] px-[24px] tablet:pt-[80px] tablet:px-[40px] desktop:px-[60px]"
+			class="w-full grid
+			grid-cols-2 gap-[16px]
+			xs:grid-cols-3 xs:gap-[24px]
+			desktop:grid-cols-4 desktop:gap-[40px]
+
+			pt-[28px] tablet:pt-[80px]
+			px-[16px] tablet:px-[40px] desktop:px-[60px]
+			
+			items-start pb-[200px]"
 		>
 			{#each data.works as work}
 				<WorkItem

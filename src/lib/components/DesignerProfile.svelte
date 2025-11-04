@@ -54,12 +54,20 @@
 <div class="flex desktop:hidden flex-col sm:flex-row gap-[20px] items-start py-[20px] w-full">
 	<!-- Profile Image (Smaller) -->
 	<div class="hidden sm:block bg-white w-[200px] h-[260px] overflow-clip relative shrink-0">
-		<img src={encodeURI(profileImage)} alt={name} class="w-full h-full object-cover" />
+		{#if profileImage}
+			<img src={encodeURI(profileImage)} alt={name} class="w-full h-full object-cover" />
+		{:else}
+			<div class="w-full h-full bg-[#808080]"></div>
+		{/if}
 	</div>
 
 	<!-- Profile Image (Smaller) -->
 	<div class="block sm:hidden bg-white w-[180px] h-[320px] overflow-clip relative shrink-0">
-		<img src={encodeURI(profileImage)} alt={name} class="w-full h-full object-cover" />
+		{#if profileImage}
+			<img src={encodeURI(profileImage)} alt={name} class="w-full h-full object-cover" />
+		{:else}
+			<div class="w-full h-full bg-[#808080]"></div>
+		{/if}
 	</div>
 
 	<!-- Text Box -->
