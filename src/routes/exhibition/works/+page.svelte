@@ -2,6 +2,14 @@
 	import WorkCard from '$lib/components/WorkCard.svelte';
 	import WorkCardMobile from '$lib/components/WorkCardMobile.svelte';
 
+	// Active card ID for mobile touch interaction
+	let activeCardId = $state<string | null>(null);
+
+	// Handle card activation (mobile 2-stage touch)
+	function handleCardActivate(id: string) {
+		activeCardId = id;
+	}
+
 	// Professor groups data structure with enhanced info
 	const professorGroups = [
 		{
@@ -79,6 +87,8 @@
 					workCount={group.workCount}
 					category={group.category}
 					title={group.title}
+					activeCardId={activeCardId}
+					onActivate={handleCardActivate}
 				/>
 			{/each}
 		</div>

@@ -12,30 +12,65 @@
 		workCount: number;
 		category?: string;
 		title?: string;
+		activeCardId?: string | null;
+		onActivate?: (id: string) => void;
 	}
 
-	let { number, professors, workCount, category, title }: Props = $props();
+	let { number, professors, workCount, category, title, activeCardId, onActivate }: Props =
+		$props();
 
+	// Device detection: Check if mouse/hover is supported (PC) vs touch-only (mobile)
+	let hasMouseSupport = $state(false);
+
+	// Active state (controlled by parent via activeCardId)
+	let isActive = $derived(activeCardId === number);
+
+	// Hover state (PC only - for mouse hover)
 	let isHovered = $state(false);
 
+	// Final expanded state (PC: use hover, Mobile: use active)
+	let isExpanded = $derived(hasMouseSupport ? isHovered : isActive);
+
+	// Detect mouse support on mount
+	$effect(() => {
+		// Check if device supports hover and has a fine pointer (mouse)
+		hasMouseSupport = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+	});
+
 	function handleMouseEnter() {
-		isHovered = true;
+		if (hasMouseSupport) {
+			isHovered = true;
+		}
 	}
 
 	function handleMouseLeave() {
-		isHovered = false;
+		if (hasMouseSupport) {
+			isHovered = false;
+		}
 	}
 
-	function handleClick() {
-		setTimeout(() => {
+	function handleClick(event: MouseEvent) {
+		// PC (mouse support): Navigate immediately
+		if (hasMouseSupport) {
 			goto(`/exhibition/works/list/${number}`);
-		}, 750);
+			return;
+		}
+
+		// Mobile (touch only): 2-stage touch logic
+		if (!isActive) {
+			// First touch: Activate card (show expanded content)
+			event.preventDefault();
+			onActivate?.(number);
+		} else {
+			// Second touch: Navigate to page
+			goto(`/exhibition/works/list/${number}`);
+		}
 	}
 </script>
 
 <!-- Work Card Mobile Component (1-column horizontal with vertical expansion) -->
 <div
-	class="relative px-[16px] w-full transition-all duration-500 ease-in-out py-[20px] overflow-hidden {isHovered
+	class="relative px-[16px] w-full transition-all duration-500 ease-in-out py-[20px] overflow-hidden {isExpanded
 		? 'bg-primary'
 		: ''}"
 	onmouseenter={handleMouseEnter}
@@ -45,7 +80,7 @@
 	tabindex="0"
 >
 	<!-- Content Container -->
-	<div class="flex {!isHovered ? 'sm:items-center items-end' : 'items-end'} justify-between w-full">
+	<div class="flex {!isExpanded ? 'sm:items-center items-end' : 'items-end'} justify-between w-full">
 		<!-- Left: Number, Category, and Count -->
 		<div class="flex flex-col gap-[12px] items-start">
 			<!-- Number and Category Row -->
@@ -53,7 +88,7 @@
 				<!-- Large Number -->
 				<div class="w-[60px]">
 					<p
-						class="font-display text-[120px] leading-[1.2] tracking-[-4.8px] text-center transition-colors duration-500 {isHovered
+						class="font-display text-[120px] leading-[1.2] tracking-[-4.8px] text-center transition-colors duration-500 {isExpanded
 							? 'text-[#fefefe]'
 							: 'text-[#111111]'}"
 					>
@@ -61,8 +96,8 @@
 					</p>
 				</div>
 
-				<!-- Category and Work Count (shown when hovered) -->
-				{#if isHovered && category}
+				<!-- Category and Work Count (shown when expanded) -->
+				{#if isExpanded && category}
 					<Motion
 						initial={{ opacity: 0, x: -10 }}
 						animate={{ opacity: 1, x: 0 }}
@@ -80,7 +115,7 @@
 							</p>
 						</div>
 					</Motion>
-				{:else if !isHovered}
+				{:else if !isExpanded}
 					<!-- Work Count (default state) -->
 					<div class="flex h-[144px] items-start pt-[22px] pb-[10px]">
 						<p
@@ -93,7 +128,7 @@
 			</div>
 
 			<!-- Expanded Content (Title - vertical expansion) -->
-			{#if isHovered && title}
+			{#if isExpanded && title}
 				<Motion
 					initial={{ opacity: 0, height: 0 }}
 					animate={{ opacity: 1, height: 'auto' }}
@@ -111,8 +146,8 @@
 
 		<!-- Right: Professor Info and Arrow -->
 		<div class="flex flex-col items-end justify-between h-full">
-			<!-- Arrow Icon (only when hovered) -->
-			{#if isHovered}
+			<!-- Arrow Icon (only when expanded) -->
+			{#if isExpanded}
 				<Motion
 					initial={{ opacity: 0, scale: 0.8 }}
 					animate={{ opacity: 1, scale: 1 }}
@@ -127,11 +162,11 @@
 
 			<!-- Professor Info -->
 			<div
-				class="{isHovered && 'hidden'} sm:flex flex-col gap-[8px] items-end justify-end w-[212px]"
+				class="{isExpanded && 'hidden'} sm:flex flex-col gap-[8px] items-end justify-end w-[212px]"
 			>
 				{#each professors as professor}
 					<div
-						class="flex items-center justify-end w-full text-[15px] transition-colors duration-500 {isHovered
+						class="flex items-center justify-end w-full text-[15px] transition-colors duration-500 {isExpanded
 							? 'text-[#fefefe]'
 							: 'text-[#111111]'}"
 					>
