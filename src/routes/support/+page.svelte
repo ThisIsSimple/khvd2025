@@ -288,8 +288,35 @@
 		</div>
 
 		<div class="max-w-[600px] mx-auto tablet:mx-0">
-			<div class="w-full aspect-[3/4] bg-gray-200 mb-[16px] max-w-[200px]">
+			<div class="w-full aspect-[3/4] bg-gray-200 mb-[16px] max-w-[250px] relative group">
 				<img src="/sponsors/developer.webp" alt="전윤민" class="w-full h-full object-cover" />
+
+				<!-- Contact Icons (Top Right) -->
+				<div class="absolute top-[12px] right-[12px] flex gap-[6px] items-center justify-end z-10">
+					<!-- Instagram -->
+					<a
+						href="https://instagram.com/_mj_mine"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="w-[32px] h-[32px] bg-[#111111] rounded-full flex items-center justify-center
+							   transition-colors duration-200 hover:bg-primary text-white text-[10px] font-bold"
+						aria-label="Instagram"
+						onclick={(e) => e.stopPropagation()}
+					>
+						<img src="/icons/insta-line-white.svg" alt="Instagram" class="w-[14px] h-[14px]" />
+					</a>
+
+					<!-- Email -->
+					<a
+						href="mailto:cordelia273@kakao.com"
+						class="w-[32px] h-[32px] bg-[#111111] rounded-full flex items-center justify-center
+							   transition-colors duration-200 hover:bg-primary"
+						aria-label="Email"
+						onclick={(e) => e.stopPropagation()}
+					>
+						<img src="/icons/mail-line-white.svg" alt="Email" class="w-[14px] h-[14px]" />
+					</a>
+				</div>
 			</div>
 			<!-- Artist Name -->
 			<p class="text-h7 tablet:text-h6 text-[#111111]">전윤민 Yun Min Jeon</p>
