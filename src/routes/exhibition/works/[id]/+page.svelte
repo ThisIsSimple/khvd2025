@@ -184,12 +184,14 @@
 										class="flex flex-col gap-[16px] group hover:opacity-80 transition-opacity"
 									>
 										<!-- Designer Profile Image (205x264) -->
-										<div class="group w-[205px] h-[264px] overflow-hidden bg-white">
-											<img
-												src={encodeURI(designer.profileImage)}
-												alt={designer.name}
-												class="group-hover:scale-110 transition-transform duration-300 w-full h-full object-cover"
-											/>
+										<div class="group w-[205px] h-[264px] overflow-hidden bg-[#808080]">
+											{#if designer.profileImage}
+												<img
+													src={encodeURI(designer.profileImage)}
+													alt={designer.name}
+													class="group-hover:scale-110 transition-transform duration-300 w-full h-full object-cover"
+												/>
+											{/if}
 										</div>
 
 										<!-- Designer Info -->
@@ -339,12 +341,14 @@
 					{#each data.designers.slice(rowIndex * 2, rowIndex * 2 + 2) as designer}
 						<a href="/designers/{designer.id}" class="flex flex-col gap-[14px] group">
 							<!-- Designer Profile Image (196x252) -->
-							<div class="w-[196px] h-[252px] overflow-hidden bg-white">
-								<img
-									src={encodeURI(designer.profileImage)}
-									alt={designer.name}
-									class="group-hover:scale-110 transition-transform duration-300 w-full h-full object-cover"
-								/>
+							<div class="w-[196px] h-[252px] overflow-hidden bg-[#808080]">
+								{#if designer.profileImage}
+									<img
+										src={encodeURI(designer.profileImage)}
+										alt={designer.name}
+										class="group-hover:scale-110 transition-transform duration-300 w-full h-full object-cover"
+									/>
+								{/if}
 							</div>
 
 							<!-- Designer Info -->

@@ -15,9 +15,19 @@
 >
 	<!-- Profile Image -->
 	<div class="bg-white h-[465px] overflow-clip relative shrink-0 w-[350px]">
-		<div class="absolute aspect-[289/384] left-0 right-0 top-1/2 translate-y-[-50%]">
-			<img src={encodeURI(profileImage)} alt={name} class="absolute inset-0 w-full h-full object-cover" />
-		</div>
+		{#if profileImage}
+			<div class="absolute aspect-[289/384] left-0 right-0 top-1/2 translate-y-[-50%]">
+				<img
+					src={encodeURI(profileImage)}
+					alt={name}
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+			</div>
+		{:else}
+			<div
+				class="absolute aspect-[289/384] left-0 right-0 top-1/2 translate-y-[-50%] bg-[#808080] flex items-center justify-center"
+			></div>
+		{/if}
 	</div>
 
 	<!-- Text Box -->
