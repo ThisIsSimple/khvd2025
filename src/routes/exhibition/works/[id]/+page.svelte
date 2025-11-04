@@ -172,7 +172,7 @@
 
 				<!-- Content Sections Container -->
 				<div
-					class="px-[40px] pt-[160px] pb-[100px] flex flex-col desktop:flex-row-reverse gap-[70px] tablet:gap-[140px]"
+					class="px-[40px] pt-[160px] pb-[100px] flex flex-col desktop:flex-row-reverse gap-[70px] tablet:gap-[140px] justify-between"
 				>
 					<!-- Designers Grid Section (comes first) -->
 					<div class="flex flex-col gap-[32px] items-end px-[16px]">
