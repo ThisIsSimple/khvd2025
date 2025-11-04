@@ -24,6 +24,7 @@
 	let error = $state<string | null>(null);
 	let editedMessage = $state('');
 	let editedWriter = $state('');
+	let isBackdropMouseDown = $state(false);
 
 	// Reset state when modal opens/closes
 	$effect(() => {
@@ -101,10 +102,17 @@
 		}
 	}
 
-	function handleBackdropClick(e: MouseEvent) {
+	function handleBackdropMouseDown(e: MouseEvent) {
 		if (e.target === e.currentTarget) {
+			isBackdropMouseDown = true;
+		}
+	}
+
+	function handleBackdropClick(e: MouseEvent) {
+		if (e.target === e.currentTarget && isBackdropMouseDown) {
 			onClose?.();
 		}
+		isBackdropMouseDown = false;
 	}
 
 	function handleKeyDown(e: KeyboardEvent) {
@@ -126,6 +134,7 @@
 	<!-- svelte-ignore a11y_interactive_supports_focus -->
 	<div
 		class="fixed inset-0 z-50 flex items-center justify-center p-4"
+		onmousedown={handleBackdropMouseDown}
 		onclick={handleBackdropClick}
 		onkeydown={handleKeyDown}
 		role="dialog"
