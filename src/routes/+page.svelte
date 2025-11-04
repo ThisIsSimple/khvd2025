@@ -248,7 +248,7 @@
 
 	<!-- Section 4: Work Shortcut -->
 	<section
-		class="w-full bg-white flex flex-col gap-[1.948px] sm:gap-[10px] tablet:gap-[10px] desktop:gap-[10px] xl:gap-[10px] items-start justify-center py-[80px] sm:py-[100px] sm:pb-[160px] tablet:py-[100px] tablet:pb-[200px] desktop:py-[100px] desktop:pb-[200px] xl:py-[100px] xl:pb-[200px] px-[16px] sm:px-[40px] tablet:px-[40px] desktop:px-[40px] xl:px-[40px]"
+		class="w-full bg-white flex flex-col gap-[4px] sm:gap-[10px] tablet:gap-[10px] desktop:gap-[10px] xl:gap-[10px] items-start justify-center py-[80px] sm:py-[100px] sm:pb-[160px] tablet:py-[100px] tablet:pb-[200px] desktop:py-[100px] desktop:pb-[200px] xl:py-[100px] xl:pb-[200px] px-[16px] sm:px-[40px] tablet:px-[40px] desktop:px-[40px] xl:px-[40px]"
 	>
 		<!-- Header -->
 		<div
@@ -268,7 +268,7 @@
 
 		<!-- Content Area -->
 		<div
-			class="w-full grid tablet:grid-cols-2 items-start sm:items-start tablet:items-start desktop:h-[695px] xl:h-[695px] gap-[12px] sm:gap-[32px] tablet:gap-[40px] desktop:gap-[60px] xl:gap-[60px] sm:py-[60px] tablet:py-[60px] desktop:py-[60px] xl:py-[60px] sm:px-[20px] tablet:px-[20px] desktop:px-[20px] xl:px-[20px]"
+			class="w-full grid tablet:grid-cols-2 items-start sm:items-start tablet:items-start desktop:h-[400px] xl:h-[530px] gap-[12px] sm:gap-[32px] tablet:gap-[40px] desktop:gap-[60px] xl:gap-[60px] sm:py-[60px] tablet:py-[60px] desktop:py-[60px] xl:py-[60px] sm:px-[20px] tablet:px-[20px] desktop:px-[20px] xl:px-[20px]"
 		>
 			<!-- Exhibition Map -->
 			<div
