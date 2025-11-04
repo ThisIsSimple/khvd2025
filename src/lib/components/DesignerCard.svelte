@@ -35,7 +35,7 @@
 	// Handle icon clicks to prevent card click propagation
 	function handleIconClick(e: MouseEvent) {
 		e.stopPropagation();
-		e.preventDefault();
+		// Don't prevent default - allow link navigation
 	}
 
 	// Determine which contacts to show

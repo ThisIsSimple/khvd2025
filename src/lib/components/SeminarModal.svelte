@@ -99,7 +99,8 @@
 
 				{#if seminar.speakers && seminar.speakers.length > 0}
 					{#each seminar.speakers as speaker}
-						<div
+						<a
+							href={seminar.link}
 							class="bg-[#fefefe] flex items-center justify-between gap-[12px] px-[16px] py-[12px] rounded-[4px]"
 						>
 							<p class="font-bold text-[16px] leading-[1.4] text-black flex-1">
@@ -126,7 +127,7 @@
 									/>
 								</svg>
 							</div>
-						</div>
+						</a>
 					{/each}
 				{/if}
 			</div>

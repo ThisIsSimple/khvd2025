@@ -269,11 +269,11 @@
 			class:translate-y-0={visible}
 			class:-translate-y-full={!visible}
 		>
-			<div class="flex gap-[10px] items-start w-full py-[20px]">
+			<div class="flex items-start w-full py-[16px]">
 				<!-- Back Arrow -->
 				<button
 					onclick={handleBack}
-					class="group shrink-0 w-[90px] h-[90px] flex items-center justify-center"
+					class="group shrink-0 w-[70px] sm:w-[90px] h-[70px] sm:h-[90px] flex items-center justify-center"
 					aria-label="Go back"
 				>
 					<img
@@ -285,10 +285,12 @@
 
 				<!-- Work Title and Description -->
 				<div class="flex flex-col items-start pt-[8px] text-[#111111] w-[555px] overflow-hidden">
-					<h1 class="font-bold text-[32px] leading-[1.4] w-full">
+					<h1
+						class="font-bold text-[24px] sm:text-[32px] leading-[1.3] sm:leading-[1.4] w-full truncate"
+					>
 						{data.work.title}
 					</h1>
-					<p class="text-[20px] leading-[1.5] w-full">
+					<p class="text-[16px] sm:text-[20px] leading-[1.3] sm:leading-[1.4] w-full truncate">
 						{data.work.description}
 					</p>
 				</div>
@@ -296,7 +298,7 @@
 		</nav>
 
 		<!-- Spacer to prevent content jump -->
-		<div class="tablet:hidden h-[130px]"></div>
+		<div class="tablet:hidden h-[70px] sm:h-[110px]"></div>
 
 		<!-- Top Section: Work Info -->
 		<div class="flex flex-col gap-[24px] items-center py-[40px]">

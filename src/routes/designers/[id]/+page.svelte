@@ -67,7 +67,7 @@
 			<!-- Back Arrow Button -->
 			<button
 				onclick={handleBack}
-				class="group w-[90px] tablet:w-[150px] h-[90px] tablet:h-[150px] flex items-center justify-center mb-[80px]"
+				class="group w-[90px] tablet:w-[150px] h-[90px] tablet:h-[150px] flex items-center justify-center mb-[12px] tablet:mb-[80px]"
 				aria-label="Go back"
 			>
 				<img
@@ -250,12 +250,12 @@
 			</div>
 
 			<!-- Messages Section (Full Width) -->
-			<div class="hidden sm:block mt-[60px] px-[20px] tablet:pt-[120px]">
+			<div class="hidden sm:block mt-[60px] px-[16px] sm:px-[24px] tablet:pt-[120px]">
 				<MessageBoard type="designer" targetId={data.designer.id} isForTarget={true} />
 			</div>
 		</main>
 	</div>
-	<div class="block sm:hidden px-[24px] tablet:px-[40px] pt-[160px]">
+	<div class="block sm:hidden px-[16px] sm:px-[24px] tablet:px-[40px] pt-[160px]">
 		<MessageBoard type="designer" targetId={data.designer.id} isForTarget={true} />
 	</div>
 {/if}

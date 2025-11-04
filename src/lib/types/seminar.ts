@@ -9,6 +9,7 @@ export interface Speaker {
 
 export interface Seminar {
 	id: string;
+	link?: string;
 	time: string;
 	category: string;
 	title: string;
