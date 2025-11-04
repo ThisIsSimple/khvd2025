@@ -29,11 +29,11 @@
 <div
 	class="{uiState.isUIHidden
 		? 'white-cursor'
-		: ''} bg-transparent w-full min-h-screen overflow-hidden"
+		: ''} black-cursor bg-transparent w-full min-h-screen overflow-hidden"
 >
 	<!-- Main Content -->
 	<div
-		class="black-cursor bg-[#fefefe] tablet:w-3/4 pb-[180px] transition-transform duration-500 ease-in-out"
+		class="bg-[#fefefe] tablet:w-3/4 pb-[180px] transition-transform duration-500 ease-in-out"
 		class:translate-x-[-100%]={uiState.isUIHidden}
 	>
 		<!-- Left Column: Content -->

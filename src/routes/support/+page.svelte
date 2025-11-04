@@ -269,9 +269,13 @@
 					href={sponsor.link}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="flex items-center justify-center aspect-square bg-[#F6F6F6] hover:bg-[#EEEEEE] transition-colors duration-300"
+					class="group overflow-hidden flex items-center justify-center aspect-square bg-[#F6F6F6] hover:bg-[#EEEEEE] transition-colors duration-300"
 				>
-					<img src={sponsor.logo} alt={sponsor.name} class="max-w-full max-h-full object-contain" />
+					<img
+						src={sponsor.logo}
+						alt={sponsor.name}
+						class="group-hover:scale-105 transition-transform duration-300 max-w-full max-h-full object-contain"
+					/>
 				</a>
 			{/each}
 		</div>
