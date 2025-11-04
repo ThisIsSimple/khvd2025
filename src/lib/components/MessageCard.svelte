@@ -83,7 +83,7 @@
 	{#if showLink}
 		<div class="flex gap-[10px] items-center justify-between w-full">
 			<!-- Navigation link to target (work/designer) -->
-			{#if targetUrl}
+			{#if targetUrl && !isForTarget}
 				<a
 					href={targetUrl}
 					class="group flex gap-[6px] items-center hover:opacity-70 transition-opacity"

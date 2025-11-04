@@ -62,35 +62,27 @@
 				class="w-full overflow-hidden flex flex-col gap-[40px] items-center px-[12px] tablet:px-[24px]"
 			>
 				<!-- Profile Image + Instagram -->
-				<div class="w-full flex flex-col gap-[6px] items-center justify-center">
-					<a
-						href={data.designer.qrLink}
-						class="w-[115%] block transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<img
-							src={encodeURI(data.designer.qrImage)}
-							alt={data.designer.name}
-							class="w-full h-full object-contain"
-						/>
-					</a>
-					{#if data.designer.instagramUrl}
+				{#if data.designer.qrImage}
+					<div class="w-full flex flex-col gap-[6px] items-center justify-center">
 						<a
-							href={data.designer.instagramUrl}
+							href={data.designer.qrLink}
+							class="w-[115%] block transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="break-all text-center text-[14px] tablet:text-[16px] leading-[1.2] tablet:leading-[1.4] tracking-[-0.64px] text-[#222222] hover:text-primary transition-colors"
 						>
-							@{data.designer.instagramUrl.split('/').pop()}
+							<img
+								src={encodeURI(data.designer.qrImage)}
+								alt={data.designer.name}
+								class="w-full h-full object-contain"
+							/>
 						</a>
-					{/if}
-				</div>
+					</div>
+				{/if}
 
 				<!-- Contact Links -->
 				{#if data.designer.contact1Text && data.designer.contact1Url}
 					<a
-						href={data.designer.contact1Url}
+						href="mailto:{data.designer.contact1Url}"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
