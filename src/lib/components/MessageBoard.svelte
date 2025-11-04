@@ -62,14 +62,7 @@
 
 		const width = window.innerWidth;
 
-		// For target pages, always use 4 per row
-		if (isForTarget) {
-			messagesPerPage = 8;
-			itemsPerRow = 4;
-			return;
-		}
-
-		// For general message board, use responsive layout
+		// Apply same responsive layout for both general and target pages
 		if (width >= 1351) {
 			messagesPerPage = 8;
 			itemsPerRow = 4;
@@ -261,7 +254,17 @@
 
 		// Resize handler
 		function handleResize() {
+			const prevMessagesPerPage = messagesPerPage;
 			updateMessagesPerPage();
+
+			// If messages per page changed, reinitialize Swiper
+			if (prevMessagesPerPage !== messagesPerPage && swiperContainer?.swiper) {
+				swiperContainer.swiper.destroy(true, true);
+				swiperInitialized = false;
+			} else if (swiperContainer?.swiper) {
+				// Update Swiper on resize even if messagesPerPage didn't change
+				swiperContainer.swiper.update();
+			}
 		}
 
 		window.addEventListener('resize', handleResize);
@@ -460,9 +463,9 @@
 
 	<!-- Messages Grid Section -->
 	<div
-		class={isForTarget
-			? 'flex flex-col gap-[40px] items-center justify-end px-0 py-[32px] w-full'
-			: 'relative flex flex-col items-center w-full max-w-[1920px]'}
+		class="relative flex flex-col items-center w-full max-w-[1920px] {isForTarget
+			? 'gap-[40px] justify-end px-0 py-[32px]'
+			: ''}"
 	>
 		{#if isLoading}
 			<!-- Loading State -->
@@ -482,9 +485,7 @@
 						<div class="flex flex-col gap-[12px] items-center justify-center w-full py-4">
 							<!-- Row 1 -->
 							<div
-								class="grid {isForTarget
-									? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
-									: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
+								class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[12px] w-full justify-items-center"
 							>
 								{#each pageMessages.slice(0, itemsPerRow) as message (message.id)}
 									<MessageCard
@@ -503,9 +504,7 @@
 							<!-- Row 2 -->
 							{#if pageMessages.length > itemsPerRow}
 								<div
-									class="grid {isForTarget
-										? 'grid-cols-4'
-										: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
+									class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-[12px] w-full justify-items-center"
 								>
 									{#each pageMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
 										<MessageCard

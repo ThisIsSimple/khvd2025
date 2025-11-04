@@ -130,7 +130,7 @@
 		</nav>
 
 		<!-- Main Content Area (flex-grow to take remaining space) -->
-		<main class="flex-1">
+		<main class="w-[calc(100%-90px)] tablet:w-[calc(100%-150px)]">
 			<!-- Desktop Layout (≥1351px) -->
 			<div class="hidden desktop:flex">
 				<!-- Center Content (830px) -->

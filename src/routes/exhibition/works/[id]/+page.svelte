@@ -145,7 +145,7 @@
 		</nav>
 
 		<!-- Main Content Area (Tablet+) -->
-		<main class="flex-1">
+		<main class="w-[calc(100%-90px)] tablet:w-[calc(100%-150px)]">
 			<!-- Desktop/Tablet Layout (≥960px) -->
 			<div class="hidden tablet:block tablet:flex-1">
 				<!-- PC Images Container (Tablet+) -->
@@ -384,7 +384,7 @@
 					{#each data.designers.slice(rowIndex * 2, rowIndex * 2 + 2) as designer}
 						<a href="/designers/{designer.id}" class="flex flex-col gap-[14px] group">
 							<!-- Designer Profile Image (196x252) -->
-							<div class="w-[196px] h-[252px] overflow-hidden bg-[#808080]">
+							<div class="aspect-[196/252] max-w-[196px] overflow-hidden bg-[#808080]">
 								{#if designer.profileImage}
 									<img
 										src={encodeURI(designer.profileImage)}
