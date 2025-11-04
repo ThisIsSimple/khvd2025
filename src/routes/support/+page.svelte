@@ -61,23 +61,23 @@
 	const sponsors = [
 		{
 			name: '리즌디자인',
-			logo: '/sponsors/리즌디자인.png',
+			logo: '/sponsors/1.png',
 			link: 'https://www.rixfontcloud.com'
 		},
 		{
 			name: '산돌구름',
-			logo: '/sponsors/산돌구름.png',
+			logo: '/sponsors/2.png',
 			link: 'https://www.sandollcloud.com/'
 		},
 		{
 			name: '릭스폰트',
-			logo: '/sponsors/릭스폰트.png',
+			logo: '/sponsors/3.png',
 			link: 'https://www.rixfontcloud.com'
 		},
-		{ name: '윤디자인', logo: '/sponsors/윤디자인.png', link: 'https://yoondesign.com' },
+		{ name: '윤디자인', logo: '/sponsors/4.png', link: 'https://yoondesign.com' },
 		{
 			name: '다인어리',
-			logo: '/sponsors/다인어리.png',
+			logo: '/sponsors/5.png',
 			link: 'https://www.instagram.com/dainary.official'
 		}
 	];
