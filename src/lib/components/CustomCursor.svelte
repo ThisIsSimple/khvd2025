@@ -18,8 +18,8 @@
 	// Primary color constant
 	const PRIMARY_COLOR = '#FC451E';
 
-	// Track mouse position
-	function handleMouseMove(e: MouseEvent) {
+	// Track pointer position (supports mouse, touch, pen, and works during drag)
+	function handlePointerMove(e: PointerEvent) {
 		mouseX = e.clientX;
 		mouseY = e.clientY;
 	}
@@ -160,8 +160,8 @@
 		return false;
 	}
 
-	// Handle mouse over elements
-	function handleMouseOver(e: MouseEvent) {
+	// Handle pointer over elements
+	function handlePointerOver(e: PointerEvent) {
 		const target = e.target as Element;
 		isHovering = isClickable(target);
 		cursorColor = detectBackgroundColor(target);
@@ -175,15 +175,15 @@
 
 		// Only add event listeners if not mobile
 		if (!isMobile) {
-			window.addEventListener('mousemove', handleMouseMove);
-			document.body.addEventListener('mouseover', handleMouseOver, true);
+			window.addEventListener('pointermove', handlePointerMove);
+			document.body.addEventListener('pointerover', handlePointerOver, true);
 		}
 
 		// Cleanup
 		return () => {
 			if (!isMobile) {
-				window.removeEventListener('mousemove', handleMouseMove);
-				document.body.removeEventListener('mouseover', handleMouseOver, true);
+				window.removeEventListener('pointermove', handlePointerMove);
+				document.body.removeEventListener('pointerover', handlePointerOver, true);
 			}
 		};
 	});
