@@ -16,8 +16,8 @@
 		date: string;
 		onedit?: (id: number) => void;
 		isForTarget?: boolean;
-		type?: 'work' | 'designer' | 'normal';
-		targetId?: number;
+		type?: string | null;
+		targetId?: number | null;
 	} = $props();
 
 	// Generate target URL based on type and targetId

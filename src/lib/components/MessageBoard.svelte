@@ -3,7 +3,9 @@
 	import EditMessageModal from './EditMessageModal.svelte';
 	import type { Message, MessagesResponse } from '$lib/types/message';
 	import { onMount } from 'svelte';
-	import { Motion } from 'svelte-motion';
+	import { register } from 'swiper/element/bundle';
+	import type { SwiperContainer } from 'swiper/element';
+	import 'swiper/css';
 
 	interface Props {
 		type?: string;
@@ -14,7 +16,6 @@
 	let { type, targetId, isForTarget = false }: Props = $props();
 
 	let messages = $state<Message[]>([]);
-	let prevMessages = $state<Message[]>([]); // Previous page messages for smooth transition
 	let totalMessages = $state(0);
 	let inputText = $state('');
 	let writerName = $state('');
@@ -24,19 +25,13 @@
 	let isSubmitting = $state(false);
 	let error = $state<string | null>(null);
 
-	// Animation state
-	let pageDirection = $state<'forward' | 'backward' | null>(null);
-	let isTransitioning = $state(false);
-	let dragResetKey = $state(0); // Key to force reset drag position
-	let dragTimeout: number | null = null;
-
 	// Edit modal state
 	let editingMessage = $state<Message | null>(null);
 	let showEditModal = $state(false);
 
-	// Dynamic container height
-	let containerHeight = $state<number | null>(null);
-	let messagesContainerRef = $state<HTMLDivElement | null>(null);
+	// Swiper reference
+	let swiperContainer = $state<SwiperContainer | null>(null);
+	let swiperInitialized = $state(false);
 
 	const maxCharacters = 120;
 
@@ -47,11 +42,19 @@
 	// Calculate total pages based on current messagesPerPage
 	let totalPages = $derived(Math.ceil(totalMessages / messagesPerPage));
 
-	// Get current page messages - no slicing needed, API handles pagination
-	let currentMessages = $derived(messages);
-
 	// Character count
 	let characterCount = $derived(inputText.length);
+
+	// Paginate messages for swiper slides
+	let paginatedMessages = $derived(() => {
+		const pages: Message[][] = [];
+		for (let i = 0; i < totalPages; i++) {
+			const start = i * messagesPerPage;
+			const end = start + messagesPerPage;
+			pages.push(messages.slice(start, end));
+		}
+		return pages;
+	});
 
 	// Update messages per page based on window size
 	function updateMessagesPerPage() {
@@ -79,68 +82,14 @@
 		}
 	}
 
-	// Calculate and update container height based on content
-	function updateContainerHeight() {
-		if (!messagesContainerRef) return;
-
-		// Use requestAnimationFrame to ensure DOM is updated
-		requestAnimationFrame(() => {
-			// Find the current messages container (non-transitioning layer)
-			const currentLayer = messagesContainerRef?.querySelector('[data-current-layer]');
-			if (currentLayer) {
-				const height = currentLayer.scrollHeight;
-				// Set minimum height based on breakpoint
-				const minHeight = typeof window !== 'undefined' && window.innerWidth >= 960 ? 480 : 400;
-				// Allow height to decrease by using actual height (just ensure minimum)
-				containerHeight = height < minHeight ? minHeight : height;
-			}
-		});
-	}
-
-	// Pre-calculate height for next page before animation
-	async function preCalculateHeight(page: number) {
-		try {
-			const params = new URLSearchParams({
-				page: String(page),
-				pageSize: String(messagesPerPage)
-			});
-
-			if (type) {
-				params.set('type', type);
-			}
-
-			if (targetId !== undefined) {
-				params.set('targetId', String(targetId));
-			}
-
-			const response = await fetch(`/api/messages?${params.toString()}`);
-			if (!response.ok) return;
-
-			const data: MessagesResponse = await response.json();
-
-			// Calculate approximate height based on next page messages
-			// Average card height varies by device and content
-			const avgCardHeight = typeof window !== 'undefined' && window.innerWidth >= 960 ? 220 : 200;
-			const rows = Math.ceil(data.messages.length / itemsPerRow);
-			const gap = 12; // Gap between rows
-			const estimatedHeight = avgCardHeight * rows + gap * Math.max(0, rows - 1);
-			const minHeight = typeof window !== 'undefined' && window.innerWidth >= 960 ? 480 : 400;
-
-			// Set container height before animation starts
-			containerHeight = Math.max(estimatedHeight, minHeight);
-		} catch (err) {
-			console.error('Height pre-calculation failed:', err);
-		}
-	}
-
 	// Fetch messages from API
-	async function fetchMessages(page: number = 0) {
+	async function fetchMessages() {
 		isLoading = true;
 		error = null;
 		try {
 			const params = new URLSearchParams({
-				page: String(page),
-				pageSize: String(messagesPerPage)
+				page: '0', // Fetch all messages, we'll paginate client-side with Swiper
+				pageSize: '100' // Fetch more messages at once
 			});
 
 			if (type) {
@@ -158,14 +107,11 @@
 			const data: MessagesResponse = await response.json();
 			messages = data.messages;
 			totalMessages = data.total;
-			currentPage = page;
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to load messages';
 			console.error('Error fetching messages:', err);
 		} finally {
 			isLoading = false;
-			// Update container height after messages are loaded and DOM is ready
-			setTimeout(() => updateContainerHeight(), 50);
 		}
 	}
 
@@ -209,7 +155,14 @@
 			inputText = '';
 			writerName = '';
 			password = '';
-			await fetchMessages(0);
+
+			// Reset Swiper before fetching new messages
+			if (swiperContainer?.swiper) {
+				swiperContainer.swiper.destroy(true, true);
+				swiperInitialized = false;
+			}
+
+			await fetchMessages();
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to submit message';
 			console.error('Error submitting message:', err);
@@ -234,28 +187,9 @@
 		}
 	}
 
-	async function goToPage(page: number) {
-		if (isTransitioning || page < 0 || page >= totalPages) return;
-
-		// Pre-calculate target height before animation starts
-		await preCalculateHeight(page);
-
-		pageDirection = page > currentPage ? 'forward' : 'backward';
-		isTransitioning = true;
-
-		// Store current messages as previous
-		prevMessages = [...messages];
-
-		// Fetch new messages
-		await fetchMessages(page);
-
-		// Reset after animation completes
-		setTimeout(() => {
-			isTransitioning = false;
-			pageDirection = null;
-			// Fine-tune container height after actual content is rendered
-			setTimeout(() => updateContainerHeight(), 50);
-		}, 400);
+	function goToPage(page: number) {
+		if (page < 0 || page >= totalPages || !swiperContainer?.swiper) return;
+		swiperContainer.swiper.slideTo(page);
 	}
 
 	function handleEdit(messageId: number) {
@@ -272,37 +206,68 @@
 	}
 
 	async function handleUpdateMessage() {
-		await fetchMessages(currentPage);
+		// Reset Swiper before fetching updated messages
+		if (swiperContainer?.swiper) {
+			swiperContainer.swiper.destroy(true, true);
+			swiperInitialized = false;
+		}
+
+		await fetchMessages();
 	}
 
-	onMount(() => {
-		updateMessagesPerPage();
-		fetchMessages(0);
+	// Initialize Swiper when messages are loaded
+	$effect(() => {
+		if (swiperContainer && messages.length > 0 && !isLoading && !swiperInitialized) {
+			// Small delay to ensure DOM is ready
+			setTimeout(() => {
+				if (!swiperContainer || swiperInitialized) return;
 
-		// Combined resize handler
+				// Configure Swiper parameters
+				Object.assign(swiperContainer, {
+					slidesPerView: 1,
+					slidesPerGroup: 1,
+					spaceBetween: 0,
+					speed: 400,
+					keyboard: {
+						enabled: true,
+						onlyInViewport: true
+					},
+					grabCursor: true,
+					resistance: true,
+					resistanceRatio: 0.85,
+					threshold: 10
+				});
+
+				swiperContainer.initialize();
+				swiperInitialized = true;
+
+				// Listen to slide change events after initialization
+				const swiper = swiperContainer.swiper;
+				if (swiper) {
+					swiper.on('slideChange', () => {
+						currentPage = swiper.activeIndex;
+					});
+				}
+			}, 50);
+		}
+	});
+
+	onMount(() => {
+		// Register Swiper web components
+		register();
+
+		updateMessagesPerPage();
+		fetchMessages();
+
+		// Resize handler
 		function handleResize() {
 			updateMessagesPerPage();
-			updateContainerHeight();
 		}
 
 		window.addEventListener('resize', handleResize);
 
-		// Keyboard navigation
-		function handleKeyboard(e: KeyboardEvent) {
-			if (e.key === 'ArrowLeft' && currentPage > 0) {
-				e.preventDefault();
-				goToPage(currentPage - 1);
-			} else if (e.key === 'ArrowRight' && currentPage < totalPages - 1) {
-				e.preventDefault();
-				goToPage(currentPage + 1);
-			}
-		}
-
-		window.addEventListener('keydown', handleKeyboard);
-
 		return () => {
 			window.removeEventListener('resize', handleResize);
-			window.removeEventListener('keydown', handleKeyboard);
 		};
 	});
 </script>
@@ -504,147 +469,24 @@
 			<div class="flex items-center justify-center py-[100px]">
 				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">로딩 중...</p>
 			</div>
-		{:else if currentMessages.length === 0}
+		{:else if messages.length === 0}
 			<!-- Empty State -->
 			<div class="flex items-center justify-center py-[100px]">
 				<p class="text-mobile-h8 tablet:text-pc-h8 text-[#999999]">첫 번째 메시지를 남겨주세요!</p>
 			</div>
 		{:else}
-			<!-- Messages Grid with Two-Layer Animation System -->
-			<div
-				bind:this={messagesContainerRef}
-				class="relative w-full overflow-hidden transition-[height] duration-300"
-				style="height: {containerHeight ? `${containerHeight}px` : 'auto'}; min-height: 400px;"
-			>
-				<!-- Previous Messages Layer (fading out during transition) -->
-				{#if isTransitioning && prevMessages.length > 0}
-					<Motion
-						animate={{ opacity: 0 }}
-						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						let:motion
-					>
-						<div use:motion class="absolute inset-0 w-full" style="z-index: 1;">
-							<div class="flex flex-col gap-[12px] items-center justify-center w-full">
-								<!-- Row 1 -->
-								<div
-									class="grid {isForTarget
-										? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
-										: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
-								>
-									{#each prevMessages.slice(0, itemsPerRow) as message (message.id)}
-										<MessageCard
-											id={message.id}
-											writer={message.writer}
-											text={message.text}
-											date={message.date}
-											onedit={handleEdit}
-											{isForTarget}
-											type={message.type}
-											targetId={message.targetId}
-										/>
-									{/each}
-								</div>
-
-								<!-- Row 2 -->
-								{#if prevMessages.length > itemsPerRow}
-									<div
-										class="grid {isForTarget
-											? 'grid-cols-4'
-											: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
-									>
-										{#each prevMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
-											<MessageCard
-												id={message.id}
-												writer={message.writer}
-												text={message.text}
-												date={message.date}
-												onedit={handleEdit}
-												{isForTarget}
-												type={message.type}
-												targetId={message.targetId}
-											/>
-										{/each}
-									</div>
-								{/if}
-							</div>
-						</div>
-					</Motion>
-				{/if}
-
-				<!-- Current Messages Layer (always rendered, fading in during transition) -->
-				<Motion
-					key={dragResetKey}
-					animate={{
-						opacity: 1,
-						x: 0
-					}}
-					initial={{
-						opacity: isTransitioning ? 0 : 1,
-						x: isTransitioning ? (pageDirection === 'forward' ? 100 : -100) : 0
-					}}
-					transition={{ duration: 0.4, ease: 'easeInOut' }}
-					drag="x"
-					dragConstraints={{ left: -100, right: 100 }}
-					dragElastic={0.2}
-					onDrag={() => {
-						// Clear existing timeout
-						if (dragTimeout !== null) {
-							clearTimeout(dragTimeout);
-						}
-
-						// Set new timeout to reset position after 500ms of inactivity
-						dragTimeout = window.setTimeout(() => {
-							dragResetKey = dragResetKey + 1;
-						}, 500);
-					}}
-					onDragEnd={(_event, info) => {
-						// Clear timeout when drag ends
-						if (dragTimeout !== null) {
-							clearTimeout(dragTimeout);
-							dragTimeout = null;
-						}
-
-						// Lower thresholds for better mobile responsiveness
-						const swipeThreshold = 30;
-						const swipeVelocity = 300;
-
-						let pageChanged = false;
-
-						if (info.offset.x < -swipeThreshold || info.velocity.x < -swipeVelocity) {
-							// Swiped left - go to next page
-							if (currentPage < totalPages - 1) {
-								goToPage(currentPage + 1);
-								pageChanged = true;
-							}
-						} else if (info.offset.x > swipeThreshold || info.velocity.x > swipeVelocity) {
-							// Swiped right - go to previous page
-							if (currentPage > 0) {
-								goToPage(currentPage - 1);
-								pageChanged = true;
-							}
-						}
-
-						// If page didn't change, force reset position
-						if (!pageChanged) {
-							dragResetKey = dragResetKey + 1;
-						}
-					}}
-					let:motion
-				>
-					<div
-						use:motion
-						data-current-layer
-						class="absolute inset-0 w-full cursor-grab active:cursor-grabbing touch-pan-x"
-						style="z-index: {isTransitioning ? 2 : 1}; touch-action: pan-x;"
-					>
-						<div class="flex flex-col gap-[12px] items-center justify-center w-full">
+			<!-- Swiper Container -->
+			<swiper-container bind:this={swiperContainer} init="false" class="w-full">
+				{#each paginatedMessages() as pageMessages, pageIndex}
+					<swiper-slide>
+						<div class="flex flex-col gap-[12px] items-center justify-center w-full py-4">
 							<!-- Row 1 -->
 							<div
 								class="grid {isForTarget
 									? 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'
 									: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
 							>
-								{#each currentMessages.slice(0, itemsPerRow) as message (message.id)}
+								{#each pageMessages.slice(0, itemsPerRow) as message (message.id)}
 									<MessageCard
 										id={message.id}
 										writer={message.writer}
@@ -659,13 +501,13 @@
 							</div>
 
 							<!-- Row 2 -->
-							{#if currentMessages.length > itemsPerRow}
+							{#if pageMessages.length > itemsPerRow}
 								<div
 									class="grid {isForTarget
 										? 'grid-cols-4'
 										: 'grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4'} gap-[12px] w-full justify-items-center"
 								>
-									{#each currentMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
+									{#each pageMessages.slice(itemsPerRow, itemsPerRow * 2) as message (message.id)}
 										<MessageCard
 											id={message.id}
 											writer={message.writer}
@@ -680,9 +522,9 @@
 								</div>
 							{/if}
 						</div>
-					</div>
-				</Motion>
-			</div>
+					</swiper-slide>
+				{/each}
+			</swiper-container>
 		{/if}
 
 		<!-- Pagination Controls -->
@@ -695,7 +537,7 @@
 				<!-- Previous Button -->
 				<button
 					onclick={() => goToPage(currentPage - 1)}
-					disabled={currentPage === 0 || isLoading || isTransitioning}
+					disabled={currentPage === 0 || isLoading}
 					class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 disabled:opacity-30 disabled:cursor-not-allowed"
 					aria-label="Previous page"
 				>
@@ -723,7 +565,7 @@
 							onclick={() => goToPage(index)}
 							class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 cursor-pointer disabled:opacity-50"
 							aria-label={`Page ${index + 1}`}
-							disabled={isLoading || isTransitioning}
+							disabled={isLoading}
 						>
 							<div class="w-[14px] h-[14px]">
 								<img
@@ -741,7 +583,7 @@
 				<!-- Next Button -->
 				<button
 					onclick={() => goToPage(currentPage + 1)}
-					disabled={currentPage === totalPages - 1 || isLoading || isTransitioning}
+					disabled={currentPage === totalPages - 1 || isLoading}
 					class="flex items-center justify-center w-[32px] h-[32px] transition-opacity hover:opacity-70 disabled:opacity-30 disabled:cursor-not-allowed"
 					aria-label="Next page"
 				>
@@ -777,5 +619,20 @@
 <style>
 	textarea::placeholder {
 		color: #999999;
+	}
+
+	swiper-container {
+		width: 100%;
+		min-height: 400px;
+	}
+
+	@media (min-width: 960px) {
+		swiper-container {
+			min-height: 480px;
+		}
+	}
+
+	swiper-slide {
+		height: auto;
 	}
 </style>
