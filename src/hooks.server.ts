@@ -4,7 +4,7 @@ import { isBeforeExhibition } from '$lib/config';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	// Get session token from cookie
-	const sessionToken = event.cookies.get('session');
+	const sessionToken = event.cookies.get('session') || null;
 
 	// Verify session and attach user to locals
 	const user = verifySession(sessionToken);

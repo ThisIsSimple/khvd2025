@@ -58,15 +58,21 @@
 			<p class="font-bold text-[20px] leading-[1.4] text-[#111111] w-full">연설자</p>
 
 			{#each seminar.speakers as speaker}
-				<div
-					class="flex gap-[12px] items-center overflow-clip px-[24px] py-[20px] bg-[#fefefe] rounded-[4px] w-full"
+				<a
+					href={seminar.link}
+					target="_blank"
+					rel="noopener noreferrer"
+					data-clickable="true"
+					class="flex gap-[12px] items-center overflow-clip px-[24px] py-[20px] bg-[#fefefe] rounded-[4px] w-full hover:bg-[#f5f5f5] transition-colors cursor-pointer"
 				>
 					<p class="flex-1 font-bold text-[20px] leading-[1.4] text-black">
 						{speaker.team || speaker.name}
 					</p>
 
 					<!-- Arrow Icon -->
-					<div class="bg-[#111111] rounded-full w-[32px] h-[32px] flex items-center justify-center">
+					<div
+						class="bg-[#111111] rounded-full w-[32px] h-[32px] flex items-center justify-center"
+					>
 						<svg
 							width="15"
 							height="15"
@@ -83,7 +89,7 @@
 							/>
 						</svg>
 					</div>
-				</div>
+				</a>
 			{/each}
 		</div>
 	{/if}

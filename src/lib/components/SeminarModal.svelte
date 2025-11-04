@@ -101,7 +101,10 @@
 					{#each seminar.speakers as speaker}
 						<a
 							href={seminar.link}
-							class="bg-[#fefefe] flex items-center justify-between gap-[12px] px-[16px] py-[12px] rounded-[4px]"
+							target="_blank"
+							rel="noopener noreferrer"
+							data-clickable="true"
+							class="bg-[#fefefe] flex items-center justify-between gap-[12px] px-[16px] py-[12px] rounded-[4px] hover:bg-[#f5f5f5] transition-colors cursor-pointer"
 						>
 							<p class="font-bold text-[16px] leading-[1.4] text-black flex-1">
 								{speaker.team || speaker.name}

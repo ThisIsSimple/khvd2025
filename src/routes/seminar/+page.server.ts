@@ -9,7 +9,7 @@ export const load: PageServerLoad = async () => {
 			seminars: [
 				{
 					id: '1',
-					link: 'https://naver.com',
+					link: '/exhibition/works/27',
 					time: '11:00 - 11:15',
 					category: '졸업스튜디오 1',
 					title: '7 GOOD THINGS CRUMBLE DOWN',
@@ -25,7 +25,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '2',
-					link: 'https://naver.com',
+					link: '/exhibition/works/32',
 					time: '11:15 - 11:30',
 					category: '졸업스튜디오 1',
 					title: 'Jourpie',
@@ -41,7 +41,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '3',
-					link: 'https://naver.com',
+					link: '/exhibition/works/46',
 					time: '13:00 - 13:15',
 					category: '졸업스튜디오 2',
 					title: '무드지엄',
@@ -57,7 +57,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '4',
-					link: 'https://naver.com',
+					link: '/exhibition/works/41',
 					time: '13:15 - 13:30',
 					category: '졸업스튜디오 2',
 					title: '웰니스 티 브랜드, 찻장',
@@ -73,7 +73,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '5',
-					link: 'https://naver.com',
+					link: '/exhibition/works/92',
 					time: '13:45 - 14:00',
 					category: '졸업스튜디오 3',
 					title: 'GongGOng(공공)',
@@ -89,7 +89,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '6',
-					link: 'https://naver.com',
+					link: '/exhibition/works/91',
 					time: '14:00 - 14:15',
 					category: '졸업스튜디오 3',
 					title: '피우 (Piu)',
@@ -105,7 +105,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '7',
-					link: 'https://naver.com',
+					link: '/exhibition/works/72',
 					time: '14:15 - 14:30',
 					category: '졸업스튜디오 0',
 					title: '차차',
@@ -121,7 +121,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '8',
-					link: 'https://naver.com',
+					link: '/exhibition/works/76',
 					time: '14:30 - 14:45',
 					category: '졸업스튜디오 0',
 					title: 'YIDA (이다)',
@@ -137,7 +137,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '9',
-					link: 'https://naver.com',
+					link: '/exhibition/works/77',
 					time: '14:45 - 15:00',
 					category: '졸업스튜디오 0',
 					title: '미룬히어로즈',
@@ -153,7 +153,7 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '10',
-					link: 'https://naver.com',
+					link: '/exhibition/works/78',
 					time: '15:00 - 15:15',
 					category: '졸업스튜디오 0',
 					title: 'MICE STAR',
@@ -174,7 +174,6 @@ export const load: PageServerLoad = async () => {
 			seminars: [
 				{
 					id: '11',
-					link: 'https://naver.com',
 					time: '15:00 - 15:30',
 					category: '마케팅',
 					title: '현혜조',
@@ -191,7 +190,6 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '12',
-					link: 'https://naver.com',
 					time: '16:00 - 16:30',
 					category: '마케팅',
 					title: '정성진',
