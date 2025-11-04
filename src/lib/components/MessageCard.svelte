@@ -94,7 +94,7 @@
 					<img
 						src="/icons/arrow_diagonal_before.svg"
 						alt=""
-						class="w-[12px] h-[12px] tablet:w-[14px] tablet:h-[14px] rotate-180 group-hover:scale-110 transition-transform duration-300"
+						class="w-[12px] h-[12px] tablet:w-[14px] tablet:h-[14px] scale-x-[-1] duration-300"
 					/>
 				</a>
 			{:else}

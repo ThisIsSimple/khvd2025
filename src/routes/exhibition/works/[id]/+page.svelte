@@ -86,26 +86,48 @@
 				/>
 			</button>
 
-			<!-- Designer Contact Info -->
-			<div class="w-full overflow-hidden flex flex-col gap-[52px] items-start px-[24px] pl-[28px]">
-				{#each data.designers as designer}
-					<div class="w-full flex flex-col gap-[8px] items-start overflow-hidden">
-						<!-- Designer Name -->
-						<p class="text-[18px] leading-[1.4] text-[#111111] text-left break-all">
-							{designer.name}
-						</p>
-
-						<!-- Designer Email (3-line format on tablet) -->
-						{#if designer.email}
-							{@const emailParts = designer.email.split('@')}
-							<div
-								class="text-[15px] leading-[1.2] text-[#111111] text-left break-all underline underline-offset-2"
-							>
-								{designer.email}
-							</div>
-						{/if}
+			<!-- QR Code + Contact Info -->
+			<div class="w-full overflow-hidden flex flex-col gap-[40px] items-center px-[24px]">
+				<!-- QR Code Image (if available) -->
+				{#if data.work.qrImage && data.work.qrLink}
+					<div class="w-full flex flex-col gap-[6px] items-center justify-center">
+						<a
+							href={data.work.qrLink}
+							class="w-[115%] block transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img
+								src={encodeURI(data.work.qrImage)}
+								alt={data.work.title}
+								class="w-full h-full object-contain"
+							/>
+						</a>
 					</div>
-				{/each}
+				{/if}
+
+				<!-- Designer Contact Info -->
+				<div class="w-full overflow-hidden flex flex-col gap-[52px] items-start pl-[4px]">
+					{#each data.designers as designer}
+						<div class="w-full flex flex-col gap-[8px] items-start overflow-hidden">
+							<!-- Designer Name -->
+							<p class="text-[18px] leading-[1.4] text-[#111111] text-left break-all">
+								{designer.name}
+							</p>
+
+							<!-- Designer Email (3-line format on tablet) -->
+							{#if designer.email}
+								{@const emailParts = designer.email.split('@')}
+								<a
+									href={`mailto:${designer.email}`}
+									class="text-[15px] leading-[1.2] text-[#111111] text-left break-all underline underline-offset-2"
+								>
+									{designer.email}
+								</a>
+							{/if}
+						</div>
+					{/each}
+				</div>
 			</div>
 		</nav>
 
@@ -127,7 +149,9 @@
 				</div>
 
 				<!-- Content Sections Container -->
-				<div class="px-[40px] pt-[160px] pb-[100px] flex flex-col desktop:flex-row-reverse gap-[70px] tablet:gap-[140px]">
+				<div
+					class="px-[40px] pt-[160px] pb-[100px] flex flex-col desktop:flex-row-reverse gap-[70px] tablet:gap-[140px]"
+				>
 					<!-- Designers Grid Section (comes first) -->
 					<div class="flex flex-col gap-[32px] items-end px-[16px]">
 						{#each Array(Math.ceil(data.designers.length / 2)) as _, rowIndex}
@@ -237,7 +261,6 @@
 
 		<!-- Top Section: Work Info -->
 		<div class="flex flex-col gap-[24px] items-center py-[40px]">
-
 			<!-- Work Content (설명글) -->
 			<div
 				class="flex gap-[10px] items-center justify-center pt-[12px] px-[16px] sm:px-[24px] w-full"

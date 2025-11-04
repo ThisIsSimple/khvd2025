@@ -58,8 +58,10 @@
 				<div class="flex flex-col items-start py-[16px] tablet:py-[40px]">
 					<!-- Title -->
 					<div class="flex flex-col gap-[4px] px-0 py-[12px]">
-						<p class="font-bold text-[#fc451e] text-[20px] leading-[1.4]">전시의도</p>
-						<h2 class="font-bold text-[#111111] text-[32px] leading-[1.4]">
+						<p class="font-bold text-[#fc451e] text-[16px] tablet:text-[20px] leading-[1.4]">
+							전시의도
+						</p>
+						<h2 class="font-bold text-[#111111] text-[24px] tablet:text-[32px] leading-[1.4]">
 							다시 보고, 마침내 실현하다
 						</h2>
 					</div>
@@ -96,8 +98,10 @@
 				<div class="flex flex-col items-start py-[16px] tablet:py-[40px]">
 					<!-- Title -->
 					<div class="flex flex-col gap-[4px] px-0 py-[8px]">
-						<p class="font-bold text-[#fc451e] text-[20px] leading-[1.4]">비주얼</p>
-						<h2 class="font-bold text-[#111111] text-[32px] leading-[1.4]">
+						<p class="font-bold text-[#fc451e] text-[16px] tablet:text-[20px] leading-[1.4]">
+							비주얼
+						</p>
+						<h2 class="font-bold text-[#111111] text-[24px] tablet:text-[32px] leading-[1.4]">
 							선명한 레드 오렌지, 타이포 중심
 						</h2>
 					</div>
@@ -179,8 +183,12 @@
 				<div class="flex flex-col gap-[12px] py-[16px] tablet:py-[40px]">
 					<!-- Title -->
 					<div class="flex flex-col gap-[4px] px-0 py-[8px]">
-						<p class="font-bold text-[#e83e15] text-[20px] leading-[1.4]">아카이브존</p>
-						<h2 class="font-bold text-black text-[32px] leading-[1.4]">미디어실</h2>
+						<p class="font-bold text-[#e83e15] text-[16px] tablet:text-[20px] leading-[1.4]">
+							아카이브존
+						</p>
+						<h2 class="font-bold text-black text-[24px] tablet:text-[32px] leading-[1.4]">
+							미디어실
+						</h2>
 					</div>
 
 					<!-- Content -->

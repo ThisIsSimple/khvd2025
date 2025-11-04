@@ -169,7 +169,7 @@
 			<h2 class="font-display text-[48px] tablet:text-[80px] text-black leading-none">
 				UNTIL CLOSING =
 			</h2>
-			<FlipClock targetDate={exhibitionEndDate} />
+			<FlipClock targetDate={exhibitionEndDate} hideSecondsOnMobile />
 		</div>
 
 		<!-- Bottom Section: Exhibition Details with Pattern Background (Tablet+ only) -->

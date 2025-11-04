@@ -27,6 +27,8 @@
 	// Animation state
 	let pageDirection = $state<'forward' | 'backward' | null>(null);
 	let isTransitioning = $state(false);
+	let dragResetKey = $state(0); // Key to force reset drag position
+	let dragTimeout: number | null = null;
 
 	// Edit modal state
 	let editingMessage = $state<Message | null>(null);
@@ -571,9 +573,10 @@
 
 				<!-- Current Messages Layer (always rendered, fading in during transition) -->
 				<Motion
+					key={dragResetKey}
 					animate={{
-						opacity: isTransitioning ? 1 : 1,
-						x: isTransitioning ? 0 : 0
+						opacity: 1,
+						x: 0
 					}}
 					initial={{
 						opacity: isTransitioning ? 0 : 1,
@@ -583,21 +586,47 @@
 					drag="x"
 					dragConstraints={{ left: -100, right: 100 }}
 					dragElastic={0.2}
+					onDrag={() => {
+						// Clear existing timeout
+						if (dragTimeout !== null) {
+							clearTimeout(dragTimeout);
+						}
+
+						// Set new timeout to reset position after 500ms of inactivity
+						dragTimeout = window.setTimeout(() => {
+							dragResetKey = dragResetKey + 1;
+						}, 500);
+					}}
 					onDragEnd={(_event, info) => {
+						// Clear timeout when drag ends
+						if (dragTimeout !== null) {
+							clearTimeout(dragTimeout);
+							dragTimeout = null;
+						}
+
 						// Lower thresholds for better mobile responsiveness
 						const swipeThreshold = 30;
 						const swipeVelocity = 300;
+
+						let pageChanged = false;
 
 						if (info.offset.x < -swipeThreshold || info.velocity.x < -swipeVelocity) {
 							// Swiped left - go to next page
 							if (currentPage < totalPages - 1) {
 								goToPage(currentPage + 1);
+								pageChanged = true;
 							}
 						} else if (info.offset.x > swipeThreshold || info.velocity.x > swipeVelocity) {
 							// Swiped right - go to previous page
 							if (currentPage > 0) {
 								goToPage(currentPage - 1);
+								pageChanged = true;
 							}
+						}
+
+						// If page didn't change, force reset position
+						if (!pageChanged) {
+							dragResetKey = dragResetKey + 1;
 						}
 					}}
 					let:motion

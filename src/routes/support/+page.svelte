@@ -186,10 +186,10 @@
 					</div>
 
 					<div
-						class="group-hover:scale-100 scale-0 transition-transform duration-300 ease-in-out z-[1] absolute left-0 top-0 w-full h-full flex flex-col items-start justify-end gap-[4px] desktop:gap-[8px] p-[24px] desktop:px-[32px] desktop:py-[26px] bg-primary"
+						class="group-hover:scale-100 scale-0 transition-transform duration-300 ease-in-out z-[1] absolute left-0 top-0 w-full h-full flex flex-col items-start justify-end gap-[4px] desktop:gap-[8px] p-[16px] tablet:p-[24px] desktop:px-[32px] desktop:py-[26px] bg-primary"
 					>
 						<h3
-							class="text-[40px] tablet:text-[52px] leading-[0.9] font-regular text-white font-display"
+							class="text-[32px] tablet:text-[52px] leading-[0.9] font-regular text-white font-display"
 						>
 							GRADUATION<br />STUDIES {professor.number}
 						</h3>
