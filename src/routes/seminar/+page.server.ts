@@ -42,12 +42,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '3',
 					link: '/exhibition/works/46',
-					time: '13:00 - 13:15',
+					time: '11:30 - 11:45',
 					category: '졸업스튜디오 2',
 					title: '무드지엄',
 					description: '기록과 감정이 작품이 되는 미술관',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  13:00-13:15',
+					fullSchedule: '11.06 (목)  11:30-11:45',
 					speakers: [
 						{
 							name: '신혜원',
@@ -58,12 +58,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '4',
 					link: '/exhibition/works/41',
-					time: '13:15 - 13:30',
+					time: '11:45 - 12:00',
 					category: '졸업스튜디오 2',
 					title: '웰니스 티 브랜드, 찻장',
 					description: '하루의 ON과 OFF를 잇습니다.',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  13:15-13:30',
+					fullSchedule: '11.06 (목)  11:45-12:00',
 					speakers: [
 						{
 							name: '김주영',
@@ -74,12 +74,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '5',
 					link: '/exhibition/works/92',
-					time: '13:45 - 14:00',
+					time: '13:00 - 13:15',
 					category: '졸업스튜디오 3',
 					title: 'GongGOng(공공)',
 					description: '놀이기반 인터렉션 투표 플랫폼',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  13:45-14:00',
+					fullSchedule: '11.06 (목)  13:00-13:15',
 					speakers: [
 						{
 							name: 'T김다은 / 임주은',
@@ -90,12 +90,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '6',
 					link: '/exhibition/works/91',
-					time: '14:00 - 14:15',
+					time: '13:15 - 13:30',
 					category: '졸업스튜디오 3',
 					title: '피우 (Piu)',
 					description: '나만의 꽃 키우기·꽃다발 커스텀 앱',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  14:00-14:15',
+					fullSchedule: '11.06 (목)  13:15-13:30',
 					speakers: [
 						{
 							name: 'T김은진 / 이채서',
@@ -106,12 +106,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '7',
 					link: '/exhibition/works/72',
-					time: '14:15 - 14:30',
+					time: '13:30 - 13:45',
 					category: '졸업스튜디오 0',
 					title: '차차',
 					description: '업사이클링 로프백 브랜드',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  14:15-14:30',
+					fullSchedule: '11.06 (목)  13:30-13:45',
 					speakers: [
 						{
 							name: 'T이수빈 / 정혜원 / 오경진',
@@ -122,12 +122,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '8',
 					link: '/exhibition/works/76',
-					time: '14:30 - 14:45',
+					time: '13:45 - 14:00',
 					category: '졸업스튜디오 0',
 					title: 'YIDA (이다)',
 					description: '한국의 유쾌함을 잇다, YIDA',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  14:30-14:45',
+					fullSchedule: '11.06 (목)  13:45-14:00',
 					speakers: [
 						{
 							name: 'T강희승 / 김의진 / 신혜원',
@@ -138,12 +138,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '9',
 					link: '/exhibition/works/77',
-					time: '14:45 - 15:00',
+					time: '14:00 - 14:15',
 					category: '졸업스튜디오 0',
 					title: '미룬히어로즈',
 					description: '지연행동 척도 기반 전략적 미룸 연구',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  14:45-15:00',
+					fullSchedule: '11.06 (목)  14:00-14:15',
 					speakers: [
 						{
 							name: 'T김주영 / 방서연 / 이윤서',
@@ -154,12 +154,12 @@ export const load: PageServerLoad = async () => {
 				{
 					id: '10',
 					link: '/exhibition/works/78',
-					time: '15:00 - 15:15',
+					time: '14:15 - 14:30',
 					category: '졸업스튜디오 0',
 					title: 'MICE STAR',
 					description: '마이스 관광 가능성을 비추는 새 기준',
 					highlighted: false,
-					fullSchedule: '11.06 (목)  15:00-15:15',
+					fullSchedule: '11.06 (목)  14:15-14:30',
 					speakers: [
 						{
 							name: 'T안효정 / 정시은 / 만령연 / 김성욱',
@@ -174,13 +174,13 @@ export const load: PageServerLoad = async () => {
 			seminars: [
 				{
 					id: '11',
-					time: '15:00 - 15:30',
+					time: '15:00 - 15:50',
 					category: '마케팅',
 					title: '현혜조',
 					description:
 						'글로벌 브랜드 마케팅과 커뮤니케이션 분야에서 활동해온 전문가가 스타트업의 생존과 성장 과정에서 얻은 실질적 경험과 통찰을 바탕으로, 마케팅 전략과 캠페인 기획·운영 노하우를 공유합니다.',
 					highlighted: false,
-					fullSchedule: '11.07 (금)  15:00-15:30',
+					fullSchedule: '11.07 (금)  15:00-15:50',
 					speakers: [
 						{
 							name: '연결링크 x',
@@ -190,13 +190,13 @@ export const load: PageServerLoad = async () => {
 				},
 				{
 					id: '12',
-					time: '16:00 - 16:30',
+					time: '16:00 - 16:50',
 					category: '마케팅',
 					title: '정성진',
 					description:
 						'영화·광고 등 다양한 영상 콘텐츠의 VFX(시각효과) 감독 및 슈퍼바이저로 활동하며, 수많은 상업영화와 프로젝트의 시각효과 기획, 연출, 제작 총괄을 담당했습니다.',
 					highlighted: false,
-					fullSchedule: '11.07 (금)  16:00-16:30',
+					fullSchedule: '11.07 (금)  16:00-16:50',
 					speakers: [
 						{
 							name: '연결링크 x',

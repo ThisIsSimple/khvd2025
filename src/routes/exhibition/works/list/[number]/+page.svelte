@@ -200,26 +200,26 @@ DESIGN FOR ALL + PASSION + OPEN, MIND + CREATIVITY + :)`
 			style="top: var(--nav-height, 0px)"
 			class:translate-y-[-100%]={scrollingDown && scrollY > 100}
 		>
-			<div class="flex items-center gap-[6px] h-[74px] pl-[8px] pr-[16px]">
+			<div class="flex items-center gap-[4px] h-[74px] pl-[4px] pr-[8px]">
 				<!-- Back button (70×70) -->
 				<button
 					onclick={handleBack}
-					class="group size-[52px] flex items-center justify-center shrink-0"
+					class="group size-[48px] flex items-center justify-center shrink-0"
 					aria-label="Go back"
 				>
 					<img
 						src="/icons/arrow_diagonal_before.svg"
 						alt="Back"
-						class="group-hover:scale-110 transition-transform duration-300 w-[28px] h-[28px]"
+						class="group-hover:scale-110 transition-transform duration-300 w-[24px] h-[24px]"
 					/>
 				</button>
 
 				<!-- Title + Count -->
-				<div class="flex gap-[6px] items-start min-w-0">
-					<h1 class="font-display text-[40px] leading-[1.1] text-[#111111] truncate">
+				<div class="flex gap-[4px] items-start min-w-0">
+					<h1 class="font-display text-[40px] leading-[1.1] tracking-[-0.8px] text-[#111111] truncate">
 						{info.title}
 					</h1>
-					<div class="flex items-center pt-[5px] shrink-0">
+					<div class="flex items-center pt-[4px] shrink-0">
 						<p class="font-display text-[18px] leading-[1.2] tracking-[-0.36px] text-[#111111]">
 							[{data.works.length}]
 						</p>
@@ -234,7 +234,7 @@ DESIGN FOR ALL + PASSION + OPEN, MIND + CREATIVITY + :)`
 				{#each filteredProfessors as professor}
 					<!-- Professor Description -->
 					<div>
-						<p class="text-[15px] leading-[1.5] text-[#222222] text-justify whitespace-pre-wrap">
+						<p class="text-[15px] leading-[1.5] text-[#222222] whitespace-pre-wrap">
 							{professor.description}
 						</p>
 					</div>

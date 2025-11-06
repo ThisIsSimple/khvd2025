@@ -29,7 +29,7 @@
 			: 'bg-[#f6f6f6]'}"
 	>
 		<div
-			class="flex gap-[8px] tablet:gap-[10px] desktop:gap-[12px] items-center justify-center w-full min-w-0"
+			class="flex flex-wrap tablet:flex-nowrap gap-[8px] tablet:gap-[10px] desktop:gap-[12px] items-center justify-center w-full min-w-0"
 		>
 			<!-- Category (fixed width, no truncation) -->
 			<p

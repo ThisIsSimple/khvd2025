@@ -195,7 +195,7 @@
 	const menuItems = [
 		{ title: 'ABOUT EXHIBITION', href: '/exhibition' },
 		{ title: 'WORK', href: '/exhibition/works' },
-		{ title: 'DESINGER', href: '/designers' },
+		{ title: 'DESIGNER', href: '/designers' },
 		{ title: 'TEACH & SUPPORT', href: '/support' },
 		{ title: 'SEMINAR', href: '/seminar' }
 	];
