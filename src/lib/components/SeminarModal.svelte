@@ -63,7 +63,7 @@
 				</button>
 
 				<!-- Category -->
-				<div class="flex items-center px-[3px]">
+				<div class="flex items-center">
 					<p class="font-bold text-[15px] leading-[1.4] text-primary">
 						{seminar.category}
 					</p>

@@ -23,7 +23,7 @@
 			number: '1',
 			professors: [{ name: 'Mi Kyeong Jang' }, { name: 'Dae Yeon Kim' }],
 			workCount: 34,
-			category: 'GRAPHIC & BRANGDING',
+			category: 'GRAPHIC & BRANDING',
 			title: '아이디어의 근원과\n메세지를 탐구하는 실전 디자인'
 		},
 		{

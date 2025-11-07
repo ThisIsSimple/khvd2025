@@ -105,14 +105,14 @@
 						href="mailto:{data.designer.contact1Url}"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.contact1Text}
 					</a>
 				{:else if data.designer.email}
 					<a
 						href="mailto:{data.designer.email}"
-						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.email}
 					</a>
@@ -121,7 +121,7 @@
 				{#if data.designer.contact2Text && data.designer.contact2Url}
 					<a
 						href="tel:{data.designer.contact2Url}"
-						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] text-justify underline hover:text-primary transition-colors break-words max-w-full"
+						class="text-[14px] tablet:text-[16px] leading-[1.4] tracking-[-0.64px] text-[#222222] underline hover:text-primary transition-colors break-words max-w-full"
 					>
 						{data.designer.contact2Text}
 					</a>

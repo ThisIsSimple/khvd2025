@@ -88,7 +88,7 @@
 			class="relative flex flex-col gap-[10px] items-start overflow-hidden px-4 tablet:px-[40px] py-[200px] tablet:py-[400px] w-full"
 		>
 			<div
-				class="flex flex-col font-display gap-[20px] items-start tablet:items-center justify-center leading-none text-primary text-[56px] tablet:text-[100px] desktop:text-[132px] text-left tablet:text-center w-full max-w-[1142px] tablet:mx-auto"
+				class="flex flex-col font-display gap-[20px] items-start tablet:items-center justify-center leading-none text-primary text-[36px] xs:text-[44px] sm:text-[52px] tablet:text-[100px] desktop:text-[132px] text-left tablet:text-center w-full max-w-[1142px] tablet:mx-auto"
 			>
 				<p class="w-full">Reenvision = vivid dreams</p>
 				<p class="whitespace-nowrap">Realization = Visual design</p>
@@ -120,7 +120,7 @@
 
 				<!-- Description -->
 				<div
-					class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full"
+					class="font-sans leading-[1.6] text-[14px] xs:text-[16px] sm:text-[20px] tablet:text-[28px] text-left tablet:text-center w-full"
 				>
 					<p class="text-primary">Reenvision, 무뎌졌던 감각을 다시 일깨우고,</p>
 					<p class="text-primary">범람하는 정보들을 자신만의 것으로 재구상하는 과정.</p>
@@ -159,7 +159,7 @@
 
 				<!-- Description -->
 				<div
-					class="font-sans leading-[1.6] text-[20px] tablet:text-[28px] text-left tablet:text-center w-full"
+					class="font-sans leading-[1.6] text-[14px] xs:text-[16px] sm:text-[20px] tablet:text-[28px] text-left tablet:text-center w-full"
 				>
 					<p>다듬어진 시선과 가치들은 시각디자인이라는 매체를 통해</p>
 					<p>Realization, 눈 앞의 현실로 드러납니다.</p>
